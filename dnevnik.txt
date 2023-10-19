@@ -1,0 +1,8 @@
+1. sastanak
+	datum: 19.10.2023.
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
+	teme:
+		dogovor o korištenim tehnologijama
+		dogovor o načinima komunikacije
+		podjela u timove za frontend, backend i dokumentaciju
+		definiranje osnovnih funkcionalnosti
