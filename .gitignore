@@ -1,0 +1,9 @@
+/Dokumentacija/*.aux
+/Dokumentacija/*.lof
+/Dokumentacija/*.log
+/Dokumentacija/*.lot
+/Dokumentacija/*.out
+/Dokumentacija/*.pdf
+/Dokumentacija/*.synctex.gz
+/Dokumentacija/*.toc
+*.idea
