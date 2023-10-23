@@ -6,3 +6,11 @@
 		dogovor o načinima komunikacije
 		podjela u timove za frontend, backend i dokumentaciju
 		definiranje osnovnih funkcionalnosti
+
+2. sastanak
+	datum: 23. listopada 2023.
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
+	teme:
+		sastavljanje use-caseova
+		razgovor o povezivanju frontenda i backenda
+		dogovor o bazi i sadržaju baze
