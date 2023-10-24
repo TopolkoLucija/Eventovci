@@ -15,7 +15,7 @@
 		razgovor o povezivanju frontenda i backenda
 		dogovor o bazi i sadržaju baze
 
-1. sastanak
+3. sastanak
 	datum: 24. listopada 2023.
 	prisustvovali: Lucija Topolko, Natali Lazarić, Iva Svalina
 	teme:
