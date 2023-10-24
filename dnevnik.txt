@@ -1,5 +1,5 @@
 1. sastanak
-	datum: 19.10.2023.
+	datum: 19. listopada 2023.
 	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
 	teme:
 		dogovor o korištenim tehnologijama
@@ -14,3 +14,9 @@
 		sastavljanje use-caseova
 		razgovor o povezivanju frontenda i backenda
 		dogovor o bazi i sadržaju baze
+
+1. sastanak
+	datum: 24. listopada 2023.
+	prisustvovali: Lucija Topolko, Natali Lazarić, Iva Svalina
+	teme:
+		osmišljavanje baze podataka (odabir h2 baze za lokalno testiranje, odabir entiteta i njihovih atributa)
