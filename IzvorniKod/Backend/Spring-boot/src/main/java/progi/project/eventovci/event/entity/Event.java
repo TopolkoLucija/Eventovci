@@ -1,4 +1,4 @@
-package progi.project.eventovci.entity;
+package progi.project.eventovci.event.entity;
 
 import jakarta.persistence.*;
 
