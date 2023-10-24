@@ -15,11 +15,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public User login(String username, String password) {
-        User korisnik = userRepository.findUserByUsername(username);
-        if (korisnik != null && Objects.equals(korisnik.getPassword(), password)) {
-            return korisnik;
+        User user = userRepository.findUserByUsername(username);
+        if (user != null && Objects.equals(user.getPassword(), password)) {
+            return user;
         } else {
-            throw new UserNotFoundException("Neispravno korisničko ime ili lozinka!");
+            throw new UserNotFoundException("Incorrect username or password!");
         }
 
     }
