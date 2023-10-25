@@ -22,7 +22,7 @@ public class Event {
     private String eventName;
 
     @Column(name="tip dogadjanja")
-    private String typeOfEvenet;
+    private String typeOfEvent;
 
     @Column(name="lokacija_dogadjanja")
     private String location;
@@ -48,7 +48,7 @@ public class Event {
 
     public Event(String eventName, String typeOfEvenet, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinator_id, Double ticketPrice) {
         this.eventName = eventName;
-        this.typeOfEvenet = typeOfEvenet;
+        this.typeOfEvent = typeOfEvenet;
         this.location = location;
         this.timeOfTheEvent = timeOfTheEvent;
         this.duration = duration;
@@ -90,12 +90,12 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public String getTypeOfEvenet() {
-        return typeOfEvenet;
+    public String getTypeOfEvent() {
+        return typeOfEvent;
     }
 
-    public void setTypeOfEvenet(String typeOfEvenet) {
-        this.typeOfEvenet = typeOfEvenet;
+    public void setTypeOfEvent(String typeOfEvent) {
+        this.typeOfEvent = typeOfEvent;
     }
 
     public String getLocation() {
