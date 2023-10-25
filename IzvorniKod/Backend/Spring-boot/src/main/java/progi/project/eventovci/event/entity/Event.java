@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Objects;
+import java.util.*;
+import java.lang.Long;
+
 
 @Entity
 @Table(name="dogadjanje")
@@ -32,6 +34,7 @@ public class Event {
 
     @Column(name="trajanje")
     private String duration;
+
     @Column(name="organizator_id")
     private Long eventCoordinator_id;
 
@@ -40,7 +43,6 @@ public class Event {
 
 
     //equals i hash za id
-
 
     @Override
     public boolean equals(Object o) {

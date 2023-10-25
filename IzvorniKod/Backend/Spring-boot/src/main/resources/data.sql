@@ -22,3 +22,10 @@ CREATE TABLE dogadjanje (
                             placanje_ulaznice BOOLEAN,
                             FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
 );
+-- Create the 'poveznica' table
+CREATE TABLE poveznica (
+                           id_dogadjanja SERIAL PRIMARY KEY,
+                           organizator_id BIGINT,
+                           link VARCHAR(255),
+                           FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
+);
