@@ -20,8 +20,13 @@ public class MediaContent {
     @Column(name="id_dogadjanje")
     private Long event_id;
 
-    //equals i hash za id
+    //konstruktor
+    public MediaContent(String contentPath, Long event_id) {
+        this.contentPath = contentPath;
+        this.event_id = event_id;
+    }
 
+    //equals i hash za id
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -28,6 +28,16 @@ public class User {
     @Column(name="placanje_clanarine")
     private Boolean shouldPayMembership; //true - treba platiti, false - ne treba platiti
 
+    //konstruktor
+    public User(String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.typeOfUser = typeOfUser;
+        this.homeAdress = homeAdress;
+        this.shouldPayMembership = shouldPayMembership;
+    }
+
     //equals i hashcode za id
 
 

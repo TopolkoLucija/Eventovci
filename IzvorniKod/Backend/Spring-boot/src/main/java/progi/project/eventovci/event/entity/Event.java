@@ -42,6 +42,20 @@ public class Event {
     private Boolean shouldPayTicket;//true - treba platiti, false - ne treba platiti
 
 
+    //konstruktor
+
+    public Event(String eventName, String typeOfEvenet, String location, LocalDate dateOfTheEvent, LocalTime timeOfTheEvent, String duration, Long eventCoordinator_id, Boolean shouldPayTicket) {
+        this.eventName = eventName;
+        this.typeOfEvenet = typeOfEvenet;
+        Location = location;
+        this.dateOfTheEvent = dateOfTheEvent;
+        this.timeOfTheEvent = timeOfTheEvent;
+        this.duration = duration;
+        this.eventCoordinator_id = eventCoordinator_id;
+        this.shouldPayTicket = shouldPayTicket;
+    }
+
+
     //equals i hash za id
 
     @Override

@@ -19,6 +19,15 @@ public class SocialMediaLink {
     @Column(name="link")
     private String link;
 
+
+    //konstruktor
+
+
+    public SocialMediaLink(Long eventCoordinator_id, String link) {
+        this.eventCoordinator_id = eventCoordinator_id;
+        this.link = link;
+    }
+
     //equals i hash za id
     @Override
     public boolean equals(Object o) {

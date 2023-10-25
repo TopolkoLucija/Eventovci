@@ -25,6 +25,17 @@ public class EventReview {
     @Column(name="id_korisnik")
     private Long user_id;
 
+
+    //konstruktor
+
+
+    public EventReview(String reviewText, Integer grade, Long event_id, Long user_id) {
+        this.reviewText = reviewText;
+        this.grade = grade;
+        this.event_id = event_id;
+        this.user_id = user_id;
+    }
+
     //equals i hash za id
     @Override
     public boolean equals(Object o) {

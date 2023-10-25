@@ -22,6 +22,15 @@ public class UserRespond {
     @Column(name="id_korisnik")
     private Long user_id;
 
+    //konstruktor
+
+
+    public UserRespond(String status, Long event_id, Long user_id) {
+        this.status = status;
+        this.event_id = event_id;
+        this.user_id = user_id;
+    }
+
     //equals i hash za id
     @Override
     public boolean equals(Object o) {
