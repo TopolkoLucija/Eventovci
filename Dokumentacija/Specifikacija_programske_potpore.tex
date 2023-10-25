@@ -427,10 +427,10 @@
 					\noindent \underbar{\textbf{UC12 - Pregled svih događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
+						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
 						\item  \textbf{Cilj:} Pregled svih događanja prema određenom kriteriju
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i ima ovlasti Posjetitelja 
+						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -447,23 +447,16 @@
 					\noindent \underbar{\textbf{UC13 - Pregled jednog događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
+						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
 						\item  \textbf{Cilj:} Pregled jednog odabranog događanja od svih prikazanih događanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i prikazana su sva događanja prema odabranom kriteriju
+						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i prikazana su sva događanja prema odabranom kriteriju
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
 							\item Korisnik odabire jedno od prikazanih događanja
 							\item Na zasebnoj se stranici korisniku prikazuju detalji o odabranom događanju
-							\item Dodatno, ovisno o vremenskom razdoblju održavanja događanja, korisnik može:
-							
-							\item[] \begin{packed_enum}
-								
-								\item recenzirati događanja završena u posljednjih 48 sati 
-								\item iskazati interes za nadolazeća događanja
-							\end{packed_enum}
 							
 						\end{packed_enum}
 						
@@ -511,8 +504,28 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
+					
+					\noindent \underbar{\textbf{UC16 - Pregled jednog vlastitog događanja}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Organizator
+						\item  \textbf{Cilj:} Prikaz jednog od događanja koje je taj organizator objavio
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Organizator odabire opciju prikaza jednog od događanja
+							\item Na zasebnoj se stranici organizatoru prikazuju detalji o odabranom događaju (uključujući i recenzije posjetitelja)
+							
+						\end{packed_enum}
+						
+					\end{packed_item}
+					
+%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC16 - Brisanje vlastitog događanja}}
+					\noindent \underbar{\textbf{UC17 - Brisanje vlastitog događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Organizator
@@ -534,7 +547,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 										
-					\noindent \underbar{\textbf{UC17 - Brisanje događanja}}
+					\noindent \underbar{\textbf{UC18 - Brisanje događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Administrator
@@ -556,7 +569,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC18 - Recenziranje događanja}}
+					\noindent \underbar{\textbf{UC19 - Recenziranje događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Posjetitelj
@@ -592,7 +605,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC19 - Brisanje vlastite recenzije}}
+					\noindent \underbar{\textbf{UC20 - Brisanje vlastite recenzije}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
@@ -614,7 +627,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC20 - Brisanje recenzije}}
+					\noindent \underbar{\textbf{UC21 - Brisanje recenzije}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Administrator
@@ -637,7 +650,7 @@
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
 					
-					\noindent \underbar{\textbf{UC21 - Iskazivanje interesa za događanje}}
+					\noindent \underbar{\textbf{UC22 - Iskazivanje interesa za događanje}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
@@ -671,13 +684,20 @@
 					
 					
 					
-					
+				\newpage
 					
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
-				\eject		
+				\begin{figure}[H]
+					\includegraphics[scale=0.5]{dijagrami/uc1.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+					\centering
+					\caption{Dijagram obrazaca uporabe; prikazana funkcionalnost Korisnika (neprijavljeni/neregistrirani korisnik) i Posjetitelja}
+					\label{fig:promjene}
+				\end{figure}
+				
+				
+				\newpage
 				
 			\subsection{Sekvencijski dijagrami}
 				
