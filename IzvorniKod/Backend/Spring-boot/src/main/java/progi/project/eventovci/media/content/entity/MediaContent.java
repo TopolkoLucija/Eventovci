@@ -11,7 +11,7 @@ public class MediaContent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_dogadjanja")
+    @Column(name="id_medijskog_sadrzaja")
     private Long id;
 
     @Column(name="adresa_medijskog_sadrzaja")

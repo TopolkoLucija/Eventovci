@@ -24,7 +24,7 @@ CREATE TABLE dogadjanje (
 );
 -- Create the 'poveznica' table
 CREATE TABLE poveznica (
-                           id_dogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           id_poveznice BIGINT AUTO_INCREMENT PRIMARY KEY,
                            organizator_id BIGINT,
                            link VARCHAR(255),
                            FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
@@ -32,8 +32,20 @@ CREATE TABLE poveznica (
 
 -- Create the 'poveznica' table
 CREATE TABLE medijski_sadrzaj (
-                                  id_dogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                  id_medijskog_sadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
                                   adresa_medijskog_sadrzaja VARCHAR(255),
-                                  id_dogadjanje BIGINT,
-                                  FOREIGN KEY (id_dogadjanje) REFERENCES dogadjanje(id_dogadjanja)
+                                  id_dogadjanja BIGINT,
+                                  FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja)
 );
+
+-- Create the 'recenzija' table
+CREATE TABLE recenzija (
+                           id_rezenczije BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           recenzija_tekst TEXT,
+                           ocjena INT,
+                           id_dogadjanja BIGINT,
+                           id_korisnik BIGINT,
+                           FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja),
+                           FOREIGN KEY (id_korisnik) REFERENCES korisnik(id)
+);
+
