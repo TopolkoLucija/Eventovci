@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="korisnik")
-public class User {
+public class User{
 
     @Id
     @Column(name="id")
@@ -42,6 +42,8 @@ public class User {
         this.shouldPayMembership = shouldPayMembership;
     }
 
+
+
     //equals i hashcode za id
     @Override
     public boolean equals(Object o) {
@@ -50,6 +52,7 @@ public class User {
         User user = (User) o;
         return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(typeOfUser, user.typeOfUser) && Objects.equals(homeAdress, user.homeAdress) && Objects.equals(shouldPayMembership, user.shouldPayMembership);
     }
+
 
     @Override
     public int hashCode() {
