@@ -49,3 +49,14 @@ CREATE TABLE recenzija (
                            FOREIGN KEY (id_korisnik) REFERENCES korisnik(id)
 );
 
+-- Create the 'dolazak_korisnika' table
+CREATE TABLE dolazak_korisnika (
+                                   id_dolaska_korisnika BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                   status_dolaska VARCHAR(255),
+                                   id_dogadjanja BIGINT,
+                                   id_korisnik BIGINT,
+                                   FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja),
+                                   FOREIGN KEY (id_korisnik) REFERENCES korisnik(id)
+);
+
+
