@@ -28,6 +28,10 @@ public class EventReview {
 
     //konstruktor
 
+    public EventReview() {
+
+    }
+
 
     public EventReview(String reviewText, Integer grade, Long event_id, Long user_id) {
         this.reviewText = reviewText;

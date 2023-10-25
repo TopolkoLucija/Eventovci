@@ -3,6 +3,7 @@ package progi.project.eventovci.event.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.lang.Long;
@@ -24,37 +25,36 @@ public class Event {
     private String typeOfEvenet;
 
     @Column(name="lokacija_dogadjanja")
-    private String Location;
+    private String location;
 
-    @Column(name="datum_dogadjanja")
-    private LocalDate dateOfTheEvent;
 
     @Column(name="vrijeme_dogadjanja")
-    private LocalTime timeOfTheEvent;
+    private LocalDateTime timeOfTheEvent;
 
     @Column(name="trajanje")
-    private String duration;
+    private Double duration;
 
     @Column(name="organizator_id")
     private Long eventCoordinator_id;
 
-    @Column(name="placanje_ulaznice")
-    private Boolean shouldPayTicket;//true - treba platiti, false - ne treba platiti
+    @Column(name="cijena_ulaznice")
+    private Double ticketPrice;// 0 - besplatan dogadjaj
 
 
     //konstruktor
+    public Event() {
 
-    public Event(String eventName, String typeOfEvenet, String location, LocalDate dateOfTheEvent, LocalTime timeOfTheEvent, String duration, Long eventCoordinator_id, Boolean shouldPayTicket) {
+    }
+
+    public Event(String eventName, String typeOfEvenet, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinator_id, Double ticketPrice) {
         this.eventName = eventName;
         this.typeOfEvenet = typeOfEvenet;
-        Location = location;
-        this.dateOfTheEvent = dateOfTheEvent;
+        this.location = location;
         this.timeOfTheEvent = timeOfTheEvent;
         this.duration = duration;
         this.eventCoordinator_id = eventCoordinator_id;
-        this.shouldPayTicket = shouldPayTicket;
+        this.ticketPrice = ticketPrice;
     }
-
 
     //equals i hash za id
 
@@ -73,11 +73,68 @@ public class Event {
 
     //geteri i seteri
 
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getTypeOfEvenet() {
+        return typeOfEvenet;
+    }
+
+    public void setTypeOfEvenet(String typeOfEvenet) {
+        this.typeOfEvenet = typeOfEvenet;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public LocalDateTime getTimeOfTheEvent() {
+        return timeOfTheEvent;
+    }
+
+    public void setTimeOfTheEvent(LocalDateTime timeOfTheEvent) {
+        this.timeOfTheEvent = timeOfTheEvent;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    public Long getEventCoordinator_id() {
+        return eventCoordinator_id;
+    }
+
+    public void setEventCoordinator_id(Long eventCoordinator_id) {
+        this.eventCoordinator_id = eventCoordinator_id;
+    }
+
+    public Double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(Double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }

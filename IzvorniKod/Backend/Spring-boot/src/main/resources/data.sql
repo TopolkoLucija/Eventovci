@@ -15,11 +15,10 @@ CREATE TABLE dogadjanje (
                             naziv_dogadjanja VARCHAR(255) NOT NULL,
                             tip_dogadjanja VARCHAR(255) NOT NULL,
                             lokacija_dogadjanja VARCHAR(255) NOT NULL,
-                            datum_dogadjanja DATE,
-                            vrijeme_pocetka TIME,
-                            trajanje VARCHAR(255),
+                            vrijeme_dogadjanja TIMESTAMP,
+                            trajanje DOUBLE PRECISION,
                             organizator_id BIGINT,
-                            placanje_ulaznice BOOLEAN,
+                            cijena_ulaznice DOUBLE PRECISION,
                             FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
 );
 -- Create the 'poveznica' table
@@ -30,7 +29,7 @@ CREATE TABLE poveznica (
                            FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
 );
 
--- Create the 'poveznica' table
+-- Create the 'medijski_sadrzaj' table
 CREATE TABLE medijski_sadrzaj (
                                   id_medijskog_sadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
                                   adresa_medijskog_sadrzaja VARCHAR(255),

@@ -21,6 +21,9 @@ public class SocialMediaLink {
 
 
     //konstruktor
+    public SocialMediaLink() {
+
+    }
 
 
     public SocialMediaLink(Long eventCoordinator_id, String link) {

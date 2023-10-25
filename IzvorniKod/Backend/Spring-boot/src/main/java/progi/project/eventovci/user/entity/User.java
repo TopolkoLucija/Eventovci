@@ -29,6 +29,10 @@ public class User {
     private Boolean shouldPayMembership; //true - treba platiti, false - ne treba platiti
 
     //konstruktor
+    public User(){
+
+    }
+
     public User(String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
         this.username = username;
         this.email = email;
@@ -39,8 +43,6 @@ public class User {
     }
 
     //equals i hashcode za id
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

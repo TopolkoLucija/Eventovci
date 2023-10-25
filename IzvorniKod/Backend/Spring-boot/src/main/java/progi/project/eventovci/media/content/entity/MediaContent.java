@@ -21,6 +21,9 @@ public class MediaContent {
     private Long event_id;
 
     //konstruktor
+    public MediaContent() {
+
+    }
     public MediaContent(String contentPath, Long event_id) {
         this.contentPath = contentPath;
         this.event_id = event_id;

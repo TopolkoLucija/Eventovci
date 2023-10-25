@@ -24,6 +24,10 @@ public class UserRespond {
 
     //konstruktor
 
+    public UserRespond() {
+
+    }
+
 
     public UserRespond(String status, Long event_id, Long user_id) {
         this.status = status;
