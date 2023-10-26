@@ -14,30 +14,30 @@ import java.lang.Long;
 public class Event {
 
     @Id
+    @Column(name="iddogadjanja")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_dogadjanja")
     private Long id;
 
-    @Column(name="naziv_dogadjanja")
+    @Column(name="nazivdogadjanja")
     private String eventName;
 
-    @Column(name="tip dogadjanja")
+    @Column(name="tipdogadjanja")
     private String typeOfEvent;
 
-    @Column(name="lokacija_dogadjanja")
+    @Column(name="lokacijadogadjanja")
     private String location;
 
 
-    @Column(name="vrijeme_dogadjanja")
+    @Column(name="vrijemedogadjanja")
     private LocalDateTime timeOfTheEvent;
 
     @Column(name="trajanje")
     private Double duration;
 
-    @Column(name="organizator_id")
-    private Long eventCoordinator_id;
+    @Column(name="organizatorid")
+    private Long eventCoordinatorid;
 
-    @Column(name="cijena_ulaznice")
+    @Column(name="cijenaulaznice")
     private Double ticketPrice;// 0 - besplatan dogadjaj
 
 
@@ -46,13 +46,13 @@ public class Event {
 
     }
 
-    public Event(String eventName, String typeOfEvenet, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinator_id, Double ticketPrice) {
+    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinatorid, Double ticketPrice) {
         this.eventName = eventName;
-        this.typeOfEvent = typeOfEvenet;
+        this.typeOfEvent = typeOfEvent;
         this.location = location;
         this.timeOfTheEvent = timeOfTheEvent;
         this.duration = duration;
-        this.eventCoordinator_id = eventCoordinator_id;
+        this.eventCoordinatorid = eventCoordinatorid;
         this.ticketPrice = ticketPrice;
     }
 
@@ -122,12 +122,12 @@ public class Event {
         this.duration = duration;
     }
 
-    public Long getEventCoordinator_id() {
-        return eventCoordinator_id;
+    public Long getEventCoordinatorid() {
+        return eventCoordinatorid;
     }
 
-    public void setEventCoordinator_id(Long eventCoordinator_id) {
-        this.eventCoordinator_id = eventCoordinator_id;
+    public void setEventCoordinatorid(Long eventCoordinatorid) {
+        this.eventCoordinatorid = eventCoordinatorid;
     }
 
     public Double getTicketPrice() {

@@ -13,19 +13,19 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="korisnicko_ime")
+    @Column(name="korisnickoime")
     private String username;
 
     @Column(name="email")
     private String email;
     @Column(name="lozinka")
     private String password;
-    @Column(name="tip_korisnika")
+    @Column(name="tipkorisnika")
     private String typeOfUser; //posjetitelj, organizator, administrator
     @Column(name="adresa")
     private String homeAdress;
 
-    @Column(name="placanje_clanarine")
+    @Column(name="placanjeclanarine")
     private Boolean shouldPayMembership; //true - treba platiti, false - ne treba platiti
 
     //konstruktor

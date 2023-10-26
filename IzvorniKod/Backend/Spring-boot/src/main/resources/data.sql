@@ -1,61 +1,61 @@
 -- Create the 'korisnik' table
 CREATE TABLE korisnik (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                          korisnicko_ime VARCHAR(255) NOT NULL,
+                          korisnickoime VARCHAR(255) NOT NULL,
                           email VARCHAR(255) NOT NULL,
                           lozinka VARCHAR(255) NOT NULL,
-                          tip_korisnika VARCHAR(13) NOT NULL,
+                          tipkorisnika VARCHAR(13) NOT NULL,
                           adresa VARCHAR(255),
-                          placanje_clanarine BOOLEAN
+                          placanjeclanarine BOOLEAN
 );
 
 -- Create the 'dogadjanje' table
 CREATE TABLE dogadjanje (
-                            id_dogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
-                            naziv_dogadjanja VARCHAR(255) NOT NULL,
-                            tip_dogadjanja VARCHAR(255) NOT NULL,
-                            lokacija_dogadjanja VARCHAR(255) NOT NULL,
-                            vrijeme_dogadjanja TIMESTAMP,
+                            iddogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                            nazivdogadjanja VARCHAR(255) NOT NULL,
+                            tipdogadjanja VARCHAR(255) NOT NULL,
+                            lokacijadogadjanja VARCHAR(255) NOT NULL,
+                            vrijemedogadjanja TIMESTAMP,
                             trajanje DOUBLE PRECISION,
-                            organizator_id BIGINT,
-                            cijena_ulaznice DOUBLE PRECISION,
-                            FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
+                            organizatorid BIGINT,
+                            cijenaulaznice DOUBLE PRECISION,
+                            FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
 );
 -- Create the 'poveznica' table
 CREATE TABLE poveznica (
-                           id_poveznice BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           organizator_id BIGINT,
+                           idpoveznice BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           organizatorid BIGINT,
                            link VARCHAR(255),
-                           FOREIGN KEY (organizator_id) REFERENCES korisnik(id)
+                           FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
 );
 
 -- Create the 'medijski_sadrzaj' table
-CREATE TABLE medijski_sadrzaj (
-                                  id_medijskog_sadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                  adresa_medijskog_sadrzaja VARCHAR(255),
-                                  id_dogadjanja BIGINT,
-                                  FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja)
+CREATE TABLE medijskisadrzaj (
+                                  idmedijskogsadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                  adresamedijskogsadrzaja VARCHAR(255),
+                                  iddogadjanja BIGINT,
+                                  FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja)
 );
 
 -- Create the 'recenzija' table
 CREATE TABLE recenzija (
-                           id_rezenczije BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           recenzija_tekst TEXT,
+                           idrezenczije BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           recenzijatekst TEXT,
                            ocjena INT,
-                           id_dogadjanja BIGINT,
-                           id_korisnik BIGINT,
-                           FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja),
-                           FOREIGN KEY (id_korisnik) REFERENCES korisnik(id)
+                           iddogadjanja BIGINT,
+                           idkorisnik BIGINT,
+                           FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja),
+                           FOREIGN KEY (idkorisnik) REFERENCES korisnik(id)
 );
 
 -- Create the 'dolazak_korisnika' table
-CREATE TABLE dolazak_korisnika (
-                                   id_dolaska_korisnika BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                   status_dolaska VARCHAR(255),
-                                   id_dogadjanja BIGINT,
-                                   id_korisnik BIGINT,
-                                   FOREIGN KEY (id_dogadjanja) REFERENCES dogadjanje(id_dogadjanja),
-                                   FOREIGN KEY (id_korisnik) REFERENCES korisnik(id)
+CREATE TABLE dolazakkorisnika (
+                                   iddolaskakorisnika BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                   statusdolaska VARCHAR(255),
+                                   iddogadjanja BIGINT,
+                                   idkorisnik BIGINT,
+                                   FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja),
+                                   FOREIGN KEY (idkorisnik) REFERENCES korisnik(id)
 );
 
 

@@ -10,19 +10,19 @@ public class EventReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_rezenczije")
+    @Column(name="idrezenczije")
     private Long id;
 
-    @Column(name = "recenzija_tekst")
+    @Column(name = "recenzijatekst")
     private String reviewText;
 
     @Column(name="ocjena")
     private Integer grade;
 
-    @Column(name="id_dogadjanja")
+    @Column(name="iddogadjanja")
     private Long event_id;
 
-    @Column(name="id_korisnik")
+    @Column(name="idkorisnik")
     private Long user_id;
 
 
