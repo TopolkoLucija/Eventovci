@@ -20,10 +20,10 @@ public class EventReview {
     private Integer grade;
 
     @Column(name="iddogadjanja")
-    private Long event_id;
+    private Long eventId;
 
     @Column(name="idkorisnik")
-    private Long user_id;
+    private Long userId;
 
 
     //konstruktor
@@ -33,11 +33,11 @@ public class EventReview {
     }
 
 
-    public EventReview(String reviewText, Integer grade, Long event_id, Long user_id) {
+    public EventReview(String reviewText, Integer grade, Long eventId, Long userId) {
         this.reviewText = reviewText;
         this.grade = grade;
-        this.event_id = event_id;
-        this.user_id = user_id;
+        this.eventId = eventId;
+        this.userId = userId;
     }
 
     //equals i hash za id
@@ -80,18 +80,18 @@ public class EventReview {
     }
 
     public Long getEvent_id() {
-        return event_id;
+        return eventId;
     }
 
     public void setEvent_id(Long event_id) {
-        this.event_id = event_id;
+        this.eventId = event_id;
     }
 
     public Long getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 }

@@ -11,9 +11,9 @@ public class EventData {
 
     }
 
-    public EventData(String eventName, String typeOfEvenet, String picture) {
+    public EventData(String eventName, String typeOfEvent, String picture) {
         this.eventName = eventName;
-        this.typeOfEvent = typeOfEvenet;
+        this.typeOfEvent = typeOfEvent;
         this.picture = picture;
     }
 

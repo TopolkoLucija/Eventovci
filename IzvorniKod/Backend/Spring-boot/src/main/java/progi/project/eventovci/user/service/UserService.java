@@ -11,7 +11,7 @@ import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
 import progi.project.eventovci.user.repository.UserRepository;
-import progi.project.eventovci.event.entity.repository.EventRepository;
+import progi.project.eventovci.event.repository.EventRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
