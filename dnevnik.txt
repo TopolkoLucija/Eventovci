@@ -24,5 +24,7 @@
 4. sastanak 
 	datum: 26. listopada 2023.
 	prisustvovali: Filip Mišković, Iva Kvesić, Bruno Marković
+	teme: 
+		
 
 
