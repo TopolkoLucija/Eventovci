@@ -10,7 +10,7 @@ public class EventReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idrezenczije")
+    @Column(name="idrecenzije")
     private Long id;
 
     @Column(name = "recenzijatekst")
