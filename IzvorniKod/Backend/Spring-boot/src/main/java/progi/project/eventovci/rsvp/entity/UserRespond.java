@@ -5,21 +5,21 @@ import java.lang.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="dolazak_korisnika")
+@Table(name="dolazakkorisnika")
 public class UserRespond {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_dolaska_korisnika")
+    @Column(name="iddolaskakorisnika")
     private Long id;
 
-    @Column(name="status_dolaska")
+    @Column(name="statusdolaska")
     private String status; // OPCIJE: "dolazim", "mozda", "ne dolazim"
 
-    @Column(name="id_dogadjanja")
+    @Column(name="iddogadjanja")
     private Long event_id;
 
-    @Column(name="id_korisnik")
+    @Column(name="idkorisnik")
     private Long user_id;
 
     //konstruktor

@@ -10,10 +10,10 @@ public class SocialMediaLink {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_poveznice")
+    @Column(name="idpoveznice")
     private Long id;
 
-    @Column(name="organizator_id")
+    @Column(name="organizatorid")
     private Long eventCoordinator_id;
 
     @Column(name="link")
