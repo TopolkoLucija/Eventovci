@@ -21,7 +21,6 @@
 				
 				\begin{packed_enum}
 					
-					\item vidjeti popis aktualnih događanja u odabranom vremenskom razdoblju (24 sata, 7 dana, 30 dana)
 					\item stvoriti novi korisnički račun kao:
 					\begin{packed_enum}
 						\item organizator (naziv, e-mail adresa, lozinka, adresa, poveznica na vlastite web ili Facebook stranice) 
@@ -35,6 +34,7 @@
 				
 				\begin{packed_enum}
 					
+					\item prijaviti se u sustav i odjaviti iz sustava
 					\item pregledavati i uređivati svoje osobne podatke
 					\item vidjeti popis aktualnih događanja u odabranom vremenskom razdoblju (24 sata, 7 dana, 30 dana)
 					\item odabrati postavke da im aplikacija automatski šalje obavijesti o najnovijim događanjima (prema vrsti događanja i području) 
@@ -44,7 +44,7 @@
 						\item po želji promijeniti interes
 					\end{packed_enum} 
 					\item vidjeti podatke o organizatorima događanja (naziv, adresa, poveznica na vlastite web ili Facebook stranice,  popis svih događanja koja su oglašena putem aplikacije u zadnje 2 godine)
-					\item napisati recenziju za događanja koja su završila u posljednjih 48 sati
+					\item napisati recenziju (i/ili obrisati svoju napisanu recenziju) za događanja koja su završila u posljednjih 48 sati
 					\item obrisati svoj korisnički račun
 					\item odjaviti se iz sustava
 					
@@ -53,22 +53,24 @@
 				\item \underbar{Organizator (inicijator) može:}		
 						
 				\begin{packed_enum}
-					\item pregledavati i uređivati svoje osobne podatke
+					\item sve što može i Posjetitelj
 					\item stvoriti novo događanje:
 					\begin{packed_enum}
 						\item za koje se ne plaća ulaz (*navesti podatke*)
 						\item za koje se plaća ulaz ()
 					\end{packed_enum}
-					\item pregledavati i uređivati svoja događanja te vidjeti broj zainteresiranih posjetitelja 
+					\item pregledavati i brisati svoja događanja 
 				\end{packed_enum}
 				
 				\item \underbar{Administrator (inicijator) može:}
 				
 				\begin{packed_enum}
+					\item prijaviti se u sustav
 					\item vidjeti popis i osobne podatke svih registriranih korisnika 
 					\item trajno obrisati korisnički profil
 					\item postaviti cijenu članarine za organizatore događanja za koje se plaća ulaz
 					\item brisati recenzije i događanja 
+					\item odjaviti se iz sustava
 				\end{packed_enum}
 				
 				\item \underbar{Baza podataka (sudionik):}
@@ -91,7 +93,7 @@
 					\noindent \underbar{\textbf{UC1 - Registracija}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: } Neregistrirani/neprijavljeni korisnik
+						\item \textbf{Glavni sudionik:} Neregistrirani/neprijavljeni korisnik
 						\item  \textbf{Cilj:} Stvaranje korisničkog računa za korištenje platforme
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} -
@@ -125,7 +127,7 @@
 					\noindent \underbar{\textbf{UC2 - Prijava}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Neregistrirani/neprijavljeni korisnik
+						\item \textbf{Glavni sudionik:} Neregistrirani/neprijavljeni korisnik
 						\item  \textbf{Cilj:} Dobiti pristup odgovarajućem korisničkom sučelju ovisno o ulozi 
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Registracija
@@ -161,7 +163,7 @@
 					\noindent \underbar{\textbf{UC3 - Odjava}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Administrator, Organizator ili Posjetitelj)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Administrator, Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Odjava iz sustava 
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
@@ -181,7 +183,7 @@
 					\noindent \underbar{\textbf{UC4 - Pregled osobnih podataka}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Korisnik (Organizator, Posjetitelj)
+						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Pregledati osobne podatke
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
@@ -200,7 +202,7 @@
 					\noindent \underbar{\textbf{UC5 - Uređivanje osobnih podataka}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Korisnik (Organizator, Posjetitelj)
+						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Izmijeniti osobne podatke 
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
@@ -246,7 +248,7 @@
 					\noindent \underbar{\textbf{UC6 - Postavke obavještavanja o novim događanjima}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Posjetitelj
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Podesiti postavke obavještavanja o najnovijim događanjima
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i ima ovlasti Posjetitelja
@@ -254,9 +256,9 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Posjetitelj odabire opciju uređivanja postavki obavještavanja o novim događanjima
-							\item Posjetitelj odabire želi li primati obavijesti i, ako da, o kojim vrstama događanja i iz kojeg područja
-							\item Posjetitelj sprema promjene
+							\item Korisnik odabire opciju uređivanja postavki obavještavanja o novim događanjima
+							\item Korisnik odabire želi li primati obavijesti i, ako da, o kojim vrstama događanja i iz kojeg područja
+							\item Korisnik sprema promjene
 							\item Baza podataka se osvježava
 							
 						\end{packed_enum}
@@ -265,12 +267,12 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[2.a] Posjetitelj odabire da želi primati obavijesti, ali ne unese minimalno jednu vrstu događanja i minimalno jedno područje
+							\item[2.a] Korisnik odabire da želi primati obavijesti, ali ne unese minimalno jednu vrstu događanja i minimalno jedno područje
 							\item[] \begin{packed_enum}
 								
 								\item Onemogućiti spremanje promjena
 								\item Obavijestiti korisnika o obaveznom izboru barem jedne vrste događanja i barem jednog područja
-								\item Posjetitelj odabire vrstu događanja i/ili područje koje nedostaje i omogućava se spremanje promjena
+								\item Korisnik odabire vrstu događanja i/ili područje koje nedostaje i omogućava se spremanje promjena
 								
 							\end{packed_enum}
 						\end{packed_item}
@@ -282,7 +284,7 @@
 					\noindent \underbar{\textbf{UC7 - Brisanje vlastitog korisničkog računa}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Korisnik (Organizator, Posjetitelj)
+						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Obrisati korisnički račun i sve osobne podatke
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
@@ -304,7 +306,7 @@
 					\noindent \underbar{\textbf{UC8 - Pregled svih korisničkih računa}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Administrator
+						\item \textbf{Glavni sudionik:} Administrator
 						\item  \textbf{Cilj:} Prikaz svih korisničkih računa 
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i ima ovlasti Administratora
@@ -324,7 +326,7 @@
 					\noindent \underbar{\textbf{UC9 - Brisanje korisničkog računa}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Administrator
+						\item \textbf{Glavni sudionik:} Administrator
 						\item  \textbf{Cilj:} Trajno brisanje korisnika iz sustava
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Administratora i prikazan mu je popis svih korisničkih računa
@@ -346,7 +348,7 @@
 						\noindent \underbar{\textbf{UC10 - Postavljanje cijene članarine}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Administrator
+						\item \textbf{Glavni sudionik:} Administrator
 						\item  \textbf{Cilj:} Postavljanje cijene mjesečne članarine za organizatore
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen i ima ovlasti Administratora 
@@ -381,7 +383,7 @@
 					\noindent \underbar{\textbf{UC11 - Dodavanje novog događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Organizator
+						\item \textbf{Glavni sudionik:} Organizator
 						\item  \textbf{Cilj:} Dodati novo događanje 
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen i ima ovlasti Organizatora
@@ -423,11 +425,12 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
+					\newpage
 
 					\noindent \underbar{\textbf{UC12 - Pregled svih događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
 						\item  \textbf{Cilj:} Pregled svih događanja prema određenom kriteriju
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav 
@@ -447,7 +450,7 @@
 					\noindent \underbar{\textbf{UC13 - Pregled jednog događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
 						\item  \textbf{Cilj:} Pregled jednog odabranog događanja od svih prikazanih događanja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i prikazana su sva događanja prema odabranom kriteriju
@@ -467,10 +470,10 @@
 					\noindent \underbar{\textbf{UC14 - Pregled profila organizatora}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 						\item  \textbf{Cilj:} Pregled korisničkog računa organizatora
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja i ima otvoren prikaz nekog događanja
+						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i ima otvoren prikaz nekog događanja
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -483,12 +486,12 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
-
+					\newpage
 					
 					\noindent \underbar{\textbf{UC15 - Pregled vlastitih događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Organizator
+						\item \textbf{Glavni sudionik:} Organizator
 						\item  \textbf{Cilj:} Pregled svih događanja koje je taj organizator objavio
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i ima ovlasti Organizatora  
@@ -508,7 +511,7 @@
 					\noindent \underbar{\textbf{UC16 - Pregled jednog vlastitog događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Organizator
+						\item \textbf{Glavni sudionik:} Organizator
 						\item  \textbf{Cilj:} Prikaz jednog od događanja koje je taj organizator objavio
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja
@@ -528,7 +531,7 @@
 					\noindent \underbar{\textbf{UC17 - Brisanje vlastitog događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Organizator
+						\item \textbf{Glavni sudionik:} Organizator
 						\item  \textbf{Cilj:} Trajno brisanje vlastitog događanja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja
@@ -546,11 +549,12 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
+					\newpage
 										
 					\noindent \underbar{\textbf{UC18 - Brisanje događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Administrator
+						\item \textbf{Glavni sudionik:} Administrator
 						\item  \textbf{Cilj:} Trajno brisanje događanja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Administratora i prikazana su mu sva događanja
@@ -572,10 +576,10 @@
 					\noindent \underbar{\textbf{UC19 - Recenziranje događanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Posjetitelj
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Dodavanje recenzije događanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja i otvoren je prikaz događanja koje je završilo u posljednjih 48 sati
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz događanja koje je završilo u posljednjih 48 sati
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -608,7 +612,7 @@
 					\noindent \underbar{\textbf{UC20 - Brisanje vlastite recenzije}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 						\item  \textbf{Cilj:} Trajno brisanje vlastite recenzije događanja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz jednog događanja
@@ -630,7 +634,7 @@
 					\noindent \underbar{\textbf{UC21 - Brisanje recenzije}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Administrator
+						\item \textbf{Glavni sudionik:} Administrator
 						\item  \textbf{Cilj:} Trajno brisanje recenzije događanja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Administratora i otvoren je prikaz jednog događanja
@@ -653,10 +657,10 @@
 					\noindent \underbar{\textbf{UC22 - Iskazivanje interesa za događanje}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Prijavljeni korisnik (Posjetitelj, Organizator)
+						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 						\item  \textbf{Cilj:} Izraziti i/ili promijeniti interes za događanje
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja i otvoren prikaz nekog događanja 
+						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i otvoren je  prikaz nekog događanja 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -690,12 +694,20 @@
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
 				\begin{figure}[H]
-					\includegraphics[scale=0.5]{dijagrami/uc1.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
+					\includegraphics[scale=0.5]{dijagrami/uc1.PNG} 
 					\centering
-					\caption{Dijagram obrazaca uporabe; prikazana funkcionalnost Korisnika (neprijavljeni/neregistrirani korisnik) i Posjetitelja}
+					\caption{Dijagram obrazaca uporabe, funkcionalnost Korisnika i Klijenta (Posjetitelj, Organizator)}
 					\label{fig:promjene}
 				\end{figure}
 				
+				\newpage
+				
+				\begin{figure}[H]
+					\includegraphics[scale=0.5]{dijagrami/uc2.PNG}
+					\centering
+					\caption{Dijagram obrazaca uporabe, dodatne funkcionalnosti Organizatora i funkcionalnost Administratora}
+					\label{fig:promjene}
+				\end{figure}
 				
 				\newpage
 				
