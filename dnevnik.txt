@@ -24,7 +24,9 @@
 4. sastanak 
 	datum: 26. listopada 2023.
 	prisustvovali: Filip Mišković, Iva Kvesić, Bruno Marković
-	teme: 
+	teme: dogovor o podjeli posla
+	      određen okvirni izgled stranice, 
+	      cijeli zapisnik i detalji se nalaze "imeFilaKojiCemoStavit"
 		
 
 
