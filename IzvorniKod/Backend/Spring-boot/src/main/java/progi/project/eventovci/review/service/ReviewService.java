@@ -8,6 +8,7 @@ import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.event.entity.EventNotFoundException;
 import progi.project.eventovci.review.entity.EventReview;
 import progi.project.eventovci.review.entity.ReviewAlreadyExistsException;
+import progi.project.eventovci.review.entity.ReviewNotFoundException;
 import progi.project.eventovci.review.entity.UnAuthorizedAddException;
 import progi.project.eventovci.review.repository.ReviewRepository;
 import progi.project.eventovci.user.entity.User;
@@ -17,6 +18,7 @@ import progi.project.eventovci.user.repository.UserRepository;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -51,5 +53,15 @@ public class ReviewService {
         }
         return reviewRepository.save(new EventReview(text, grade, eventId, userId));
 
+    }
+
+    public Long deleteReview(Long id) {
+        EventReview review = reviewRepository.findEventReviewById(id);
+        if (review==null){
+            throw new ReviewNotFoundException("Recenzija ne postoji!");
+        } else {
+            reviewRepository.delete(review);
+            return id;
+        }
     }
 }
