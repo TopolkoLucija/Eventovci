@@ -20,3 +20,9 @@
 	prisustvovali: Lucija Topolko, Natali Lazarić, Iva Svalina
 	teme:
 		osmišljavanje baze podataka (odabir h2 baze za lokalno testiranje, odabir entiteta i njihovih atributa)
+
+4. sastanak 
+	datum: 26. listopada 2023.
+	prisustvovali: Filip Mišković, Iva Kvesić, Bruno Marković
+
+
