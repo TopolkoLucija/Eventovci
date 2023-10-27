@@ -1,0 +1,44 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+}
+
+.sidebar {
+  background-color: #FF6B6B;
+  color: #333;
+  width: 50%;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebar::before {
+  content: "";
+  display: block;
+  height: 70px;
+  /* Postavite željeni razmak (visinu) između pozadine sidebara i ikona */
+  background-color: #FF6B6B;
+  /* Boja sidebara */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 4%;
+}
+
+.category img {
+  width: 10%;
+  /* Ovdje postavite željenu širinu za sliku */
+}
