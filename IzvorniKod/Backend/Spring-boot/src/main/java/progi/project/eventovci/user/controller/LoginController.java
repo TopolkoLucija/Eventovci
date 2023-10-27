@@ -4,16 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.user.controller.dto.LoginForm;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/login") //http://localhost:8080/Test/login
 public class LoginController {
 
