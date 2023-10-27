@@ -14,7 +14,7 @@ import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/login") //http://localhost:8080/Test/login
 public class LoginController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class LoginController {
 
     @PostMapping()
     public ResponseEntity<User> login(@RequestBody LoginForm loginform) {
-        User user = userService.login(loginform.getUsername(), loginform.getPassword());
+        User user = userService.login(loginform.getEmail(), loginform.getPassword());
         return ResponseEntity.ok(user);
     }
 
