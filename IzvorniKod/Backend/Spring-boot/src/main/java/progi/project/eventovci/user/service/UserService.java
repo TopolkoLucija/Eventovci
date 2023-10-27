@@ -30,12 +30,12 @@ public class UserService {
     @Autowired
     private MediaContentRepository mediaContentRepository;
 
-    public User login(String username, String password) {
-        User user = userRepository.findUserByUsername(username);
+    public User login(String email, String password) {
+        User user = userRepository.findUserByEmail(email);
         if (user != null && Objects.equals(user.getPassword(), password)) {
             return user;
         } else {
-            throw new UserNotFoundException("Incorrect username or password!");
+            throw new UserNotFoundException("Incorrect email or password!");
         }
 
     }

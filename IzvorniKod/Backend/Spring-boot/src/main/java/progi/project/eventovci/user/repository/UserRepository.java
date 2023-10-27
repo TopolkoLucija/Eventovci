@@ -8,6 +8,7 @@ import progi.project.eventovci.user.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
 
+
     User findUserById(Long id);
 
     User findUserByEmail(String email);
