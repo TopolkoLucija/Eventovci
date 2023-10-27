@@ -1,73 +1,82 @@
 -- Create the 'korisnik' table
 CREATE TABLE KORISNIK (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                          korisnickoIme VARCHAR(255) NOT NULL,
+                          korisnickoime VARCHAR(255) NOT NULL,
                           email VARCHAR(255) NOT NULL,
                           lozinka VARCHAR(255) NOT NULL,
-                          tipKorisnika VARCHAR(13) NOT NULL,
+                          tipkorisnika VARCHAR(13) NOT NULL,
                           adresa VARCHAR(255),
-                          placanjeClanarine BOOLEAN,
-                          UNIQUE (korisnickoIme, email)
+                          placanjeclanarine BOOLEAN,
+                          UNIQUE (korisnickoime, email)
+
 );
 
 -- Create the 'dogadjanje' table
 CREATE TABLE DOGADJANJE (
-                            idDogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
-                            nazivDogadjanja VARCHAR(255) NOT NULL,
-                            tipDogadjanja VARCHAR(255) NOT NULL,
-                            lokacijaDogadjanja VARCHAR(255) NOT NULL,
-                            vrijemeDogadjanja TIMESTAMP NOT NULL,
+                            iddogadjanja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                            nazivdogadjanja VARCHAR(255) NOT NULL,
+                            tipdogadjanja VARCHAR(255) NOT NULL,
+                            lokacijadogadjanja VARCHAR(255) NOT NULL,
+                            vrijemedogadjanja TIMESTAMP NOT NULL,
                             trajanje DOUBLE PRECISION,
-                            organizatorId BIGINT NOT NULL,
-                            cijenaUlaznice DOUBLE PRECISION NOT NULL,
-                            FOREIGN KEY (organizatorId) REFERENCES korisnik(id),
-                            UNIQUE (organizatorId)
+                            organizatorid BIGINT NOT NULL,
+                            cijenaulaznice DOUBLE PRECISION NOT NULL,
+                            FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
+                                ON DELETE CASCADE,
+                            UNIQUE (organizatorid)
 );
 -- Create the 'poveznica' table
 CREATE TABLE POVEZNICA (
-                           idPoveznice BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           organizatorId BIGINT NOT NULL ,
+                           idpoveznice BIGINT AUTO_INCREMENT PRIMARY KEY,
+                           organizatorid BIGINT NOT NULL ,
                            link VARCHAR(255) NOT NULL,
-                           FOREIGN KEY (organizatorId) REFERENCES korisnik(id)
+                           FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
+                                ON DELETE CASCADE
 );
 
 CREATE TABLE MEDIJSKISADRZAJ (
-                                  idMedijskogSadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                  adresaMedijskogSadrzaja VARCHAR(255),
-                                  idDogadjanja BIGINT,
-                                  FOREIGN KEY (idDogadjanja) REFERENCES dogadjanje(idDogadjanja)
-);
+                                  idmedijskogsadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                  medijskisadrzaj LONGBLOB,
+                                  iddogadjanja BIGINT,
+                                  FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja)
+                                        ON DELETE CASCADE
+                             );
 
 -- Create the 'recenzija' table
 CREATE TABLE RECENZIJA (
                            idrecenzije BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           recenzijaTekst TEXT NOT NULL ,
+                           recenzijatekst TEXT NOT NULL ,
                            ocjena INT NOT NULL,
-                           idDogadjanja BIGINT NOT NULL ,
-                           idKorisnik BIGINT NOT NULL ,
-                           FOREIGN KEY (idDogadjanja) REFERENCES dogadjanje(idDogadjanja),
-                           FOREIGN KEY (idKorisnik) REFERENCES korisnik(id)
+                           iddogadjanja BIGINT NOT NULL ,
+                           idkorisnik BIGINT NOT NULL ,
+                           FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja)
+                                ON DELETE CASCADE,
+                           FOREIGN KEY (idkorisnik) REFERENCES korisnik(id)
+                                ON DELETE CASCADE
 );
 
 -- Create the 'dolazak_korisnika' table
 CREATE TABLE dolazakkorisnika (
-                                   idDolaskaKorisnika BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                   statusDolaska VARCHAR(255),
-                                   idDogadjanja BIGINT,
-                                   idKorisnik BIGINT,
-                                   FOREIGN KEY (idDogadjanja) REFERENCES dogadjanje(idDogadjanja),
-                                   FOREIGN KEY (idKorisnik) REFERENCES korisnik(id),
-                                   UNIQUE(idDogadjanja, idKorisnik)
+                                   iddolaskakorisnika BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                   statusdolaska VARCHAR(255),
+                                   iddogadjanja BIGINT,
+                                   idkorisnik BIGINT,
+                                   FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja)
+                                       ON DELETE CASCADE,
+                                   FOREIGN KEY (idkorisnik) REFERENCES korisnik(id)
+                                       ON DELETE CASCADE,
+                                   UNIQUE(iddogadjanja, idkorisnik)
 );
 
 -- Create the 'clanarina' table
 CREATE TABLE CLANARINA
 (
-    idClanarine     BIGINT AUTO_INCREMENT PRIMARY KEY,
-    idKorisnik      BIGINT           NOT NULL,
-    cijenaClanarine DOUBLE PRECISION NOT NULL,
-    vrijediDo       TIMESTAMP        NOT NULL,
-    FOREIGN KEY (idKorisnik) REFERENCES korisnik (id)
+    idclanarine     BIGINT AUTO_INCREMENT PRIMARY KEY,
+    idkorisnik      BIGINT           NOT NULL,
+    cijenaclanarine DOUBLE PRECISION NOT NULL,
+    vrijedido       TIMESTAMP        NOT NULL,
+    FOREIGN KEY (idkorisnik) REFERENCES korisnik (id)
+        ON DELETE CASCADE
 );
 
 

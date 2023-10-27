@@ -70,7 +70,7 @@ public class UserService {
                     List<EventData> eventlist = new ArrayList<>();
                     for (Event e : event) {
                         MediaContent media = mediaContentRepository.first(e.getId()).get(0);
-                        EventData eventData = new EventData(e.getEventName(), e.getTypeOfEvent(), media.getContentPath());
+                        EventData eventData = new EventData(e.getEventName(), e.getTypeOfEvent(), media.getContent());
                         eventlist.add(eventData);
                     }
                     System.out.println(eventlist.size());

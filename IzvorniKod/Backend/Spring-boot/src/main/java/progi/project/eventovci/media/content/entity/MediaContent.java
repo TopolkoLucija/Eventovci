@@ -14,8 +14,8 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
-    @Column(name="adresamedijskogsadrzaja")
-    private String contentPath;
+    @Column(name="medijskisadrzaj")
+    private byte[] content;
 
     @Column(name="iddogadjanja")
     private Long eventid;
@@ -24,8 +24,9 @@ public class MediaContent {
     public MediaContent() {
 
     }
-    public MediaContent(String contentPath, Long eventid) {
-        this.contentPath = contentPath;
+
+    public MediaContent(byte[] content, Long eventid) {
+        this.content = content;
         this.eventid = eventid;
     }
 
@@ -54,12 +55,12 @@ public class MediaContent {
         this.id = id;
     }
 
-    public String getContentPath() {
-        return contentPath;
+    public byte[] getContent() {
+        return content;
     }
 
-    public void setContentPath(String contentPath) {
-        this.contentPath = contentPath;
+    public void setContent(byte[] content) {
+        this.content = content;
     }
 
     public Long getEvent_id() {

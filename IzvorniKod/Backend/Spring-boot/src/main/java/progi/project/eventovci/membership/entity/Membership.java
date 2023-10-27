@@ -11,16 +11,16 @@ public class Membership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_clanarine")
+    @Column(name="idclanarine")
     private Long membershipId;
 
-    @Column(name="id_korisnik")
+    @Column(name="idkorisnik")
     private Long user_id;
 
-    @Column(name="cijena_clanarine")
+    @Column(name="cijenaclanarine")
     private Double price;
 
-    @Column(name="vrijedi_do")
+    @Column(name="vrijedido")
     private LocalDateTime validUntil;
 
     //konstruktori

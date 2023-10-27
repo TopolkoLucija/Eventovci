@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 public class EventData {
     private String eventName;
     private String typeOfEvent;
-    private String picture;
+    private byte[] picture;
 
     public EventData() {
 
     }
 
-    public EventData(String eventName, String typeOfEvent, String picture) {
+    public EventData(String eventName, String typeOfEvent, byte[] picture) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.picture = picture;
@@ -25,7 +25,5 @@ public class EventData {
         return typeOfEvent;
     }
 
-    public String getPicture() {
-        return picture;
-    }
+    public byte[] getPicture() {return picture;}
 }
