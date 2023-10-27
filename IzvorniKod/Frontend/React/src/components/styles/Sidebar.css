@@ -23,10 +23,8 @@ body,
 .sidebar::before {
   content: "";
   display: block;
-  height: 70px;
-  /* Postavite željeni razmak (visinu) između pozadine sidebara i ikona */
+  height: 140px;
   background-color: #FF6B6B;
-  /* Boja sidebara */
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
@@ -39,6 +37,20 @@ body,
 }
 
 .category img {
-  width: 10%;
+  width: 12%;
   /* Ovdje postavite željenu širinu za sliku */
+  margin-right: 10%; /* Postavite željeni razmak (u ovom slučaju 10px) između slike i teksta */
+  margin-left: 4%;
+}
+
+
+.category span {
+  font-family: 'Helvetica Neue' sans-serif;
+  letter-spacing: 1px;
+}
+
+.category:hover {
+  background-color: #fff; 
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
