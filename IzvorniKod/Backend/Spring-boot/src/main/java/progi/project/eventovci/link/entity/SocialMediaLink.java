@@ -14,7 +14,7 @@ public class SocialMediaLink {
     private Long id;
 
     @Column(name="organizatorid")
-    private Long eventCoordinator_id;
+    private Long eventCoordinatorId;
 
     @Column(name="link")
     private String link;
@@ -27,7 +27,7 @@ public class SocialMediaLink {
 
 
     public SocialMediaLink(Long eventCoordinator_id, String link) {
-        this.eventCoordinator_id = eventCoordinator_id;
+        this.eventCoordinatorId = eventCoordinator_id;
         this.link = link;
     }
 
@@ -54,12 +54,12 @@ public class SocialMediaLink {
         this.id = id;
     }
 
-    public Long getEventCoordinator_id() {
-        return eventCoordinator_id;
+    public Long getEventCoordinatorId() {
+        return eventCoordinatorId;
     }
 
-    public void setEventCoordinator_id(Long eventCoordinator_id) {
-        this.eventCoordinator_id = eventCoordinator_id;
+    public void setEventCoordinatorId(Long eventCoordinatorId) {
+        this.eventCoordinatorId = eventCoordinatorId;
     }
 
     public String getLink() {

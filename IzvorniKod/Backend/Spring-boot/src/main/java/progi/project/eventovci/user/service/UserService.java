@@ -3,8 +3,10 @@ package progi.project.eventovci.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
+import progi.project.eventovci.link.entity.SocialMediaLink;
+import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.user.controller.dto.EventData;
+import progi.project.eventovci.event.controller.dto.EventData;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.entity.UserNotFoundException;
@@ -14,7 +16,6 @@ import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.event.repository.EventRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +30,9 @@ public class UserService {
 
     @Autowired
     private MediaContentRepository mediaContentRepository;
+
+    @Autowired
+    private LinkRepository linkRepository;
 
     public User login(String email, String password) {
         User user = userRepository.findUserByEmail(email);
@@ -59,23 +63,25 @@ public class UserService {
         if(user != null){
 
             if(Objects.equals(user.getTypeOfUser(),"posjetitelj")){
-                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null);
+                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
             }
             if(Objects.equals(user.getTypeOfUser(),"organizator")){
                 List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
-                if(event.isEmpty()){
-                    return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null);
+                List<EventData> eventlist = new ArrayList<>();
+                for (Event e : event) {
+                    MediaContent media = mediaContentRepository.first(e.getId()).get(0);
+                    EventData eventData = new EventData(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
+                    eventlist.add(eventData);
                 }
-                else {
-                    List<EventData> eventlist = new ArrayList<>();
-                    for (Event e : event) {
-                        MediaContent media = mediaContentRepository.first(e.getId()).get(0);
-                        EventData eventData = new EventData(e.getEventName(), e.getTypeOfEvent(), media.getContent());
-                        eventlist.add(eventData);
-                    }
-                    System.out.println(eventlist.size());
-                    return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), eventlist);
+
+                List<SocialMediaLink> socialMediaLinks = linkRepository.findAllByEventCoordinatorId(id);
+                List<String> links = new ArrayList<>();
+                for (SocialMediaLink s : socialMediaLinks) {
+                    links.add(s.getLink());
                 }
+
+                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), eventlist, links);
+
             }
             return null;
         }else {
