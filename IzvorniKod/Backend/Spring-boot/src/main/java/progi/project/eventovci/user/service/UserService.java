@@ -1,5 +1,6 @@
 package progi.project.eventovci.user.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
@@ -86,7 +87,20 @@ public class UserService {
             return null;
         }else {
             throw new UserNotFoundException("Korisnik ne postoji!");
-}
-}
+        }
+    }
+
+    @Transactional
+    public User changeData(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+        User user = userRepository.findUserById(id);
+        if(user != null){
+            Integer x = userRepository.updateUserById(id, username, email, password, typeOfUser, homeAdress, shouldPayMembership);
+            User newUser = userRepository.findUserById(id);
+            return newUser;
+        }else {
+        throw new UserNotFoundException("Korisnik ne postoji!");
+        }
+    }
+
 
 }
