@@ -1,0 +1,19 @@
+.main-content{
+   border-radius: 10px;
+   height: 100%;
+   padding: 30px;
+}
+
+.more-info{
+   text-decoration: none;
+   color: white;
+   background-color: #0d6efd;
+   padding: 6px 12px;
+   border-radius: 8px;
+   transition: background-color 0.15s ease-in-out;
+}
+
+.more-info:hover{
+   background-color: #0a58ca;
+}
+

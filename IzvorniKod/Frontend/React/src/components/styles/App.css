@@ -7,9 +7,6 @@
    width: 25%;
 }
 
-.main-content{
+.content{
    width: 75%;
-   display: grid;
-   place-content: center;
-   place-items: center;
 }

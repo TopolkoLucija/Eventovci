@@ -62,7 +62,7 @@ const LoginM = () => {
   }
 
   return (
-    <div className="main-content" id='NaCentarDiva'>
+    <div className="content" id='NaCentarDiva'>
       <form>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
