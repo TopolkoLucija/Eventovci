@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Home() {
+function Events() {
   return (
     <div className="main-content">
-      <h1>Homepage</h1>
+      <h1>Events</h1>
     </div>
   );
 }
 
-export default Home;
+export default Events;

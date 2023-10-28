@@ -1,8 +1,9 @@
-.NaCentarDiva{
+#NaCentarDiva{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .RazmakniBotune{
     display: flex;
     justify-content: space-around;

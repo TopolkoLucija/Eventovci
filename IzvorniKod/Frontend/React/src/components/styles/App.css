@@ -1,0 +1,15 @@
+.app-container{
+   width: 100%;
+   display: flex;
+}
+
+.sidebar{
+   width: 25%;
+}
+
+.main-content{
+   width: 75%;
+   display: grid;
+   place-content: center;
+   place-items: center;
+}
