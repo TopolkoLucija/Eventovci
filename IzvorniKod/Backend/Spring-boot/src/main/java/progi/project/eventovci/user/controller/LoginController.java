@@ -12,7 +12,7 @@ import progi.project.eventovci.user.service.UserService;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/login") //http://localhost:8080/Test/login
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired

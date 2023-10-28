@@ -1,6 +1,6 @@
 package progi.project.eventovci.user.controller.dto;
 
-import progi.project.eventovci.user.controller.dto.EventData;
+import progi.project.eventovci.event.controller.dto.EventData;
 import java.util.List;
 
 public class DataForm {
@@ -12,6 +12,11 @@ public class DataForm {
     private Boolean shouldPayMembership;
 
     private List<EventData> eventList;
+    private List<String> links;
+
+    public List<String> getLinks() {
+        return links;
+    }
 
     public String getUsername() {
         return username;
@@ -44,12 +49,13 @@ public class DataForm {
     public DataForm(){
 
     }
-    public DataForm(String username, String email, String typeOfUser, String homeAdress, Boolean shouldPayMembership, List<EventData> eventList) {
+    public DataForm(String username, String email, String typeOfUser, String homeAdress, Boolean shouldPayMembership, List<EventData> eventList, List<String> links) {
         this.username = username;
         this.email = email;
         this.typeOfUser = typeOfUser;
         this.homeAdress = homeAdress;
         this.shouldPayMembership = shouldPayMembership;
         this.eventList = eventList;
+        this.links=links;
     }
 }
