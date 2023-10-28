@@ -1,10 +1,12 @@
 package progi.project.eventovci.user.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.user.controller.dto.EventData;
+import progi.project.eventovci.user.controller.dto.RegisterForm;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.entity.UserNotFoundException;
@@ -54,19 +56,18 @@ public class UserService {
         return user;
     }
 
-    public DataForm data(Long id){
+    public DataForm data(Long id) {
         User user = userRepository.findUserById(id);
-        if(user != null){
+        if (user != null) {
 
-            if(Objects.equals(user.getTypeOfUser(),"posjetitelj")){
+            if (Objects.equals(user.getTypeOfUser(), "posjetitelj")) {
                 return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null);
             }
-            if(Objects.equals(user.getTypeOfUser(),"organizator")){
+            if (Objects.equals(user.getTypeOfUser(), "organizator")) {
                 List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
-                if(event.isEmpty()){
+                if (event.isEmpty()) {
                     return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null);
-                }
-                else {
+                } else {
                     List<EventData> eventlist = new ArrayList<>();
                     for (Event e : event) {
                         MediaContent media = mediaContentRepository.first(e.getId()).get(0);
@@ -78,9 +79,19 @@ public class UserService {
                 }
             }
             return null;
-        }else {
+        } else {
             throw new UserNotFoundException("Korisnik ne postoji!");
-}
-}
-
+        }
+    }
+    @Transactional
+    public User changeData(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+        User user = userRepository.findUserById(id);
+        if (user != null) {
+            Integer x = userRepository.updateUserById(id,username, email, password, typeOfUser, homeAdress, shouldPayMembership);
+            User userNew = userRepository.findUserById(id);
+            return userNew;
+        } else {
+            throw new UserNotFoundException("Korisnik ne postoji!");
+        }
+    }
 }
