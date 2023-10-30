@@ -36,7 +36,7 @@ const LoginM = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
-    fetch('http://localhost:8080/Test/register', {
+    fetch('/Test/register', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)

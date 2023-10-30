@@ -12,8 +12,7 @@ import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 
 import java.util.logging.Logger;
 
-@Controller
-@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 @RequestMapping("/review")
 public class ReviewController {
 
