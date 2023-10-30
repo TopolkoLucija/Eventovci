@@ -24,34 +24,41 @@ body,
 .sidebar::before {
   content: "";
   display: block;
-  height: 140px;
+  height: 19%;
   background-color: #FF6B6B;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
+
 .category {
   display: flex;
   align-items: center;
-  padding: 10px;
-  margin-top: 4%;
+  padding: 4.3%;
 }
 
 .category img {
-  width: 12%;
-  /* Ovdje postavite željenu širinu za sliku */
-  margin-right: 10%; /* Postavite željeni razmak (u ovom slučaju 10px) između slike i teksta */
+  width: 11%;
+  margin-right: 12%; 
   margin-left: 4%;
+}
+
+.box a {
+  text-decoration: none; /* uklanja podcrtavanje */
 }
 
 
 .category span {
-  font-family: 'Helvetica Neue' sans-serif;
-  letter-spacing: 1px;
+  font-size: 115%; 
+  font-family:  Helvetica, sans-serif;
+  letter-spacing: 2px;
+  color: #000; 
 }
 
 .category:hover {
-  background-color: #fff; 
+  background-color: #fff;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  text-decoration: none; 
+  transform: scale(1.015);
 }

@@ -15,12 +15,14 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       {categories.map((category, index) => (
+        <div className='box'>
         <a key={index} href={category.path}>
           <div key={index} className="category">
             <img src={category.img} alt={`img for ${category.title}`} />
             <span>{category.title}</span>
           </div>
         </a>
+        </div>
       ))}
     </div>
   );
