@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../styles/LoginM.css';
+import { useNavigate } from 'react-router-dom';
 const LoginM = () => {
   const [dodatnoZaRegistraciju, setDodatnoZaRegistraciju] = useState(false);
   const [PrijaviSeOrganizator, setPrijaviSeOrganizator] = useState(false);
@@ -9,6 +10,9 @@ const LoginM = () => {
   const [homeAdress, setHomeAdress] = useState("null");
   const [shouldPayMembership, setShouldPayMembership] = useState(false);
   const [typeOfUser, setTypeOfUser] = useState("posjetitelj");
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const podatci = { email, password };
@@ -24,6 +28,7 @@ const LoginM = () => {
       return response.json();
     }).then((data) => {
       console.log(data);
+      navigate('/home')
     }).catch((error) => {
       if (error.message === "No user found") {
         alert("No user found");
@@ -45,7 +50,8 @@ const LoginM = () => {
         throw new Error("No user found");
       }
       if (response.ok) {
-        alert("Dodano")
+        alert("Dodano");
+        navigate('/home');
       }
 
     }).catch((error) => {
@@ -75,7 +81,7 @@ const LoginM = () => {
         </div>
         {!dodatnoZaRegistraciju && (
           <div className='RazmakniBotune'>
-            <button type="submit" className="btn btn-primary " onClick={handleSubmit}  >Submit</button>
+            <button type="submit" className="btn btn-primary " onClick={handleSubmit}  >Prijavi se</button>
             <button className='btn btn-primary' onClick={() => {
               setDodatnoZaRegistraciju(true);
             }}>Registriraj se</button>
