@@ -10,8 +10,7 @@ import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
 
-@Controller
-@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 @RequestMapping("/login")
 public class LoginController {
 

@@ -13,7 +13,7 @@ const LoginM = () => {
     e.preventDefault();
     const podatci = { email, password };
     // console.log(JSON.stringify(podatci));
-    fetch('http://localhost:8080/Test/login', {
+    fetch('/Test/login', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(podatci)

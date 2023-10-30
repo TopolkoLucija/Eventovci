@@ -24,7 +24,6 @@ public class WebSecurity  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()); //allows all http requests
-        http.formLogin(Customizer.withDefaults());//configures form-based login authentication
         http.httpBasic(Customizer.withDefaults());// configures HTTP Basic authentication
         http.csrf(AbstractHttpConfigurer::disable);//disables Cross-Site Request Forgery (an attack that forces authenticated users to submit a request to a Web application against which they are currently authenticated) protection
         return http.build();
