@@ -713,17 +713,41 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth]{dijagrami/sd1.PNG}
+					\centering
+					\caption{Sekvencijski dijagram za \textbf{UC11}}
+					\label{fig:promjene}
+				\end{figure}
 				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-				\eject
+				\newpage
+		
+				
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth]{dijagrami/sd2.PNG}
+					\centering
+					\caption{Sekvencijski dijagram za \textbf{UC19}}
+					\label{fig:promjene}
+				\end{figure}
+				
+				\newpage
 	
 		\section{Ostali zahtjevi}
 		
-			\textbf{\textit{dio 1. revizije}}\\
-		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
-			 
+			\begin{packed_item}
+				\item Sustav treba biti implementiran kao web aplikacija koristeći objektno-orijentirane jezike 
+				\item Sustav mora omogućiti rad više korisnika u stvarnom vremenu 
+				\item Sustav treba sve zadatke izvršavati u vrlo kratkom vremenu, unutar nekoliko sekundi
+				\item Korisnički podaci trebaju biti sigurno pohranjeni i odgovarajuće enkriptirani
+				\item Sustav mora efikasno pohranjivati, upravljati i pristupati podacima putem baze podataka 
+				\item Korisničko sučelje mora podržavati hrvatsku abecedu pri unosu i prikazu tekstualnog sadržaja
+				\item Sustav mora koristiti europsku valutu (EUR) za prikaz cijena te europski oblik datuma (\textit{DD.MM.GGGG}) za prikaz i unos datuma
+				\item Web aplikacija mora biti responzivna i optimalno korisničko iskustvo pružati na svim uređajima
+				\item Korisničko sučelje treba biti intuitivno i pregledno, korisnici se moraju moći koristiti sučeljem bez opširnih uputa
+				\item Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnosti i rad sustava
+				
+				
+			\end{packed_item}
 			 
 			 
 	
