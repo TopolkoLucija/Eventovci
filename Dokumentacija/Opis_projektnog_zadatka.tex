@@ -1,114 +1,88 @@
 \chapter{Opis projektnog zadatka}
-		
-		\textbf{\textit{dio 1. revizije}}\\
-		
-		\textit{Na osnovi projektnog zadatka detaljno opisati korisničke zahtjeve. Što jasnije opisati cilj projektnog zadatka, razraditi problematiku zadatka, dodati nove aspekte problema i potencijalnih rješenja. Očekuje se minimalno 3, a poželjno 4-5 stranica opisa.	Teme koje treba dodatno razraditi u ovom poglavlju su:}
-		\begin{packed_item}
-			\item \textit{potencijalna korist ovog projekta}
-			\item \textit{postojeća slična rješenja (istražiti i ukratko opisati razlike u odnosu na zadani zadatak). Dodajte slike koja predočavaju slična rješenja.}
-			\item \textit{skup korisnika koji bi mogao biti zainteresiran za ostvareno rješenje.}
-			\item \textit{mogućnost prilagodbe rješenja }
-			\item \textit{opseg projektnog zadatka}
-			\item \textit{moguće nadogradnje projektnog zadatka}
-		\end{packed_item}
-		
-		\textit{Za pomoć pogledati reference navedene u poglavlju „Popis literature“, a po potrebi konzultirati sadržaj na internetu koji nudi dobre smjernice u tom pogledu.}
-		\eject
-		
-		\section{Primjeri u \LaTeX u}
-		
-		\textit{Ovo potpoglavlje izbrisati.}\\
-
-		U nastavku se nalaze različiti primjeri kako koristiti osnovne funkcionalnosti \LaTeX a koje su potrebne za izradu dokumentacije. Za dodatnu pomoć obratiti se asistentu na projektu ili potražiti upute na sljedećim web sjedištima:
-		\begin{itemize}
-			\item Upute za izradu diplomskog rada u \LaTeX u - \url{https://www.fer.unizg.hr/_download/repository/LaTeX-upute.pdf}
-			\item \LaTeX\ projekt - \url{https://www.latex-project.org/help/}
-			\item StackExchange za Tex - \url{https://tex.stackexchange.com/}\\
-		
-		\end{itemize} 	
-
-
-		
-		\noindent \underbar{podcrtani tekst}, \textbf{podebljani tekst}, 	\textit{nagnuti tekst}\\
-		\noindent \normalsize primjer \large primjer \Large primjer \LARGE {primjer} \huge {primjer} \Huge primjer \normalsize
 				
-		\begin{packed_item}
+		\section{Uvod}
+		
+		Cilj ovog projektnog zadatka je razviti programsku potporu za web aplikaciju $\textit{Connectima}$ koja predstavlja inovativnu platformu za promociju raznih vrsta događanja. Aplikacija je namijenjena široj populaciji koja je zainteresirana za najavljena događanja u svojoj okolini ili želi popularizirati svoje događanje. \\ Korisnici mogu pregledavati događanja i njihove organizatore te po završetku događanja iste recenzirati. Također, organizatori događanja mogu ih objavljivati uz mogućnost dodavanja širokog spektra informacija i medijskih sadržaja.\\
+		U nastavku su opisani korisnički zahtjevi i glavne funkcionalnosti ove web-aplikacije.
+		
+		\section{Opis funkcionalnosti}
+		
+			\subsection{Stranice}
 			
-			\item  primjer
-			\item  primjer
-			\item  primjer
-			\item[] \begin{packed_enum}
-				\item primjer
-				\item[] \begin{packed_enum}
-					\item[1.a] primjer
-					\item[b] primjer
-				\end{packed_enum}
-				\item primjer
+				\subsubsection{Početna stranica}
+				Pri pokretanju web aplikacije prikazuje se početna stranica. S lijeve strane stranice nalazi se navigacijska traka s različitim stranicama koje sadrže događanja, podatke o korisniku i drugo. Pošto korisnik u tom trenutku još nije autoriziran, ne može pristupiti nijednoj od dolje navedenih stranica, osim 'Prijava' i 'O nama'.
+				
+				\subsubsection{O nama}
+				Stranica 'O nama' javno je dostupna svima, a ukratko predstavlja cilj web aplikacije i osnovne informacije.
+				
+				\subsubsection{Prijava}
+				 Na stranici prijava korisniku se omogućuje prijava u sustav pomoću adrese elektroničke pošte i lozinke. Ako korisnik još nije registriran u sustav, na istoj se stranici može registrirati i odabrati želi li biti organizator ili posjetitelj.
+				 
+				\subsubsection{Događanja}
+				Nakon uspješne prijave ili registracije, korisnika se preusmjeruje na stranicu s događanjima. Može ih filtrirati po vremenu održavanja te otvarati pojedina događanja kako bi dobio više informacija.\\
+				Pri pregledu svih događanja prikazuju se naziv događanja, jedna slika, lokacija, vrijeme i organizator, a pri pregledu pojedinačnih događanja prikazuju se svi podaci.
+				
+				\subsubsection{Moj račun}
+				Na stranici 'Moj račun' korisnik može pregledati i uređivati osobne podatke te odjaviti se iz sustava. Osim navedenog, korisnici koji imaju ovlasti organizatora mogu dodavati i brisati vlastita događanja te platiti članarinu. Administrator preko ove stranice može pristupiti popisu svih korisnika te upravljati njima i njihovim događanjima.
+			
+				\subsubsection{Moj kalendar}
+				'Moj kalendar' predstavlja stranicu na kojoj korisnici mogu kronološki pregledati događaje za koje su izrazili interes i najavili dolazak.
+				
+			
+			\subsection{Vrste korisnika}
+			U sustavu postoje četiri vrste korisnika:
+			\begin{packed_enum}
+				\item anonimni (neregistrirani) korisnik,
+				\item posjetitelj,
+				\item organizator i 
+				\item administrator.
 			\end{packed_enum}
 			
-		\end{packed_item}
+			\underline{Anonimni korisnik} ne može koristiti aplikaciju niti pregledavati njen sadržaj dok god se ne prijavi ili registrira. Može se samo upoznati sa izgledom početne stranice i pročitati osnovne informacije o aplikaciji. \\
+			
+			\underline{Posjetitelj} može pregledati događanja objavljena na stranici, detalje o njima i njihovim organizatorima. Može ih filtrirati po odabranom vremenskom razdoblju (24h, 7 dana, 30 dana, prošla događanja). Također, može pregledati i mijenjati osobne podatke, odjaviti se i obrisati svoj korisnički račun. Na zasebnoj stranici može pregledati događanja za koja je izrazio interes (najavio dolazak). Najaviti dolazak može za bilo koje događanje koje još nije počelo. Po završetku događanja, u roku 48 sati može ostaviti recenziju događanja. Posjetitelj također može uključiti primanje obavijesti o događanjima na nekom području ili neke određene vrste. \\
+			
+			\underline{Organizator} ima sve ovlasti posjetitelja. Uz to, može dodavati događanja i uređivati ih. Ne može recenzirati vlastita događanja ili najaviti dolazak na njih, ali oni mu se automatski prikazuju u kalendaru.\\
+			Postoje dvije skupine organizatora: oni koji aplikaciju koriste besplatno te oni koji plaćaju članarinu. Prema osnovnim postavkama, svaki organizator na početku aplikaciju koristi besplatno. Članarinu mora platiti ako želi dodavati događanja koja nisu besplatna, već se za njih mora platiti ulaznica. \\
+			
+			\underline{Administrator} ima najveće ovlasti. Njegov je zadatak nadziranje podataka koji se dijele u aplikaciji, dakle događanja i korisnike. Administrator može pregledavati sve korisnike te ih filtrirati na posjetitelje i organizatore. Može obrisati korisničke račune drugih korisnika, pojedina događanja i recenzije. Postavlja i mijenja cijenu članarine. Administrator ne može obrisati svoj račun, dodavati i recenzirati događanja. 
 		
-		\noindent primjer url-a: \url{https://www.fer.unizg.hr/predmet/proinz/projekt}
+		\section{Slična rješenja}
 		
-		\noindent posebni znakovi: \# \$ \% \& \{ \} \_ 
-		$|$ $<$ $>$ 
-		\^{} 
-		\~{} 
-		$\backslash$ 
+		Već postoje mnoge aplikacije koje imaju isti ili sličan cilj kao i naša aplikacija. \\
+		Društvene mreže poput Facebooka omogućavaju dodavanje događanja koja se mogu dijeliti na profilu korisnika. S događanjem mogu se povezati naknadne objave korisnika, lokaciju događaja moguće je vidjeti na karti te se, kao i na našoj stranici, može pronaći sve potrebne informacije o samom događanju, ali i njegovom organizatoru. 
 		
+		\begin{figure}[H]
+			\includegraphics[scale=0.7]{slike/Facebook_dogadanja.png}
+			\centering
+			\caption{Primjer događanja oglašenog na Facebooku}
+		\end{figure}
 		
-		\begin{longtblr}[
-			label=none,
-			entry=none
-			]{
-				width = \textwidth,
-				colspec={|X[8,l]|X[8, l]|X[16, l]|}, 
-				rowhead = 1,
-			} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-			\hline \SetCell[c=3]{c}{\textbf{naslov unutar tablice}}	 \\ \hline[3pt]
-			\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-			korisnickoIme	& VARCHAR &   	\\ \hline 
-			email & VARCHAR &   \\ \hline 
-			ime & VARCHAR	&  		\\ \hline 
-			\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-		\end{longtblr}
+		Iako naša aplikacija u ovoj fazi još ne posjeduje sve te funkcionalnosti, svakako ima prednosti pred navedenom opcijom na Facebooku. Facebook je društvena mreža kojoj oglašavanje događanja nije primarni cilj. Mnogi korisnici žele pratiti događanja u blizini te ista dodavati bez da pritom kreiraju profil na nekoj društvenoj mreži. Upravo je to prednost naše aplikacije koja služi isključivo za promociju događanja.\\
 		
-
-		\begin{longtblr}[
-				caption = {Naslov s referencom izvan tablice},
-				entry = {Short Caption},
-			]{
-				width = \textwidth, 
-				colspec = {|X[8,l]|X[8,l]|X[16,l]|}, 
-				rowhead = 1,
-			}
-			\hline
-			\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-			korisnickoIme	& VARCHAR &   	\\ \hline 
-			email & VARCHAR &   \\ \hline 
-			ime & VARCHAR	&  		\\ \hline 
-			\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
-		\end{longtblr}
-	
-
-
+		Drugi je primjer aplikacija \textit{Meetup}. Meetup je po većini funkcionalnosti vrlo sličan našoj aplikaciji. Događanja se mogu filtrirati po lokaciji i vremenu. Dodatna funkcionalnost s obzirom na \textit{Cennectimu} je mogućnost prijave na događanje. Upravo je u tome ključna razlika između ove dvije aplikacije. \textit{Connectima} je zamišljena kao aplikacija za sve vrste događanja, od malih lokalnih okupljanja do velikih koncerata i konferencija. \textit{Meetup} je, s druge strane, aplikacija specijalizirana za konferencije i radionice koje zahtijevaju raniju najavu.
+		 
+		\begin{figure}[H]
+			\includegraphics[scale=0.7]{slike/Meetup.png}
+			\centering
+			\caption{Početna stranica aplikacije Meetup}
+		\end{figure}
 		
+		\section{Moguće nadogradnje}
 		
-		%unos slike
-		%\begin{figure}[H]
-			%\includegraphics[scale=0.4]{slike/aktivnost.PNG} %veličina slike u odnosu na originalnu datoteku i pozicija slike
-			%\centering
-			%\caption{Primjer slike s potpisom}
-			%\label{fig:promjene}
-		%\end{figure}
-		
-		%\begin{figure}[H]
-		%	\includegraphics[width=\textwidth]{slike/aktivnost.PNG} %veličina u odnosu na širinu linije
-		%	\caption{Primjer slike s potpisom 2}
-		%	\label{fig:promjene2} %label mora biti drugaciji za svaku sliku
-		%\end{figure}
-		
-		Referenciranje slike \ref{fig:promjene2} u tekstu.
+		Ova aplikacija ima još puno prostora za nadogradnju pa bi iduće verzije mogle uključivati:
+			
+			\begin{packed_enum}
+				\item uvođenje dodatnih jezika aplikacije (engleski, njemački...),
+				\item integraciju s popularnim društvenim mrežama i aplikacijama za razmjenu poruka (Facebook, Instagram, Whatsapp, Viber) za jednostavno dijeljenje događanja
+				\item dodatne načine plaćanja
+				\item umetanje medijskih sadržaja uz recenziju
+				\item preuzimanje događanja u vlastiti kalendar u iCal formatu
+				\item pretragu događanja na interaktivnoj karti
+				\item mogućnost razmjena poruka među korisnicima
+			\end{packed_enum}
+			
+		Uz sve navedeno, dodatne bi se funkcionalnosti mogle dodavati na temelju povratnih informacija svih korisnika (posjetitelja, organizatora i administratora).
 		
 		\eject
 		
