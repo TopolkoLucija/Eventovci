@@ -11,20 +11,123 @@
 
 	
 		
-
-		
-
-				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		Sustav koristi H2 relacijsku bazu podataka za organizaciju i pohranu različitih podataka. Organizacija temeljena na relacijskom modelu omogućuje lakšu manipulaciju podacima, pruža sigurnost i kontrolu nad podacima te osigurava trajno spremanje podataka. U sustavu baza podataka igra ključnu ulogu u pohrani informacija o korisnicima, događanjima i dodatnim informacijama o događanjima. Baza podataka ima sljedeće entitete:
+		
+		\begin{packed_item}
+			\item Korisnik
+			\item Dogadjanje
+			\item Poveznica
+			\item MedijskiSadrzaj
+			\item Recenzija
+			\item DolazakKorisnika
+			\item Clanarina
+		\end{packed_item}
+		
+		\noindent Svaki od entiteta ima svoje atribute i jedinstveni primarni ključ koji osigurava jednoznačno identificiranje svakog zapisa. Baza podataka omogućuje brzu i jednostavnu pohranu, izmjenu i dohvat podataka, što je ključno za daljnju obradu podataka događanjima.
 		
 			\subsection{Opis tablica}
 			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				\noindent \textbf{Korisnik} Entitet sadrži sve relevantne informacije o registriranom korisniku aplikacije. Atributi id, korisnickoime, email, lozinka i tipkorisnika spremaju se za sve tipove korisnika sustava, dok se atributi adresa i placanjeclanarine odnose samo na organizatore i poprimaju vrijednost \textit{null} za tip korisnika Posjetitelj i Administrator.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \SetCell[c=3]{c}{\textbf{Korisnik}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					id & BIGINT	&  	jedinstveni identifikator korisnika  	\\ 
+					\hline
+					korisnickoime	& VARCHAR & korisničko ime\\ 
+					\hline 
+					email & VARCHAR & e-mail adresa korisnika  \\
+					 \hline 
+					lozinka & VARCHAR	&  lozinka korisničkog računa \\ 
+					\hline 
+					tipkorisnika & VARCHAR	& Posjetitelj, Organizator ili Administrator\\ 
+					\hline 
+					adresa & VARCHAR & adresa Organizatora\\ 
+					\hline 
+					placanjeclanarine & BOOLEAN	& plaća li Organizator članarinu\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{Dogadjanje} Entitet omogućuje pohranu informacija o različitim događanjima koja se mogu organizirati. Atribut organizatorid strani je ključ koji se odnosi na korisnika koji je organizator događanja. Atribut cijenaulaznice sadrži informacije o cijeni ulaznica za događanje, a može biti i \textit{null} u slučaju da je događanje besplatno. 
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{Dogadjanje}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					iddogadjanja & BIGINT	&  	jedinstveni identifikator događanja  	\\ 
+					\hline
+					nazivdogadjanja	& VARCHAR & naziv događanja \\ 
+					\hline 
+					tipdogadjanja & VARCHAR & vrsta događanja  \\
+					\hline 
+					lokacijagodadjanja & VARCHAR & lokacija događanja \\ 
+					\hline 
+					vrijemedogadjanja & TIMESTAMP & datum i vrijeme događanja\\ 
+					\hline 
+					trajanje & DOUBLE & vremensko trajanje događanja\\ 
+					\hline 
+					\SetCell{LightBlue} organizatorid & BIGINT	& identifikator Organizatora \\ 
+					\hline
+					cijenaulaznice & DOUBLE	& cijena ulaznice događanja\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{Poveznica} Entitet služi za pohranu podataka o poveznicama koje su povezane s određenim organizatorima događanja (strani ključ organizatorid). 
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{Poveznica}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					idpoveznice & BIGINT & jedinstveni identifikator poveznice  	\\ 
+					\hline
+					\SetCell{LightBlue} organizatorid & BIGINT	& identifikator Organizatora \\ 
+					\hline
+					link & VARCHAR	& poveznica na web stranice Organizatora\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{MedijskiSadrzaj} Entitet omogućava pohranu različitih medijskih sadržaja koji su povezani s određenim događanjima, što omogućava organizatorima da dijele fotografije i videozapise povezane s njihovim događanjima.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{MedijskiSadrzaj}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					idmedijskogsadrzaja & BIGINT & jedinstveni identifikator sadržaja  	\\ 
+					\hline
+					\SetCell{LightBlue} iddogadjanja & BIGINT	& identifikator događanja \\ 
+					\hline
+					medijskisadrzaj & LONGLOB & medijski sadržaj\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{Recenzija} Entitet služi za pohranu recenzija koje korisnici mogu napisati za određena događanja u sustavu. Entitet omogućava korisnicima da izraze svoje mišljenje i ocjene događanja, čime se pruža povratna informacija organizatorima i drugim potencijalnim sudionicima.
 				
 				
 				\begin{longtblr}[
@@ -32,22 +135,89 @@
 					entry=none
 					]{
 						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
-					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{Recenzija}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					idrecenzije & BIGINT	&  	jedinstveni identifikator recenzije\\ 
+					\hline
+					recenzijatekst & TEXT & tekst napisane  recenzije \\
+					\hline
+					ocjena & INT & dodijeljena ocjena događanja\\
+					\hline 
+					\SetCell{LightBlue} iddogadjanja & BIGINT & identifikator događanja\\
+					\hline 
+					\SetCell{LightBlue} idkorisnik & BIGINT & identifikator korisnika (autora recenzije)\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{DolazakKorisnika} Entitet služi za praćenje iskazanog interesa korisnika za dolazak na određeno događanje. Atribut statusdolaska može poprimiti vrijednosti \textit{sigurno dolazim}, \textit{možda dolazim} i \textit{ne dolazim}.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[9,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{DolazakKorisnika}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					iddolaskakorisnika & BIGINT	&  	jedinstveni identifikator dolaska  	\\ 
+					\hline
+					statusdolaska & VARCHAR & iskazani interes za dolazak \\ 
+					\hline 
+					\SetCell{LightBlue} iddogadjanja & BIGINT & identifikator događanja  \\
+					\hline 
+					\SetCell{LightBlue} idkorisnik & BIGINT & identifikator korisnika\\ 
+					\hline
+				\end{longtblr}
+				
+				\noindent \textbf{Clanarina} Entitet služi za praćenje informacija o članarinama koje organizatori moraju platiti kako bi imali mogućnost organiziranja događanja za koja se plaća ulaz. Entitet omogućava praćenje članarina koje su korisnici platili te pruža informacije o cijenama i datumima isteka vrijednosti članarine.
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} 
+					\hline \SetCell[c=3]{c}{\textbf{Clanarina}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}
+					idclanarine & BIGINT	&  	jedinstveni identifikator članarine \\ 
+					\hline
+					\SetCell{LightBlue} idkorisnik & VARCHAR & identifikator korisnika \\ 
+					\hline 
+					cijenaclanarine & DOUBLE & iznos cijene članarine  \\
+					\hline 
+					vrijedido & TIMESTAMP & datum i vrijeme isteka članarine\\ 
+					\hline
 				\end{longtblr}
 				
 				
+				\newpage
+				
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
-			
+				
+				\begin{figure}[H]
+					\includegraphics[scale=0.35]{dijagrami/db_ER.jpeg} 
+					\centering
+					\caption{ER dijagram baze podataka}
+					\label{fig:promjene}
+				\end{figure}
+				
+				\newpage
+				
+				\begin{figure}[H]
+					\includegraphics[scale=0.35]{dijagrami/db_REL.jpeg} 
+					\centering
+					\caption{Relacijski dijagram baze podataka}
+					\label{fig:promjene}
+				\end{figure}
+				
 			\eject
 			
 			
