@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import '../styles/LoginM.css';
 import { useNavigate } from 'react-router-dom';
-const LoginM = () => {
+
+const LoginM = ({getData}) => {
   const [dodatnoZaRegistraciju, setDodatnoZaRegistraciju] = useState(false);
   const [PrijaviSeOrganizator, setPrijaviSeOrganizator] = useState(false);
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ const LoginM = () => {
   const [homeAdress, setHomeAdress] = useState("null");
   const [shouldPayMembership, setShouldPayMembership] = useState(false);
   const [typeOfUser, setTypeOfUser] = useState("posjetitelj");
+
 
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ const LoginM = () => {
       }
       return response.json();
     }).then((data) => {
-      console.log(data);
+      getData(data);
       navigate('/home')
     }).catch((error) => {
       if (error.message === "No user found") {
@@ -41,6 +43,7 @@ const LoginM = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
+    if(username !== "" && password !== "" && email !== ""){
     fetch('/Test/register', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -51,6 +54,7 @@ const LoginM = () => {
       }
       if (response.ok) {
         alert("Dodano");
+        getData(data);
         navigate('/home');
       }
 
@@ -61,9 +65,9 @@ const LoginM = () => {
         console.error("Error fetching data: ", error);
       }
     });
-
-
-
+  }else{
+    alert("Nisu sva polja popunjena")
+  }
 
   }
 

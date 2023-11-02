@@ -7,8 +7,14 @@ import LoginM from './components/scripts/LoginM';
 import Events from './components/scripts/Events';
 import Calendar from './components/scripts/Calendar';
 import './components/styles/App.css';
+import { useEffect, useState } from 'react';
+
 
 function App() {
+  const getData = (data) =>{
+    console.log(data);
+  }
+
   return (
     <div className="app-container">
       <Sidebar />
@@ -21,7 +27,7 @@ function App() {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/login" element={<LoginM />} />
+          <Route path="/login" element={<LoginM getData = {getData} />} />
         </Routes>
       </Router>
 
