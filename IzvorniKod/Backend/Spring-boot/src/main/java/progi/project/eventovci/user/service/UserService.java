@@ -2,6 +2,7 @@ package progi.project.eventovci.user.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.link.entity.SocialMediaLink;
@@ -35,9 +36,12 @@ public class UserService {
     @Autowired
     private LinkRepository linkRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public User login(String email, String password) {
         User user = userRepository.findUserByEmail(email);
-        if (user != null && Objects.equals(user.getPassword(), password)) {
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return user;
         } else {
             throw new UserNotFoundException("Incorrect email or password!");
@@ -54,7 +58,7 @@ public class UserService {
         if(user != null && Objects.equals(user.getUsername(), username)) {
             throw new UserAlreadyExistsException("Neispravno korisničko ime!");
         }
-        user = new User(username, email, password, typeOfUser, homeAdress, shouldPayMembership);
+        user = new User(username, email, passwordEncoder.encode(password), typeOfUser, homeAdress, shouldPayMembership);
         userRepository.save(user);
         return user;
     }
