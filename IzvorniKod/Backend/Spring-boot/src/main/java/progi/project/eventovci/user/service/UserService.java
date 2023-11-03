@@ -45,13 +45,13 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
 
-    public User login(String email, String password) {
+    public User login(String username, String password) {
 
-        User user = userRepository.findUserByEmail(email);
+        User user = userRepository.findUserByUsername(username);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return user;
         } else {
-            throw new UserNotFoundException("Incorrect email or password!");
+            throw new UserNotFoundException("Neispravno korisničko ime ili lozinka!");
         }
 
     }
