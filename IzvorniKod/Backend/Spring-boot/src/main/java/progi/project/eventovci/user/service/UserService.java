@@ -11,6 +11,7 @@ import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.event.controller.dto.EventData;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
+import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
@@ -104,6 +105,17 @@ public class UserService {
         }else {
         throw new UserNotFoundException("Korisnik ne postoji!");
         }
+    }
+
+    public List<AllUserDataForm> allUsers() {
+
+        List<User> allUsers= userRepository.findAllUsers();
+        List<AllUserDataForm> allUserDataForms = new ArrayList<>();
+        for (User u : allUsers) {
+            AllUserDataForm data = new AllUserDataForm(u.getUsername(), u.getEmail(), u.getTypeOfUser());
+            allUserDataForms.add(data);
+        }
+        return allUserDataForms;
     }
 
 

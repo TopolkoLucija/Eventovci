@@ -6,10 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.user.controller.dto.DataForm;
+import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.controller.dto.RegisterForm;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/data")
@@ -30,6 +33,12 @@ public class DataController {
                 registerform.getTypeOfUser(), registerform.getHomeAdress(), registerform.getShouldPayMembership() );
 
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<AllUserDataForm>> allUsers() {
+        List<AllUserDataForm> data = userService.allUsers();
+        return ResponseEntity.ok(data);
     }
 
     @ExceptionHandler()
