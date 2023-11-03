@@ -710,6 +710,10 @@
 				\newpage
 				
 			\subsection{Sekvencijski dijagrami}
+			
+				\noindent \textbf{Obrazac upotrebe UC11 - Dodavanje novog događanja}
+				
+				\noindent Organizator odabire opciju dodavanja novog događanja. Prikazuje mu se obrazac za unos podataka o događanju. Po završetku unosa željenih podataka, organizator odabire opciju objave događanja. Provjeravaju se uneseni podaci - ako su ispravni, podaci o događanju spremaju se u bazu podataka i novo je događanje objavljeno, inače se prikazuje obavijest o neispravnosti podataka i organizatoru se omogućuje ponovni unos podataka o događanju. 
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{dijagrami/sd1.PNG}
@@ -719,7 +723,10 @@
 				\end{figure}
 				
 				\newpage
-		
+				
+				\noindent \textbf{Obrazac upotrebe UC19 - Recenziranje događanja}
+				
+				\noindent Korisnik iz prikaza svih događanja završenih u posljednjih 48 sati odabire jedno koje želi recenzirati. Korisniku se vraća obrazac za unos recenzije. Pri objavi recenzije provjerava se ispravnost recenzije te ako je ispravna, recenzija se sprema u bazu podataka i prikazuje na stranici, u suprotnom korisnik se obavještava o neispravnosti recenzije i istu može napisati ponovno.
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{dijagrami/sd2.PNG}
@@ -727,6 +734,37 @@
 					\caption{Sekvencijski dijagram za \textbf{UC19}}
 					\label{fig:promjene}
 				\end{figure}
+				
+				\newpage
+				
+				\noindent \textbf{Obrazac upotrebe UC22 - Iskazivanje interesa za događanje}
+				
+				\noindent Korisnik iz prikaza svih događanja završenih u posljednjih odabire jedno za koje želi iskazati interes. Korisniku odabire jednu od opcija \textit{sigurno dolazim}, \textit{možda dolazim}, \textit{ne dolazim}. Obavlja se provjera baze podataka i utvrđuje je li to prvi iskazani interes tog korisnika za događanje ili se radi o promjeni iskazanog interesa. U bazu se sprema novi zapis ili se postojeći mijenja i na stranici korisnik vidi svoj iskazan interes.
+				
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth]{dijagrami/sd3.PNG}
+					\centering
+					\caption{Sekvencijski dijagram za \textbf{UC22}}
+					\label{fig:promjene}
+				\end{figure}
+				
+				\newpage
+				
+				\noindent \textbf{Obrasci upotrebe UC8, UC9 i UC10 - Prikaz i brisanje korisničkih računa i postavljanje cijene članarine}
+				
+				\noindent Administrator odabire opciju prikaza svih korisničkih računa koji se po tom odabiru dohvaćaju iz baze. Kraj korisničkog računa na popisu, administrator može odabrati opciju brisanja korisničkog računa te se brisanje obavlja nakon potvrde. Odabirom opcije za promjenu iznosa članarine administratoru se vraća obrazac u koji administrator unosi novu cijenu članarine sve dok ne unese ispravan iznos.
+				
+				\vspace{-0.3cm}
+				
+				\begin{figure}[H]
+					\includegraphics[width=\textwidth]{dijagrami/sd4.PNG}
+					\centering
+					\vspace{-0.7cm}
+					\caption{Sekvencijski dijagram za \textbf{UC8}, \textbf{UC9} i \textbf{UC10}}
+					\label{fig:promjene}
+				\end{figure}
+				
+				\vspace{-0.5cm}
 				
 				\newpage
 	
