@@ -2,6 +2,10 @@ package progi.project.eventovci.user.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
@@ -40,7 +44,9 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+
     public User login(String email, String password) {
+
         User user = userRepository.findUserByEmail(email);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return user;
