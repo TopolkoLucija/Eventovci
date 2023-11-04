@@ -42,7 +42,15 @@ public class User{
         this.shouldPayMembership = shouldPayMembership;
     }
 
-
+    public User(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.typeOfUser = typeOfUser;
+        this.homeAdress = homeAdress;
+        this.shouldPayMembership = shouldPayMembership;
+    }
 
     //equals i hashcode za id
     @Override

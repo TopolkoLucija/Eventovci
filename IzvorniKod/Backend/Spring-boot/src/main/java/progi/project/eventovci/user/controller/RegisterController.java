@@ -3,6 +3,7 @@ package progi.project.eventovci.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.user.controller.dto.RegisterForm;
@@ -26,7 +27,7 @@ public class RegisterController {
     }
 
     @ExceptionHandler()
-    public ResponseEntity<String> handleException(UserAlreadyExistsException ex){
+    public ResponseEntity<String> handleException(AuthenticationException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());
     }
 }

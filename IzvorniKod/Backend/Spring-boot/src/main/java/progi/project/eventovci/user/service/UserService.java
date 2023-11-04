@@ -2,10 +2,6 @@ package progi.project.eventovci.user.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
@@ -13,13 +9,12 @@ import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.event.controller.dto.EventData;
-import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
-import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
+import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.event.repository.EventRepository;
 
@@ -49,12 +44,7 @@ public class UserService {
 
     public User login(String username) {
 
-        User user = userRepository.findUserByUsername(username);
-        if (user != null) {
-            return user;
-        } else {
-            throw new UserNotFoundException("Neispravno korisničko ime ili lozinka!");
-        }
+        return userRepository.findUserByUsername(username);
 
     }
 
@@ -72,10 +62,10 @@ public class UserService {
         return user;
     }
 
-    public DataForm data(Long id){
-        User user = userRepository.findUserById(id);
+    public DataForm data(String username){
+        User user = userRepository.findUserByUsername(username);
         if(user != null){
-
+            Long id = user.getId();
             if(Objects.equals(user.getTypeOfUser(),"posjetitelj")){
                 return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
             }
@@ -107,9 +97,9 @@ public class UserService {
     public User changeData(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
         User user = userRepository.findUserById(id);
         if(user != null){
-            Integer x = userRepository.updateUserById(id, username, email, password, typeOfUser, homeAdress, shouldPayMembership);
-            User newUser = userRepository.findUserById(id);
-            return newUser;
+
+            userRepository.updateUserById(id, username, email, passwordEncoder.encode(password), typeOfUser, homeAdress, shouldPayMembership);
+            return new User(id,username,email,passwordEncoder.encode(password),typeOfUser,homeAdress,shouldPayMembership);
         }else {
         throw new UserNotFoundException("Korisnik ne postoji!");
         }
