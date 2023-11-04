@@ -15,6 +15,7 @@ const LoginM = ({getData}) => {
 
   const navigate = useNavigate();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const podatci = { email, password };
@@ -29,8 +30,9 @@ const LoginM = ({getData}) => {
       }
       return response.json();
     }).then((data) => {
+      alert("Welcome: " + podatci.email);
       getData(data);
-      navigate('/home')
+      navigate("/home");
     }).catch((error) => {
       if (error.message === "No user found") {
         alert("No user found");
