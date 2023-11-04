@@ -7,8 +7,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import progi.project.eventovci.securityconfig.AuthResponseDTO;
+import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.controller.dto.LoginForm;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
@@ -21,12 +22,27 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
 
     @PostMapping()
-    public ResponseEntity<User> login(@RequestBody LoginForm loginform) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginForm loginform) {
 
-        User user = userService.login(loginform.getUsername(), loginform.getPassword());
-        return ResponseEntity.ok(user);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginform.getUsername(), loginform.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+
+        String username = jwtGenerator.getUsernameFromJWT(token);
+
+        User user = userService.login(username);
+
+        return new ResponseEntity<>(new AuthResponseDTO(token, user), HttpStatus.OK);
     }
 
     @ExceptionHandler()

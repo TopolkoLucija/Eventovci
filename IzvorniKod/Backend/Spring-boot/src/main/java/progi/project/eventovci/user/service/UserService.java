@@ -13,6 +13,7 @@ import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.event.controller.dto.EventData;
+import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
@@ -45,10 +46,11 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
 
-    public User login(String username, String password) {
+
+    public User login(String username) {
 
         User user = userRepository.findUserByUsername(username);
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        if (user != null) {
             return user;
         } else {
             throw new UserNotFoundException("Neispravno korisničko ime ili lozinka!");
