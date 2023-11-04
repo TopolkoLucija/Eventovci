@@ -6,7 +6,11 @@ function Home() {
     <div className='content'>
       <div className='main-content'>
         <div className='main-content-title'>
-          <h1>CONNECTIMA</h1>
+          <h1>
+            <div className='title-box'>
+              <a href='/home'>CONNECTIMA</a>
+            </div>
+          </h1>
         </div>
         <div className='main-content-image'>
           <img src="https://media.istockphoto.com/id/1189205501/photo/cheering-crowd-of-unrecognized-people-at-a-rock-music-concert-concert-crowd-in-front-of.jpg?s=612x612&w=0&k=20&c=_vgyStdIBHCbnDHdu3lNTwfJxt2fTcJc9PB345ryhZo=" alt="Naslovna slika" />

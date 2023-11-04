@@ -5,6 +5,20 @@
     align-items: center;
 }
 
+.main-content-title {
+   text-align: center;
+   margin-top: 3%;
+   text-decoration: none;
+   color: black;
+   font-family:  Helvetica, sans-serif;
+   letter-spacing: 1px;
+}
+ 
+.title-box a {
+   text-decoration: none; /* uklanja podcrtavanje */
+   color: black;
+}
+
 .main-content-image {
    width: 100%;
    display: flex;
@@ -12,34 +26,32 @@
    align-items: center; 
 }
 
- .main-content-image img {
-   width: 70%; 
+.main-content-image img {
+   width: 67%; 
    margin-top: 1%;
+   border-top-right-radius: 20px;
+   border-bottom-right-radius: 20px;
+   border-top-left-radius: 20px;
+   border-bottom-left-radius: 20px;
 }
  
- .main-content-title {
+ 
+.main-content-text {
    text-align: center;
-   margin-top: 2%;
+   margin-top: 1.5%;
    color: black;
    font-family:  Helvetica, sans-serif;
    letter-spacing: 1px;
- }
+   font-size: 18px;
+}
  
- .main-content-text {
-   text-align: center;
-   margin-top: 2%;
-   color: black;
-   font-family:  Helvetica, sans-serif;
-   letter-spacing: 1px;
- }
- 
- .more-info {
+.more-info {
    color: black;
    text-decoration: none;
- }
+   transition: 0.1s;
+}
  
- .more-info:hover {
+.more-info:hover {
    color: #FF6B6B;
    text-decoration: none;
-   transform: scale(1.015);
- }
+}
