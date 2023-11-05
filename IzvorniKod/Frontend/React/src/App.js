@@ -11,8 +11,12 @@ import { useEffect, useState } from 'react';
 
 
 function App() {
+
+  const [user, setUser] = useState("");
+
   const getData = (data) =>{
     console.log(data);
+    setUser(data);
   }
 
   return (
@@ -24,7 +28,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/my-account" element={<MyAccount/>} />
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<LoginM getData = {getData} />} />
