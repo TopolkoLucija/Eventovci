@@ -9,8 +9,6 @@ public class AddReviewDTO {
 
     private Long eventId;
 
-    private Long userId;
-
 
     public String getReviewText() {
         return reviewText;
@@ -24,9 +22,6 @@ public class AddReviewDTO {
         return eventId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 
     public void setReviewText(String reviewText) {
         this.reviewText = reviewText;
@@ -40,7 +35,4 @@ public class AddReviewDTO {
         this.eventId = eventId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }
