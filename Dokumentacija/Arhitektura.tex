@@ -1,15 +1,30 @@
 \chapter{Arhitektura i dizajn sustava}
+
 		
-		\textbf{\textit{dio 1. revizije}}\\
+	%	\textbf{\textit{dio 1. revizije}}\\
 
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
+%		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+%	\begin{itemize}
+%		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
+%		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
+%		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+%	\end{itemize}
 
-	
+		\noindent Arhitektura sustava sastoji se od tri glavna dijela: 
+		
+		\begin{packed_item}
+			\item Web preglednik 
+			\item Web poslužitelj
+			\item Baza podataka
+		\end{packed_item}
+		
+		\textbf{Web preglednik} računalni je program koji korisnicima omogućuje  pristup internetu i pregled web stranica te interakciju s raznim online sadržajem. Korisnici koriste web preglednik za slanje zahtjeva web poslužitelju putem HTTP (eng. \textit{Hyper Text Transfer Protocol}) protokola i primanje odgovora u obliku HTML dokumenata koji se zatim interpretiraju i prikazuju. Osim pregledavanja web stranica, web preglednici omogućuju i izvođenje različitih aktivnosti kao što su ispunjavanje web obrazaca i prikaz slika i videozapisa.
+		
+		\textbf{Web poslužitelj} ključan je dio web aplikacija i internetskih servisa. Njegova je glavna uloga primanje, obrada i posredovanje zahtjeva koji dolaze od web preglednika korisnika. Web poslužitelj uspostavlja komunikaciju između klijenta (korisnika) i web aplikacije te osigurava ispravan protok informacija.
+		
+		\textbf{Web aplikacija} obrađuje zahtjeve korisnika. Nakon obrade zahtjeva, šalje se odgovor poslužitelju koji se korisniku prikazuje u web pregledniku. Obrada korisničkih zahtjeva najčešće uključuje određenu komunikaciju s bazom podataka npr. dohvaćanje, uređivanje ili brisanje podataka.
+		
+		
 		
 		\section{Baza podataka}
 			
