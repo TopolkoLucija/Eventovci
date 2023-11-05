@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import progi.project.eventovci.securityconfig.AuthResponseDTO;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.controller.dto.LoginForm;
 import progi.project.eventovci.user.entity.User;
@@ -30,7 +29,7 @@ public class LoginController {
 
 
     @PostMapping()
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginForm loginform) {
+    public ResponseEntity<String> login(@RequestBody LoginForm loginform) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginform.getUsername(), loginform.getPassword()));
@@ -42,7 +41,7 @@ public class LoginController {
 
         User user = userService.login(username);
 
-        return new ResponseEntity<>(new AuthResponseDTO(token, user), HttpStatus.OK);
+        return ResponseEntity.ok(token);
     }
 
     @ExceptionHandler()

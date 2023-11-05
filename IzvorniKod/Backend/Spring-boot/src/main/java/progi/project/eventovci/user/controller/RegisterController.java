@@ -8,13 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import progi.project.eventovci.securityconfig.AuthResponseDTO;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.controller.dto.RegisterForm;
 import progi.project.eventovci.user.entity.User;
-import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 import progi.project.eventovci.user.service.UserService;
 
 @RestController
@@ -31,7 +28,7 @@ public class RegisterController {
     private JWTGenerator jwtGenerator;
 
     @PostMapping()
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterForm registerform) {
+    public ResponseEntity<String> register(@RequestBody RegisterForm registerform) {
         User user = userService.register(registerform.getUsername(), registerform.getEmail(), registerform.getPassword(),
         registerform.getTypeOfUser(), registerform.getHomeAdress(), registerform.getShouldPayMembership() );
 
@@ -41,7 +38,7 @@ public class RegisterController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
 
-        return new ResponseEntity<>(new AuthResponseDTO(token, user), HttpStatus.OK);
+        return ResponseEntity.ok(token);
     }
 
     @ExceptionHandler()

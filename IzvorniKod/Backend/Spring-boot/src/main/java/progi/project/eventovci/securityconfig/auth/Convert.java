@@ -15,11 +15,11 @@ public class Convert {
     UserRepository userRepository;
 
     public Long convertToId(String token) {
-        String username = jwtGenerator.getUsernameFromJWT(token.substring(7));
+        String username = jwtGenerator.getUsernameFromJWT(token);
         return userRepository.findUserByUsername(username).getId();
     }
 
     public String convertToUsername(String token) {
-        return jwtGenerator.getUsernameFromJWT(token.substring(7));
+        return jwtGenerator.getUsernameFromJWT(token);
     }
 }
