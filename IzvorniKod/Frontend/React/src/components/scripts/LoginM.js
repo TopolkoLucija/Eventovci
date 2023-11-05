@@ -108,13 +108,12 @@ const LoginM = ({getData}) => {
   }
 
   const handleRegister = (e) => {
-    validateEmail();
     validatePassword();
     validateName();
     validateAdress();
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
-    if(username !== "" && password !== "" && email !== ""){
+    if(username !== "" && password !== "" && validateEmail()){
     if(PrijaviSeOrganizator){
       if(homeAdress != "null" && homeAdress != ""){
       fetch('/Test/register', {
@@ -151,7 +150,6 @@ const LoginM = ({getData}) => {
         throw new Error("No user found");
       }
       if (response.ok) {
-        alert("Dodano");
         getData(data);
         navigate('/home');
       }
