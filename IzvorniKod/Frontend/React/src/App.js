@@ -17,6 +17,9 @@ function App() {
   const getData = (data) =>{
     console.log(data);
     setUser(data);
+    // Spremanje accessToken u localStorage
+    sessionStorage.setItem('accessToken', data.accessToken);
+
   }
 
   return (
@@ -28,7 +31,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/my-account" element={<MyAccount/>} />
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<LoginM getData = {getData} />} />

@@ -1,6 +1,7 @@
 import React from 'react';
 
-function MyAccount() {
+const MyAccount = () => {
+
 
   return (
     <div className="content">

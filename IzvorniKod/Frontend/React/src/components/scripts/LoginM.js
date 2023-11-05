@@ -168,7 +168,7 @@ const LoginM = ({getData}) => {
 
   return (
     <div className="content" id='NaCentarDiva'>
-      <div class="alert alert-danger gmb" id='gmb' role="alert">
+      <div className="alert alert-danger gmb" id='gmb' role="alert">
         Neispravno korisničko ime ili lozinka
       </div>
       <form className='forma'>
@@ -180,7 +180,7 @@ const LoginM = ({getData}) => {
               <div id="name-error" className="form-text" ></div>
             </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">Šifra  </label>
+          <label htmlFor="exampleInputPassword1" className="form-label">Lozinka  </label>
           <input type="password" className="form-control sifrafild" id="sifrafild" value={password} onChange={(e) => {setPassword(e.target.value);
           validatePassword()}} />
           <div id="sifra-errors" className="form-text" ></div>

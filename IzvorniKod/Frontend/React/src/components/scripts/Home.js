@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Home.css';
 
 function Home() {
+
   return (
     <div className='content'>
       <div className='main-content'>
