@@ -12,15 +12,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [user, setUser] = useState("");
-
-  const getData = (data) =>{
-    console.log(data);
-    setUser(data);
-    // Spremanje accessToken u localStorage
-    sessionStorage.setItem('accessToken', data.accessToken);
-
-  }
+  // console.log(sessionStorage.getItem('accessToken'));
 
   return (
     <div className="app-container">
@@ -34,7 +26,7 @@ function App() {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/login" element={<LoginM getData = {getData} />} />
+          <Route path="/login" element={<LoginM />} />
         </Routes>
       </Router>
 

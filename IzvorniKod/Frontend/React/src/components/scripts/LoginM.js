@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/LoginM.css';
 import { useNavigate } from 'react-router-dom';
 
-const LoginM = ({getData}) => {
+const LoginM = ({ getData }) => {
   const [dodatnoZaRegistraciju, setDodatnoZaRegistraciju] = useState(false);
   const [PrijaviSeOrganizator, setPrijaviSeOrganizator] = useState(false);
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const LoginM = ({getData}) => {
   const [typeOfUser, setTypeOfUser] = useState("posjetitelj");
   const navigate = useNavigate();
 
- 
+
   const validateEmail = () => {
     const emailField = document.getElementById("email-label");
     const emailError = document.getElementById("email-error");
@@ -34,11 +34,11 @@ const LoginM = ({getData}) => {
   const validatePassword = () => {
     const sifra = document.getElementById("sifrafild");
     const errSifra = document.getElementById("sifra-errors");
-    if(sifra.value == ""){
+    if (sifra.value == "") {
       sifra.style.borderColor = "red"
       errSifra.innerText = "Šifra ne smije biti prazan niz.";
       errSifra.style.color = "red";
-    }else{
+    } else {
       sifra.style.borderColor = "green"
       errSifra.innerText = "";
       errSifra.style.color = "green";
@@ -47,25 +47,25 @@ const LoginM = ({getData}) => {
   const validateName = () => {
     const nameErr = document.getElementById("name-error");
     const sifra = document.getElementById("nameField");
-    if(sifra.value == ""){
+    if (sifra.value == "") {
       sifra.style.borderColor = "red"
       nameErr.innerText = "Upišite korisničko ime";
       nameErr.style.color = "red";
-    }else{
+    } else {
       sifra.style.borderColor = "green"
       nameErr.innerText = "";
       nameErr.style.color = "green";
     }
   }
   const validateAdress = () => {
-    if(PrijaviSeOrganizator){
+    if (PrijaviSeOrganizator) {
       const poljeAdresa = document.getElementById("adress");
       const adresaErr = document.getElementById("adresa-errors");
-      if(poljeAdresa.value == "null" || poljeAdresa.value == ""){
+      if (poljeAdresa.value == "null" || poljeAdresa.value == "") {
         poljeAdresa.style.borderColor = "red";
         adresaErr.innerText = "Upišite adresu";
         adresaErr.style.color = "red";
-      }else{
+      } else {
         poljeAdresa.style.borderColor = "green";
         adresaErr.innerText = "";
         adresaErr.style.color = "black";
@@ -92,77 +92,78 @@ const LoginM = ({getData}) => {
       if (!response.ok) {
         throw new Error("No user found");
       }
-      return response.json();
+      return response.text();
     }).then((data) => {
-      getData(data);
+      sessionStorage.setItem('accessToken', data);
       navigate('/home')
     }).catch((error) => {
       if (error.message === "No user found") {
-        
+
         alrt.style.visibility = "visible";
       } else {
         console.error("Error fetching data: ", error);
       }
-      
+
     });
   }
 
+  // Ispraviti Register dio!
   const handleRegister = (e) => {
     validatePassword();
     validateName();
     validateAdress();
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
-    if(username !== "" && password !== "" && validateEmail()){
-    if(PrijaviSeOrganizator){
-      if(homeAdress != "null" && homeAdress != ""){
-      fetch('/Test/register', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("No user found");
-      }
-      if (response.ok) {
-        alert("Dodano");
-        getData(data);
-        navigate('/home');
-      }
+    if (username !== "" && password !== "" && validateEmail()) {
+      if (PrijaviSeOrganizator) {
+        if (homeAdress != "null" && homeAdress != "") {
+          fetch('/Test/register', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          }).then((response) => {
+            if (!response.ok) {
+              throw new Error("No user found");
+            }
+            if (response.ok) {
+              // alert("Dodano");
+              sessionStorage.setItem('accessToken', data);
+              navigate('/home');
+            }
 
-    }).catch((error) => {
-      if (error.message === "No user found") {
-        alert("No user found");
+          }).catch((error) => {
+            if (error.message === "No user found") {
+              alert("No user found");
+            } else {
+              console.error("Error fetching data: ", error);
+            }
+          });
+        } else {
+          alert("Nije popunjena adresa")
+        }
       } else {
-        console.error("Error fetching data: ", error);
-      }
-    });
-  }else{
-    alert("Nije popunjena adresa")
-  } 
-  }else{
-    fetch('/Test/register', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("No user found");
-      }
-      if (response.ok) {
-        getData(data);
-        navigate('/home');
-      }
+        fetch('/Test/register', {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("No user found");
+          }
+          if (response.ok) {
+            sessionStorage.setItem('accessToken', data);
+            navigate('/home');
+          }
 
-    }).catch((error) => {
-      if (error.message === "No user found") {
-        alert("No user found");
-      } else {
-        console.error("Error fetching data: ", error);
+        }).catch((error) => {
+          if (error.message === "No user found") {
+            alert("No user found");
+          } else {
+            console.error("Error fetching data: ", error);
+          }
+        });
       }
-    });
-  }
-  }
+    }
 
   }
 
@@ -172,17 +173,19 @@ const LoginM = ({getData}) => {
         Neispravno korisničko ime ili lozinka
       </div>
       <form className='forma'>
-      <div className="mb-3">
-              <label htmlFor="name" className="form-label" >
-                Korisničko ime
-              </label>
-              <input type="name" className="form-control" id="nameField" value={username} onChange={(e) => {setUserName(e.target.value);validateName()}} />
-              <div id="name-error" className="form-text" ></div>
-            </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label" >
+            Korisničko ime
+          </label>
+          <input type="name" className="form-control" id="nameField" value={username} onChange={(e) => { setUserName(e.target.value); validateName() }} />
+          <div id="name-error" className="form-text" ></div>
+        </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">Lozinka  </label>
-          <input type="password" className="form-control sifrafild" id="sifrafild" value={password} onChange={(e) => {setPassword(e.target.value);
-          validatePassword()}} />
+          <input type="password" className="form-control sifrafild" id="sifrafild" value={password} onChange={(e) => {
+            setPassword(e.target.value);
+            validatePassword()
+          }} />
           <div id="sifra-errors" className="form-text" ></div>
         </div>
         {!dodatnoZaRegistraciju && (
@@ -197,13 +200,15 @@ const LoginM = ({getData}) => {
         )}
         {dodatnoZaRegistraciju && (
           <>
-            
+
             <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">Email adresa</label>
-          <input type="email" className="form-control" id="email-field" aria-describedby="emailHelp" value={email} onChange={(e) => {setEmail(e.target.value);
-          validateEmail();}} />
-          <div id="email-error" className="form-text" ></div>
-        </div>
+              <label htmlFor="exampleInputEmail1" className="form-label">Email adresa</label>
+              <input type="email" className="form-control" id="email-field" aria-describedby="emailHelp" value={email} onChange={(e) => {
+                setEmail(e.target.value);
+                validateEmail();
+              }} />
+              <div id="email-error" className="form-text" ></div>
+            </div>
             <div className="mb-3 form-check">
               <input
                 type="checkbox"
