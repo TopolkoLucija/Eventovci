@@ -62,3 +62,7 @@ body,
   text-decoration: none; 
   transform: scale(1.015);
 }
+
+.mirror-image img {
+  transform: scaleX(-1);
+}
