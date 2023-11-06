@@ -22,8 +22,7 @@ CREATE TABLE DOGADJANJE (
                             organizatorid BIGINT NOT NULL,
                             cijenaulaznice DOUBLE PRECISION NOT NULL,
                             FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
-                                ON DELETE CASCADE,
-                            UNIQUE (organizatorid)
+                                ON DELETE CASCADE
 );
 -- Create the 'poveznica' table
 CREATE TABLE POVEZNICA (
@@ -80,6 +79,79 @@ CREATE TABLE CLANARINA
 );
 
 
+INSERT INTO korisnik (korisnickoime, email, lozinka, tipkorisnika, adresa, placanjeclanarine)
+VALUES
+    ('user1', 'user1@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa1', false),
+    ('user2', 'user2@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa2', false),
+    ('user3', 'user3@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa3', false),
+    ('user4', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa6', false),
+    ('user5', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa7', false),
+    ('user6', 'user6@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa8', false),
+    ('user7', 'user7@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa9', false),
+    ('org1', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa4', true),
+    ('org2', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5', false),
+    ('admin', 'admin@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'administrator', 'AdminAdresa', false);
+
+INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice)
+VALUES
+    ('Event 1', 'Type 1', 'Location 1', CURRENT_TIMESTAMP, 2.5, 8, 15.0),
+    ('Event 2', 'Type 2', 'Location 2', DATEADD('DAY', -1, CURRENT_TIMESTAMP), 3.0, 8, 20.0), -- Yesterday
+    ('Event 3', 'Type 1', 'Location 3', DATEADD('DAY', -3, CURRENT_TIMESTAMP), 1.5, 8, 10.0), -- 3 days ago
+    ('Event 4', 'Type 3', 'Location 4', DATEADD('HOUR', 3, CURRENT_TIMESTAMP), 4.0, 8, 25.0),  -- 3 hours from now
+    ('Event 5', 'Type 2', 'Location 5', DATEADD('DAY', 50, CURRENT_TIMESTAMP), 2.5, 9, 0),   -- 50 days from now
+    ('Event 6', 'Type 1', 'Location 6', DATEADD('DAY', 5, CURRENT_TIMESTAMP), 2.0, 9, 0),    -- 5 days from now
+    ('Event 7', 'Type 3', 'Location 7', DATEADD('DAY', 3, CURRENT_TIMESTAMP), 3.5, 9, 0),   -- 3 days from now
+    ('Event 8', 'Type 2', 'Location 8', DATEADD('HOUR', 12, CURRENT_TIMESTAMP), 1.5, 9, 0); -- 12 hours from now
 
 
+INSERT INTO poveznica (organizatorid, link)
+VALUES
+    (8, 'https://www.facebook.com/user8'),
+    (8, 'https://www.twitter.com/user8'),
+    (8, 'https://www.instagram.com/user8'),
+    (9, 'https://www.facebook.com/user9'),
+    (9, 'https://www.twitter.com/user9'),
+    (9, 'https://www.instagram.com/user9');
 
+INSERT INTO medijskisadrzaj (medijskisadrzaj, iddogadjanja)
+VALUES
+    (X'0102030405', 1),
+    (X'060708090A', 1),
+    (X'0B0C0D0E0F', 2),
+    (X'1011121314', 2),
+    (X'1516171819', 3),
+    (X'1A1B1C1D1E', 3),
+    (X'1F20212223', 4),
+    (X'2425262728', 4),
+    (X'2930313233', 5),
+    (X'3435363738', 5),
+    (X'3940414243', 6),
+    (X'4445464748', 6),
+    (X'4950515253', 7),
+    (X'5455565758', 7),
+    (X'595A5B5C5D', 8),
+    (X'5E5F606162', 8);
+
+INSERT INTO dolazakkorisnika (statusdolaska, iddogadjanja, idkorisnik)
+VALUES
+    ('dolazim', 1, 1), -- User 1 attending event 1
+    ('mozda', 1, 2),  -- User 2 maybe attending event 1
+    ('ne dolazim', 5, 3),  -- User 3 not attending event 5
+
+    ('dolazim', 2, 4), -- User 4 attending event 2
+    ('mozda', 4, 5),  -- User 5 maybe attending event 4
+    ('ne dolazim', 2, 6),  -- User 6 not attending event 2
+
+    ('dolazim', 3, 7), -- User 7 attending event 3
+    ('mozda', 6, 8);  -- User 8 maybe attending event 6
+
+INSERT INTO recenzija (recenzijatekst, ocjena, iddogadjanja, idkorisnik)
+VALUES
+    ('Event 2 review by User 1', 4, 2, 1),  -- User 1's review for event 2 with a rating of 4
+    ('Event 2 review by User 2', 5, 2, 2),  -- User 2's review for event 2 with a rating of 5
+    ('Event 3 review by User 3', 3, 3, 3),  -- User 3's review for event 3 with a rating of 3
+    ('Event 3 review by User 4', 4, 3, 4);  -- User 4's review for event 3 with a rating of 4
+
+INSERT INTO clanarina (idkorisnik, cijenaclanarine, vrijedido)
+VALUES
+    (8, 20.0, DATEADD('DAY', 18, CURRENT_TIMESTAMP));

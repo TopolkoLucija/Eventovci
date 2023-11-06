@@ -15,7 +15,7 @@ public class Membership {
     private Long membershipId;
 
     @Column(name="idkorisnik")
-    private Long user_id;
+    private Long userId;
 
     @Column(name="cijenaclanarine")
     private Double price;
@@ -28,8 +28,8 @@ public class Membership {
 
     }
 
-    public Membership(Long user_id, Double price, LocalDateTime validUntil) {
-        this.user_id = user_id;
+    public Membership(Long userId, Double price, LocalDateTime validUntil) {
+        this.userId = userId;
         this.price = price;
         this.validUntil = validUntil;
     }
@@ -52,12 +52,12 @@ public class Membership {
 
     //geteri i seteri
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Double getPrice() {
