@@ -15,9 +15,9 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       {categories.map((category, index) => (
-        <div className='box'>
-          <a key={index} href={category.path}>
-            <div key={index} className="category">
+        <div key={index} className='box'>
+          <a href={category.path}>
+            <div className="category">
               <img src={category.img} alt={`img for ${category.title}`} />
               <span>{category.title}</span>
             </div>

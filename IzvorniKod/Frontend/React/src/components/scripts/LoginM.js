@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/LoginM.css';
 import { useNavigate } from 'react-router-dom';
 
-const LoginM = ({ getData }) => {
+const LoginM = () => {
   const [dodatnoZaRegistraciju, setDodatnoZaRegistraciju] = useState(false);
   const [PrijaviSeOrganizator, setPrijaviSeOrganizator] = useState(false);
   const [email, setEmail] = useState("");
