@@ -8,7 +8,7 @@ const LoginM = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
-  const [homeAdress, setHomeAdress] = useState("null");
+  const [homeAdress, setHomeAdress] = useState("");
   const [shouldPayMembership, setShouldPayMembership] = useState(false);
   const [typeOfUser, setTypeOfUser] = useState("posjetitelj");
   const navigate = useNavigate();
@@ -97,6 +97,7 @@ const LoginM = () => {
       // console.log(response);
       sessionStorage.setItem('accessToken', response);
       navigate('/home')
+      window.location.reload();
     }).catch((error) => {
       if (error.message === "No user found") {
 
@@ -115,6 +116,7 @@ const LoginM = () => {
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
     const alrt = document.getElementById("gmb");
+    alrt.style.visibility = "hidden";
     if (username !== "" && password !== "" && validateEmail()) {
       if (PrijaviSeOrganizator) {
         if (homeAdress != "null" && homeAdress != "") {
@@ -139,7 +141,7 @@ const LoginM = () => {
             }
           });
         } else {
-          alert("Nije popunjena adresa")
+          
         }
       } else {
         fetch('/Test/register', {
@@ -183,7 +185,7 @@ const LoginM = () => {
       </div>
       <div className='formaDio'>
         <div className="alert alert-danger gmb" id='gmb' role="alert">
-          Neispravno korisničko ime ili lozinka
+          {!dodatnoZaRegistraciju ? "Neispravno korisničko ime ili lozinka" : "Korisničko ime je zauzeto"}
         </div>
         <form className='forma'>
           <div className="mb-3">

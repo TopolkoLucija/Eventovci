@@ -10,6 +10,7 @@ function Logout() {
 
    useEffect(() => {
       navigate('/home');
+      window.location.reload();
    }, [])
 
    return (
