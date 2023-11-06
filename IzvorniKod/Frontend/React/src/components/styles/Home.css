@@ -1,4 +1,3 @@
-
 .main-content {
    display: flex;
     flex-direction: column;
@@ -47,12 +46,13 @@
  
 .more-info {
    color: black;
-   transition: 0.1s;
+   transition: 0.3s;
    text-decoration: underline;
    text-decoration-color: black;
 }
  
 .more-info:hover {
    color: #FF6B6B;
-   text-decoration: none;
+   text-decoration: underline;
+   text-decoration-color: #FF6B6B;
 }

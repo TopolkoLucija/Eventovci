@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Home.css';
 
-function Home() {
+const Home = () => {
 
   const accessToken = sessionStorage.getItem('accessToken');
 
