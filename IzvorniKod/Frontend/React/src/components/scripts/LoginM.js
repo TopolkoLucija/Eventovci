@@ -169,6 +169,18 @@ const LoginM = ({ getData }) => {
 
   return (
     <div className="content" id='NaCentarDiva'>
+
+      <div className='JosImasNemas'>{!dodatnoZaRegistraciju ? <> Još nemaš račun? <button className='btn btn-primary' onClick={() => {
+              setDodatnoZaRegistraciju(true);
+              const alrt = document.getElementById("gmb");
+              alrt.style.visibility = "hidden";
+            }}>Registriraj se</button> </> : <> Već imaš račun? <button className='btn btn-primary' onClick={() => {
+              setDodatnoZaRegistraciju(false);
+              const alrt = document.getElementById("gmb");
+              alrt.style.visibility = "hidden";
+            }}>Prijavi se</button>  </>}
+      </div>
+      <div className='formaDio'>
       <div className="alert alert-danger gmb" id='gmb' role="alert">
         Neispravno korisničko ime ili lozinka
       </div>
@@ -191,11 +203,6 @@ const LoginM = ({ getData }) => {
         {!dodatnoZaRegistraciju && (
           <div className='RazmakniBotune'>
             <button type="submit" className="btn btn-primary " onClick={handleSubmit}  >Prijavi se</button>
-            <button className='btn btn-primary' onClick={() => {
-              setDodatnoZaRegistraciju(true);
-              const alrt = document.getElementById("gmb");
-              alrt.style.visibility = "hidden";
-            }}>Registriraj se</button>
           </div>
         )}
         {dodatnoZaRegistraciju && (
@@ -238,12 +245,15 @@ const LoginM = ({ getData }) => {
           </>
         )}
         {dodatnoZaRegistraciju && (
-          <button type="submit" className="btn btn-primary" onClick={handleRegister}>
+          <div className='cnt'>
+          <button type="submit" className="btn btn-primary cnt" onClick={handleRegister}>
             Registriraj se
           </button>
+          </div>
         )}
       </form>
     </div>
+  </div>
   )
 }
 
