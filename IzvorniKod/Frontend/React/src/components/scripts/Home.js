@@ -3,6 +3,8 @@ import '../styles/Home.css';
 
 function Home() {
 
+  const accessToken = sessionStorage.getItem('accessToken');
+
   return (
     <div className='content'>
       <div className='main-content'>
@@ -18,7 +20,7 @@ function Home() {
         </div>
         <div className='main-content-text'>
           <p>Dobrodošli na mjesto povezivanja i razmjene informacija putem zabavnih događaja.</p>
-          <p>Za više informacija <a href='/about-us' className='more-info'>kliknite ovdje</a>.</p>
+          <p>Za više informacija <a href={accessToken ? '/about-us' : '/login'} className='more-info'>kliknite ovdje</a>.</p>
         </div>
       </div>
     </div>
