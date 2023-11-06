@@ -93,8 +93,9 @@ const LoginM = ({ getData }) => {
         throw new Error("No user found");
       }
       return response.text();
-    }).then((data) => {
-      sessionStorage.setItem('accessToken', data);
+    }).then((response) => {
+      console.log(response);
+      sessionStorage.setItem('accessToken', response);
       navigate('/home')
     }).catch((error) => {
       if (error.message === "No user found") {
@@ -103,7 +104,6 @@ const LoginM = ({ getData }) => {
       } else {
         console.error("Error fetching data: ", error);
       }
-
     });
   }
 
@@ -114,6 +114,7 @@ const LoginM = ({ getData }) => {
     validateAdress();
     e.preventDefault();
     const data = { username, password, email, typeOfUser, homeAdress, shouldPayMembership };
+    const alrt = document.getElementById("gmb");
     if (username !== "" && password !== "" && validateEmail()) {
       if (PrijaviSeOrganizator) {
         if (homeAdress != "null" && homeAdress != "") {
@@ -125,15 +126,14 @@ const LoginM = ({ getData }) => {
             if (!response.ok) {
               throw new Error("No user found");
             }
-            if (response.ok) {
-              // alert("Dodano");
-              sessionStorage.setItem('accessToken', data);
-              navigate('/home');
-            }
-
+            return response.text();
+          }).then((response) => {
+            console.log(response);
+            sessionStorage.setItem('accessToken', response);
+            navigate('/home')
           }).catch((error) => {
             if (error.message === "No user found") {
-              alert("No user found");
+              alrt.style.visibility = "visible";
             } else {
               console.error("Error fetching data: ", error);
             }
@@ -150,14 +150,14 @@ const LoginM = ({ getData }) => {
           if (!response.ok) {
             throw new Error("No user found");
           }
-          if (response.ok) {
-            sessionStorage.setItem('accessToken', data);
-            navigate('/home');
-          }
-
+          return response.text();
+        }).then((response) => {
+          console.log(response);
+          sessionStorage.setItem('accessToken', response);
+          navigate('/home')
         }).catch((error) => {
           if (error.message === "No user found") {
-            alert("No user found");
+            alrt.style.visibility = "visible";
           } else {
             console.error("Error fetching data: ", error);
           }
@@ -171,90 +171,90 @@ const LoginM = ({ getData }) => {
     <div className="content" id='NaCentarDiva'>
 
       <div className='JosImasNemas'>{!dodatnoZaRegistraciju ? <> Još nemaš račun? <button className='btn btn-primary' onClick={() => {
-              setDodatnoZaRegistraciju(true);
-              const alrt = document.getElementById("gmb");
-              alrt.style.visibility = "hidden";
-            }}>Registriraj se</button> </> : <> Već imaš račun? <button className='btn btn-primary' onClick={() => {
-              setDodatnoZaRegistraciju(false);
-              setPrijaviSeOrganizator(false);
-              const alrt = document.getElementById("gmb");
-              alrt.style.visibility = "hidden";
-            }}>Prijavi se</button>  </>}
+        setDodatnoZaRegistraciju(true);
+        const alrt = document.getElementById("gmb");
+        alrt.style.visibility = "hidden";
+      }}>Registriraj se</button> </> : <> Već imaš račun? <button className='btn btn-primary' onClick={() => {
+        setDodatnoZaRegistraciju(false);
+        setPrijaviSeOrganizator(false);
+        const alrt = document.getElementById("gmb");
+        alrt.style.visibility = "hidden";
+      }}>Prijavi se</button>  </>}
       </div>
       <div className='formaDio'>
-      <div className="alert alert-danger gmb" id='gmb' role="alert">
-        Neispravno korisničko ime ili lozinka
-      </div>
-      <form className='forma'>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label" >
-            Korisničko ime
-          </label>
-          <input type="name" className="form-control" id="nameField" value={username} onChange={(e) => { setUserName(e.target.value); validateName() }} />
-          <div id="name-error" className="form-text" ></div>
+        <div className="alert alert-danger gmb" id='gmb' role="alert">
+          Neispravno korisničko ime ili lozinka
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">Lozinka  </label>
-          <input type="password" className="form-control sifrafild" id="sifrafild" value={password} onChange={(e) => {
-            setPassword(e.target.value);
-            validatePassword()
-          }} />
-          <div id="sifra-errors" className="form-text" ></div>
-        </div>
-        {!dodatnoZaRegistraciju && (
-          <div className='RazmakniBotune'>
-            <button type="submit" className="btn btn-primary " onClick={handleSubmit}  >Prijavi se</button>
+        <form className='forma'>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label" >
+              Korisničko ime
+            </label>
+            <input type="name" className="form-control" id="nameField" value={username} onChange={(e) => { setUserName(e.target.value); validateName() }} />
+            <div id="name-error" className="form-text" ></div>
           </div>
-        )}
-        {dodatnoZaRegistraciju && (
-          <>
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">Lozinka  </label>
+            <input type="password" className="form-control sifrafild" id="sifrafild" value={password} onChange={(e) => {
+              setPassword(e.target.value);
+              validatePassword()
+            }} />
+            <div id="sifra-errors" className="form-text" ></div>
+          </div>
+          {!dodatnoZaRegistraciju && (
+            <div className='RazmakniBotune'>
+              <button type="submit" className="btn btn-primary " onClick={handleSubmit}  >Prijavi se</button>
+            </div>
+          )}
+          {dodatnoZaRegistraciju && (
+            <>
 
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">Email adresa</label>
-              <input type="email" className="form-control" id="email-field" aria-describedby="emailHelp" value={email} onChange={(e) => {
-                setEmail(e.target.value);
-                validateEmail();
-              }} />
-              <div id="email-error" className="form-text" ></div>
-            </div>
-            <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck2"
-                onChange={() => {
-                  setPrijaviSeOrganizator(!PrijaviSeOrganizator);
-                }}
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Registriraj se kao organizator
-              </label>
-            </div>
-            {PrijaviSeOrganizator && (
               <div className="mb-3">
-                <label htmlFor="adress" className="form-label">
-                  Adresa:
-                </label>
-                <input type="adress" className="form-control" id="adress" value={homeAdress} onChange={(e) => {
-                  setHomeAdress(e.target.value);
-                  setTypeOfUser("organizator");
-                  validateAdress();
+                <label htmlFor="exampleInputEmail1" className="form-label">Email adresa</label>
+                <input type="email" className="form-control" id="email-field" aria-describedby="emailHelp" value={email} onChange={(e) => {
+                  setEmail(e.target.value);
+                  validateEmail();
                 }} />
-                <div id="adresa-errors" className="form-text" ></div>
+                <div id="email-error" className="form-text" ></div>
               </div>
-            )}
-          </>
-        )}
-        {dodatnoZaRegistraciju && (
-          <div className='cnt'>
-          <button type="submit" className="btn btn-primary cnt" onClick={handleRegister}>
-            Registriraj se
-          </button>
-          </div>
-        )}
-      </form>
+              <div className="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="exampleCheck2"
+                  onChange={() => {
+                    setPrijaviSeOrganizator(!PrijaviSeOrganizator);
+                  }}
+                />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Registriraj se kao organizator
+                </label>
+              </div>
+              {PrijaviSeOrganizator && (
+                <div className="mb-3">
+                  <label htmlFor="adress" className="form-label">
+                    Adresa:
+                  </label>
+                  <input type="adress" className="form-control" id="adress" value={homeAdress} onChange={(e) => {
+                    setHomeAdress(e.target.value);
+                    setTypeOfUser("organizator");
+                    validateAdress();
+                  }} />
+                  <div id="adresa-errors" className="form-text" ></div>
+                </div>
+              )}
+            </>
+          )}
+          {dodatnoZaRegistraciju && (
+            <div className='cnt'>
+              <button type="submit" className="btn btn-primary cnt" onClick={handleRegister}>
+                Registriraj se
+              </button>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
-  </div>
   )
 }
 
