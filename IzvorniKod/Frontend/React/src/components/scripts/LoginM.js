@@ -176,6 +176,7 @@ const LoginM = ({ getData }) => {
               alrt.style.visibility = "hidden";
             }}>Registriraj se</button> </> : <> Već imaš račun? <button className='btn btn-primary' onClick={() => {
               setDodatnoZaRegistraciju(false);
+              setPrijaviSeOrganizator(false);
               const alrt = document.getElementById("gmb");
               alrt.style.visibility = "hidden";
             }}>Prijavi se</button>  </>}
