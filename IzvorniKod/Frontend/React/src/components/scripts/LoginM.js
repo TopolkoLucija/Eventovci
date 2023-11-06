@@ -132,7 +132,8 @@ const LoginM = () => {
           }).then((response) => {
             // console.log(response);
             sessionStorage.setItem('accessToken', response);
-            navigate('/home')
+            navigate('/home');
+            window.location.reload();
           }).catch((error) => {
             if (error.message === "No user found") {
               alrt.style.visibility = "visible";
@@ -156,7 +157,8 @@ const LoginM = () => {
         }).then((response) => {
           // console.log(response);
           sessionStorage.setItem('accessToken', response);
-          navigate('/home')
+          navigate('/home');
+          window.location.reload();
         }).catch((error) => {
           if (error.message === "No user found") {
             alrt.style.visibility = "visible";
