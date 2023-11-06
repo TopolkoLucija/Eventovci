@@ -94,7 +94,7 @@ const LoginM = () => {
       }
       return response.text();
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
       sessionStorage.setItem('accessToken', response);
       navigate('/home')
     }).catch((error) => {
@@ -128,7 +128,7 @@ const LoginM = () => {
             }
             return response.text();
           }).then((response) => {
-            console.log(response);
+            // console.log(response);
             sessionStorage.setItem('accessToken', response);
             navigate('/home')
           }).catch((error) => {
@@ -152,7 +152,7 @@ const LoginM = () => {
           }
           return response.text();
         }).then((response) => {
-          console.log(response);
+          // console.log(response);
           sessionStorage.setItem('accessToken', response);
           navigate('/home')
         }).catch((error) => {

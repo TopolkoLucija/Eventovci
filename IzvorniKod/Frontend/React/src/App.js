@@ -6,6 +6,7 @@ import MyAccount from './components/scripts/MyAccount';
 import LoginM from './components/scripts/LoginM';
 import Events from './components/scripts/Events';
 import Calendar from './components/scripts/Calendar';
+import Logout from './components/scripts/Logout';
 import './components/styles/App.css';
 import { useEffect, useState } from 'react';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<LoginM />} />
+          <Route path="logout" element={<Logout/>} />
         </Routes>
       </Router>
 
