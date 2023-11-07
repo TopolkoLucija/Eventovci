@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/MyAccount.css';
 
 const MyAccount = () => {
   const accessToken = sessionStorage.getItem('accessToken');
@@ -24,6 +25,7 @@ const MyAccount = () => {
             navigate('/login');
             return;
           }
+          // console.log(response.json());
           return response.json();
         })
         .then((data) => {
@@ -52,6 +54,9 @@ const MyAccount = () => {
                 <p>Ti si: {userData.typeOfUser}</p>
                 <p>Trebaš platiti članarinu? {userData.shouldPayMembership ? "Da" : "Ne"}</p>
                 <p>Adresa: {userData.homeAdress}</p>
+                {userData.typeOfUser === "administrator" ? <button className='btn btn-primary' id='my-account'>Dodaj korisnika</button> : <></>}
+                {userData.typeOfUser === "organizator" ? <button className='btn btn-primary' id='my-account'>Dodaj događaj</button> : <></>}
+                {/* {userData.typeOfUser === "posjetitelj" ? <button className='btn btn-primary'></button> : <></>} */}
               </div>
             </div>
           </div> : ""
