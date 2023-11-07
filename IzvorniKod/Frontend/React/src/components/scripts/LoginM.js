@@ -19,13 +19,13 @@ const LoginM = () => {
     const emailError = document.getElementById("email-error");
     const kvadrat = document.getElementById("email-field");
     if (!kvadrat.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
-      emailError.innerText = "Email mora biti formata <ime>@<adresa>.<nes>";
+      emailError.innerText = "Email format nije ispravan";
       emailError.style.color = "red";
       kvadrat.style.borderColor = "red";
       kvadrat.style.color = "black";
       return false;
     } else {
-      emailError.innerText = "We'll never share your email with anyone else.";
+      emailError.innerText = "";
       emailError.style.color = "green";
       kvadrat.style.borderColor = "green"
       return true;
@@ -36,7 +36,7 @@ const LoginM = () => {
     const errSifra = document.getElementById("sifra-errors");
     if (sifra.value == "") {
       sifra.style.borderColor = "red"
-      errSifra.innerText = "Šifra ne smije biti prazan niz.";
+      errSifra.innerText = "Upišite lozinku";
       errSifra.style.color = "red";
     } else {
       sifra.style.borderColor = "green"
