@@ -8,8 +8,6 @@ import Events from './components/scripts/Events';
 import Calendar from './components/scripts/Calendar';
 import Logout from './components/scripts/Logout';
 import './components/styles/App.css';
-import { useEffect, useState } from 'react';
-
 
 function App() {
 

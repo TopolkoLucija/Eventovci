@@ -9,7 +9,7 @@ function Logout() {
    sessionStorage.removeItem('accessToken');
 
    useEffect(() => {
-      navigate('/home');
+      navigate('/login');
       window.location.reload();
    }, [])
 

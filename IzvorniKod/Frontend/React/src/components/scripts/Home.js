@@ -20,7 +20,7 @@ const Home = () => {
         </div>
         <div className='main-content-text'>
           <p>Dobrodošli na mjesto povezivanja i razmjene informacija putem zabavnih događaja.</p>
-          <p>Za više informacija <a href={accessToken ? '/about-us' : '/login'} className='more-info'>kliknite ovdje</a>.</p>
+          <p>Za više informacija kliknite <a href={accessToken ? '/about-us' : '/login'} className='more-info'>ovdje</a>.</p>
         </div>
       </div>
     </div>
