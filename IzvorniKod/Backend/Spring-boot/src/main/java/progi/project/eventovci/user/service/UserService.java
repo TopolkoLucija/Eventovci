@@ -69,6 +69,9 @@ public class UserService {
             if(Objects.equals(user.getTypeOfUser(),"posjetitelj")){
                 return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
             }
+            if(Objects.equals(user.getTypeOfUser(),"administrator")){
+                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
+            }
             if(Objects.equals(user.getTypeOfUser(),"organizator")){
                 List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
                 List<EventData> eventlist = new ArrayList<>();
