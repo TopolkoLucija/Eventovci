@@ -1,8 +1,10 @@
 import React from 'react';
 import '../styles/Sidebar.css';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const accessToken = sessionStorage.getItem('accessToken');
+  const location = useLocation();
 
   const categories = [
     /* { img: 'https://cdn.iconscout.com/icon/free/png-256/free-menu-199-458540.png', title: 'IZBORNIK' }, */ // koristit će se u mobilnoj verziji
@@ -19,7 +21,7 @@ const Sidebar = () => {
     <div className="sidebar">
       {categories.map((category, index) => (
         (accessToken !== null && index !== categories.length - 2) || (accessToken === null && index !== categories.length - 1) ? (
-          <div key={index} className={`box ${category.path === 'logout' ? 'mirror-image' : ''}`}>
+          <div key={index} className={`box ${category.path === 'logout' ? 'mirror-image' : ''} ${location.pathname === `/${category.path}` ? 'active-category' : ''}`}>
             <a href={category.path}>
               <div className="category">
                 <img src={category.img} alt={`img for ${category.title}`} />
@@ -28,7 +30,7 @@ const Sidebar = () => {
             </a>
           </div>
         ) : null
-      ))}
+    ))}
     </div>
   );
 };

@@ -1,6 +1,4 @@
-html,
-body,
-#root {
+html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -24,17 +22,17 @@ body,
 .sidebar::before {
   content: "";
   display: block;
-  height: 19%;
+  height: 18%;
   background-color: #FF6B6B;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
-
 .category {
   display: flex;
   align-items: center;
   padding: 4.3%;
+  transition: 0.1s;
 }
 
 .category img {
@@ -43,16 +41,20 @@ body,
   margin-left: 4%;
 }
 
+.box {
+  margin-bottom: 1%; 
+  text-decoration: none;
+}
+
 .box a {
   text-decoration: none; /* uklanja podcrtavanje */
 }
 
-
 .category span {
-  font-size: 115%; 
-  font-family:  Helvetica, sans-serif;
+  font-size: 115%;
+  font-family: Helvetica, sans-serif;
   letter-spacing: 2px;
-  color: #000; 
+  color: #000;
 }
 
 .category:hover {
@@ -61,6 +63,13 @@ body,
   border-bottom-left-radius: 20px;
   text-decoration: none; 
   transform: scale(1.015);
+}
+
+.active-category {
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-decoration: none; 
 }
 
 .mirror-image img {

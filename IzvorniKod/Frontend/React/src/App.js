@@ -10,14 +10,11 @@ import Logout from './components/scripts/Logout';
 import './components/styles/App.css';
 
 function App() {
-
-  // console.log(sessionStorage.getItem('accessToken'));
-
   return (
-    <div className="app-container">
-      <Sidebar />
+    <Router>
+      <div className="app-container">
+        <Sidebar />
 
-      <Router>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
@@ -26,11 +23,10 @@ function App() {
           <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<LoginM />} />
-          <Route path="logout" element={<Logout/>} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
-      </Router>
-
-    </div>
+      </div>
+    </Router>
   );
 }
 

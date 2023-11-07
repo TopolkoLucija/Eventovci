@@ -49,6 +49,7 @@
    transition: 0.3s;
    text-decoration: underline;
    text-decoration-color: black;
+   text-underline-offset: 5%;
 }
  
 .more-info:hover {
