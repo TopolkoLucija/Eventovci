@@ -92,10 +92,10 @@ const LoginM = ({ getType }) => {
         // console.log(response);
         sessionStorage.setItem("accessToken", response);
         navigate("/home");
-        getType(true, "Uspješna prijava", "success");
+        getType(true, "Uspješna prijava", "success"); // uspjesna prijava stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
       })
       .catch((error) => {
         if (error.message === "No user found") {
@@ -140,10 +140,10 @@ const LoginM = ({ getType }) => {
               // console.log(response);
               sessionStorage.setItem("accessToken", response);
               navigate("/home");
-              getType(true, "Uspješna registracija", "success");
+              getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
               setTimeout(() => {
                 window.location.reload();
-              }, 1000);
+              }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
             })
             .catch((error) => {
               if (error.message === "No user found") {
@@ -170,10 +170,10 @@ const LoginM = ({ getType }) => {
             // console.log(response);
             sessionStorage.setItem("accessToken", response);
             navigate("/home");
-            getType(true, "Uspješna registracija", "success");
+            getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
             setTimeout(() => {
               window.location.reload();
-            }, 1000);
+            }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
           })
           .catch((error) => {
             if (error.message === "No user found") {

@@ -13,18 +13,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
-  const [show, setShow] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastType, setToastType] = useState("success");
+  // podatci koji trebaju MyToast.js
+  const [show, setShow] = useState(false); // zelis li da se pokaze zeleni prozor
+  const [toastMessage, setToastMessage] = useState(""); // poruka koju zelis da se ispise
+  const [toastType, setToastType] = useState("success"); // success = zeleni prozor u ovom slucaju ne koristimo crveni
 
   const getType = (e, message, type) => {
+    // podatke iz LoginM.js upisi u varijable koje su u App.js, njih ce MyTast kasnije koristiti za renderiranje zelenog prozorcica
     setShow(e);
     setToastMessage(message);
     setToastType(type);
-    setTimeout(() => {
-      setShow(false);
-      console.log("hidden");
-    }, 5000);
   };
 
   return (
