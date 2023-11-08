@@ -5,7 +5,6 @@ import AboutUs from "./components/scripts/AboutUs";
 import MyAccount from "./components/scripts/MyAccount";
 import LoginM from "./components/scripts/LoginM";
 import Events from "./components/scripts/Events";
-import Calendar from "./components/scripts/Calendar";
 import Logout from "./components/scripts/Logout";
 import "./components/styles/App.css";
 import MyToast from "./components/scripts/MyToast";
@@ -35,7 +34,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/my-calendar" element={<Calendar />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<LoginM getType={getType} />} />
           <Route path="/logout" element={<Logout />} />

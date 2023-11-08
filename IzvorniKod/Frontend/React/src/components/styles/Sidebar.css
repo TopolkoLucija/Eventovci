@@ -22,7 +22,7 @@ html, body, #root {
 .sidebar::before {
   content: "";
   display: block;
-  height: 18%;
+  height: 22%;
   background-color: #FF6B6B;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -31,7 +31,7 @@ html, body, #root {
 .category {
   display: flex;
   align-items: center;
-  padding: 4.3%;
+  padding: 5%;
   transition: 0.1s;
 }
 
@@ -42,7 +42,7 @@ html, body, #root {
 }
 
 .box {
-  margin-bottom: 1%; 
+  margin-bottom: 2%; 
   text-decoration: none;
 }
 
