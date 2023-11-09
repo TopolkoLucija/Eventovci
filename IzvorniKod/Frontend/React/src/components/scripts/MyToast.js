@@ -2,6 +2,8 @@ import React from "react";
 import { Toast } from "react-bootstrap";
 
 const MyToast = (props) => {
+  const { show, message, type } = props;
+  //css
   const toastCss = {
     position: "fixed",
     top: "10px",
@@ -12,24 +14,26 @@ const MyToast = (props) => {
   };
 
   return (
-    <div style={props.show ? toastCss : null}>
+    <div style={show ? toastCss : null}>
       <Toast
         className={`border text-white ${
-          props.type === "success"
+          type === "success"
             ? "border-success bg-success"
             : "border-danger bg-danger"
         }`}
-        show={props.show}
+        show={show}
       >
         <Toast.Header
           className={`text-white ${
-            props.type === "success" ? "bg-success" : "bg-danger"
+            type === "success" ? "bg-success" : "bg-danger"
           }`}
           closeButton={false}
         >
-          <strong className="mr-auto">Success</strong>
+          <strong className="mr-auto">
+            {type === "success" ? ":)" : "Error"}
+          </strong>
         </Toast.Header>
-        <Toast.Body>{props.message}</Toast.Body>
+        <Toast.Body>{message}</Toast.Body>
       </Toast>
     </div>
   );
