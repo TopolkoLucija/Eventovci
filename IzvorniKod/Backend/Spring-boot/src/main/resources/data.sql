@@ -21,6 +21,7 @@ CREATE TABLE DOGADJANJE (
                             trajanje DOUBLE PRECISION,
                             organizatorid BIGINT NOT NULL,
                             cijenaulaznice DOUBLE PRECISION NOT NULL,
+                            opis VARCHAR(1500),
                             FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
                                 ON DELETE CASCADE
 );
@@ -101,16 +102,16 @@ VALUES
     ('org2', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5', false),
     ('admin', 'admin@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'administrator', 'AdminAdresa', false);
 
-INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice)
+INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice, opis)
 VALUES
-    ('Event 1', 'Type 1', 'Location 1', CURRENT_TIMESTAMP, 2.5, 8, 15.0),
-    ('Event 2', 'Type 2', 'Location 2', DATEADD('DAY', -1, CURRENT_TIMESTAMP), 3.0, 8, 20.0), -- Yesterday
-    ('Event 3', 'Type 1', 'Location 3', DATEADD('DAY', -3, CURRENT_TIMESTAMP), 1.5, 8, 10.0), -- 3 days ago
-    ('Event 4', 'Type 3', 'Location 4', DATEADD('HOUR', 3, CURRENT_TIMESTAMP), 4.0, 8, 25.0),  -- 3 hours from now
-    ('Event 5', 'Type 2', 'Location 5', DATEADD('DAY', 50, CURRENT_TIMESTAMP), 2.5, 9, 0),   -- 50 days from now
-    ('Event 6', 'Type 1', 'Location 6', DATEADD('DAY', 5, CURRENT_TIMESTAMP), 2.0, 9, 0),    -- 5 days from now
-    ('Event 7', 'Type 3', 'Location 7', DATEADD('DAY', 3, CURRENT_TIMESTAMP), 3.5, 9, 0),   -- 3 days from now
-    ('Event 8', 'Type 2', 'Location 8', DATEADD('HOUR', 12, CURRENT_TIMESTAMP), 1.5, 9, 0); -- 12 hours from now
+    ('Event 1', 'Type 1', 'Location 1', CURRENT_TIMESTAMP, 2.5, 8, 15.0, 'opis'),
+    ('Event 2', 'Type 2', 'Location 2', DATEADD('DAY', -1, CURRENT_TIMESTAMP), 3.0, 8, 20.0, 'opis'), -- Yesterday
+    ('Event 3', 'Type 1', 'Location 3', DATEADD('DAY', -3, CURRENT_TIMESTAMP), 1.5, 8, 10.0, 'opis'), -- 3 days ago
+    ('Event 4', 'Type 3', 'Location 4', DATEADD('HOUR', 3, CURRENT_TIMESTAMP), 4.0, 8, 25.0, 'opis'),  -- 3 hours from now
+    ('Event 5', 'Type 2', 'Location 5', DATEADD('DAY', 50, CURRENT_TIMESTAMP), 2.5, 9, 0, 'opis'),   -- 50 days from now
+    ('Event 6', 'Type 1', 'Location 6', DATEADD('DAY', 5, CURRENT_TIMESTAMP), 2.0, 9, 0, 'opis'),    -- 5 days from now
+    ('Event 7', 'Type 3', 'Location 7', DATEADD('DAY', 3, CURRENT_TIMESTAMP), 3.5, 9, 0, 'opis'),   -- 3 days from now
+    ('Event 8', 'Type 2', 'Location 8', DATEADD('HOUR', 12, CURRENT_TIMESTAMP), 1.5, 9, 0, 'opis'); -- 12 hours from now
 
 
 INSERT INTO poveznica (organizatorid, link)

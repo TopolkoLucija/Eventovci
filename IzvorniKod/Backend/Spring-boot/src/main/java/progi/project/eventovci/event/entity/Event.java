@@ -40,6 +40,9 @@ public class Event {
     @Column(name="cijenaulaznice")
     private Double ticketPrice;// 0 - besplatan dogadjaj
 
+    @Column(name = "opis")
+    private String text;
+
 
     //konstruktor
     public Event() {

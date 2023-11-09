@@ -8,7 +8,7 @@ import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.event.controller.dto.EventData;
+import progi.project.eventovci.event.controller.dto.EventDataDTO;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
@@ -74,11 +74,11 @@ public class UserService {
             }
             if(Objects.equals(user.getTypeOfUser(),"organizator")){
                 List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
-                List<EventData> eventlist = new ArrayList<>();
+                List<EventDataDTO> eventlist = new ArrayList<>();
                 for (Event e : event) {
                     MediaContent media = mediaContentRepository.first(e.getId()).get(0);
-                    EventData eventData = new EventData(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
-                    eventlist.add(eventData);
+                    EventDataDTO eventDataDTO = new EventDataDTO(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
+                    eventlist.add(eventDataDTO);
                 }
 
                 List<SocialMediaLink> socialMediaLinks = linkRepository.findAllByEventCoordinatorId(id);

@@ -2,17 +2,17 @@ package progi.project.eventovci.event.controller.dto;
 
 import java.time.LocalDateTime;
 
-public class EventData {
+public class EventDataDTO {
     private String eventName;
     private String location;
     private LocalDateTime timeOfTheEvent;
     private byte[] picture;
 
-    public EventData() {
+    public EventDataDTO() {
 
     }
 
-    public EventData(String eventName, String location, LocalDateTime timeOfTheEvent, byte[] picture) {
+    public EventDataDTO(String eventName, String location, LocalDateTime timeOfTheEvent, byte[] picture) {
         this.eventName = eventName;
         this.location = location;
         this.timeOfTheEvent=timeOfTheEvent;

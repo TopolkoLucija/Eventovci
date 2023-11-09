@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="dolazakkorisnika")
-public class UserRespond {
+public class UserResponse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,12 @@ public class UserRespond {
 
     //konstruktor
 
-    public UserRespond() {
+    public UserResponse() {
 
     }
 
 
-    public UserRespond(String status, Long event_id, Long user_id) {
+    public UserResponse(String status, Long event_id, Long user_id) {
         this.status = status;
         this.event_id = event_id;
         this.user_id = user_id;
@@ -40,7 +40,7 @@ public class UserRespond {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserRespond that = (UserRespond) o;
+        UserResponse that = (UserResponse) o;
         return Objects.equals(id, that.id);
     }
 
