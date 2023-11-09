@@ -22,7 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 
-@Profile("test")
+@Profile({"test"})
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = false)
 //this enables method-level security: use @Secured to secure individual methods
 @Configuration
