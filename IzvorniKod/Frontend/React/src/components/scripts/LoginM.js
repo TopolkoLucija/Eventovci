@@ -93,13 +93,19 @@ const LoginM = ({ getType }) => {
         sessionStorage.setItem("accessToken", response);
         navigate("/home");
         getType(true, "Uspješna prijava", "success"); // uspjesna prijava stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
+        //       setTimeout(() => {
+        //         window.location.reload();
+        //       }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
       })
       .catch((error) => {
         if (error.message === "No user found") {
           alrt.style.visibility = "visible";
+          setUserName("");
+          setPassword("");
+          const sifra = document.getElementById("nameField");
+          sifra.style.borderColor = "red";
+          const sifra1 = document.getElementById("sifrafild");
+          sifra1.style.borderColor = "red";
         } else {
           console.error("Error fetching data: ", error);
         }
@@ -141,9 +147,9 @@ const LoginM = ({ getType }) => {
               sessionStorage.setItem("accessToken", response);
               navigate("/home");
               getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
+              //             setTimeout(() => {
+              //               window.location.reload();
+              //             }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
             })
             .catch((error) => {
               if (error.message === "No user found") {
@@ -171,9 +177,9 @@ const LoginM = ({ getType }) => {
             sessionStorage.setItem("accessToken", response);
             navigate("/home");
             getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
-            setTimeout(() => {
-              window.location.reload();
-            }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
+            //          setTimeout(() => {
+            //            window.location.reload();
+            //          }, 1000); // cekaj jednu sekundu prije nego sta refreshas tako da ne nestane zeleni prozorcic instant
           })
           .catch((error) => {
             if (error.message === "No user found") {
@@ -230,7 +236,7 @@ const LoginM = ({ getType }) => {
         </div>
         <form className="forma">
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="nameField" className="form-label">
               Korisničko ime
             </label>
             <input
@@ -246,7 +252,7 @@ const LoginM = ({ getType }) => {
             <div id="name-error" className="form-text"></div>
           </div>
           <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
+            <label htmlFor="sifrafild" className="form-label">
               Lozinka{" "}
             </label>
             <input
@@ -275,7 +281,7 @@ const LoginM = ({ getType }) => {
           {dodatnoZaRegistraciju && (
             <>
               <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">
+                <label htmlFor="email-field" className="form-label">
                   Email adresa
                 </label>
                 <input
@@ -300,7 +306,7 @@ const LoginM = ({ getType }) => {
                     setPrijaviSeOrganizator(!PrijaviSeOrganizator);
                   }}
                 />
-                <label className="form-check-label" htmlFor="exampleCheck1">
+                <label className="form-check-label" htmlFor="exampleCheck2">
                   Registriraj se kao organizator
                 </label>
               </div>

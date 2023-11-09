@@ -22,9 +22,9 @@ function App() {
     setShow(e);
     setToastMessage(message);
     setToastType(type);
-    //   setTimeout(() => {
-    //    setShow(false);
-    //    }, 1000);
+    setTimeout(() => {
+      setShow(false);
+    }, 1000);
   };
 
   return (
