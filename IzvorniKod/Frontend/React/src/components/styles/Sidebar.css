@@ -1,0 +1,77 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  background-color: #FF6B6B;
+  color: #333;
+  width: 50%;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebar::before {
+  content: "";
+  display: block;
+  height: 22%;
+  background-color: #FF6B6B;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  padding: 5%;
+  transition: 0.1s;
+}
+
+.category img {
+  width: 11%;
+  margin-right: 12%; 
+  margin-left: 4%;
+}
+
+.box {
+  margin-bottom: 2%; 
+  text-decoration: none;
+}
+
+.box a {
+  text-decoration: none; /* uklanja podcrtavanje */
+}
+
+.category span {
+  font-size: 115%;
+  font-family: Helvetica, sans-serif;
+  letter-spacing: 2px;
+  color: #000;
+}
+
+.category:hover {
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-decoration: none; 
+  transform: scale(1.015);
+}
+
+.active-category {
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-decoration: none; 
+}
+
+.mirror-image img {
+  transform: scaleX(-1);
+}

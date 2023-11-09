@@ -7,3 +7,5 @@
 /Dokumentacija/*.synctex.gz
 /Dokumentacija/*.toc
 *.idea
+*.DS_Store
+node_modules/
