@@ -78,6 +78,15 @@ CREATE TABLE CLANARINA
         ON DELETE CASCADE
 );
 
+CREATE TABLE PRETPLATA (
+    idpretplata BIGINT AUTO_INCREMENT PRIMARY KEY,
+    kategorija VARCHAR(255),
+    lokacija VARCHAR(255),
+    idkorisnik BIGINT NOT NULL,
+    FOREIGN KEY (idkorisnik) REFERENCES korisnik (id)
+    ON DELETE CASCADE
+);
+
 
 INSERT INTO korisnik (korisnickoime, email, lozinka, tipkorisnika, adresa, placanjeclanarine)
 VALUES
