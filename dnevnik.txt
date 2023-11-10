@@ -24,9 +24,18 @@
 4. sastanak 
 	datum: 26. listopada 2023.
 	prisustvovali: Filip Mišković, Iva Kvesić, Bruno Marković
-	teme: dogovor o podjeli posla
-	      određen okvirni izgled stranice, 
-	      cijeli zapisnik i detalji se nalaze "imeFilaKojiCemoStavit"
+	teme: 
+		dogovor o podjeli posla
+		određen okvirni izgled stranice
+
+5. sastanak
+	datum: 9. studenog 2023.
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
+	teme: 
+		od nastavnice dobivena povratna informacija o dosadašnjem radu
+		utvrđivanje zadataka koje je potrebno dovršiti prije prve predaje 
+		dogovor o budućem izgledu pojedinih stranica web aplikacije
+
 		
 
 
