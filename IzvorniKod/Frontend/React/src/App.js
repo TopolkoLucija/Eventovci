@@ -28,22 +28,22 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="app-container">
-        <Sidebar />
+      <Router>
+        <div className="app-container">
+          <Sidebar />
 
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/login" element={<LoginM getType={getType} />} />
-          <Route path="/logout" element={<Logout />} />
-        </Routes>
-      </div>
-      {show && <MyToast show={show} message={toastMessage} type={toastType} />}
-    </Router>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/login" element={<LoginM getType={getType} />} />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+        </div>
+        {show && <MyToast show={show} message={toastMessage} type={toastType} />}
+      </Router>
   );
 }
 
