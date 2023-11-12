@@ -22,12 +22,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 
-@Profile({"test"})
+@Profile({"prod"})
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = false)
 //this enables method-level security: use @Secured to secure individual methods
 @Configuration
 @EnableWebSecurity
-public class WebSecurity  {
+public class WebSecurityProd  {
 
     private JwtAuthEntryPoint authEntryPoint;
 
@@ -35,7 +35,7 @@ public class WebSecurity  {
     private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    public WebSecurity(CustomUserDetailsService customUserDetailsService, JwtAuthEntryPoint authEntryPoint) {
+    public WebSecurityProd(CustomUserDetailsService customUserDetailsService, JwtAuthEntryPoint authEntryPoint) {
         this.customUserDetailsService = customUserDetailsService;
         this.authEntryPoint = authEntryPoint;
     }
@@ -63,15 +63,6 @@ public class WebSecurity  {
         return http.build();
     }
 
-
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain h2ConsoleSecurityFilterChain(HttpSecurity http) throws Exception{ //configures security for accessing the H2 Console
-        http.securityMatcher(PathRequest.toH2Console());//specifies that this security configuration applies to requests for the H2 Console
-        http.csrf(AbstractHttpConfigurer::disable);// disables CSRF protection for the H2 Console
-        http.headers((headers) -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); //sets the frame options to allow the same origin
-        return http.build();
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
