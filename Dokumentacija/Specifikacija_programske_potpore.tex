@@ -20,11 +20,11 @@
 				\item  \underbar{Neregistrirani/neprijavljeni korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
-					
+					\item prikazati stranicu \textit{O nama}
 					\item stvoriti novi korisnički račun kao:
 					\begin{packed_enum}
-						\item organizator (naziv, e-mail adresa, lozinka, adresa, poveznica na vlastite web ili Facebook stranice) 
-						\item  posjetitelj (ime, prezime, korisničko ime, e-mail adresa, lozinka) 
+						\item organizator (korisničko ime, e-mail adresa, lozinka, adresa) 
+						\item  posjetitelj (korisničko ime, e-mail adresa, lozinka) 
 					\end{packed_enum} 
 					\item prijaviti se u sustav
 					
@@ -54,10 +54,10 @@
 						
 				\begin{packed_enum}
 					\item sve što može i Posjetitelj
-					\item stvoriti novo događanje:
+					\item unošenjem obaveznih i, po želji, opcionalnih podataka, ovisno plaća li članarinu, stvoriti novo događanje:
 					\begin{packed_enum}
-						\item za koje se ne plaća ulaz (*navesti podatke*)
-						\item za koje se plaća ulaz ()
+						\item za koje se ne plaća ulaz 
+						\item za koje se plaća ulaz ili za koje se ne plaća ulaz
 					\end{packed_enum}
 					\item pregledavati i brisati svoja događanja 
 				\end{packed_enum}
@@ -88,9 +88,30 @@
 			\subsection{Obrasci uporabe}
 				
 				\subsubsection{Opis obrazaca uporabe}
+				
+				\noindent U nastavku su detaljno opisani obrasci upotrebe označenih kraticom UC i rednim brojem obrasca. Obrasci predstavljaju ključne scenarije interakcije između korisnika i samog sustava. Svaki UC pruža jasno strukturirane korake koje korisnik slijedi i omogućuje razumijevanje odziva sustava na te korake.  \\
+				
+					\noindent \underbar{\textbf{UC1 - Prikaz stranice O nama}}
+					\begin{packed_item}
 						
+						\item \textbf{Glavni sudionik:} Neregistrirani/neprijavljeni korisnik i prijavljeni korisnik
+						\item  \textbf{Cilj:} Prikaz stranice s općim informacijama o web aplikaciji
+						\item  \textbf{Sudionici:} -
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik odabire opciju prikaza stranice O nama
+							\item Otvara se stranica i prikazuju informacije o web aplikaciji
+							
+						\end{packed_enum}						
+					\end{packed_item}
+					
+					
+%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%					
 
-					\noindent \underbar{\textbf{UC1 - Registracija}}
+					\noindent \underbar{\textbf{UC2 - Registracija}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik:} Neregistrirani/neprijavljeni korisnik
@@ -102,7 +123,8 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju registracije
-							\item Korisnik unosi tražene podatke i, po potrebi, podmiruje članarinu 
+							\item Korisnik unosi tražene podatke 
+							\item Baza podataka se osvježava
 							\item Korisnik dobiva pristup korisničkim funkcijama i obavijest o uspješnoj registraciji te se preusmjerava na početnu stranicu za prijavljene korisnike 
 							
 						\end{packed_enum}
@@ -123,8 +145,10 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
+
+\newpage
 					
-					\noindent \underbar{\textbf{UC2 - Prijava}}
+					\noindent \underbar{\textbf{UC3 - Prijava}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Neregistrirani/neprijavljeni korisnik
@@ -160,12 +184,12 @@
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
 					
-					\noindent \underbar{\textbf{UC3 - Odjava}}
+					\noindent \underbar{\textbf{UC4 - Odjava}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Administrator, Organizator, Posjetitelj)
 						\item  \textbf{Cilj:} Odjava iz sustava 
-						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Sudionici:} -
 						\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -180,7 +204,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
-					\noindent \underbar{\textbf{UC4 - Pregled osobnih podataka}}
+					\noindent \underbar{\textbf{UC5 - Pregled osobnih podataka}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
@@ -199,7 +223,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
-					\noindent \underbar{\textbf{UC5 - Uređivanje osobnih podataka}}
+					\noindent \underbar{\textbf{UC6 - Uređivanje osobnih podataka}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
@@ -245,7 +269,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
-					\noindent \underbar{\textbf{UC6 - Postavke obavještavanja o novim događanjima}}
+					\noindent \underbar{\textbf{UC7 - Postavke obavještavanja o novim događanjima}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
@@ -257,31 +281,31 @@
 						\item[] \begin{packed_enum}
 							
 							\item Korisnik odabire opciju uređivanja postavki obavještavanja o novim događanjima
-							\item Korisnik odabire želi li primati obavijesti i, ako da, o kojim vrstama događanja i iz kojeg područja
+							\item Korisnik odabire želi li primati obavijesti i, ako da, o kojim vrstama događanja i na kojem području
 							\item Korisnik sprema promjene
 							\item Baza podataka se osvježava
 							
 						\end{packed_enum}
 						
-						\item  \textbf{Opis mogućih odstupanja:}
+						%\item  \textbf{Opis mogućih odstupanja:}
 						
-						\item[] \begin{packed_item}
+						%\item[] \begin{packed_item}
 							
-							\item[2.a] Korisnik odabire da želi primati obavijesti, ali ne unese minimalno jednu vrstu događanja i minimalno jedno područje
-							\item[] \begin{packed_enum}
+						%	\item[2.a] Korisnik odabire da želi primati obavijesti, ali ne unese minimalno jednu vrstu događanja i minimalno jedno područje
+						%	\item[] \begin{packed_enum}
 								
-								\item Onemogućiti spremanje promjena
-								\item Obavijestiti korisnika o obaveznom izboru barem jedne vrste događanja i barem jednog područja
-								\item Korisnik odabire vrstu događanja i/ili područje koje nedostaje i omogućava se spremanje promjena
+						%		\item Onemogućiti spremanje promjena
+						%		\item Obavijestiti korisnika o obaveznom izboru barem jedne vrste događanja i barem jednog područja
+						%		\item Korisnik odabire vrstu događanja i/ili područje koje nedostaje i omogućava se spremanje promjena
 								
-							\end{packed_enum}
-						\end{packed_item}
+						%	\end{packed_enum}
+						%\end{packed_item}
 						
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC7 - Brisanje vlastitog korisničkog računa}}
+					\noindent \underbar{\textbf{UC8 - Brisanje vlastitog korisničkog računa}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
@@ -303,7 +327,8 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC8 - Pregled svih korisničkih računa}}
+
+					\noindent \underbar{\textbf{UC9 - Pregled svih korisničkih računa}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Administrator
@@ -323,7 +348,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
-					\noindent \underbar{\textbf{UC9 - Brisanje korisničkog računa}}
+					\noindent \underbar{\textbf{UC10 - Brisanje korisničkog računa}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Administrator
@@ -344,8 +369,10 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
+
+\newpage
 					
-						\noindent \underbar{\textbf{UC10 - Postavljanje cijene članarine}}
+						\noindent \underbar{\textbf{UC11 - Postavljanje cijene članarine}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Administrator
@@ -380,7 +407,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC11 - Dodavanje novog događanja}}
+					\noindent \underbar{\textbf{UC12 - Dodavanje novog događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Organizator
@@ -392,7 +419,7 @@
 						\item[] \begin{packed_enum}
 							
 							\item Organizator odabire opciju dodavanja novog događanja
-							\item Organizator upisuje potrebne i, po želji, opcionalne podatke o događanju (naziv, vrsta, lokacija, vrijeme početka, trajanje, cijena; opcionalno foto/video galerija)
+							\item Organizator upisuje potrebne i, po želji, opcionalne podatke o događanju (naziv, vrsta, lokacija, vrijeme početka, trajanje, cijena; opcionalno fotografije, videozapisi)
 							
 							\item Ovisno o tome ima li Organizator mogućnost organiziranja događanja koja se plaćaju: 
 							\item[] \begin{packed_enum}
@@ -423,9 +450,8 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
-					\newpage
 
-					\noindent \underbar{\textbf{UC12 - Pregled svih događanja}}
+					\noindent \underbar{\textbf{UC13 - Pregled svih događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
@@ -436,7 +462,7 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Na početnoj stranici korisnik odabire kriterij prema kojem se prikazuju događanja (prikaz događanja završenih u zadnjih 48 sati ili aktualna događanja u narednih 24 sata, 7 dana, 30 dana)
+							\item Na stranici s događanjima korisnik odabire kriterij prema kojem se prikazuju događanja (prikaz događanja završenih u zadnjih 48 sati ili aktualna događanja u narednih 24 sata, 7 dana, 30 dana)
 							\item Događanja koja zadovoljavaju odabrani kriterij prikazuju se na stranici
 						
 						\end{packed_enum}
@@ -445,7 +471,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC13 - Pregled jednog događanja}}
+					\noindent \underbar{\textbf{UC14 - Pregled jednog događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator, Administrator)
@@ -465,7 +491,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%				
 					
-					\noindent \underbar{\textbf{UC14 - Pregled profila organizatora}}
+					\noindent \underbar{\textbf{UC15 - Pregled profila organizatora}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
@@ -484,9 +510,8 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
-					\newpage
 					
-					\noindent \underbar{\textbf{UC15 - Pregled vlastitih događanja}}
+					\noindent \underbar{\textbf{UC16 - Pregled vlastitih događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Organizator
@@ -506,7 +531,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
-					\noindent \underbar{\textbf{UC16 - Pregled jednog vlastitog događanja}}
+					\noindent \underbar{\textbf{UC17 - Pregled jednog vlastitog događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Organizator
@@ -526,7 +551,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC17 - Brisanje vlastitog događanja}}
+					\noindent \underbar{\textbf{UC18 - Brisanje vlastitog događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Organizator
@@ -547,9 +572,8 @@
 					\end{packed_item}
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
-					\newpage
 										
-					\noindent \underbar{\textbf{UC18 - Brisanje događanja}}
+					\noindent \underbar{\textbf{UC19 - Brisanje događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Administrator
@@ -571,7 +595,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC19 - Recenziranje događanja}}
+					\noindent \underbar{\textbf{UC20 - Recenziranje događanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
@@ -583,7 +607,7 @@
 						\item[] \begin{packed_enum}
 							
 							\item Posjetitelj odabire opciju dodavanja recenzije
-							\item Posjetitelj upisuje recenziju
+							\item Posjetitelj upisuje ocjenu i recenziju događanja
 							\item Posjetitelj potvrđuje da želi objaviti recenziju ili odustaje od objave
 							\item Baza podataka se osvježava
 							\item Recenzija je dodana i vidljiva na vrhu recenzija tog događanja
@@ -607,7 +631,9 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC20 - Brisanje vlastite recenzije}}
+					\newpage
+
+					\noindent \underbar{\textbf{UC21 - Brisanje vlastite recenzije}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
@@ -629,7 +655,7 @@
 					
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 
-					\noindent \underbar{\textbf{UC21 - Brisanje recenzije}}
+					\noindent \underbar{\textbf{UC22 - Brisanje recenzije}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Administrator
@@ -652,7 +678,7 @@
 %	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%	%
 					
 					
-					\noindent \underbar{\textbf{UC22 - Iskazivanje interesa za događanje}}
+					\noindent \underbar{\textbf{UC23 - Iskazivanje interesa za događanje}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
@@ -711,46 +737,46 @@
 				
 			\subsection{Sekvencijski dijagrami}
 			
-				\noindent \textbf{Obrazac upotrebe UC11 - Dodavanje novog događanja}
+				\noindent \textbf{Obrazac upotrebe UC12 - Dodavanje novog događanja}
 				
 				\noindent Organizator odabire opciju dodavanja novog događanja. Prikazuje mu se obrazac za unos podataka o događanju. Po završetku unosa željenih podataka, organizator odabire opciju objave događanja. Provjeravaju se uneseni podaci - ako su ispravni, podaci o događanju spremaju se u bazu podataka i novo je događanje objavljeno, inače se prikazuje obavijest o neispravnosti podataka i organizatoru se omogućuje ponovni unos podataka o događanju. 
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{dijagrami/sd1.PNG}
 					\centering
-					\caption{Sekvencijski dijagram za \textbf{UC11}}
+					\caption{Sekvencijski dijagram za \textbf{UC12}}
 					\label{fig:promjene}
 				\end{figure}
 				
 				\newpage
 				
-				\noindent \textbf{Obrazac upotrebe UC19 - Recenziranje događanja}
+				\noindent \textbf{Obrazac upotrebe UC20 - Recenziranje događanja}
 				
 				\noindent Korisnik iz prikaza svih događanja završenih u posljednjih 48 sati odabire jedno koje želi recenzirati. Korisniku se vraća obrazac za unos recenzije. Pri objavi recenzije provjerava se ispravnost recenzije te ako je ispravna, recenzija se sprema u bazu podataka i prikazuje na stranici, u suprotnom korisnik se obavještava o neispravnosti recenzije i istu može napisati ponovno.
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{dijagrami/sd2.PNG}
 					\centering
-					\caption{Sekvencijski dijagram za \textbf{UC19}}
+					\caption{Sekvencijski dijagram za \textbf{UC20}}
 					\label{fig:promjene}
 				\end{figure}
 				
 				\newpage
 				
-				\noindent \textbf{Obrazac upotrebe UC22 - Iskazivanje interesa za događanje}
+				\noindent \textbf{Obrazac upotrebe UC23 - Iskazivanje interesa za događanje}
 				
 				\noindent Korisnik iz prikaza svih događanja završenih u posljednjih odabire jedno za koje želi iskazati interes. Korisniku odabire jednu od opcija \textit{sigurno dolazim}, \textit{možda dolazim}, \textit{ne dolazim}. Obavlja se provjera baze podataka i utvrđuje je li to prvi iskazani interes tog korisnika za događanje ili se radi o promjeni iskazanog interesa. U bazu se sprema novi zapis ili se postojeći mijenja i na stranici korisnik vidi svoj iskazan interes.
 				
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth]{dijagrami/sd3.PNG}
 					\centering
-					\caption{Sekvencijski dijagram za \textbf{UC22}}
+					\caption{Sekvencijski dijagram za \textbf{UC23}}
 					\label{fig:promjene}
 				\end{figure}
 				
 				\newpage
 				
-				\noindent \textbf{Obrasci upotrebe UC8, UC9 i UC10 - Prikaz i brisanje korisničkih računa i postavljanje cijene članarine}
+				\noindent \textbf{Obrasci upotrebe UC9, UC10 i UC11 - Prikaz i brisanje korisničkih računa i postavljanje cijene članarine}
 				
 				\noindent Administrator odabire opciju prikaza svih korisničkih računa koji se po tom odabiru dohvaćaju iz baze. Kraj korisničkog računa na popisu, administrator može odabrati opciju brisanja korisničkog računa te se brisanje obavlja nakon potvrde. Odabirom opcije za promjenu iznosa članarine administratoru se vraća obrazac u koji administrator unosi novu cijenu članarine sve dok ne unese ispravan iznos.
 				
@@ -760,7 +786,7 @@
 					\includegraphics[width=\textwidth]{dijagrami/sd4.PNG}
 					\centering
 					\vspace{-0.7cm}
-					\caption{Sekvencijski dijagram za \textbf{UC8}, \textbf{UC9} i \textbf{UC10}}
+					\caption{Sekvencijski dijagram za \textbf{UC9}, \textbf{UC10} i \textbf{UC11}}
 					\label{fig:promjene}
 				\end{figure}
 				
