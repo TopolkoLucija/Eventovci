@@ -1,0 +1,12 @@
+.app-container{
+   width: 100%;
+   display: flex;
+}
+
+.sidebar{
+   width: 24%;
+}
+
+.content{
+   width: 76%;
+}
