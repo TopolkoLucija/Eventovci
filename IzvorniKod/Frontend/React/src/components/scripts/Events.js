@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Dogadaj from "./Dogadaj";
 import "../styles/Events.css";
 
@@ -12,7 +12,7 @@ const dogadaj = {
 };
 
 function Events() {
-  const accessToken = sessionStorage.getItem('accessToken');
+  const accessToken = sessionStorage.getItem("accessToken");
 
   // console.log(accessToken);
 
@@ -21,37 +21,46 @@ function Events() {
 
   useEffect(() => {
     if (accessToken !== null) {
-      fetch('/api/data', {
-        method: 'GET',
+      fetch("/api/data", {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': accessToken
-        }
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
       })
-          .then((response) => {
-            if (!response.ok) {
-              console.error('Request failed');
-              navigate('/login');
-              return;
-            }
-            // console.log(response.json());
-            return response.json();
-          })
-          .then((data) => {
-            setUserData(data);
-            // console.log(data);
-          })
-          .catch((error) => {
-            console.error('Error: ' + error);
-          });
-    }
-    else {
-      navigate('/login');
+        .then((response) => {
+          if (!response.ok) {
+            console.error("Request failed");
+            navigate("/login");
+            return;
+          }
+          // console.log(response.json());
+          return response.json();
+        })
+        .then((data) => {
+          setUserData(data);
+          // console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error: " + error);
+        });
+    } else {
+      navigate("/login");
     }
   }, []);
 
   return (
-    <div>
+    <div className="glavniKontejner">
+      <div className="kontejnerZaNavbar">
+        <nav>
+          <a href="">24h</a>
+          <a href="">48h</a>
+          <a href="">7 dana</a>
+          <a href="">30 dana</a>
+          <a href="">Prije 48h</a>
+          <div className="animation start-home"></div>
+        </nav>
+      </div>
       {dogadaj ? (
         <div className="container">
           <Dogadaj dogadaj={dogadaj}></Dogadaj>
