@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import progi.project.eventovci.event.controller.dto.EventFilter;
-import progi.project.eventovci.securityconfig.JWTGenerator;
+import progi.project.eventovci.event.controller.dto.IdFilter;
 import progi.project.eventovci.securityconfig.auth.Convert;
 import progi.project.eventovci.user.controller.dto.*;
 import progi.project.eventovci.user.entity.User;
-import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
 
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/data")
@@ -53,8 +49,14 @@ public class DataController {
     }
 
     @DeleteMapping("/deleteMyProfile")
-    public ResponseEntity<Void> delete(@RequestHeader("Authorization") String token){
-        userService.delete(convert.convertToId(token));
+    public ResponseEntity<Void> deleteMyProfile(@RequestHeader("Authorization") String token){
+        userService.deleteMyProfile(convert.convertToId(token));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteUser")
+    public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter){
+        userService.deleteUser(convert.convertToId(token), filter.getFilter());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

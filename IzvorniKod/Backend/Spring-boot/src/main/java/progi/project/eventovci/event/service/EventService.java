@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.controller.dto.AddEventDTO;
-import progi.project.eventovci.event.controller.dto.EventFilter;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;

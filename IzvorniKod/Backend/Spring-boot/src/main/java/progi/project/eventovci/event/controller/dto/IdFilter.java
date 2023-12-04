@@ -1,14 +1,12 @@
 package progi.project.eventovci.event.controller.dto;
 
-import progi.project.eventovci.event.entity.Event;
-
-public class EventFilter {
+public class IdFilter {
     private Long filter;
 
-    public EventFilter(){
+    public IdFilter(){
 
     }
-    public EventFilter(Long filter) {
+    public IdFilter(Long filter) {
         this.filter = filter;
     }
 

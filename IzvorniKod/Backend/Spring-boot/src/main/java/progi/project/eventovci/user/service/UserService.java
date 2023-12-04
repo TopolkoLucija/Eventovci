@@ -130,14 +130,31 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id){
+    public void deleteMyProfile(Long id){
         User user = userRepository.findUserById(id);
         if(!Objects.equals(user.getTypeOfUser(), "administrator")){
             userRepository.deleteUserById(id);
         }
         else{
-            throw new UnAuthorizedException("Admin ne može obrisati profil!");
+            throw new UnAuthorizedException("Nije moguće obrisati profil administratora!");
         }
+    }
+
+    @Transactional
+    public void deleteUser(Long idAdmin, Long id){
+        User admin = userRepository.findUserById(idAdmin);
+        User user = userRepository.findUserById(id);
+        if(user != null) {
+            if (Objects.equals(user.getTypeOfUser(), "administrator") || Objects.equals(idAdmin, id) || !Objects.equals(admin.getTypeOfUser(), "administrator")) {
+                throw new UnAuthorizedException("Nije moguće obrisati profil administratora!");
+            } else {
+                userRepository.deleteUserById(id);
+            }
+        }
+        else{
+            throw new UnAuthorizedException("Korisnik ne postoji!");
+        }
+
     }
 
 
