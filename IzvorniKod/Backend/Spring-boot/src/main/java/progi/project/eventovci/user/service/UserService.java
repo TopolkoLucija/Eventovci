@@ -129,6 +129,17 @@ public class UserService {
         return allUserDataForms;
     }
 
+    @Transactional
+    public void delete(Long id){
+        User user = userRepository.findUserById(id);
+        if(!Objects.equals(user.getTypeOfUser(), "administrator")){
+            userRepository.deleteUserById(id);
+        }
+        else{
+            throw new UnAuthorizedException("Admin ne može obrisati profil!");
+        }
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.eventovci.event.controller.dto.EventFilter;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
 import progi.project.eventovci.user.controller.dto.*;
@@ -51,8 +52,14 @@ public class DataController {
         return ResponseEntity.ok(user.getTypeOfUser());
     }
 
+    @DeleteMapping("/deleteMyProfile")
+    public ResponseEntity<Void> delete(@RequestHeader("Authorization") String token){
+        userService.delete(convert.convertToId(token));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @ExceptionHandler()
-    public ResponseEntity<String> handleException(UserNotFoundException ex){
+    public ResponseEntity<String> handleException(RuntimeException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());
     }
 }
