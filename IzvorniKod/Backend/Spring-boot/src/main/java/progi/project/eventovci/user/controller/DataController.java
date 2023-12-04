@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
-import progi.project.eventovci.user.controller.dto.ChangeDataForm;
-import progi.project.eventovci.user.controller.dto.DataForm;
-import progi.project.eventovci.user.controller.dto.AllUserDataForm;
-import progi.project.eventovci.user.controller.dto.RegisterForm;
+import progi.project.eventovci.user.controller.dto.*;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.service.UserService;
@@ -43,8 +40,8 @@ public class DataController {
     }
 
     @GetMapping("/allUsers")
-    public ResponseEntity<List<AllUserDataForm>> allUsers() {
-        List<AllUserDataForm> data = userService.allUsers();
+    public ResponseEntity<List<AllUserDataForm>> allUsers(@RequestHeader("Authorization") String token, @RequestBody Filter filter) {
+        List<AllUserDataForm> data = userService.allUsers(convert.convertToUser(token), filter.getFilter());
         return ResponseEntity.ok(data);
     }
 

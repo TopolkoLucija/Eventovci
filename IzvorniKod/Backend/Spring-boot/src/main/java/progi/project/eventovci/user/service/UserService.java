@@ -9,6 +9,7 @@ import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.event.controller.dto.EventDataDTO;
+import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
@@ -108,16 +109,26 @@ public class UserService {
         }
     }
 
-    public List<AllUserDataForm> allUsers() {
+    public List<AllUserDataForm> allUsers(User user, Integer filter) {
+
+        if (!Objects.equals(user.getTypeOfUser(), "administrator")){
+            throw new UnAuthorizedException("Korisnik nije administrator!");
+        }
 
         List<User> allUsers= userRepository.findAllUsers();
         List<AllUserDataForm> allUserDataForms = new ArrayList<>();
+
         for (User u : allUsers) {
-            AllUserDataForm data = new AllUserDataForm(u.getUsername(), u.getEmail(), u.getTypeOfUser());
-            allUserDataForms.add(data);
+            if ((filter == 1 && Objects.equals(u.getTypeOfUser(), "posjetitelj")) ||
+                    (filter == 2 && Objects.equals(u.getTypeOfUser(), "organizator")) ||
+                    filter == 0) {
+                AllUserDataForm data = new AllUserDataForm(u.getId(), u.getUsername(), u.getEmail(), u.getTypeOfUser());
+                allUserDataForms.add(data);
+            }
         }
         return allUserDataForms;
     }
+
 
 
 }
