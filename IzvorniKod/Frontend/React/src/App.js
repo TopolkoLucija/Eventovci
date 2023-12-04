@@ -6,6 +6,8 @@ import MyAccount from "./components/scripts/MyAccount";
 import LoginM from "./components/scripts/LoginM";
 import Events from "./components/scripts/Events";
 import Logout from "./components/scripts/Logout";
+import AddEvent from "./components/scripts/AddEvent";
+import ShowAll from "./components/scripts/ShowAll";
 import "./components/styles/App.css";
 import MyToast from "./components/scripts/MyToast";
 import { useState } from "react";
@@ -40,6 +42,9 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/login" element={<LoginM getType={getType} />} />
             <Route path="/logout" element={<Logout />} />
+          
+            <Route path="/my-account/add-events" element={<AddEvent />} />
+            <Route path="/my-account/show-all" element={ <ShowAll/>} />
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}
