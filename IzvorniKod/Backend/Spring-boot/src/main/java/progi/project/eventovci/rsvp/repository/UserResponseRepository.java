@@ -9,4 +9,8 @@ public interface UserResponseRepository extends JpaRepository<UserResponse, Long
 
     List<UserResponse> findAllByUserid(Long userId);
 
+    UserResponse findByEventidAndUserid(Long eventid, Long userid);
+
+    Integer countAllByEventidAndStatus(Long eventid, String status);
+
 }

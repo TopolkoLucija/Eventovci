@@ -52,7 +52,7 @@ public class MembershipService {
             }
         }
         else{
-            throw new UnAuthorizedException("Samo administrator može mjenjati članarinu!!");
+            throw new UnAuthorizedException("Samo administrator može mjenjati cijenu članarine!");
         }
     }
 
