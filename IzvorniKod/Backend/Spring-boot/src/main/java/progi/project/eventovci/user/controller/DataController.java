@@ -45,6 +45,12 @@ public class DataController {
         return ResponseEntity.ok(data);
     }
 
+    @GetMapping("/type")
+    public ResponseEntity<String> getType(@RequestHeader("Authorization") String token) {
+        User user = convert.convertToUser(token);
+        return ResponseEntity.ok(user.getTypeOfUser());
+    }
+
     @ExceptionHandler()
     public ResponseEntity<String> handleException(UserNotFoundException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());
