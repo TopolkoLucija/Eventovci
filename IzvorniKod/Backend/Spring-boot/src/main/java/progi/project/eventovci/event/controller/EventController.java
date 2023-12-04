@@ -43,8 +43,16 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
+    @GetMapping("inbox")
+    public ResponseEntity<List<EventPrintDTO>> inbox(@RequestHeader("Authorization") String token){
+        List<EventPrintDTO> events = eventService.getInbox(convert.convertToId(token));
+        return ResponseEntity.ok(events);
+    }
+
     @ExceptionHandler()
     public ResponseEntity<String> handleException(RuntimeException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());
     }
+
+
 }
