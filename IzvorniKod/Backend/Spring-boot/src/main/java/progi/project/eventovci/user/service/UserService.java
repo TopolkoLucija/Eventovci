@@ -134,7 +134,7 @@ public class UserService {
             userRepository.updateUserById(id, username, email, homeAdress);
 
         }else {
-        throw new UserNotFoundException("Korisnik ne postoji!");
+            throw new UserNotFoundException("Korisnik ne postoji!");
         }
     }
 
