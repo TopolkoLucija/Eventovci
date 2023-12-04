@@ -1,12 +1,12 @@
-.app-container{
+.app-container {
    width: 100%;
    display: flex;
 }
 
-.sidebar{
+.sidebar {
    width: 24%;
 }
 
-.content{
+.content {
    width: 76%;
 }
