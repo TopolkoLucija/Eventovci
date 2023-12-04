@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.controller.dto.AddEventDTO;
+import progi.project.eventovci.event.controller.dto.EventInfoDTO;
 import progi.project.eventovci.event.controller.dto.EventPrintDTO;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.repository.EventRepository;
@@ -157,5 +158,11 @@ public class EventService {
         }
 
         return eventsdto;
+    }
+    public EventInfoDTO getInfo(Long id) {
+        Event event = eventRepository.findEventById(id);
+        User user = userRepository.findUserById(event.getEventCoordinatorid());
+        EventInfoDTO eventInfoDTO = new EventInfoDTO(event.getEventName(), event.getTypeOfEvent(), event.getLocation(), event.getTimeOfTheEvent(), event.getDuration(), event.getTicketPrice(), event.getEventCoordinatorid(), user.getUsername());
+        return eventInfoDTO;
     }
 }

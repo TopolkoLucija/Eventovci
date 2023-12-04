@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.event.controller.dto.AddEventDTO;
+import progi.project.eventovci.event.controller.dto.EventInfoDTO;
 import progi.project.eventovci.event.controller.dto.EventPrintDTO;
 import progi.project.eventovci.event.controller.dto.IdFilter;
 import progi.project.eventovci.event.service.EventService;
@@ -54,6 +55,12 @@ public class EventController {
     public ResponseEntity<List<EventPrintDTO>> allEvents(@RequestHeader("Authorization") String token, @RequestBody Filter filter ){
         List<EventPrintDTO> events = eventService.getEvents(filter.getFilter());
         return ResponseEntity.ok(events);
+    }
+
+    @GetMapping("/getEvent")
+    public ResponseEntity<EventInfoDTO> eventInfo(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter ){
+        EventInfoDTO eventinfo = eventService.getInfo(filter.getFilter());
+        return ResponseEntity.ok(eventinfo);
     }
 
     @ExceptionHandler()
