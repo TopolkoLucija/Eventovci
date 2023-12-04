@@ -22,6 +22,7 @@ import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.event.repository.EventRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -66,6 +67,12 @@ public class UserService {
         }
         user = new User(username, email, passwordEncoder.encode(password), typeOfUser, homeAdress, shouldPayMembership);
         userRepository.save(user);
+        if (Objects.equals(typeOfUser, "organizator")) {
+            Long a = (long) 1.0;
+            Double price = membershipRepository.findByMembershipId(a).getPrice();
+            Membership membership = new Membership(user.getId(), price, LocalDateTime.MIN);
+            membershipRepository.save(membership);
+        }
         return user;
     }
 
@@ -127,7 +134,7 @@ public class UserService {
             userRepository.updateUserById(id, username, email, homeAdress);
 
         }else {
-        throw new UserNotFoundException("Korisnik ne postoji!");
+            throw new UserNotFoundException("Korisnik ne postoji!");
         }
     }
 

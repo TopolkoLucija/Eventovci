@@ -165,3 +165,10 @@ VALUES
 INSERT INTO clanarina (idkorisnik, cijenaclanarine, vrijedido)
 VALUES
     (8, 20.0, DATEADD('DAY', 18, CURRENT_TIMESTAMP));
+
+INSERT INTO pretplata (kategorija, lokacija, idkorisnik)
+VALUES
+    ('Concert', NULL, 1),
+    (NULL, 'Concert Hall', 2),
+    (NULL, 'Trešnjevka', 1),
+    (NULL, 'Trešnjevka', 8);
