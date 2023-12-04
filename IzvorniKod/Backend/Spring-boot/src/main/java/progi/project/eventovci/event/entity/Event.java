@@ -49,7 +49,7 @@ public class Event {
 
     }
 
-    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinatorid, Double ticketPrice) {
+    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinatorid, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -57,6 +57,7 @@ public class Event {
         this.duration = duration;
         this.eventCoordinatorid = eventCoordinatorid;
         this.ticketPrice = ticketPrice;
+        this.text = text;
     }
 
     //equals i hash za id

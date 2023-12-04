@@ -63,11 +63,11 @@ public class MediaContent {
         this.content = content;
     }
 
-    public Long getEvent_id() {
+    public Long getEventid() {
         return eventid;
     }
 
-    public void setEvent_id(Long eventid) {
+    public void setEventid(Long eventid) {
         this.eventid = eventid;
     }
 }

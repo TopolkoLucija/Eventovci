@@ -13,4 +13,6 @@ public interface MediaContentRepository extends JpaRepository<MediaContent, Long
     @Query("SELECT m FROM MediaContent m WHERE m.eventid = :id")
     List<MediaContent> first(@Param("id") Long id);
 
+    MediaContent getFirstByEventid(Long eventid);
+
 }
