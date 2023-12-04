@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.eventovci.event.controller.dto.IdFilter;
+import progi.project.eventovci.membership.controller.dto.FilterPrice;
 import progi.project.eventovci.membership.service.MembershipService;
 import progi.project.eventovci.securityconfig.auth.Convert;
 
@@ -28,6 +30,12 @@ public class MembershipController {
     public ResponseEntity<Double> getPrice(@RequestHeader("Authorization") String token) {
         Double price = membershipService.getPrice(convert.convertToId(token));
         return ResponseEntity.ok(price);
+    }
+
+    @PostMapping("/changePrice")
+    public ResponseEntity<Void> changePrice(@RequestHeader("Authorization") String token, @RequestBody FilterPrice filter) {
+        membershipService.changePrice(convert.convertToId(token), filter.getFilter());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler()
