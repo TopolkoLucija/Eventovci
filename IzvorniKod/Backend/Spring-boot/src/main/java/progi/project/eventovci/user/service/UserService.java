@@ -97,12 +97,12 @@ public class UserService {
     }
 
     @Transactional
-    public User changeData(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+    public void changeData(Long id, String username, String email, String homeAdress) {
         User user = userRepository.findUserById(id);
         if(user != null){
 
-            userRepository.updateUserById(id, username, email, passwordEncoder.encode(password), typeOfUser, homeAdress, shouldPayMembership);
-            return new User(id,username,email,passwordEncoder.encode(password),typeOfUser,homeAdress,shouldPayMembership);
+            userRepository.updateUserById(id, username, email, homeAdress);
+
         }else {
         throw new UserNotFoundException("Korisnik ne postoji!");
         }

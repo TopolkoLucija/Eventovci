@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
+import progi.project.eventovci.user.controller.dto.ChangeDataForm;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.controller.dto.RegisterForm;
@@ -34,11 +35,11 @@ public class DataController {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<User> changeData(@RequestHeader("Authorization") String token, @RequestBody RegisterForm registerform) {
-        User user = userService.changeData(convert.convertToId(token), registerform.getUsername(), registerform.getEmail(), registerform.getPassword(),
-                registerform.getTypeOfUser(), registerform.getHomeAdress(), registerform.getShouldPayMembership() );
+    public ResponseEntity<Void> changeData(@RequestHeader("Authorization") String token, @RequestBody ChangeDataForm changedataform) {
+        userService.changeData(convert.convertToId(token), changedataform.getUsername(), changedataform.getEmail(),
+                changedataform.getHomeAdress());
 
-        return ResponseEntity.ok(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/allUsers")
