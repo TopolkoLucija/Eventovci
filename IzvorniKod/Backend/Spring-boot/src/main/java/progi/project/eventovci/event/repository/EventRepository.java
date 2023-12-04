@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import progi.project.eventovci.event.entity.Event;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
@@ -16,5 +15,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByEventCoordinatorid(@Param("id") Long id);
 
     Event findEventById(Long id);
+
+    void deleteEventById(Long id);
 
 }
