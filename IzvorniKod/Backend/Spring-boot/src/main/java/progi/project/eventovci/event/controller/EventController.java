@@ -49,6 +49,13 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
+    //prikaz svih događaja u određenom vremenu
+    @GetMapping("/all")
+    public ResponseEntity<List<EventPrintDTO>> allEvents(@RequestHeader("Authorization") String token, @RequestBody Filter filter ){
+        List<EventPrintDTO> events = eventService.getEvents(filter.getFilter());
+        return ResponseEntity.ok(events);
+    }
+
     @ExceptionHandler()
     public ResponseEntity<String> handleException(RuntimeException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());

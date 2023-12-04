@@ -21,6 +21,7 @@ import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.membership.controller.dto.NoMembershipException;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -127,5 +128,34 @@ public class EventService {
         }
 
         return new ArrayList<>(eventsdto);
+    }
+
+    public List<EventPrintDTO> getEvents(Integer time) {
+        List<EventPrintDTO> eventsdto = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
+
+        if (time == 0) {
+            events = eventRepository.findAllByTimeOfTheEventAfter(LocalDateTime.now());
+        }
+        if (time == 48) {
+            events = eventRepository.findAllByTimeOfTheEventIsBetween(LocalDateTime.now().minusSeconds(48 * 60 * 60), LocalDateTime.now());
+        }
+        if (time != 0 && time != 48) {
+            LocalDateTime until = switch (time) {
+                case 24 -> LocalDateTime.now().plusSeconds(24 * 60 * 60);
+                case 7 -> LocalDateTime.now().plusSeconds(7 * 24 * 60 * 60);
+                case 30 -> LocalDateTime.now().plusSeconds(30 * 24 * 60 * 60);
+                default -> LocalDateTime.now();
+            };
+
+            events = eventRepository.findAllByTimeOfTheEventIsBetween(LocalDateTime.now(), until);
+        }
+        for (Event e : events) {
+            Event event = eventRepository.findEventById(e.getId());
+            byte[] media = mediaContentRepository.getFirstByEventid(event.getId()).getContent();
+            eventsdto.add(new EventPrintDTO(event.getId(), media, event.getEventName(), event.getTimeOfTheEvent(), event.getLocation()));
+        }
+
+        return eventsdto;
     }
 }
