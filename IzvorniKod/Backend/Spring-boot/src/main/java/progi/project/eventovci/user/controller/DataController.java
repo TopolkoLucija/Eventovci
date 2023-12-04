@@ -23,8 +23,14 @@ public class DataController {
     Convert convert;
 
     @GetMapping()
-    public ResponseEntity<DataForm> data(@RequestHeader("Authorization") String token) {
-        DataForm dataform = userService.data(convert.convertToUsername(token));
+    public ResponseEntity<ProfileForm> data(@RequestHeader("Authorization") String token) {
+        ProfileForm profileForm = userService.data(convert.convertToUsername(token));
+        return ResponseEntity.ok(profileForm);
+    }
+
+    @GetMapping("/getOrg")
+    public ResponseEntity<DataForm> dataOrg(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter) {
+        DataForm dataform = userService.dataOrg(filter.getFilter());
         return ResponseEntity.ok(dataform);
     }
 

@@ -9,6 +9,9 @@ import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.event.controller.dto.EventDataDTO;
+import progi.project.eventovci.membership.entity.Membership;
+import progi.project.eventovci.membership.repository.MembershipRepository;
+import progi.project.eventovci.user.controller.dto.ProfileForm;
 import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
@@ -31,6 +34,9 @@ public class UserService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private MembershipRepository membershipRepository;
 
     @Autowired
     private MediaContentRepository mediaContentRepository;
@@ -63,37 +69,53 @@ public class UserService {
         return user;
     }
 
-    public DataForm data(String username){
+    public ProfileForm data(String username){
         User user = userRepository.findUserByUsername(username);
         if(user != null){
             Long id = user.getId();
             if(Objects.equals(user.getTypeOfUser(),"posjetitelj")){
-                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
+                return new ProfileForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), null);
             }
             if(Objects.equals(user.getTypeOfUser(),"administrator")){
-                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), null, null);
+                return new ProfileForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), null);
             }
             if(Objects.equals(user.getTypeOfUser(),"organizator")){
-                List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
-                List<EventDataDTO> eventlist = new ArrayList<>();
-                for (Event e : event) {
-                    MediaContent media = mediaContentRepository.first(e.getId()).get(0);
-                    EventDataDTO eventDataDTO = new EventDataDTO(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
-                    eventlist.add(eventDataDTO);
+                Membership membership = membershipRepository.findByUserIdOrderByValidUntilDesc(user.getId());
+                if(membership != null) {
+                    return new ProfileForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), membership.getValidUntil());
                 }
-
-                List<SocialMediaLink> socialMediaLinks = linkRepository.findAllByEventCoordinatorId(id);
-                List<String> links = new ArrayList<>();
-                for (SocialMediaLink s : socialMediaLinks) {
-                    links.add(s.getLink());
+                else{
+                    return new ProfileForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), null);
                 }
-
-                return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), eventlist, links);
-
             }
             return null;
         }else {
             throw new UserNotFoundException("Korisnik ne postoji!");
+        }
+    }
+
+    public DataForm dataOrg(Long id){
+        User user = userRepository.findUserById(id);
+        if(user != null && Objects.equals(user.getTypeOfUser(), "organizator")){
+            List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
+            List<EventDataDTO> eventlist = new ArrayList<>();
+            for (Event e : event) {
+                MediaContent media = mediaContentRepository.first(e.getId()).get(0);
+                EventDataDTO eventDataDTO = new EventDataDTO(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
+                eventlist.add(eventDataDTO);
+            }
+
+            List<SocialMediaLink> socialMediaLinks = linkRepository.findAllByEventCoordinatorId(id);
+            List<String> links = new ArrayList<>();
+            for (SocialMediaLink s : socialMediaLinks) {
+                links.add(s.getLink());
+            }
+
+            return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), eventlist, links);
+
+        }
+        else {
+            throw new UserNotFoundException("Korisnik nije organizator!");
         }
     }
 
