@@ -4,18 +4,23 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.controller.dto.AddEventDTO;
+import progi.project.eventovci.event.controller.dto.EventPrintDTO;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
 import progi.project.eventovci.membership.entity.Membership;
 import progi.project.eventovci.membership.repository.MembershipRepository;
+import progi.project.eventovci.rsvp.entity.UserResponse;
+import progi.project.eventovci.rsvp.repository.UserResponseRepository;
 import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.membership.controller.dto.NoMembershipException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -32,6 +37,9 @@ public class EventService {
 
     @Autowired
     private MediaContentRepository mediaContentRepository;
+
+    @Autowired
+    private UserResponseRepository userResponseRepository;
 
     public void add(User user, AddEventDTO eventDTO) {
 
@@ -66,5 +74,27 @@ public class EventService {
             throw new UnAuthorizedException("Korisnik nije organizator događaja!");
         }
 
+    }
+
+    public List<EventPrintDTO> getInterests(Long userId, Integer option) {
+
+        List<UserResponse> responses = userResponseRepository.findAllByUserid(userId);
+        List<EventPrintDTO> eventsdto = new ArrayList<>();
+        String status = switch (option) {
+            case 0 -> "dolazim";
+            case 1 -> "mozda";
+            case 2 -> "ne dolazim";
+            default -> "";
+        };
+
+        for (UserResponse u: responses) {
+            if (Objects.equals(u.getStatus(), status)) {
+                Event event = eventRepository.findEventById(u.getEventid());
+                byte[] media = mediaContentRepository.getFirstByEventid(event.getId()).getContent();
+                eventsdto.add(new EventPrintDTO(event.getId(), media, event.getEventName(), event.getTimeOfTheEvent(), event.getLocation()));
+            }
+        }
+
+        return  eventsdto;
     }
 }
