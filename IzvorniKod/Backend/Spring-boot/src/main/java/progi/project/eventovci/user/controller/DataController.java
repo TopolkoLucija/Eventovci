@@ -3,8 +3,13 @@ package progi.project.eventovci.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.event.controller.dto.IdFilter;
+import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
 import progi.project.eventovci.user.controller.dto.*;
 import progi.project.eventovci.user.entity.User;
@@ -22,6 +27,12 @@ public class DataController {
     @Autowired
     Convert convert;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
     @GetMapping()
     public ResponseEntity<ProfileForm> data(@RequestHeader("Authorization") String token) {
         ProfileForm profileForm = userService.data(convert.convertToUsername(token));
@@ -35,11 +46,24 @@ public class DataController {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<Void> changeData(@RequestHeader("Authorization") String token, @RequestBody ChangeDataForm changedataform) {
+    public ResponseEntity<String> changeData(@RequestHeader("Authorization") String token, @RequestBody ChangeDataForm changedataform) {
+        User user = convert.convertToUser(token);
+
         userService.changeData(convert.convertToId(token), changedataform.getUsername(), changedataform.getEmail(),
                 changedataform.getHomeAdress());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        Long id = user.getId();
+
+        User newUser = userService.get(id);
+
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(newUser.getUsername(), newUser.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String newToken = jwtGenerator.generateToken(authentication);
+
+        return ResponseEntity.ok(newToken);
     }
 
     @GetMapping("/allUsers/{filter}")
