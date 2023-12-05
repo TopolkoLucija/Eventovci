@@ -11,6 +11,8 @@ import ShowAll from "./components/scripts/ShowAll";
 import "./components/styles/App.css";
 import MyToast from "./components/scripts/MyToast";
 import { useState } from "react";
+import Inbox from "./components/scripts/Inbox";
+import Interested from "./components/scripts/Interested";
 import { useEffect } from "react";
 
 function App() {
@@ -42,9 +44,10 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/login" element={<LoginM getType={getType} />} />
             <Route path="/logout" element={<Logout />} />
-          
             <Route path="/my-account/add-events" element={<AddEvent />} />
             <Route path="/my-account/show-all" element={ <ShowAll/>} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/interested" element={<Interested />} />
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}
