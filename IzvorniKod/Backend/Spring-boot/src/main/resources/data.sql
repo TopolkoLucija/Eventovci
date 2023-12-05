@@ -36,7 +36,8 @@ CREATE TABLE POVEZNICA (
 
 CREATE TABLE MEDIJSKISADRZAJ (
                                  idmedijskogsadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                 medijskisadrzaj LONGBLOB,
+                                 medijskisadrzaj TEXT,
+                                 vrsta VARCHAR(10),
                                  iddogadjanja BIGINT,
                                  FOREIGN KEY (iddogadjanja) REFERENCES dogadjanje(iddogadjanja)
                                      ON DELETE CASCADE
@@ -104,7 +105,7 @@ VALUES
 
 INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice, opis)
 VALUES
-    ('Event 1', 'Type 1', 'Location 1', CURRENT_TIMESTAMP, 2.5, 8, 15.0, 'opis'),
+    ('Event 1', 'Type 1', 'Location 1', CURRENT_TIMESTAMP, 2.5, 8, 15.0, 'opis'), -- doslovno sada
     ('Event 2', 'Type 2', 'Location 2', DATEADD('DAY', -1, CURRENT_TIMESTAMP), 3.0, 8, 20.0, 'opis'), -- Yesterday
     ('Event 3', 'Type 1', 'Location 3', DATEADD('DAY', -3, CURRENT_TIMESTAMP), 1.5, 8, 10.0, 'opis'), -- 3 days ago
     ('Event 4', 'Type 3', 'Location 4', DATEADD('HOUR', 3, CURRENT_TIMESTAMP), 4.0, 8, 25.0, 'opis'),  -- 3 hours from now
@@ -123,24 +124,6 @@ VALUES
     (9, 'https://www.twitter.com/user9'),
     (9, 'https://www.instagram.com/user9');
 
-INSERT INTO medijskisadrzaj (medijskisadrzaj, iddogadjanja)
-VALUES
-    (X'0102030405', 1),
-    (X'060708090A', 1),
-    (X'0B0C0D0E0F', 2),
-    (X'1011121314', 2),
-    (X'1516171819', 3),
-    (X'1A1B1C1D1E', 3),
-    (X'1F20212223', 4),
-    (X'2425262728', 4),
-    (X'2930313233', 5),
-    (X'3435363738', 5),
-    (X'3940414243', 6),
-    (X'4445464748', 6),
-    (X'4950515253', 7),
-    (X'5455565758', 7),
-    (X'595A5B5C5D', 8),
-    (X'5E5F606162', 8);
 
 INSERT INTO dolazakkorisnika (statusdolaska, iddogadjanja, idkorisnik)
 VALUES

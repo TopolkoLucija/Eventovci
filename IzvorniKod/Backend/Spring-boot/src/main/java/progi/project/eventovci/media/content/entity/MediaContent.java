@@ -14,9 +14,12 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
+    @Lob
     @Column(name="medijskisadrzaj")
-    private byte[] content;
+    private String content;
 
+    @Column(name="vrsta")
+    private String type;
     @Column(name="iddogadjanja")
     private Long eventid;
 
@@ -25,8 +28,9 @@ public class MediaContent {
 
     }
 
-    public MediaContent(byte[] content, Long eventid) {
+    public MediaContent(String content, String type, Long eventid) {
         this.content = content;
+        this.type = type;
         this.eventid = eventid;
     }
 
@@ -55,11 +59,11 @@ public class MediaContent {
         this.id = id;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -69,5 +73,13 @@ public class MediaContent {
 
     public void setEventid(Long eventid) {
         this.eventid = eventid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -4,11 +4,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import progi.project.eventovci.event.controller.dto.EventPrintDTO;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.link.entity.SocialMediaLink;
 import progi.project.eventovci.link.repository.LinkRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.event.controller.dto.EventDataDTO;
 import progi.project.eventovci.membership.entity.Membership;
 import progi.project.eventovci.membership.repository.MembershipRepository;
 import progi.project.eventovci.user.controller.dto.ProfileForm;
@@ -105,11 +105,19 @@ public class UserService {
         User user = userRepository.findUserById(id);
         if(user != null && Objects.equals(user.getTypeOfUser(), "organizator")){
             List<Event> event = eventRepository.findAllByEventCoordinatorid(id);
-            List<EventDataDTO> eventlist = new ArrayList<>();
+            List<EventPrintDTO> eventlist = new ArrayList<>();
             for (Event e : event) {
-                MediaContent media = mediaContentRepository.first(e.getId()).get(0);
-                EventDataDTO eventDataDTO = new EventDataDTO(e.getEventName(), e.getLocation(),e.getTimeOfTheEvent(), media.getContent());
-                eventlist.add(eventDataDTO);
+                List<MediaContent> mc = mediaContentRepository.getAllByEventid(e.getId());
+                String media = null;
+                String type = null;
+                for (int i = mc.size()-1; i>0; i--) {
+                    if (Objects.equals(mc.get(i).getType(), "image")){
+                        media = mc.get(i).getContent();
+                        type = mc.get(i).getType();
+                    }
+                }
+                eventlist.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
+
             }
 
             List<SocialMediaLink> socialMediaLinks = linkRepository.findAllByEventCoordinatorId(id);

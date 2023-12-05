@@ -1,9 +1,7 @@
 package progi.project.eventovci.user.controller.dto;
 
-import progi.project.eventovci.event.controller.dto.EventDataDTO;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ProfileForm {
 
