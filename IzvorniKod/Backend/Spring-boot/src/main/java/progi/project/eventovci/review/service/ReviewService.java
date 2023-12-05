@@ -7,10 +7,12 @@ import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.entity.EventTooOldException;
 import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.event.entity.EventNotFoundException;
+import progi.project.eventovci.review.controller.dto.ReviewDataDTO;
 import progi.project.eventovci.review.entity.EventReview;
 import progi.project.eventovci.review.entity.ReviewAlreadyExistsException;
 import progi.project.eventovci.review.entity.UnAuthorizedAddException;
 import progi.project.eventovci.review.repository.ReviewRepository;
+import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
@@ -18,6 +20,8 @@ import progi.project.eventovci.user.repository.UserRepository;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -70,5 +74,25 @@ public class ReviewService {
                 throw new UnAuthorizedException("Nije moguće obrisati recenziju!");
             }
         }
+    }
+
+    public List<ReviewDataDTO> allReviews(Long filter) {
+
+        Event event = eventRepository.findEventById(filter);
+        if (event == null){
+            throw new UnAuthorizedException("Event ne postoji!");
+        }
+
+        List<EventReview> allReviews= reviewRepository.findAllEventReviews();
+        List<ReviewDataDTO> reviewDataDTOList = new ArrayList<>();
+
+        for (EventReview er : allReviews) {
+            if (Objects.equals(er.getEvent_id(), filter)) {
+                User user = userRepository.findUserById(er.getUser_id());
+                ReviewDataDTO data = new ReviewDataDTO(er.getReviewText(), er.getGrade(), user.getId(), user.getUsername());
+                reviewDataDTOList.add(data);
+            }
+        }
+        return reviewDataDTOList;
     }
 }

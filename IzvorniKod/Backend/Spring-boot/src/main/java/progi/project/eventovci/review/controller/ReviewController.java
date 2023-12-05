@@ -7,14 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.event.controller.dto.IdFilter;
 import progi.project.eventovci.review.controller.dto.AddReviewDTO;
+import progi.project.eventovci.review.controller.dto.ReviewDataDTO;
 import progi.project.eventovci.review.entity.EventReview;
 import progi.project.eventovci.review.service.ReviewService;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
+import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.entity.UserAlreadyExistsException;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.user.service.UserService;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -37,6 +40,12 @@ public class ReviewController {
     public ResponseEntity<Void> delete(@RequestHeader("Authorization") String token, @PathVariable Long filter){
         reviewService.deleteReview(convert.convertToId(token) , filter);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{filter}")
+    public ResponseEntity<List<ReviewDataDTO>> allReviews(@RequestHeader("Authorization") String token, @PathVariable Long filter) {
+        List<ReviewDataDTO> data = reviewService.allReviews(filter);
+        return ResponseEntity.ok(data);
     }
 
     @ExceptionHandler()
