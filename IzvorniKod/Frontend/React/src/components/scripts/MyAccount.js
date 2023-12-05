@@ -10,8 +10,11 @@ const MyAccount = () => {
 
   // console.log(accessToken);
 
-  const [userData, setUserData] = useState("");
   const navigate = useNavigate();
+  const [userData, setUserData] = useState("");
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [homeAdress, setHomeAdress] = useState("");
 
   useEffect(() => {
     if (accessToken !== null) {
@@ -33,6 +36,9 @@ const MyAccount = () => {
         })
         .then((data) => {
           setUserData(data);
+          setUserName(data.username);
+          setEmail(data.email);
+          setHomeAdress(data.homeAdress);
           // console.log(data);
         })
         .catch((error) => {
@@ -55,15 +61,34 @@ const MyAccount = () => {
                 <h4>{userData.typeOfUser}</h4>
               </div>
               <div className='my-account-content-text'>
-                <p>Korisničko ime: {userData.username}</p>
-                <p>E-mail adresa: {userData.email}</p>
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="korisnicko-ime">Korisničko ime:</label>
+                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => {setUserName(e.target.value);}} disabled></input>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="email">E-mail adresa:</label>
+                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => {setEmail(e.target.value);}} disabled></input>
+                  </div>
+
+                  {(userData.typeOfUser === "organizator") ? 
+                    <>
+                      <div className="form-group">
+                        <label htmlFor="address">Adresa:</label>
+                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => {setHomeAdress(e.target.value);}} disabled></input>
+                      </div>
+                    </> : <></>}
+
+                  <button type="submit" className="btn btn-primary" hidden>Spremi</button>
+                </form>
               </div>
             </div>
 
             {/* TODO - dodati funkcionalnost buttona i uljepšati ih! */}
             <div className="edit-content">
               {(userData.typeOfUser === "administrator") ? <AdminView /> : <></>}
-              {(userData.typeOfUser === "organizator") ? <OrganizerView/> : <></>}
+              {(userData.typeOfUser === "organizator") ? <OrganizerView /> : <></>}
               {(userData.typeOfUser === "posjetitelj") ? <UserView /> : <></>}
             </div>
 
