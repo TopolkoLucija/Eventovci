@@ -7,4 +7,8 @@ import progi.project.eventovci.review.entity.EventReview;
 @Repository
 public interface ReviewRepository extends JpaRepository<EventReview, Long> {
     boolean existsByUserIdAndEventId(Long userId, Long eventId);
+
+    EventReview findEventReviewById(Long id);
+
+    void deleteEventReviewById(Long id);
 }

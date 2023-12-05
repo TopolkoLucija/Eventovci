@@ -1,5 +1,6 @@
 package progi.project.eventovci.review.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
@@ -10,6 +11,7 @@ import progi.project.eventovci.review.entity.EventReview;
 import progi.project.eventovci.review.entity.ReviewAlreadyExistsException;
 import progi.project.eventovci.review.entity.UnAuthorizedAddException;
 import progi.project.eventovci.review.repository.ReviewRepository;
+import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.repository.UserRepository;
@@ -51,5 +53,21 @@ public class ReviewService {
         }
         return reviewRepository.save(new EventReview(text, grade, eventId, userId));
 
+    }
+
+    @Transactional
+    public void deleteReview(Long userId, Long reviewId){
+        EventReview review = reviewRepository.findEventReviewById(reviewId);
+        User user = userRepository.findUserById(userId);
+        if(Objects.equals(user.getTypeOfUser(), "administrator") || Objects.equals(userId, review.getUser_id())) {
+            if (review != null) {
+                reviewRepository.deleteEventReviewById(reviewId);
+            } else {
+                throw new UnAuthorizedException("Recenzija ne postoji");
+            }
+        }
+        else{
+            throw new UnAuthorizedException("Nije moguće obrisati recenziju!");
+        }
     }
 }
