@@ -1,21 +1,27 @@
 package progi.project.eventovci.review.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.entity.EventTooOldException;
 import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.event.entity.EventNotFoundException;
+import progi.project.eventovci.review.controller.dto.ReviewDataDTO;
 import progi.project.eventovci.review.entity.EventReview;
 import progi.project.eventovci.review.entity.ReviewAlreadyExistsException;
 import progi.project.eventovci.review.entity.UnAuthorizedAddException;
 import progi.project.eventovci.review.repository.ReviewRepository;
+import progi.project.eventovci.user.controller.dto.AllUserDataForm;
+import progi.project.eventovci.user.controller.dto.UnAuthorizedException;
 import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.repository.UserRepository;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -51,5 +57,42 @@ public class ReviewService {
         }
         return reviewRepository.save(new EventReview(text, grade, eventId, userId));
 
+    }
+
+    @Transactional
+    public void deleteReview(Long userId, Long reviewId){
+        EventReview review = reviewRepository.findEventReviewById(reviewId);
+        User user = userRepository.findUserById(userId);
+        if(review == null){
+            throw new UnAuthorizedException("Recenzija ne postoji");
+        }
+        else{
+            if(Objects.equals(user.getTypeOfUser(), "administrator") || Objects.equals(userId, review.getUser_id())) {
+                reviewRepository.deleteEventReviewById(reviewId);
+            }
+            else{
+                throw new UnAuthorizedException("Nije moguće obrisati recenziju!");
+            }
+        }
+    }
+
+    public List<ReviewDataDTO> allReviews(Long filter) {
+
+        Event event = eventRepository.findEventById(filter);
+        if (event == null){
+            throw new UnAuthorizedException("Event ne postoji!");
+        }
+
+        List<EventReview> allReviews= reviewRepository.findAllEventReviews();
+        List<ReviewDataDTO> reviewDataDTOList = new ArrayList<>();
+
+        for (EventReview er : allReviews) {
+            if (Objects.equals(er.getEvent_id(), filter)) {
+                User user = userRepository.findUserById(er.getUser_id());
+                ReviewDataDTO data = new ReviewDataDTO(er.getReviewText(), er.getGrade(), user.getId(), user.getUsername());
+                reviewDataDTOList.add(data);
+            }
+        }
+        return reviewDataDTOList;
     }
 }
