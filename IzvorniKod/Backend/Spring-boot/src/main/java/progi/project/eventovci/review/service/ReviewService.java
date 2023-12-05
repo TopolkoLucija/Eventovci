@@ -59,15 +59,16 @@ public class ReviewService {
     public void deleteReview(Long userId, Long reviewId){
         EventReview review = reviewRepository.findEventReviewById(reviewId);
         User user = userRepository.findUserById(userId);
-        if(Objects.equals(user.getTypeOfUser(), "administrator") || Objects.equals(userId, review.getUser_id())) {
-            if (review != null) {
-                reviewRepository.deleteEventReviewById(reviewId);
-            } else {
-                throw new UnAuthorizedException("Recenzija ne postoji");
-            }
+        if(review == null){
+            throw new UnAuthorizedException("Recenzija ne postoji");
         }
         else{
-            throw new UnAuthorizedException("Nije moguće obrisati recenziju!");
+            if(Objects.equals(user.getTypeOfUser(), "administrator") || Objects.equals(userId, review.getUser_id())) {
+                reviewRepository.deleteEventReviewById(reviewId);
+            }
+            else{
+                throw new UnAuthorizedException("Nije moguće obrisati recenziju!");
+            }
         }
     }
 }
