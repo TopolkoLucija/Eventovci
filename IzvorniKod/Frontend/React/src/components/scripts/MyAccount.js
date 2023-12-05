@@ -16,6 +16,8 @@ const MyAccount = () => {
   const [email, setEmail] = useState("");
   const [homeAdress, setHomeAdress] = useState("");
 
+  // console.log(userData);
+
   useEffect(() => {
     if (accessToken !== null) {
       fetch('/api/data', {
@@ -50,6 +52,35 @@ const MyAccount = () => {
     }
   }, []);
 
+
+  const handleEdit = (e) => {
+    // e.preventDefault();
+    // console.log("handle edit")
+
+    userData.email = email;
+    userData.username = username;
+    setUserData(userData);
+    // console.log(userData);
+
+    fetch('/api/data/change', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': accessToken
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Nemoguće promijeniti podatke");
+        }
+        else {
+          console.log(response);
+          console.log("Uspješna promjena");
+        }
+    })
+  }
+
   return (
     <>
       {
@@ -64,28 +95,28 @@ const MyAccount = () => {
                 <form>
                   <div className="form-group">
                     <label htmlFor="korisnicko-ime">Korisničko ime:</label>
-                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => {setUserName(e.target.value);}} disabled></input>
+                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => { setUserName(e.target.value); }} disabled></input>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="email">E-mail adresa:</label>
-                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => {setEmail(e.target.value);}} disabled></input>
+                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setEmail(e.target.value); }} disabled></input>
                   </div>
 
-                  {(userData.typeOfUser === "organizator") ? 
+                  {(userData.typeOfUser === "organizator") ?
                     <>
                       <div className="form-group">
                         <label htmlFor="address">Adresa:</label>
-                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => {setHomeAdress(e.target.value);}} disabled></input>
+                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => { setHomeAdress(e.target.value); }} disabled></input>
                       </div>
                     </> : <></>}
 
-                  <button type="submit" className="btn btn-primary" hidden>Spremi</button>
+                  <button type="submit" className="btn btn-primary" onClick={handleEdit} hidden>Spremi</button>
                 </form>
               </div>
             </div>
 
-            {/* TODO - dodati funkcionalnost buttona i uljepšati ih! */}
+            {/* TODO - dodati funkcionalnost buttona! */}
             <div className="edit-content">
               {(userData.typeOfUser === "administrator") ? <AdminView /> : <></>}
               {(userData.typeOfUser === "organizator") ? <OrganizerView /> : <></>}
