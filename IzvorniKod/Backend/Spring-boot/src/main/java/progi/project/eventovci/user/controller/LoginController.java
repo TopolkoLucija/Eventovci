@@ -39,9 +39,6 @@ public class LoginController {
     @Autowired
     private JWTGenerator jwtGenerator;
 
-    @Autowired
-    private MediaContentRepository mediaContentRepository;
-
     @PostMapping()
     public ResponseEntity<String> login(@RequestBody LoginForm loginform) throws IOException {
 
@@ -55,22 +52,6 @@ public class LoginController {
 
         User user = userService.login(username);
 
-        //privremeno rješenje za dodavanje slika u bazu
-        String s = "https://static.wikia.nocookie.net/magnificentbaddie/images/7/73/The_Grinch.png/revision/latest/scale-to-width-down/1200?cb=20210323121308";
-        URL url = new URL(s);
-        InputStream input = url.openStream();
-        MultipartFile multipartFile = new MockMultipartFile("fileItem",
-                "input", "image/png", IOUtils.toByteArray(input));
-
-        String content = (Base64.getEncoder().encodeToString(multipartFile.getBytes()));
-
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 1.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 2.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 3.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 4.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 5.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 6.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 7.0));
         return ResponseEntity.ok(token);
     }
 
