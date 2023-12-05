@@ -32,9 +32,9 @@ public class MembershipController {
         return ResponseEntity.ok(price);
     }
 
-    @PostMapping("/changePrice")
-    public ResponseEntity<Void> changePrice(@RequestHeader("Authorization") String token, @RequestBody FilterPrice filter) {
-        membershipService.changePrice(convert.convertToId(token), filter.getFilter());
+    @PostMapping("/changePrice/{filter}")
+    public ResponseEntity<Void> changePrice(@RequestHeader("Authorization") String token, @PathVariable Double filter) {
+        membershipService.changePrice(convert.convertToId(token), filter);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

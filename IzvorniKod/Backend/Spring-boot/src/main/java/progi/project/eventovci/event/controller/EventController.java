@@ -44,22 +44,22 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
-    @GetMapping("inbox")
+    @GetMapping("/inbox")
     public ResponseEntity<List<EventPrintDTO>> inbox(@RequestHeader("Authorization") String token){
         List<EventPrintDTO> events = eventService.getInbox(convert.convertToId(token));
         return ResponseEntity.ok(events);
     }
 
     //prikaz svih događaja u određenom vremenu
-    @GetMapping("/all")
-    public ResponseEntity<List<EventPrintDTO>> allEvents(@RequestHeader("Authorization") String token, @RequestBody Filter filter ){
-        List<EventPrintDTO> events = eventService.getEvents(filter.getFilter());
+    @GetMapping("/all/{filter}")
+    public ResponseEntity<List<EventPrintDTO>> allEvents(@RequestHeader("Authorization") String token, @PathVariable Integer filter ){
+        List<EventPrintDTO> events = eventService.getEvents(filter);
         return ResponseEntity.ok(events);
     }
 
-    @GetMapping("/getEvent")
-    public ResponseEntity<EventInfoDTO> eventInfo(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter ){
-        EventInfoDTO eventinfo = eventService.getInfo(filter.getFilter());
+    @GetMapping("/getEvent/{filter}")
+    public ResponseEntity<EventInfoDTO> eventInfo(@RequestHeader("Authorization") String token, @PathVariable Long filter ){
+        EventInfoDTO eventinfo = eventService.getInfo(filter);
         return ResponseEntity.ok(eventinfo);
     }
 

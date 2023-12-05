@@ -28,9 +28,9 @@ public class DataController {
         return ResponseEntity.ok(profileForm);
     }
 
-    @GetMapping("/getOrg")
-    public ResponseEntity<DataForm> dataOrg(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter) {
-        DataForm dataform = userService.dataOrg(filter.getFilter());
+    @GetMapping("/getOrg/{filter}")
+    public ResponseEntity<DataForm> dataOrg(@RequestHeader("Authorization") String token, @PathVariable Long filter) {
+        DataForm dataform = userService.dataOrg(filter);
         return ResponseEntity.ok(dataform);
     }
 
@@ -42,9 +42,9 @@ public class DataController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/allUsers")
-    public ResponseEntity<List<AllUserDataForm>> allUsers(@RequestHeader("Authorization") String token, @RequestBody Filter filter) {
-        List<AllUserDataForm> data = userService.allUsers(convert.convertToUser(token), filter.getFilter());
+    @GetMapping("/allUsers/{filter}")
+    public ResponseEntity<List<AllUserDataForm>> allUsers(@RequestHeader("Authorization") String token, @PathVariable Integer filter) {
+        List<AllUserDataForm> data = userService.allUsers(convert.convertToUser(token), filter);
         return ResponseEntity.ok(data);
     }
 
@@ -60,9 +60,9 @@ public class DataController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteUser")
-    public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter){
-        userService.deleteUser(convert.convertToId(token), filter.getFilter());
+    @DeleteMapping("/deleteUser/{filter}")
+    public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String token, @PathVariable Long filter){
+        userService.deleteUser(convert.convertToId(token), filter);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

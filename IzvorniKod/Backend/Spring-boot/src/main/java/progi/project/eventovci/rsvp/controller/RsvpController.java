@@ -19,9 +19,9 @@ public class RsvpController {
     @Autowired
     private Convert convert;
 
-    @GetMapping("/get")
-    public ResponseEntity<List<Integer>> getMyRsvp(@RequestHeader("Authorization") String token, @RequestBody IdFilter filter) {
-        List<Integer> rsvp = rsvpService.get(convert.convertToUser(token), filter.getFilter());
+    @GetMapping("/get/{filter}")
+    public ResponseEntity<List<Integer>> getMyRsvp(@RequestHeader("Authorization") String token, @PathVariable Long filter) {
+        List<Integer> rsvp = rsvpService.get(convert.convertToUser(token), filter);
         return ResponseEntity.ok(rsvp);
     }
 }
