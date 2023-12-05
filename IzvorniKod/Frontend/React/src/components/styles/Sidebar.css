@@ -20,7 +20,15 @@ html, body, #root {
 }
 
 .sidebar.logged-in::before {
-  height: 15%;
+  height: 13%; /* ova je vrijednost za posjetitelja */
+}
+
+.sidebar.organizator::before {
+  height: 9%;
+}
+
+.sidebar.administrator::before {
+  height: 22%;
 }
 
 .sidebar::before {

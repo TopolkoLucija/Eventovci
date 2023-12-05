@@ -4,7 +4,7 @@ import '../styles/Interested.css';
 const Interested = () => {
   return (
      <>
-        <h1>Interested</h1>
+        <h1>Zanima me</h1>
      </>
   );
 }
