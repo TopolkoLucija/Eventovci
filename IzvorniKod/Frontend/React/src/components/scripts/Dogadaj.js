@@ -7,8 +7,9 @@ const Dogadaj = ({ Datum, Poster, Mjesto, Naslov }) => {
         <p>{Datum}</p>
       </div>
       <div>
+
         <img
-          src={Poster !== "N/A" ? Poster : "https://via.placeholder.com/400"}
+          src={Poster !== "N/A" && Poster != null ? `data:image/png;base64,${Poster}` : "https://via.placeholder.com/400"}
           alt={Naslov}
         ></img>
       </div>
