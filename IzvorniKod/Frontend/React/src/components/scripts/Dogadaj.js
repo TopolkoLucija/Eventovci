@@ -1,24 +1,20 @@
 import React from "react";
 import "../styles/Dogadaj.css";
-const Dogadaj = ({ dogadaj }) => {
+const Dogadaj = ({ Datum, Poster, Mjesto, Naslov }) => {
   return (
     <div className="dogadaj">
       <div>
-        <p>{dogadaj.Datum}</p>
+        <p>{Datum}</p>
       </div>
       <div>
         <img
-          src={
-            dogadaj.Poster !== "N/A"
-              ? dogadaj.Poster
-              : "https://via.placeholder.com/400"
-          }
-          alt={dogadaj.Naslov}
+          src={Poster !== "N/A" ? Poster : "https://via.placeholder.com/400"}
+          alt={Naslov}
         ></img>
       </div>
       <div>
-        <span>{dogadaj.Mjesto}</span>
-        <h3>{dogadaj.Naslov}</h3>
+        <span>{Mjesto}</span>
+        <h3>{Naslov}</h3>
       </div>
     </div>
   );
