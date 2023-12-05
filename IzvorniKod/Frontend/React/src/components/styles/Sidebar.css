@@ -19,6 +19,10 @@ html, body, #root {
   border-bottom-right-radius: 20px;
 }
 
+.sidebar.logged-in::before {
+  height: 15%;
+}
+
 .sidebar::before {
   content: "";
   display: block;

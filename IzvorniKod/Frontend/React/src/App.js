@@ -16,6 +16,7 @@ import Interested from "./components/scripts/Interested";
 import { useEffect } from "react";
 
 function App() {
+  const accessToken = sessionStorage.getItem('accessToken');
   // podatci koji trebaju MyToast.js
   const [show, setShow] = useState(false); // zelis li da se pokaze zeleni prozor
   const [toastMessage, setToastMessage] = useState(""); // poruka koju zelis da se ispise
@@ -34,7 +35,7 @@ function App() {
   return (
       <Router>
         <div className="app-container">
-          <Sidebar />
+        <Sidebar className={accessToken ? 'logged-in' : ''} />
 
           <Routes>
             <Route path="/home" element={<Home />} />

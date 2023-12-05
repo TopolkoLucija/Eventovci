@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Sidebar.css';
 import { useLocation } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ className }) => {
   const accessToken = sessionStorage.getItem('accessToken');
   const location = useLocation();
 
@@ -11,7 +11,7 @@ const Sidebar = () => {
     { img: 'https://cdn.iconscout.com/icon/free/png-256/free-home-1767940-1502276.png', title: 'POČETNA STRANICA', path: 'home' },
     { img: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Simpleicons_Business_calendar-check.svg', title: 'DOGAĐANJA', path: 'events' },
     { img: 'https://cdn.iconscout.com/icon/free/png-256/free-inbox-1767938-1502274.png', title: 'INBOX', path: 'inbox' },
-    { img: 'https://cdn-icons-png.flaticon.com/512/4384/4384371.png', title: 'ZANIMA ME', path: 'my-account' },
+    { img: 'https://cdn-icons-png.flaticon.com/512/4384/4384371.png', title: 'ZANIMA ME', path: 'interested' },
     { img: 'https://cdn.iconscout.com/icon/free/png-256/free-person-1767893-1502146.png', title: 'MOJ RAČUN', path: 'my-account' },
     { img: 'https://cdn.iconscout.com/icon/free/png-256/free-people-1768021-1502195.png', title: 'O NAMA', path: 'about-us' },
     { img: 'https://cdn.iconscout.com/icon/free/png-256/free-login-1767822-1502402.png', title: 'PRIJAVA', path: 'login' },
@@ -33,7 +33,6 @@ const Sidebar = () => {
         );
       }
     } else {
-      // Dodana dodatna provjera za kategorije s indexima 3 i 4
       if (index !== categories.length - 1 && index !== 2 && index !== 3) {
         return (
           <div key={index} className={`box ${category.path === 'logout' ? 'mirror-image' : ''} ${location.pathname === `/${category.path}` ? 'active-category' : ''}`}>
@@ -51,7 +50,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${className}`}>
       {categories.map((category, index) => (
         renderCategory(category, index)
       ))}
