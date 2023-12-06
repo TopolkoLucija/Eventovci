@@ -9,7 +9,7 @@ import progi.project.eventovci.event.controller.dto.EventPrintDTO;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.repository.EventRepository;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
+import progi.project.eventovci.media.content.repository.MediaContentRepository;
 import progi.project.eventovci.membership.entity.Membership;
 import progi.project.eventovci.membership.repository.MembershipRepository;
 import progi.project.eventovci.rsvp.entity.UserResponse;

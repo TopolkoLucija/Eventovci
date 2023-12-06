@@ -13,7 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
+import progi.project.eventovci.media.content.repository.MediaContentRepository;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.user.controller.dto.LoginForm;
 import progi.project.eventovci.user.entity.User;

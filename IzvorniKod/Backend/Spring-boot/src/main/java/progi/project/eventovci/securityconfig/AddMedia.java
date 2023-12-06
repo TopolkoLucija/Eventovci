@@ -7,7 +7,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import progi.project.eventovci.media.content.entity.MediaContent;
-import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
+import progi.project.eventovci.media.content.repository.MediaContentRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +56,7 @@ public class AddMedia {
                 "input", "video", IOUtils.toByteArray(input));
 
         content = (Base64.getEncoder().encodeToString(multipartFile.getBytes()));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 3.0));
-        mediaContentRepository.save(new MediaContent(content, "image", (long) 4.0));
+        mediaContentRepository.save(new MediaContent(content, "video", (long) 3.0));
+        mediaContentRepository.save(new MediaContent(content, "video", (long) 4.0));
     }
 }

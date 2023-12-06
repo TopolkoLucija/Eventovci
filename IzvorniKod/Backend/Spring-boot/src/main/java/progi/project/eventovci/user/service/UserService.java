@@ -17,7 +17,7 @@ import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.controller.dto.DataForm;
 import progi.project.eventovci.user.controller.dto.AllUserDataForm;
 import progi.project.eventovci.user.entity.UserAlreadyExistsException;
-import progi.project.eventovci.media.content.entity.repository.MediaContentRepository;
+import progi.project.eventovci.media.content.repository.MediaContentRepository;
 import progi.project.eventovci.user.entity.UserNotFoundException;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.event.repository.EventRepository;
