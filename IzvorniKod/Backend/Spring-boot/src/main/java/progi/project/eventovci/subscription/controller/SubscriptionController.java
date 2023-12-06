@@ -1,12 +1,11 @@
 package progi.project.eventovci.subscription.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.securityconfig.auth.Convert;
+import progi.project.eventovci.subscription.controller.dto.AddSubscriptionDTO;
 import progi.project.eventovci.subscription.controller.dto.MySubscriptionsDTO;
 import progi.project.eventovci.subscription.service.SubscriptionService;
 
@@ -26,5 +25,11 @@ public class SubscriptionController {
     public ResponseEntity<List<MySubscriptionsDTO>> get(@RequestHeader("Authorization") String token) {
         List<MySubscriptionsDTO> mySubscriptionsDTOS = subscriptionService.get(convert.convertToId(token));
         return ResponseEntity.ok(mySubscriptionsDTOS);
+    }
+
+    @PostMapping()
+    public ResponseEntity<Void> add(@RequestHeader("Authorization") String token, @RequestBody AddSubscriptionDTO addSubscriptionDTO) {
+        subscriptionService.add(convert.convertToId(token), addSubscriptionDTO.getTypes(), addSubscriptionDTO.getLocations());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
