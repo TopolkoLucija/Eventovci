@@ -11,12 +11,12 @@ html, body, #root {
 }
 
 .sidebar {
-  background-color: #FF6B6B;
   color: #333;
   width: 50%;
   height: 100%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  background: rgba(0,0,0,.05);
+  box-shadow: 0 15px 25px rgba(0,0,0,.3);
+  border-radius: 10px;
 }
 
 .sidebar.logged-in::before {
@@ -35,7 +35,6 @@ html, body, #root {
   content: "";
   display: block;
   height: 22%;
-  background-color: #FF6B6B;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
