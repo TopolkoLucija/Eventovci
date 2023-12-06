@@ -6,7 +6,6 @@ CREATE TABLE KORISNIK (
                           lozinka VARCHAR(255) NOT NULL,
                           tipkorisnika VARCHAR(13) NOT NULL,
                           adresa VARCHAR(255),
-                          placanjeclanarine BOOLEAN,
                           UNIQUE (korisnickoime, email)
 
 );
@@ -90,18 +89,18 @@ CREATE TABLE PRETPLATA (
 );
 
 
-INSERT INTO korisnik (korisnickoime, email, lozinka, tipkorisnika, adresa, placanjeclanarine)
+INSERT INTO korisnik (korisnickoime, email, lozinka, tipkorisnika, adresa)
 VALUES
-    ('user1', 'user1@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa1', false),
-    ('user2', 'user2@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa2', false),
-    ('user3', 'user3@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa3', false),
-    ('user4', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa6', false),
-    ('user5', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa7', false),
-    ('user6', 'user6@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa8', false),
-    ('user7', 'user7@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa9', false),
-    ('org1', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa4', true),
-    ('org2', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5', false),
-    ('admin', 'admin@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'administrator', 'AdminAdresa', false);
+    ('user1', 'user1@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa1'),
+    ('user2', 'user2@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa2'),
+    ('user3', 'user3@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa3'),
+    ('user4', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa6'),
+    ('user5', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa7'),
+    ('user6', 'user6@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa8'),
+    ('user7', 'user7@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa9'),
+    ('org1', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa4'),
+    ('org2', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5'),
+    ('admin', 'admin@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'administrator', 'AdminAdresa');
 
 INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice, opis)
 VALUES
@@ -147,7 +146,8 @@ VALUES
 
 INSERT INTO clanarina (idkorisnik, cijenaclanarine, vrijedido)
 VALUES
-    (8, 20.0, DATEADD('DAY', 18, CURRENT_TIMESTAMP));
+    (8, 20.0, DATEADD('DAY', 18, CURRENT_TIMESTAMP)),
+    (9, 20.0, '0000-01-01T00:00:00');
 
 INSERT INTO pretplata (kategorija, lokacija, idkorisnik)
 VALUES

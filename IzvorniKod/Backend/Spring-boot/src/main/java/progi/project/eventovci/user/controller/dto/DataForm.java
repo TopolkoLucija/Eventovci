@@ -10,7 +10,6 @@ public class DataForm {
     private String email;
     private String typeOfUser;
     private String homeAdress;
-    private Boolean shouldPayMembership;
 
     private List<EventPrintDTO> eventList;
     private List<String> links;
@@ -35,9 +34,6 @@ public class DataForm {
         return homeAdress;
     }
 
-    public Boolean getShouldPayMembership() {
-        return shouldPayMembership;
-    }
 
     public List<EventPrintDTO> getEventList() {
         return eventList;
@@ -50,12 +46,11 @@ public class DataForm {
     public DataForm(){
 
     }
-    public DataForm(String username, String email, String typeOfUser, String homeAdress, Boolean shouldPayMembership, List<EventPrintDTO> eventList, List<String> links) {
+    public DataForm(String username, String email, String typeOfUser, String homeAdress, List<EventPrintDTO> eventList, List<String> links) {
         this.username = username;
         this.email = email;
         this.typeOfUser = typeOfUser;
         this.homeAdress = homeAdress;
-        this.shouldPayMembership = shouldPayMembership;
         this.eventList = eventList;
         this.links=links;
     }

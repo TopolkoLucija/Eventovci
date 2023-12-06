@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import progi.project.eventovci.event.controller.dto.IdFilter;
 import progi.project.eventovci.rsvp.controller.dto.AddRsvpDTO;
 import progi.project.eventovci.rsvp.service.RsvpService;
 import progi.project.eventovci.securityconfig.auth.Convert;

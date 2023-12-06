@@ -56,7 +56,7 @@ public class UserService {
 
     }
 
-    public User register(String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+    public User register(String username, String email, String password, String typeOfUser, String homeAdress) {
         User user = userRepository.findUserByEmail(email);
         if(user != null && Objects.equals(user.getEmail(), email)){
             throw new UserAlreadyExistsException("Neispravan email!");
@@ -65,7 +65,7 @@ public class UserService {
         if(user != null && Objects.equals(user.getUsername(), username)) {
             throw new UserAlreadyExistsException("Neispravno korisničko ime!");
         }
-        user = new User(username, email, passwordEncoder.encode(password), typeOfUser, homeAdress, shouldPayMembership);
+        user = new User(username, email, passwordEncoder.encode(password), typeOfUser, homeAdress);
         userRepository.save(user);
         if (Objects.equals(typeOfUser, "organizator")) {
             Long a = (long) 1.0;
@@ -126,7 +126,7 @@ public class UserService {
                 links.add(s.getLink());
             }
 
-            return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), user.getShouldPayMembership(), eventlist, links);
+            return new DataForm(user.getUsername(), user.getEmail(), user.getTypeOfUser(), user.getHomeAdress(), eventlist, links);
 
         }
         else {

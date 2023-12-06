@@ -19,12 +19,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByEmail(String email);
     @Modifying
     @Query("UPDATE User u SET u.username = :username, u.email = :email, u.homeAdress = :homeAddress WHERE u.id = :id")
-    Integer updateUserById(@Param("id") Long id, @Param("username") String username, @Param("email") String email, @Param("homeAddress") String homeAddress);
+    void updateUserById(@Param("id") Long id, @Param("username") String username, @Param("email") String email, @Param("homeAddress") String homeAddress);
 
     @Query("SELECT u FROM User u")
     List<User> findAllUsers();
-
-    User save(User user);
 
     void deleteUserById(Long id);
 }

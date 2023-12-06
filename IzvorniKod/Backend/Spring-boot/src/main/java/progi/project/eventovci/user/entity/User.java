@@ -25,31 +25,26 @@ public class User{
     @Column(name="adresa")
     private String homeAdress;
 
-    @Column(name="placanjeclanarine")
-    private Boolean shouldPayMembership; //true - treba platiti, false - ne treba platiti
-
     //konstruktor
     public User(){
 
     }
 
-    public User(String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+    public User(String username, String email, String password, String typeOfUser, String homeAdress) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.typeOfUser = typeOfUser;
         this.homeAdress = homeAdress;
-        this.shouldPayMembership = shouldPayMembership;
     }
 
-    public User(Long id, String username, String email, String password, String typeOfUser, String homeAdress, Boolean shouldPayMembership) {
+    public User(Long id, String username, String email, String password, String typeOfUser, String homeAdress) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.typeOfUser = typeOfUser;
         this.homeAdress = homeAdress;
-        this.shouldPayMembership = shouldPayMembership;
     }
 
     //equals i hashcode za id
@@ -58,7 +53,7 @@ public class User{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(typeOfUser, user.typeOfUser) && Objects.equals(homeAdress, user.homeAdress) && Objects.equals(shouldPayMembership, user.shouldPayMembership);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(typeOfUser, user.typeOfUser) && Objects.equals(homeAdress, user.homeAdress);
     }
 
 
@@ -116,13 +111,5 @@ public class User{
 
     public void setHomeAdress(String homeAdress) {
         this.homeAdress = homeAdress;
-    }
-
-    public Boolean getShouldPayMembership() {
-        return shouldPayMembership;
-    }
-
-    public void setShouldPayMembership(Boolean shouldPayMembership) {
-        this.shouldPayMembership = shouldPayMembership;
     }
 }

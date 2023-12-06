@@ -6,7 +6,6 @@ public class RegisterForm {
     private String email;
     private String typeOfUser;
     private String homeAdress;
-    private Boolean shouldPayMembership;
 
     public String getUsername() {
         return username;
@@ -28,7 +27,4 @@ public class RegisterForm {
         return homeAdress;
     }
 
-    public Boolean getShouldPayMembership() {
-        return shouldPayMembership;
-    }
 }
