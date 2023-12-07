@@ -36,6 +36,11 @@
 		utvrđivanje zadataka koje je potrebno dovršiti prije prve predaje 
 		dogovor o budućem izgledu pojedinih stranica web aplikacije
 
+6. sastanak
+	datum: 7. prosinca 2023.
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Kvesić, Natali Lazarić, Bruno Marković
+	teme: 
+		dodjela bodova ostvarenih prilikom prve predaje projekta
 		
 
 
