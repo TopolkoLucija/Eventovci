@@ -9,6 +9,19 @@ const Sidebar = ({ className }) => {
   const [userData, setUserData] = useState("");
   const [userType, setUserType] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth<=768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -121,7 +134,7 @@ const Sidebar = ({ className }) => {
     return null;
   };
 
-  if(window.innerWidth > 768) { 
+  if(!isMobile) {
   return (
     <div className={`sidebar ${className} ${userType}`}>
       {categories.map((category, index) => (
@@ -130,7 +143,7 @@ const Sidebar = ({ className }) => {
     </div>
   );
   }
-  else if (window.innerWidth <= 768) {
+  else{
     return (
       <div className={`sidebar ${className} ${userType}`}>
         <div className="mobile-elements">

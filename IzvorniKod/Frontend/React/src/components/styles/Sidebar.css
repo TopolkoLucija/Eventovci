@@ -94,8 +94,9 @@ html, body, #root {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: auto;
+    height: 5rem;
   }
+
 
   .sidebar::before {
     content: none; /* sakrij background pseudo-element na mobilnim uređajima */
