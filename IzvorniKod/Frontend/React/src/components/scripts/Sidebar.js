@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Sidebar.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ className }) => {
   const accessToken = sessionStorage.getItem('accessToken');
   const location = useLocation();
+  const navigate = useNavigate();
   const [userData, setUserData] = useState("");
   const [userType, setUserType] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
+  
+  const handleConnectimaLogoClick = () => {
+    navigate('/home'); 
+  };
 
   useEffect(() => {
     if (accessToken !== null) {
@@ -107,6 +121,7 @@ const Sidebar = ({ className }) => {
     return null;
   };
 
+  if(window.innerWidth > 768) { 
   return (
     <div className={`sidebar ${className} ${userType}`}>
       {categories.map((category, index) => (
@@ -114,6 +129,38 @@ const Sidebar = ({ className }) => {
       ))}
     </div>
   );
+  }
+  else if (window.innerWidth <= 768) {
+    return (
+      <div className={`sidebar ${className} ${userType}`}>
+        <div className="mobile-elements">
+          <img
+            src="https://static.thenounproject.com/png/188125-200.png"
+            alt="Connectima logo"
+            className="mobile-image"
+            onClick={handleConnectimaLogoClick}
+          />
+          <img
+            src="https://cdn.iconscout.com/icon/free/png-256/free-menu-199-458540.png"
+            alt="Izbornik"
+            className="mobile-image"
+            onClick={handleMenuClick}
+          />
+        </div>
+  
+        {isMenuOpen && (
+          <div className="mobile-menu">
+            <span className="close-icon" onClick={handleCloseMenu}>
+              X
+            </span>
+            {categories.map((category, index) => (
+              renderCategory(category, index)
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 };
 
 export default Sidebar;

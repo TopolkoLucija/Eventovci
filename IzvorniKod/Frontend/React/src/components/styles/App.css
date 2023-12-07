@@ -15,11 +15,23 @@
    z-index: -1; /* Ensure the pseudo-element is behind the content */
 }
 
-
 .sidebar {
    width: 24%;
 }
 
 .content {
    width: 76%;
+}
+
+@media (max-width: 768px) {
+   .app-container {
+      flex-direction: column;
+   }
+   .sidebar {
+      height: 18%;
+      width: 100%;
+   }
+   .content {
+      width: 100%;
+   }
 }
