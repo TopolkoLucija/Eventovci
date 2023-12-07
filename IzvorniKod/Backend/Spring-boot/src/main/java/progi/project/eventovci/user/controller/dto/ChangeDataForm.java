@@ -4,6 +4,8 @@ public class ChangeDataForm {
     private String username;
     private String email;
     private String homeAdress;
+    private String password;
+
 
     public String getUsername() {
         return username;
@@ -18,5 +20,7 @@ public class ChangeDataForm {
         return homeAdress;
     }
 
-
+    public String getPassword() {
+        return password;
+    }
 }

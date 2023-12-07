@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.securityconfig.JWTGenerator;
 import progi.project.eventovci.securityconfig.auth.Convert;
@@ -32,6 +33,9 @@ public class DataController {
     @Autowired
     private JWTGenerator jwtGenerator;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping()
     public ResponseEntity<ProfileForm> data(@RequestHeader("Authorization") String token) {
         ProfileForm profileForm = userService.data(convert.convertToUsername(token));
@@ -47,21 +51,20 @@ public class DataController {
     @PostMapping("/change")
     public ResponseEntity<String> changeData(@RequestHeader("Authorization") String token, @RequestBody ChangeDataForm changedataform) {
         User user = convert.convertToUser(token);
+        String password = changedataform.getPassword();
+        if (passwordEncoder.matches(changedataform.getPassword(), user.getPassword())) {
+            userService.changeData(convert.convertToId(token), changedataform.getUsername(), changedataform.getEmail(),
+                    changedataform.getHomeAdress());
+        }
+        else {
+            throw new UnAuthorizedException("Pogrešna lozinka!");
+        }
 
-        userService.changeData(convert.convertToId(token), changedataform.getUsername(), changedataform.getEmail(),
-                changedataform.getHomeAdress());
-
-        Long id = user.getId();
-
-        User newUser = userService.get(id);
-
-
+        User newUser = userService.get(user.getId());
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(newUser.getUsername(), newUser.getPassword()));
-
+                new UsernamePasswordAuthenticationToken(user.getUsername(), password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String newToken = jwtGenerator.generateToken(authentication);
-
         return ResponseEntity.ok(newToken);
     }
 

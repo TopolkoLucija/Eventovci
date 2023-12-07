@@ -138,9 +138,7 @@ public class UserService {
     public void changeData(Long id, String username, String email, String homeAdress) {
         User user = userRepository.findUserById(id);
         if(user != null){
-
             userRepository.updateUserById(id, username, email, homeAdress);
-
         }else {
             throw new UserNotFoundException("Korisnik ne postoji!");
         }
