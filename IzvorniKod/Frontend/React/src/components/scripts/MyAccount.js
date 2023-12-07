@@ -20,6 +20,9 @@ const MyAccount = () => {
 
   useEffect(() => {
     if (accessToken !== null) {
+
+      console.log(accessToken === sessionStorage.getItem('accessToken'));
+
       fetch('/api/data', {
         method: 'GET',
         headers: {
@@ -59,6 +62,11 @@ const MyAccount = () => {
 
     userData.email = email;
     userData.username = username;
+
+    if (userData.typeOfUser === "organizator") {
+      userData.homeAdress = homeAdress;
+    }
+
     setUserData(userData);
     // console.log(userData);
 
@@ -75,10 +83,18 @@ const MyAccount = () => {
           throw new Error("Nemoguće promijeniti podatke");
         }
         else {
-          console.log(response);
-          console.log("Uspješna promjena");
+          return response.text();
         }
-    })
+      })
+      
+      // Možda nepotreban ovaj blok?
+      .then((response) => {
+        console.log(response);
+        sessionStorage.setItem("accessToken", response);
+      })
+      .catch((error) => {
+        console.error('Error: ' + error);
+      });
   }
 
   return (
