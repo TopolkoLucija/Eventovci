@@ -13,35 +13,31 @@ import progi.project.eventovci.user.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
-
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
 
-        if(user == null) {
-            throw new UsernameNotFoundException("Username not found");
-        }
+        Optional<User> userInfo = Optional.ofNullable(userRepository.findUserByUsername(username));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRoleToAuthority(user.getTypeOfUser()));
-
-    }
-
-    private Collection<GrantedAuthority> mapRoleToAuthority(String role) {
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
-
-        return authorities;
+        return userInfo.map(user -> {
+                    System.out.println("User found: " + username);
+                    UserInfoUserDetails returnUser = new UserInfoUserDetails(user);
+                    System.out.println("UserInfoUserDetails " + returnUser.getUsername() + " " + returnUser.getAuthorities());
+                    return returnUser;
+                })
+                .orElseThrow(() -> {
+                    System.out.println("User not found: " + username);
+                    return new UsernameNotFoundException("User not found: " + username);
+                });
 
     }
+
+
 }
