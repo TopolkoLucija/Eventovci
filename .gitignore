@@ -5,6 +5,7 @@
 /Dokumentacija/*.out
 /Dokumentacija/*.synctex.gz
 /Dokumentacija/*.toc
+/Dokumentacija/*.pdf
 *.idea
 *.DS_Store
 node_modules/
