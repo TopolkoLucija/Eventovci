@@ -6,6 +6,7 @@ const OrganizerView = () => {
 
    const navigate = useNavigate();
    const location = useLocation();
+   const accessToken = sessionStorage.getItem('accessToken');
 
    const Edit = () => {
       var sendButton = document.querySelector(".btn.btn-primary");
@@ -26,6 +27,32 @@ const OrganizerView = () => {
 
    const closeModalDelete = () => {
       setShowModalDelete(false);
+   }
+
+   const deleteMyProfile = () => {
+
+
+      fetch('/api/data/deleteMyProfile', {
+         method: "DELETE",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+               throw new Error("Nemoguće promijeniti podatke");
+            }
+            else {
+               return response.text();
+            }
+         })
+         .then((response) => {
+            console.log(response);
+            sessionStorage.removeItem("accessToken");
+            navigate('/home');
+         })
    }
 
    return (
@@ -57,6 +84,10 @@ const OrganizerView = () => {
                <div className="window">
                   <span onClick={closeModalDelete}>&times;</span>
                   <div>Jesi siguran da želiš obrisati račun?</div>
+                  <div>
+                     <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
+                     <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
+                  </div>
                </div>
             </div>
          )}

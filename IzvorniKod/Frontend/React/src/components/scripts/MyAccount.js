@@ -6,7 +6,7 @@ import OrganizerView from "./views/OrganizerView";
 import AdminView from "./views/AdminView";
 
 const MyAccount = () => {
-  var accessToken = sessionStorage.getItem('accessToken');
+  var accessToken = sessionStorage.getItem("accessToken");
 
   // console.log(accessToken);
 
@@ -76,14 +76,14 @@ const MyAccount = () => {
     })
   }
 
-  const handleEdit = () => {
+  const handleEdit = (e) => {
     // e.preventDefault();
     // console.log("handle edit")
 
     Edit();
 
-    accessToken = sessionStorage.getItem('accessToken');
-    console.log("session1: "+accessToken);
+    accessToken = sessionStorage.getItem("accessToken");
+    // console.log("session1: " + accessToken);
 
     setShowModalValidation(false);
 
@@ -102,7 +102,7 @@ const MyAccount = () => {
       password
     };
 
-    console.log(user);
+    // console.log(user);
 
     fetch('/api/data/change', {
       method: "POST",
@@ -124,16 +124,23 @@ const MyAccount = () => {
 
       // Možda nepotreban ovaj blok?
       .then((response) => {
-        console.log("res: " + response);
-        console.log("session1: " + sessionStorage.getItem('accessToken'))
-        console.log(response === sessionStorage.getItem('accessToken'));
-        sessionStorage.setItem('accessToken', response);
-        console.log(response === sessionStorage.getItem('accessToken'));
-        console.log("session2: " + sessionStorage.getItem('accessToken'))
+        // console.log("res: " + response);
+        // console.log("session1: " + sessionStorage.getItem("accessToken"))
+        // console.log(response === sessionStorage.getItem("accessToken"));
+        sessionStorage.setItem("accessToken", response);
+        // console.log(response === sessionStorage.getItem("accessToken"));
+        // console.log("session2: " + sessionStorage.getItem("accessToken"))
       })
       .catch((error) => {
         console.error('Error: ' + error);
       });
+
+
+    setTimeout(() => {
+
+      console.log(sessionStorage.getItem('accessToken'))
+    }, 4000);
+
   }
 
   return (

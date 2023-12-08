@@ -31,6 +31,9 @@ const AdminView = () => {
             // navigate(location.pathname + "/show-all");
             setShowModalShowAll(true);
          }}>Pogledaj sve korisnike</button>
+         <button className="btn btn-primary" id='edit-buttons' onClick={() => {
+            console.log("Povećaj članarinu");
+         }}>Povećaj članarinu</button>
 
          {/* Modal */}
          {showModalShowAll && (

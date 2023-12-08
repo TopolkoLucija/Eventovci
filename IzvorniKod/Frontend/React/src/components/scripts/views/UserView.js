@@ -1,4 +1,4 @@
-import { useNavigate, useLocation, UNSAFE_FetchersContext } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import '../../styles/MyAccount.css';
 
@@ -31,16 +31,30 @@ const UserView = () => {
    }
 
    const deleteMyProfile = () => {
-      
+
 
       fetch('/api/data/deleteMyProfile', {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-            'Authorization': accessToken
-         }
-      });
-   }
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': accessToken
+        }
+      })
+        .then((response) => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error("Nemoguće promijeniti podatke");
+          }
+          else {
+            return response.text();
+          }
+        })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.removeItem("accessToken");
+          navigate('/home');
+        })
+    }
 
    return (
       <>
@@ -71,8 +85,8 @@ const UserView = () => {
                   <span onClick={closeModalDelete}>&times;</span>
                   <div>Jesi siguran da želiš obrisati račun?</div>
                   <div>
-                     <button onClick={deleteMyProfile}>Da</button>
-                     <button onClick={closeModalDelete}>Ne</button>
+                     <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
+                     <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
                   </div>
                </div>
             </div>
