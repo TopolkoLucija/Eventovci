@@ -129,7 +129,9 @@ const MyAccount = () => {
         // console.log(response === sessionStorage.getItem("accessToken"));
         sessionStorage.setItem("accessToken", response);
         // console.log(response === sessionStorage.getItem("accessToken"));
-        // console.log("session2: " + sessionStorage.getItem("accessToken"))
+        console.log("session2: " + sessionStorage.getItem("accessToken"))
+        accessToken = sessionStorage.getItem("accessToken");
+        console.log(accessToken);
       })
       .catch((error) => {
         console.error('Error: ' + error);

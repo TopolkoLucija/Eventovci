@@ -61,8 +61,9 @@ public class DataController {
         }
 
         User newUser = userService.get(user.getId());
+        System.out.println(newUser.getUsername());
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), password));
+                new UsernamePasswordAuthenticationToken(changedataform.getUsername(), password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String newToken = jwtGenerator.generateToken(authentication);
         return ResponseEntity.ok(newToken);
