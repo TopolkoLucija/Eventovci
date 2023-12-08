@@ -6,13 +6,14 @@ import OrganizerView from "./views/OrganizerView";
 import AdminView from "./views/AdminView";
 
 const MyAccount = () => {
-  const accessToken = sessionStorage.getItem('accessToken');
+  var accessToken = sessionStorage.getItem('accessToken');
 
   // console.log(accessToken);
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState("");
   const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [homeAdress, setHomeAdress] = useState("");
 
@@ -21,7 +22,6 @@ const MyAccount = () => {
   useEffect(() => {
     if (accessToken !== null) {
 
-      console.log(accessToken === sessionStorage.getItem('accessToken'));
 
       fetch('/api/data', {
         method: 'GET',
@@ -56,9 +56,36 @@ const MyAccount = () => {
   }, []);
 
 
-  const handleEdit = (e) => {
+  const [showModalValidation, setShowModalValidation] = useState(false);
+
+  const closeModalValidation = () => {
+    setShowModalValidation(false);
+  };
+
+  const validation = () => {
+    setShowModalValidation(true);
+  }
+
+  const Edit = () => {
+    var sendButton = document.querySelector(".btn.btn-primary");
+    var inputs = document.querySelectorAll(".form-control");
+    sendButton.toggleAttribute("hidden");
+    console.log(inputs);
+    inputs.forEach((input) => {
+      input.toggleAttribute("disabled");
+    })
+  }
+
+  const handleEdit = () => {
     // e.preventDefault();
     // console.log("handle edit")
+
+    Edit();
+
+    accessToken = sessionStorage.getItem('accessToken');
+    console.log("session1: "+accessToken);
+
+    setShowModalValidation(false);
 
     userData.email = email;
     userData.username = username;
@@ -68,7 +95,14 @@ const MyAccount = () => {
     }
 
     setUserData(userData);
-    // console.log(userData);
+    const user = {
+      username,
+      email,
+      homeAdress,
+      password
+    };
+
+    console.log(user);
 
     fetch('/api/data/change', {
       method: "POST",
@@ -76,9 +110,10 @@ const MyAccount = () => {
         "Content-Type": "application/json",
         'Authorization': accessToken
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(user)
     })
       .then((response) => {
+        console.log(response);
         if (!response.ok) {
           throw new Error("Nemoguće promijeniti podatke");
         }
@@ -86,11 +121,15 @@ const MyAccount = () => {
           return response.text();
         }
       })
-      
+
       // Možda nepotreban ovaj blok?
       .then((response) => {
-        console.log(response);
-        sessionStorage.setItem("accessToken", response);
+        console.log("res: " + response);
+        console.log("session1: " + sessionStorage.getItem('accessToken'))
+        console.log(response === sessionStorage.getItem('accessToken'));
+        sessionStorage.setItem('accessToken', response);
+        console.log(response === sessionStorage.getItem('accessToken'));
+        console.log("session2: " + sessionStorage.getItem('accessToken'))
       })
       .catch((error) => {
         console.error('Error: ' + error);
@@ -108,7 +147,7 @@ const MyAccount = () => {
                 <h4>{userData.typeOfUser}</h4>
               </div>
               <div className='my-account-content-text'>
-                <form>
+                <div className='form'>
                   <div className="form-group">
                     <label htmlFor="korisnicko-ime">Korisničko ime:</label>
                     <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => { setUserName(e.target.value); }} disabled></input>
@@ -127,8 +166,8 @@ const MyAccount = () => {
                       </div>
                     </> : <></>}
 
-                  <button type="submit" className="btn btn-primary" onClick={handleEdit} hidden>Spremi</button>
-                </form>
+                  <button className="btn btn-primary" onClick={validation} hidden>Spremi</button>
+                </div>
               </div>
             </div>
 
@@ -138,6 +177,20 @@ const MyAccount = () => {
               {(userData.typeOfUser === "organizator") ? <OrganizerView /> : <></>}
               {(userData.typeOfUser === "posjetitelj") ? <UserView /> : <></>}
             </div>
+
+
+            {/* Modal */}
+            {showModalValidation && (
+              <div className="background">
+                <div className="window">
+                  <span onClick={closeModalValidation}>&times;</span>
+                  <div>Unesi lozinku</div>
+                  <label htmlFor='password'>Lozinka:</label>
+                  <input type='password' className='form-control' id='password' onChange={(e) => { setPassword(e.target.value); }}></input>
+                  <button type="submit" className='btn btn-primary' onClick={handleEdit}>Provjeri</button>
+                </div>
+              </div>
+            )}
 
           </div> : ""
       }

@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, UNSAFE_FetchersContext } from 'react-router-dom';
 import { useState } from 'react';
 import '../../styles/MyAccount.css';
 
@@ -7,6 +7,7 @@ const UserView = () => {
 
    const navigate = useNavigate();
    const location = useLocation();
+   const accessToken = sessionStorage.getItem('accessToken');
 
    const [showModalSettings, setShowModalSettings] = useState(false);
    const [showModalDelete, setShowModalDelete] = useState(false);
@@ -27,6 +28,18 @@ const UserView = () => {
       inputs.forEach((input) => {
          input.toggleAttribute("disabled");
       })
+   }
+
+   const deleteMyProfile = () => {
+      
+
+      fetch('/api/data/deleteMyProfile', {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      });
    }
 
    return (
@@ -57,6 +70,10 @@ const UserView = () => {
                <div className="window">
                   <span onClick={closeModalDelete}>&times;</span>
                   <div>Jesi siguran da želiš obrisati račun?</div>
+                  <div>
+                     <button onClick={deleteMyProfile}>Da</button>
+                     <button onClick={closeModalDelete}>Ne</button>
+                  </div>
                </div>
             </div>
          )}
