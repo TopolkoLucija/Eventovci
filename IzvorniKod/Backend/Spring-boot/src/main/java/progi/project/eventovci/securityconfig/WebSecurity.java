@@ -80,6 +80,11 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/membership/price")).hasRole("ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/membership/changePrice/{filter}")).hasRole("ADMINISTRATOR")
 
+                .requestMatchers(new AntPathRequestMatcher("/review")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/review/delete/{filter}")).hasAnyRole("ADMINISTRATOR","ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/review/get/{filter}")).hasAnyRole("ADMINISTRATOR","ORGANIZATOR", "POSJETITELJ")
+
+
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
         http.csrf(csrf -> csrf.disable());
