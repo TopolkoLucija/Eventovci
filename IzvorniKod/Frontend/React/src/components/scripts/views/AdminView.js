@@ -52,10 +52,10 @@ const AdminView = () => {
          .then((response) => {
             console.log(response);
             if (!response.ok) {
-               setMessage("Nemoguće promijeniti iznos članarine");
+               setMessage("Nije moguće promijeniti iznos članarine!");
             }
             else {
-               setMessage("Promijenjen iznos članarine na: " + amount + "€");
+               setMessage("Cijena članarine sada iznosi : " + amount + "€");
             }
          })
 
@@ -76,7 +76,7 @@ const AdminView = () => {
          }}>Pogledaj sve korisnike</button>
          <button className="btn btn-primary" id='edit-buttons' onClick={() => {
             setShowModalIncreaseMembership(true);
-         }}>Povećaj članarinu</button>
+         }}>Promijeni cijenu članarinu</button>
 
          {/* Modal */}
          {showModalShowAll && (
@@ -96,7 +96,7 @@ const AdminView = () => {
                   <div>Unesi iznos:</div>
                   <form>
                      <input type='text' className='form-control' id='amount' onChange={(e) => { setAmount(e.target.value); }}></input>
-                     <button type="submit" className='btn btn-primary' onClick={handleIncreaseMembership}>Povećaj</button>
+                     <button type="submit" className='btn btn-primary' onClick={handleIncreaseMembership}>Promijeni</button>
                   </form>
                </div>
             </div>
