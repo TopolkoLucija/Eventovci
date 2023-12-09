@@ -16,6 +16,7 @@ const MyAccount = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [homeAdress, setHomeAdress] = useState("");
+  const [message, setMessage] = useState("");
 
   // console.log(userData);
 
@@ -57,6 +58,7 @@ const MyAccount = () => {
 
 
   const [showModalValidation, setShowModalValidation] = useState(false);
+  const [showModalMessage, setShowModalMessage] = useState(false);
 
   const closeModalValidation = () => {
     setShowModalValidation(false);
@@ -66,43 +68,44 @@ const MyAccount = () => {
     setShowModalValidation(true);
   }
 
+  const closeModalMessage = () => {
+    setShowModalMessage(false);
+  }
+
   const Edit = () => {
     var sendButton = document.querySelector(".btn.btn-primary");
     var inputs = document.querySelectorAll(".form-control");
     sendButton.toggleAttribute("hidden");
-    console.log(inputs);
+    // console.log(inputs);
     inputs.forEach((input) => {
       input.toggleAttribute("disabled");
     })
   }
 
   const handleEdit = (e) => {
-    // e.preventDefault();
-    // console.log("handle edit")
-
+    e.preventDefault();
+    combineAndSubmitData();
     Edit();
+
+  }
+
+  const combineAndSubmitData = () => {
 
     accessToken = sessionStorage.getItem("accessToken");
     // console.log("session1: " + accessToken);
 
     setShowModalValidation(false);
 
-    userData.email = email;
-    userData.username = username;
+    const oldEmail = userData.email;
+    const oldUserName = userData.username;
 
-    if (userData.typeOfUser === "organizator") {
-      userData.homeAdress = homeAdress;
-    }
 
-    setUserData(userData);
     const user = {
       username,
       email,
       homeAdress,
       password
     };
-
-    // console.log(user);
 
     fetch('/api/data/change', {
       method: "POST",
@@ -113,11 +116,21 @@ const MyAccount = () => {
       body: JSON.stringify(user)
     })
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
-          alert("Pogrešna lozinka!");
+          setUserName(oldUserName);
+          setEmail(oldEmail);
+          setMessage("Pogrešna lozinka");
         }
         else {
+          userData.email = email;
+          userData.username = username;
+
+          if (userData.typeOfUser === "organizator") {
+            userData.homeAdress = homeAdress;
+          }
+
+          setUserData(userData);
+
           const podatci = {
             username: user.username,
             password: user.password
@@ -129,19 +142,25 @@ const MyAccount = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(podatci),
           })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("No user found");
-                }
-                return response.text();
-              })
-              .then((response) => {
-                sessionStorage.setItem("accessToken", response);
-              })
-              .catch((error) => {
-                console.error("Error fetching data: ", error);
-              });
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("No user found");
+              }
+              return response.text();
+            })
+            .then((response) => {
+              sessionStorage.setItem("accessToken", response);
+            })
+            .catch((error) => {
+              console.error("Error fetching data: ", error);
+            });
+
+          setMessage("Podatci promijenjeni!");
         }
+
+        setTimeout(() => {
+          setShowModalMessage(true);
+        }, 500)
       })
   }
 
@@ -159,19 +178,19 @@ const MyAccount = () => {
                 <div className='form'>
                   <div className="form-group">
                     <label htmlFor="korisnicko-ime">Korisničko ime:</label>
-                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => { setUserName(e.target.value); }} disabled></input>
+                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => { setUserName(e.target.value) }} disabled></input>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="email">E-mail adresa:</label>
-                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setEmail(e.target.value); }} disabled></input>
+                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setEmail(e.target.value) }} disabled></input>
                   </div>
 
                   {(userData.typeOfUser === "organizator") ?
                     <>
                       <div className="form-group">
                         <label htmlFor="address">Adresa:</label>
-                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => { setHomeAdress(e.target.value); }} disabled></input>
+                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => { setHomeAdress(e.target.value) }} disabled></input>
                       </div>
                     </> : <></>}
 
@@ -197,6 +216,20 @@ const MyAccount = () => {
                   <label htmlFor='password'>Lozinka:</label>
                   <input type='password' className='form-control' id='password' onChange={(e) => { setPassword(e.target.value); }}></input>
                   <button type="submit" className='btn btn-primary' onClick={handleEdit}>Provjeri</button>
+                </div>
+              </div>
+            )}
+
+            {/* Modal */}
+            {showModalMessage && (
+              <div className="background">
+                <div className="window">
+                  <span onClick={closeModalMessage}>&times;</span>
+                  <div>{message}</div>
+                  <button className='btn btn-primary' onClick={() => {
+                    closeModalMessage();
+                    window.location.reload();
+                  }}>Zatvori</button>
                 </div>
               </div>
             )}

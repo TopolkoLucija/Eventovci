@@ -7,12 +7,12 @@ const OrganizerView = () => {
    const navigate = useNavigate();
    const location = useLocation();
    const accessToken = sessionStorage.getItem('accessToken');
+   const [message, setMessage] = useState("");
 
    const Edit = () => {
       var sendButton = document.querySelector(".btn.btn-primary");
       var inputs = document.querySelectorAll(".form-control");
       sendButton.toggleAttribute("hidden");
-      console.log(inputs);
       inputs.forEach((input) => {
          input.toggleAttribute("disabled");
       })
@@ -20,6 +20,7 @@ const OrganizerView = () => {
 
    const [showModalAddEvent, setShowModalAddEvent] = useState(false);
    const [showModalDelete, setShowModalDelete] = useState(false);
+   const [showModalMessage, setShowModalMessage] = useState(false);
 
    const closeModalAddEvent = () => {
       setShowModalAddEvent(false);
@@ -29,9 +30,12 @@ const OrganizerView = () => {
       setShowModalDelete(false);
    }
 
+   const closeModalMessage = () => {
+      setShowModalMessage(false);
+   }
+
    const deleteMyProfile = () => {
-
-
+      
       fetch('/api/data/deleteMyProfile', {
          method: "DELETE",
          headers: {
@@ -40,19 +44,23 @@ const OrganizerView = () => {
          }
       })
          .then((response) => {
-            console.log(response);
             if (!response.ok) {
-               throw new Error("Nemoguće promijeniti podatke");
+               setMessage("Nemoguće izbrisati korisnika!");
             }
             else {
                return response.text();
             }
          })
          .then((response) => {
-            console.log(response);
+            //  console.log(response);
             sessionStorage.removeItem("accessToken");
-            navigate('/home');
+            setMessage("Korisnik obrisan!");
          })
+      
+      closeModalDelete();
+      setTimeout(() => {
+         setShowModalMessage(true);
+      }, 500)
    }
 
    return (
@@ -88,6 +96,20 @@ const OrganizerView = () => {
                      <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
                      <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
                   </div>
+               </div>
+            </div>
+         )}
+
+         {/* Modal */}
+         {showModalMessage && (
+            <div className="background">
+               <div className="window">
+                  <span onClick={closeModalMessage}>&times;</span>
+                  <div>{message}</div>
+                  <button className='btn btn-primary' onClick={() => {
+                     closeModalMessage();
+                     navigate('/home');
+                  }}>Zatvori</button>
                </div>
             </div>
          )}
