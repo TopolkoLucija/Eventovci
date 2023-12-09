@@ -57,3 +57,10 @@
    text-decoration: underline;
    text-decoration-color: #FF6B6B;
 }
+
+@media only screen and (max-width: 768px) {
+   .main-content {
+       margin-left: 5px;
+       margin-right: 5px;
+   }
+}

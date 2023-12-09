@@ -64,3 +64,10 @@
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    .main-content {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
