@@ -87,6 +87,8 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/rsvp")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/rsvp/get/{filter}")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
 
+                .requestMatchers(new AntPathRequestMatcher("/subscription")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
+
 
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
