@@ -65,6 +65,7 @@ public class WebSecurity  {
         //http.cors(AbstractHttpConfigurer::disable);
         http.authorizeRequests()
                 .requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ") // Zastiti rutu
+
                 .requestMatchers(new AntPathRequestMatcher("/events/add")).hasRole("ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/all")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/all/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
@@ -72,7 +73,13 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/events/delete/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/inbox")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/getEvent/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
+
                 .requestMatchers(new AntPathRequestMatcher("/media/get/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
+
+                .requestMatchers(new AntPathRequestMatcher("/membership")).hasRole("ORGANIZATOR")
+                .requestMatchers(new AntPathRequestMatcher("/membership/price")).hasRole("ORGANIZATOR")
+                .requestMatchers(new AntPathRequestMatcher("/membership/changePrice/{filter}")).hasRole("ADMINISTRATOR")
+
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
         http.csrf(csrf -> csrf.disable());
