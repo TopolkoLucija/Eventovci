@@ -24,6 +24,7 @@ public class JWTGenerator {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
         System.out.println("Authorities in generateToken: " + authorities);
+        System.out.println("Username: " + username);
 
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION);

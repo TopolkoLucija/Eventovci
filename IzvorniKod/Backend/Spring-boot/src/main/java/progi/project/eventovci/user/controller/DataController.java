@@ -36,6 +36,7 @@ public class DataController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @GetMapping()
     public ResponseEntity<ProfileForm> data(@RequestHeader("Authorization") String token) {
         ProfileForm profileForm = userService.data(convert.convertToUsername(token));
@@ -49,25 +50,29 @@ public class DataController {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<String> changeData(@RequestHeader("Authorization") String token, @RequestBody ChangeDataForm changedataform) {
+    public ResponseEntity<String> changeData(@RequestHeader("Authorization") String token,
+                                             @RequestBody ChangeDataForm changedataform) {
         User user = convert.convertToUser(token);
         String password = changedataform.getPassword();
-        if (passwordEncoder.matches(changedataform.getPassword(), user.getPassword())) {
-            userService.changeData(convert.convertToId(token), changedataform.getUsername(), changedataform.getEmail(),
+        String username = changedataform.getUsername();
+
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            userService.changeData(convert.convertToId(token),
+                    username,
+                    changedataform.getEmail(),
                     changedataform.getHomeAdress());
-        }
-        else {
+
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String newToken = jwtGenerator.generateToken(authentication);
+            return ResponseEntity.ok(newToken);
+        } else {
             throw new UnAuthorizedException("Pogrešna lozinka!");
         }
-
-        User newUser = userService.get(user.getId());
-        System.out.println(newUser.getUsername());
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(changedataform.getUsername(), password));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String newToken = jwtGenerator.generateToken(authentication);
-        return ResponseEntity.ok(newToken);
     }
+
 
     @GetMapping("/allUsers/{filter}")
     public ResponseEntity<List<AllUserDataForm>> allUsers(@RequestHeader("Authorization") String token, @PathVariable Integer filter) {

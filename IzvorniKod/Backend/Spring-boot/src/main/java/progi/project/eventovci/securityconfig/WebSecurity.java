@@ -63,7 +63,8 @@ public class WebSecurity  {
 
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         //http.cors(AbstractHttpConfigurer::disable);
-        http.authorizeRequests().requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ORGANIZATOR", "ADMIN", "POSJETITELJ") // Zastiti rutu
+        http.authorizeRequests().requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ") // Zastiti rutu
+
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne
 
         http.csrf(csrf -> csrf.disable());
