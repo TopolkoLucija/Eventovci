@@ -19,7 +19,15 @@ html, body, #root {
   border-radius: 10px;
 }
 
-.sidebar.logged-in::before {
+.sidebar::before {
+  content: "";
+  display: block;
+  height: 22%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidebar.posjetitelj::before {
   height: 13%; /* ova je vrijednost za posjetitelja */
 }
 
@@ -29,14 +37,6 @@ html, body, #root {
 
 .sidebar.administrator::before {
   height: 22%;
-}
-
-.sidebar::before {
-  content: "";
-  display: block;
-  height: 22%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
 
 .category {

@@ -10,6 +10,8 @@ const Sidebar = ({ className }) => {
   const [userType, setUserType] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth<=768);
+  const userTypeClass = userType.toLowerCase(); // Pretvaranje tipa korisnika u malim slovima
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -145,7 +147,7 @@ const Sidebar = ({ className }) => {
   }
   else{
     return (
-      <div className={`sidebar ${className} ${userType}`}>
+      <div className={`sidebar ${className} ${userTypeClass}`}>
         <div className="mobile-elements">
           <img
             src="https://static.thenounproject.com/png/188125-200.png"

@@ -109,6 +109,7 @@ const OrganizerView = () => {
                   <button className='btn btn-primary' onClick={() => {
                      closeModalMessage();
                      navigate('/home');
+                     window.location.reload();
                   }}>Zatvori</button>
                </div>
             </div>
