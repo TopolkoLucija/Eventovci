@@ -115,34 +115,34 @@ const MyAccount = () => {
       .then((response) => {
         console.log(response);
         if (!response.ok) {
-          throw new Error("Nemoguće promijeniti podatke");
+          alert("Pogrešna lozinka!");
         }
         else {
-          return response.text();
+          const podatci = {
+            username: user.username,
+            password: user.password
+          };
+
+          //console.log(JSON.stringify(podatci));
+          fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(podatci),
+          })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("No user found");
+                }
+                return response.text();
+              })
+              .then((response) => {
+                sessionStorage.setItem("accessToken", response);
+              })
+              .catch((error) => {
+                console.error("Error fetching data: ", error);
+              });
         }
       })
-
-      // Možda nepotreban ovaj blok?
-      .then((response) => {
-        // console.log("res: " + response);
-        // console.log("session1: " + sessionStorage.getItem("accessToken"))
-        // console.log(response === sessionStorage.getItem("accessToken"));
-        sessionStorage.setItem("accessToken", response);
-        // console.log(response === sessionStorage.getItem("accessToken"));
-        console.log("session2: " + sessionStorage.getItem("accessToken"))
-        accessToken = sessionStorage.getItem("accessToken");
-        console.log(accessToken);
-      })
-      .catch((error) => {
-        console.error('Error: ' + error);
-      });
-
-
-    setTimeout(() => {
-
-      console.log(sessionStorage.getItem('accessToken'))
-    }, 4000);
-
   }
 
   return (

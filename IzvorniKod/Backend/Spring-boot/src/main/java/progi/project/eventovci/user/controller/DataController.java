@@ -50,7 +50,7 @@ public class DataController {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<String> changeData(@RequestHeader("Authorization") String token,
+    public ResponseEntity<Void> changeData(@RequestHeader("Authorization") String token,
                                              @RequestBody ChangeDataForm changedataform) {
         User user = convert.convertToUser(token);
         String password = changedataform.getPassword();
@@ -61,13 +61,7 @@ public class DataController {
                     username,
                     changedataform.getEmail(),
                     changedataform.getHomeAdress());
-
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String newToken = jwtGenerator.generateToken(authentication);
-            return ResponseEntity.ok(newToken);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             throw new UnAuthorizedException("Pogrešna lozinka!");
         }
