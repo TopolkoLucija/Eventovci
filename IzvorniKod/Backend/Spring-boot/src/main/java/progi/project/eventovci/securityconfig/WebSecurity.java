@@ -72,6 +72,7 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/events/delete/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/inbox")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/getEvent/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/media/get/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
         http.csrf(csrf -> csrf.disable());
