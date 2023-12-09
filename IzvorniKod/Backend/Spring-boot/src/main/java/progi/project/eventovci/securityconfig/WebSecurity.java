@@ -65,6 +65,12 @@ public class WebSecurity  {
         //http.cors(AbstractHttpConfigurer::disable);
         http.authorizeRequests()
                 .requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ") // Zastiti rutu
+                .requestMatchers(new AntPathRequestMatcher("/data/getOrg/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/data/change")).hasAnyRole( "ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/data/allUsers/{filter}")).hasAnyRole("ADMINISTRATOR")
+                .requestMatchers(new AntPathRequestMatcher("/data/type")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/data/deleteMyProfile")).hasAnyRole( "ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/data/deleteUser/{filter}")).hasAnyRole( "ADMINISTRATOR")
 
                 .requestMatchers(new AntPathRequestMatcher("/events/add")).hasRole("ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/all")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
