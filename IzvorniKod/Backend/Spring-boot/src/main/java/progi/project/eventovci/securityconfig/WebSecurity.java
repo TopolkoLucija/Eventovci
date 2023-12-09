@@ -64,10 +64,11 @@ public class WebSecurity  {
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         //http.cors(AbstractHttpConfigurer::disable);
         http.authorizeRequests()
-                .requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ") // Zastiti rutu
+                .requestMatchers(new AntPathRequestMatcher("/data")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ") // Zastiti rutu
                 .requestMatchers(new AntPathRequestMatcher("/events/add")).hasRole("ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/all")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/myInterests/{option}")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/events/delete/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR")
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
         http.csrf(csrf -> csrf.disable());
