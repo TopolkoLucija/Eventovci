@@ -58,3 +58,16 @@ form {
     display: flex;
     justify-content: center;
 }
+@media screen and (max-width: 400px) {
+.forma{
+    width: 85vw;
+    height: 40vh;
+}
+}
+@media screen and (max-width: 300px) {
+    .forma{
+        width: 82vw;
+        height: 40vh;
+        margin-right: 3rem;
+    }
+    }

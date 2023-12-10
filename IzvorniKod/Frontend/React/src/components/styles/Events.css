@@ -41,6 +41,16 @@ nav{
     font-size: 0;
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
 }
+nav a.active {
+    /* Your styles for the active link */
+    background-color: #1abc9c; /* Change to your desired background color */
+    color: rgb(0, 0, 0); /* Change to your desired text color */
+    border-radius: 8px;
+    height: 100%;
+  }
+  nav a.active~.animation {
+    display: none; /* Or any other styles you want to apply to remove the active effect */
+  }
 nav a{
     font-size: 15px;
     text-transform: uppercase;
@@ -98,3 +108,58 @@ nav a:nth-child(5):hover~.animation{
     width: 120px;
     left: 470px;
 }
+@media (max-width: 768px) {
+    .glavniKontejner{
+        width: 100vw;
+    }
+    .KontejnerZaKarice{
+        overflow-y: scroll;
+        height: 80vh;
+        padding-top: 1rem;
+    }
+    nav a{
+        font-size: 10px;
+        width: 20vw;
+    }
+    nav a:nth-child(1){
+        width: 20vw;
+    }
+    nav a:nth-child(2){
+        width: 20vw;
+    }
+    nav a:nth-child(3){
+        width: 20vw;
+    }
+    nav a:nth-child(4){
+        width: 20vw;
+    }
+    nav{
+        width: 80vw;
+    }
+    nav .animation {
+        width: 20vw; /* Match the width of the animation to nav a elements */
+        transition: all .5s ease 0s;
+    }
+    nav .start-home, a:nth-child(1):hover~.animation{
+        width: 20vw;
+        left: 0;
+    }
+    nav a:nth-child(2):hover~.animation{
+        width: 20vw;
+        left: 20vw;
+    }
+    nav a:nth-child(3):hover~.animation{
+        width: 20vw;
+        left: 40vw;
+    }
+    nav a:nth-child(4):hover~.animation{
+        width: 20vw;
+        left: 60vw;
+    }
+  }
+  @media (max-width: 768px) {
+    nav a{
+        font-size: 8px;
+    }
+
+  }
