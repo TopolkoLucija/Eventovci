@@ -23,10 +23,21 @@ const dogadaj = {
 function Events() {
   const accessToken = sessionStorage.getItem("accessToken");
   const [dogadajcic, setdogadajcic] = useState([]);
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  const [activeLink, setActiveLink] = useState(null);
   // console.log(accessToken);
 
   const setUserData = useState("");
   const navigate = useNavigate();
+
+  const handleLinkClick = (filterValue, index) => {
+    setActiveLink(index);
+    if (filterValue !== 0) {
+      setInitialLoad(false);
+      dvadesetCetriSata(filterValue);
+    }
+  };
 
   useEffect(() => {
     if (accessToken !== null) {
@@ -95,14 +106,46 @@ function Events() {
   useEffect(() => {
     console.log("Updated dogadajcic:", dogadajcic);
   }, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
+
+  useEffect(() => {
+    if (initialLoad) {
+      dvadesetCetriSata(0);
+      setInitialLoad(false);
+    }
+  }, [initialLoad]);
+
   return (
     <div className="glavniKontejner">
       <div className="kontejnerZaNavbar">
         <nav>
-          <a onClick={() => dvadesetCetriSata(24)}>24h</a>
-          <a onClick={() => dvadesetCetriSata(7)}>7 dana</a>
-          <a onClick={() => dvadesetCetriSata(30)}>30 dana</a>
-          <a onClick={() => dvadesetCetriSata(48)}>Prije 48h</a>
+          <a
+            className={activeLink === 1 ? "active" : ""}
+            onClick={() => handleLinkClick(24, 1)}
+            onMouseEnter={() => setActiveLink(null)}
+          >
+            24h
+          </a>
+          <a
+            className={activeLink === 2 ? "active" : ""}
+            onClick={() => handleLinkClick(7, 2)}
+            onMouseEnter={() => setActiveLink(null)}
+          >
+            7 dana
+          </a>
+          <a
+            className={activeLink === 3 ? "active" : ""}
+            onClick={() => handleLinkClick(30, 3)}
+            onMouseEnter={() => setActiveLink(null)}
+          >
+            30 dana
+          </a>
+          <a
+            className={activeLink === 4 ? "active" : ""}
+            onClick={() => handleLinkClick(48, 4)}
+            onMouseEnter={() => setActiveLink(null)}
+          >
+            Prije 48h
+          </a>
           <div className="animation start-home"></div>
         </nav>
       </div>
