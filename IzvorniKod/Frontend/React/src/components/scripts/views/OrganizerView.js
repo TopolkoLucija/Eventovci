@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import '../../styles/MyAccount.css';
+import '../../styles/views/OrganizerView.css';
 
 const OrganizerView = (props) => {
 
@@ -16,6 +17,59 @@ const OrganizerView = (props) => {
       type: "",
       content: ""
    });
+   const [membershipAmount, setMembershipAmount] = useState("");
+
+   const [creditCardNumber, setCreditCardNumber] = useState("");
+   const [creditCardName, setCreditCardName] = useState("");
+   const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('');
+   const [creditCardCVC, setCreditCardCVC] = useState("");
+
+   const handleCardCVCInput = (event) => {
+      let inputValue = event.target.value;
+
+      inputValue = inputValue.replace(/\D/g, '');
+      setCreditCardCVC(inputValue);
+   }
+
+   const handleExpirationDateInput = (event) => {
+      let inputValue = event.target.value;
+
+      // Uklonite sve karaktere osim brojeva
+      inputValue = inputValue.replace(/\D/g, '');
+
+      // Formatirajte brojeve kao MM/YY
+      if (inputValue.length <= 4) {
+         let formattedValue = '';
+         for (let i = 0; i < inputValue.length; i++) {
+            if (i === 2 && inputValue.length > 2) {
+               formattedValue += '/'; // Dodajte kosu crtu između MM i YY
+            }
+            formattedValue += inputValue[i];
+         }
+
+         // Postavite formatirani datum u stanje
+         setCreditCardExpirationDate(formattedValue);
+      }
+   };
+
+   const handleCardNumberInput = (event) => {
+      let inputValue = event.target.value;
+
+      // Uklonite sve karaktere osim brojeva
+      inputValue = inputValue.replace(/\D/g, '');
+
+      // Formatirajte brojeve dok se unose
+      let formattedValue = '';
+      for (let i = 0; i < inputValue.length; i++) {
+         if (i > 0 && i % 4 === 0) {
+            formattedValue += ' '; // Dodajte razmak nakon svake grupe od 4 broja
+         }
+         formattedValue += inputValue[i];
+      }
+
+      // Postavite formatirani broj u stanje
+      setCreditCardNumber(formattedValue);
+   };
 
    useEffect(() => {
       setEmail(userData.email);
@@ -132,6 +186,9 @@ const OrganizerView = (props) => {
    const [showModalMessage, setShowModalMessage] = useState(false);
    const [showModalPayMembership, setShowModalPayMembership] = useState(false);
    const [showModalValidation, setShowModalValidation] = useState(false);
+   const [showModalPayWithCard, setShowModalPayWithCard] = useState(false);
+   const [showModalPayWithPayPal, setShowModalPayWithPayPal] = useState(false);
+   const [showModalMembershipPayed, setShowModalMembershipPayed] = useState(false);
 
    const validation = () => {
       setShowModalValidation(true);
@@ -140,7 +197,6 @@ const OrganizerView = (props) => {
    const closeModalAddEvent = () => {
       setShowModalAddEvent(false);
    };
-
    const openModalAddEvent = () => {
       setShowModalAddEvent(true);
    }
@@ -148,7 +204,6 @@ const OrganizerView = (props) => {
    const closeModalDelete = () => {
       setShowModalDelete(false);
    }
-
    const openModalDelete = () => {
       setShowModalDelete(true);
    }
@@ -156,17 +211,66 @@ const OrganizerView = (props) => {
    const closeModalMessage = () => {
       setShowModalMessage(false);
    }
-
    const openModalMessage = () => {
       setShowModalMessage(true);
+   }
+
+   const closeModalPayWithPayPal = () => {
+      setShowModalPayWithPayPal(false);
+   }
+   const openModalPayWithPayPal = () => {
+      setShowModalPayWithPayPal(true);
+   }
+
+   const closeModalPayWithCard = () => {
+      setShowModalPayWithCard(false);
+   }
+   const openModalPayWithCard = () => {
+      setShowModalPayWithCard(true);
+   }
+
+   const closeModalMembershipPayed = () => {
+      setShowModalMembershipPayed(false);
+   }
+   const openModalMembershipPayed = () => {
+      setShowModalMembershipPayed(true);
    }
 
    const closeModalPayMembership = () => {
       setShowModalPayMembership(false);
    }
-
    const openModalPayMembership = () => {
-      setShowModalPayMembership(true)
+      setShowModalPayMembership(true);
+      handleGetMembershipPrice();
+   }
+   const handleGetMembershipPrice = () => {
+      fetch('/api/membership/price', {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               setMessage({
+                  type: "error",
+                  content: "Nije moguće dohvatiti iznos članarine!"
+               })
+            }
+            else {
+               return response.json();
+            }
+         })
+         .then((response) => {
+            if (response) {
+               setMembershipAmount(response);
+               setMessage({
+                  type: "get-price",
+                  content: "Cijena članarine: " + response + " €"
+               })
+            }
+         })
    }
 
    const deleteMyProfile = () => {
@@ -200,6 +304,33 @@ const OrganizerView = (props) => {
       setTimeout(() => {
          openModalMessage();
       }, 500)
+   }
+
+   const handlePayMembership = () => {
+      fetch('/api/membership', {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+               setMessage({
+                  type: "error",
+                  content: "Transakcija nije provedena!"
+               })
+            }
+            else {
+               setMessage({
+                  type: "membership-payed",
+                  content: "Članarina plaćena!"
+               })
+            }
+            openModalMembershipPayed();
+            closeModalPayWithCard();
+         })
    }
 
    return (
@@ -269,7 +400,120 @@ const OrganizerView = (props) => {
                      <div className="background">
                         <div className="window">
                            <span className='exit' onClick={closeModalPayMembership}>&times;</span>
-                           <div>Plati!</div>
+                           <div>{message.content}</div>
+                           {message.type !== "error" ?
+                              <>
+                                 <div>Odaberi način plaćanja:</div>
+                                 <div>
+                                    <button className='btn btn-primary' onClick={openModalPayWithCard}>Karticom</button>
+                                    <button className='btn btn-primary' onClick={openModalPayWithPayPal}>PayPalom</button>
+                                 </div>
+                              </> : <></>}
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalPayWithCard && (
+                     <div className="background">
+                        <div className="window-payment">
+                           <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
+                           <div>Iznos: {membershipAmount} €</div>
+                           <div>Unesi podatke o kartici:</div>
+                              <div className='form-group'>
+                                 <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
+                                 <input
+                                    type='text'
+                                    className='form-control'
+                                    id='cardNumber'
+                                    value={creditCardNumber}
+                                    onChange={handleCardNumberInput}
+                                    placeholder='0000 0000 0000 0000'
+                                    maxLength={19}
+                                 />
+                              </div>
+                              <div className='form-group'>
+                                 <label htmlFor='cardName'>Ime nositelja kartice:</label>
+                                 <input type='text'
+                                    className='form-control'
+                                    id='cardName'
+                                    value={creditCardName}
+                                    placeholder='Pero Perić'
+                                    onChange={(e) => { setCreditCardName(e.target.value) }} />
+                              </div>
+                              <div className='form-group'>
+                                 <label htmlFor='cardExpirationDate'>Datum isteka:</label>
+                                 <input
+                                    type="text"
+                                    className='form-control'
+                                    id='cardExpirationDate'
+                                    value={creditCardExpirationDate}
+                                    onChange={handleExpirationDateInput}
+                                    placeholder="MM/YY"
+                                    maxLength={5}
+                                 />
+                              </div>
+                              <div className='form-group'>
+                                 <label htmlFor='cardCVC'>CVC:</label>
+                                 <input type='text'
+                                    className='form-control'
+                                    id='cardCVC'
+                                    value={creditCardCVC}
+                                    placeholder='000'
+                                    onChange={handleCardCVCInput}
+                                    maxLength={3}
+                                 />
+                              </div>
+
+                              <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
+                           
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalPayWithPayPal && (
+                     <div className="background">
+                        <div className="window-payment">
+                           <span className='exit' onClick={closeModalPayWithPayPal}>&times;</span>
+                           <div>Unesi podatke o PayPalu:</div>
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalMembershipPayed && (
+                     <div className="background">
+                        <div className="window-payment">
+                           <div>{message.content}</div>
+                           {message.type !== "error" ? 
+                              <div>
+                                 <button className='btn btn-primary' onClick={() => {
+                                    closeModalMembershipPayed();
+                                    setMessage({
+                                       type: "",
+                                       content: ""
+                                    })
+                                    closeModalPayMembership();
+                                 }}>Zatvori</button>
+                              </div> :
+                              <div>
+                                 <button className='btn btn-primary' onClick={() => {
+                                    closeModalMembershipPayed();
+                                    setMessage({
+                                       type: "get-price",
+                                       content: "Cijena članarine: " + membershipAmount + " €"
+                                    })
+                                 }}>Pokušaj ponovno</button>
+                                 <button className='btn btn-primary' onClick={() => {
+                                    closeModalMembershipPayed();
+                                    setMessage({
+                                       type: "",
+                                       content: ""
+                                    })
+                                    closeModalPayMembership();
+                                 }}>Odustani</button>
+                              </div>}
                         </div>
                      </div>
                   )}
