@@ -81,7 +81,7 @@ const UserView = () => {
          {showModalSettings && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalSettings}>&times;</span>
+                  <span className='exit' onClick={closeModalSettings}>&times;</span>
                   <div>Uređivanje postavke obavijesti</div>
                </div>
             </div>
@@ -91,7 +91,7 @@ const UserView = () => {
          {showModalDelete && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalDelete}>&times;</span>
+                  <span className='exit' onClick={closeModalDelete}>&times;</span>
                   <div>Jesi siguran da želiš obrisati račun?</div>
                   <div>
                      <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
@@ -105,7 +105,7 @@ const UserView = () => {
          {showModalMessage && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalMessage}>&times;</span>
+                  <span className='exit' onClick={closeModalMessage}>&times;</span>
                   <div>{message}</div>
                   <button className='btn btn-primary' onClick={() => {
                      closeModalMessage();

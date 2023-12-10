@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import '../../styles/MyAccount.css';
-import { FormText } from 'react-bootstrap';
+import '../../styles/views/AdminView.css'
 
 const AdminView = () => {
 
@@ -67,12 +67,99 @@ const AdminView = () => {
       console.log(amount);
    }
 
+   const handleDeleteUser = (e) => {
+      const accessToken = sessionStorage.getItem('accessToken');
+      var filter = e.target.id;
+
+      fetch(`/api/data/deleteUser/${filter}`, {
+         method: "DELETE",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               setMessage("Nije moguće izbrisati korisnika (id: " + filter + ")");
+               setShowModalMessage(true);
+            }
+            else {
+               setMessage("Korisnik (id: " + filter + ") izbrisan!");
+               setShowModalMessage(true);
+               document.getElementById(`${filter}`).remove();
+            }
+         })
+   }
+
+   const handleAllUsers = (filter) => {
+      const accessToken = sessionStorage.getItem('accessToken');
+
+      fetch(`/api/data/allUsers/${filter}`, {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               setMessage("Nije moguće prikazati sve korisnike!");
+               setShowModalMessage(true);
+            }
+            else {
+               setShowModalShowAll(true);
+               return response.json();
+            }
+         })
+         .then((response) => {
+            if (response) {
+               if (document.querySelector('.user')) {
+                  document.querySelector('.allUsers').innerHTML = "";
+               }
+               response.forEach((res) => {
+
+                  if (res.typeOfUser === "administrator") {
+                     return;
+                  }
+
+                  var divAllUsers = document.querySelector('.allUsers');
+                  const divUser = document.createElement('div');
+                  const spanUserName = document.createElement('span');
+                  const spanEmail = document.createElement('span');
+                  const spanTypeOfUser = document.createElement('span');
+                  const buttonDelete = document.createElement('button');
+
+                  divUser.append(spanUserName);
+                  divUser.append(spanEmail);
+                  divUser.append(spanTypeOfUser);
+                  divUser.append(buttonDelete);
+
+                  divAllUsers.append(divUser);
+
+                  spanUserName.innerText = res.username;
+                  spanEmail.innerText = res.email;
+                  spanTypeOfUser.innerText = res.typeOfUser;
+                  buttonDelete.innerHTML = "&times";
+
+                  divUser.className = "user";
+                  divUser.id = `${res.userId}`;
+                  buttonDelete.classList = "btn btn-primary";
+                  buttonDelete.classList = "delete-button";
+                  buttonDelete.id = `${res.userId}`;
+
+                  buttonDelete.addEventListener("click", handleDeleteUser);
+
+               })
+            }
+         })
+   }
+
    return (
       <>
          <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
          <button className="btn btn-primary" id="edit-buttons" onClick={() => {
             // navigate(location.pathname + "/show-all");
-            setShowModalShowAll(true);
+            handleAllUsers(0);
          }}>Pogledaj sve korisnike</button>
          <button className="btn btn-primary" id='edit-buttons' onClick={() => {
             setShowModalIncreaseMembership(true);
@@ -81,9 +168,21 @@ const AdminView = () => {
          {/* Modal */}
          {showModalShowAll && (
             <div className="background">
-               <div className="window">
-                  <span onClick={closeModalShowAll}>&times;</span>
+               <div className="window-show-all">
+                  <span className='exit' onClick={closeModalShowAll}>&times;</span>
                   <div>Prikaži sve</div>
+                  <div>
+                     <button className='btn btn-primary' onClick={() => {
+                        handleAllUsers(0);
+                     }}>Svi</button>
+                     <button className='btn btn-primary' onClick={() => {
+                        handleAllUsers(1);
+                     }}>Posjetitelji</button>
+                     <button className='btn btn-primary' onClick={() => {
+                        handleAllUsers(2);
+                     }}>Organizatori</button>
+                  </div>
+                  <div className='allUsers'></div>
                </div>
             </div>
          )}
@@ -92,7 +191,7 @@ const AdminView = () => {
          {showModalIncreaseMembership && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalIncreaseMembership}>&times;</span>
+                  <span className='exit' onClick={closeModalIncreaseMembership}>&times;</span>
                   <div>Unesi iznos:</div>
                   <form>
                      <input type='text' className='form-control' id='amount' onChange={(e) => { setAmount(e.target.value); }}></input>
@@ -106,7 +205,7 @@ const AdminView = () => {
          {showModalMessage && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalMessage}>&times;</span>
+                  <span className='exit' onClick={closeModalMessage}>&times;</span>
                   <div>{message}</div>
                   <button className='btn btn-primary' onClick={closeModalMessage}>Zatvori</button>
                </div>

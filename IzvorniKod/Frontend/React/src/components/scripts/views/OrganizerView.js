@@ -52,7 +52,6 @@ const OrganizerView = () => {
             }
          })
          .then((response) => {
-            //  console.log(response);
             sessionStorage.removeItem("accessToken");
             setMessage("Korisnik obrisan!");
          })
@@ -80,7 +79,7 @@ const OrganizerView = () => {
          {showModalAddEvent && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalAddEvent}>&times;</span>
+                  <span className='exit' onClick={closeModalAddEvent}>&times;</span>
                   <div>Uređivanje postavke obavijesti</div>
                </div>
             </div>
@@ -90,7 +89,7 @@ const OrganizerView = () => {
          {showModalDelete && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalDelete}>&times;</span>
+                  <span className='exit' onClick={closeModalDelete}>&times;</span>
                   <div>Jesi siguran da želiš obrisati račun?</div>
                   <div>
                      <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
@@ -104,7 +103,7 @@ const OrganizerView = () => {
          {showModalMessage && (
             <div className="background">
                <div className="window">
-                  <span onClick={closeModalMessage}>&times;</span>
+                  <span className='exit' onClick={closeModalMessage}>&times;</span>
                   <div>{message}</div>
                   <button className='btn btn-primary' onClick={() => {
                      closeModalMessage();

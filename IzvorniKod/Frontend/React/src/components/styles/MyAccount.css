@@ -70,7 +70,7 @@
    align-content: center;
 }
 
-.window span {
+.exit {
    position: absolute;
    top: 10px;
    right: 10px;
@@ -105,6 +105,6 @@
    background-color: #0056b3;
 }
 
-.window span:hover{
+.exit:hover{
    cursor: pointer;
 }
