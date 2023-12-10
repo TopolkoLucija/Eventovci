@@ -6,237 +6,50 @@ import OrganizerView from "./views/OrganizerView";
 import AdminView from "./views/AdminView";
 
 const MyAccount = () => {
-  var accessToken = sessionStorage.getItem("accessToken");
+   var accessToken = sessionStorage.getItem("accessToken");
 
-  // console.log(accessToken);
+   const navigate = useNavigate();
+   const [userData, setUserData] = useState("");
 
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState("");
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [homeAdress, setHomeAdress] = useState("");
-  const [message, setMessage] = useState("");
+   useEffect(() => {
+      if (accessToken !== null) {
 
-  // console.log(userData);
-
-  useEffect(() => {
-    if (accessToken !== null) {
-
-
-      fetch('/api/data', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': accessToken
-        }
-      })
-        .then((response) => {
-          if (!response.ok) {
-            console.error('Request failed');
-            navigate('/login');
-            return;
-          }
-          // console.log(response.json());
-          return response.json();
-        })
-        .then((data) => {
-          setUserData(data);
-          setUserName(data.username);
-          setEmail(data.email);
-          setHomeAdress(data.homeAdress);
-          // console.log(data);
-        })
-        .catch((error) => {
-          console.error('Error: ' + error);
-        });
-    }
-    else {
-      navigate('/login');
-    }
-  }, []);
-
-
-  const [showModalValidation, setShowModalValidation] = useState(false);
-  const [showModalMessage, setShowModalMessage] = useState(false);
-
-  const closeModalValidation = () => {
-    setShowModalValidation(false);
-  };
-
-  const validation = () => {
-    setShowModalValidation(true);
-  }
-
-  const closeModalMessage = () => {
-    setShowModalMessage(false);
-  }
-
-  const Edit = () => {
-    var sendButton = document.querySelector(".btn.btn-primary");
-    var inputs = document.querySelectorAll(".form-control");
-    sendButton.toggleAttribute("hidden");
-    // console.log(inputs);
-    inputs.forEach((input) => {
-      input.toggleAttribute("disabled");
-    })
-  }
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    combineAndSubmitData();
-    Edit();
-
-  }
-
-  const combineAndSubmitData = () => {
-
-    accessToken = sessionStorage.getItem("accessToken");
-    // console.log("session1: " + accessToken);
-
-    setShowModalValidation(false);
-
-    const oldEmail = userData.email;
-    const oldUserName = userData.username;
-
-
-    const user = {
-      username,
-      email,
-      homeAdress,
-      password
-    };
-
-    fetch('/api/data/change', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': accessToken
-      },
-      body: JSON.stringify(user)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          setUserName(oldUserName);
-          setEmail(oldEmail);
-          setMessage("Pogrešna lozinka");
-        }
-        else {
-          userData.email = email;
-          userData.username = username;
-
-          if (userData.typeOfUser === "organizator") {
-            userData.homeAdress = homeAdress;
-          }
-
-          setUserData(userData);
-
-          const podatci = {
-            username: user.username,
-            password: user.password
-          };
-
-          //console.log(JSON.stringify(podatci));
-          fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(podatci),
-          })
+         fetch('/api/data', {
+            method: 'GET',
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': accessToken
+            }
+         })
             .then((response) => {
-              if (!response.ok) {
-                throw new Error("No user found");
-              }
-              return response.text();
+               if (!response.ok) {
+                  console.error('Request failed');
+                  navigate('/login');
+                  return;
+               }
+               return response.json();
             })
-            .then((response) => {
-              sessionStorage.setItem("accessToken", response);
+            .then((data) => {
+               setUserData(data);
             })
             .catch((error) => {
-              console.error("Error fetching data: ", error);
+               console.error('Error: ' + error);
             });
-
-          setMessage("Podatci promijenjeni!");
-        }
-
-        setTimeout(() => {
-          setShowModalMessage(true);
-        }, 500)
-      })
-  }
-
-  return (
-    <>
-      {
-        (accessToken !== null) ? // ako je netko prijavljen onda vrati info o korisniku/organizatoru, inače ništa
-          <div className="my-account-content">
-            <div className='my-account-content-title-and-text'>
-              <div className='my-account-content-title'>
-                <h1>Pozdrav, {userData.username}!</h1>
-                <h4>{userData.typeOfUser}</h4>
-              </div>
-              <div className='my-account-content-text'>
-                <div className='form'>
-                  <div className="form-group">
-                    <label htmlFor="korisnicko-ime">Korisničko ime:</label>
-                    <input type="text" className="form-control" id="korisnicko-ime" value={username} onChange={(e) => { setUserName(e.target.value) }} disabled></input>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email">E-mail adresa:</label>
-                    <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setEmail(e.target.value) }} disabled></input>
-                  </div>
-
-                  {(userData.typeOfUser === "organizator") ?
-                    <>
-                      <div className="form-group">
-                        <label htmlFor="address">Adresa:</label>
-                        <input type="text" className="form-control" id="address" value={homeAdress} onChange={(e) => { setHomeAdress(e.target.value) }} disabled></input>
-                      </div>
-                    </> : <></>}
-
-                  <button className="btn btn-primary" onClick={validation} hidden>Spremi</button>
-                </div>
-              </div>
-            </div>
-
-            {/* TODO - dodati funkcionalnost buttona! */}
-            <div className="edit-content">
-              {(userData.typeOfUser === "administrator") ? <AdminView /> : <></>}
-              {(userData.typeOfUser === "organizator") ? <OrganizerView /> : <></>}
-              {(userData.typeOfUser === "posjetitelj") ? <UserView /> : <></>}
-            </div>
-
-
-            {/* Modal */}
-            {showModalValidation && (
-              <div className="background">
-                <div className="window">
-                  <div>Unesi lozinku</div>
-                  <label htmlFor='password'>Lozinka:</label>
-                  <input type='password' className='form-control' id='password' onChange={(e) => { setPassword(e.target.value); }}></input>
-                  <button type="submit" className='btn btn-primary' onClick={handleEdit}>Provjeri</button>
-                </div>
-              </div>
-            )}
-
-            {/* Modal */}
-            {showModalMessage && (
-              <div className="background">
-                <div className="window">
-                  <span onClick={closeModalMessage}>&times;</span>
-                  <div>{message}</div>
-                  <button className='btn btn-primary' onClick={() => {
-                    closeModalMessage();
-                    window.location.reload();
-                  }}>Zatvori</button>
-                </div>
-              </div>
-            )}
-
-          </div> : ""
       }
-    </>
-  );
+      else {
+         navigate('/login');
+      }
+   }, [accessToken, navigate]);
+
+   return (
+      <>
+
+         {(userData.typeOfUser === "administrator") ? <AdminView myProp={ userData } /> : <></>}
+         {(userData.typeOfUser === "organizator") ? <OrganizerView myProp={ userData } /> : <></>}
+         {(userData.typeOfUser === "posjetitelj") ? <UserView myProp={ userData } /> : <></>}
+
+      </>
+   );
 }
 
 export default MyAccount;

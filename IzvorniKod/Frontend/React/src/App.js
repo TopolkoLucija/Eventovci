@@ -14,7 +14,6 @@ import { useState } from "react";
 import Inbox from "./components/scripts/Inbox";
 import Interested from "./components/scripts/Interested";
 import MyEvents from "./components/scripts/MyEvents";
-import { useEffect } from "react";
 
 function App() {
   const accessToken = sessionStorage.getItem('accessToken');

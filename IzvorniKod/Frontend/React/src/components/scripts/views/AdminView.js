@@ -1,14 +1,29 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/MyAccount.css';
 import '../../styles/views/AdminView.css'
 
-const AdminView = () => {
+const AdminView = (props) => {
+   var accessToken = sessionStorage.getItem("accessToken");
+   var userData = props.myProp;
+
 
    const navigate = useNavigate();
-   const location = useLocation();
+   const [email, setEmail] = useState("");
+   const [username, setUserName] = useState("");
+   const [password, setPassword] = useState("");
+   const [homeAdress, setHomeAdress] = useState("");
+   const [message, setMessage] = useState({
+      type: "",
+      content: ""
+   });
    const [amount, setAmount] = useState("");
-   const [message, setMessage] = useState("");
+
+   useEffect(() => {
+      setEmail(userData.email);
+      setUserName(userData.username);
+      setHomeAdress(userData.homeAdress || "");
+   }, [userData]);
 
    const Edit = () => {
       var sendButton = document.querySelector(".btn.btn-primary");
@@ -17,22 +32,129 @@ const AdminView = () => {
       inputs.forEach((input) => {
          input.toggleAttribute("disabled");
       })
+
+      setValues();
+   }
+
+   const setValues = () => {
+      var userNameInput = document.getElementById('userName');
+      var emailInput = document.getElementById('email');
+
+      userNameInput.value = userData.username;
+      emailInput.value = userData.email;
+
+      setUserName(userData.username);
+      setEmail(userData.email);
+   }
+
+   const handleEdit = (e) => {
+      e.preventDefault();
+      combineAndSubmitData();
+      Edit();
+
+   }
+
+   const combineAndSubmitData = () => {
+
+      accessToken = sessionStorage.getItem("accessToken");
+
+      setShowModalValidation(false);
+
+      const oldEmail = userData.email;
+      const oldUserName = userData.username;
+
+
+      const user = {
+         username,
+         email,
+         homeAdress,
+         password
+      };
+
+      fetch('/api/data/change', {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         },
+         body: JSON.stringify(user)
+      })
+         .then((response) => {
+            if (!response.ok) {
+               setUserName(oldUserName);
+               setEmail(oldEmail);
+               setMessage({
+                  type: "change",
+                  content: "Pogrešna lozinka"
+               });
+            }
+            else {
+               userData.email = email;
+               userData.username = username;
+
+               const podatci = {
+                  username: user.username,
+                  password: user.password
+               };
+
+               fetch("/api/login", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(podatci),
+               })
+                  .then((response) => {
+                     if (!response.ok) {
+                        throw new Error("No user found");
+                     }
+                     return response.text();
+                  })
+                  .then((response) => {
+                     sessionStorage.setItem("accessToken", response);
+                  })
+                  .catch((error) => {
+                     console.error("Error fetching data: ", error);
+                  });
+
+               setMessage({
+                  type: "change",
+                  content: "Podatci promijenjeni!"
+               });
+            }
+
+            setTimeout(() => {
+               setShowModalMessage(true);
+            }, 500)
+         })
    }
 
    const [showModalShowAll, setShowModalShowAll] = useState(false);
    const [showModalIncreaseMembership, setShowModalIncreaseMembership] = useState(false);
    const [showModalMessage, setShowModalMessage] = useState(false);
+   const [showModalValidation, setShowModalValidation] = useState(false);
+
+   const validation = () => {
+      setShowModalValidation(true);
+   }
 
    const closeModalShowAll = () => {
       setShowModalShowAll(false);
    };
+   const openModalShowAll = () => {
+      setShowModalShowAll(true);
+   }
 
    const closeModalIncreaseMembership = () => {
       setShowModalIncreaseMembership(false);
    }
+   const openModalIncreaseMembership = () => {
+      setShowModalIncreaseMembership(true);
+   }
 
    const closeModalMessage = () => {
       setShowModalMessage(false);
+   }
+   const openModalMessage = () => {
+      setShowModalMessage(true);
    }
 
    const handleIncreaseMembership = (e) => {
@@ -52,17 +174,23 @@ const AdminView = () => {
          .then((response) => {
             console.log(response);
             if (!response.ok) {
-               setMessage("Nije moguće promijeniti iznos članarine!");
+               setMessage({
+                  type: "membership-price",
+                  content: "Nije moguće promijeniti iznos članarine!"
+               });
             }
             else {
-               setMessage("Cijena članarine sada iznosi : " + amount + "€");
+               setMessage({
+                  type: "membership-price",
+                  content: "Cijena članarine sada iznosi : " + amount + "€"
+               });
             }
          })
 
       closeModalIncreaseMembership();
 
       setTimeout(() => {
-         setShowModalMessage(true);
+         openModalMessage();
       }, 500)
       console.log(amount);
    }
@@ -80,12 +208,18 @@ const AdminView = () => {
       })
          .then((response) => {
             if (!response.ok) {
-               setMessage("Nije moguće izbrisati korisnika (id: " + filter + ")");
-               setShowModalMessage(true);
+               setMessage({
+                  type: "delete-user",
+                  content: "Nije moguće izbrisati korisnika (id: " + filter + ")"
+               });
+               openModalMessage();
             }
             else {
-               setMessage("Korisnik (id: " + filter + ") izbrisan!");
-               setShowModalMessage(true);
+               setMessage({
+                  type: "delete-user",
+                  content: "Korisnik (id: " + filter + ") izbrisan!"
+               });
+               openModalMessage();
                document.getElementById(`${filter}`).remove();
             }
          })
@@ -103,11 +237,14 @@ const AdminView = () => {
       })
          .then((response) => {
             if (!response.ok) {
-               setMessage("Nije moguće prikazati sve korisnike!");
-               setShowModalMessage(true);
+               setMessage({
+                  type: "show-all",
+                  content: "Nije moguće prikazati sve korisnike!"
+               });
+               openModalMessage();
             }
             else {
-               setShowModalShowAll(true);
+               openModalShowAll();
                return response.json();
             }
          })
@@ -156,61 +293,110 @@ const AdminView = () => {
 
    return (
       <>
-         <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
-         <button className="btn btn-primary" id="edit-buttons" onClick={() => {
-            // navigate(location.pathname + "/show-all");
-            handleAllUsers(0);
-         }}>Pogledaj sve korisnike</button>
-         <button className="btn btn-primary" id='edit-buttons' onClick={() => {
-            setShowModalIncreaseMembership(true);
-         }}>Promijeni cijenu članarinu</button>
+         {
+            (accessToken !== null) ? // ako je netko prijavljen onda vrati info o korisniku/organizatoru, inače ništa
+               <div className="my-account-content">
+                  <div className='my-account-content-title-and-text'>
+                     <div className='my-account-content-title'>
+                        <h1>Pozdrav, {userData.username}!</h1>
+                        <h4>{userData.typeOfUser}</h4>
+                     </div>
+                     <div className='my-account-content-text'>
+                        <div className='form'>
+                           <div className="form-group">
+                              <label htmlFor="userName">Korisničko ime:</label>
+                              <input type="text" className="form-control" id="userName" value={username} onChange={(e) => { setUserName(e.target.value) }} disabled></input>
+                           </div>
 
-         {/* Modal */}
-         {showModalShowAll && (
-            <div className="background">
-               <div className="window-show-all">
-                  <span className='exit' onClick={closeModalShowAll}>&times;</span>
-                  <div>Prikaži sve</div>
-                  <div>
-                     <button className='btn btn-primary' onClick={() => {
-                        handleAllUsers(0);
-                     }}>Svi</button>
-                     <button className='btn btn-primary' onClick={() => {
-                        handleAllUsers(1);
-                     }}>Posjetitelji</button>
-                     <button className='btn btn-primary' onClick={() => {
-                        handleAllUsers(2);
-                     }}>Organizatori</button>
+                           <div className="form-group">
+                              <label htmlFor="email">E-mail adresa:</label>
+                              <input type="email" className="form-control" id="email" value={email} onChange={(e) => { setEmail(e.target.value) }} disabled></input>
+                           </div>
+
+                           <button className="btn btn-primary" onClick={validation} hidden>Spremi</button>
+                        </div>
+                     </div>
                   </div>
-                  <div className='allUsers'></div>
-               </div>
-            </div>
-         )}
 
-         {/* Modal */}
-         {showModalIncreaseMembership && (
-            <div className="background">
-               <div className="window">
-                  <span className='exit' onClick={closeModalIncreaseMembership}>&times;</span>
-                  <div>Unesi iznos:</div>
-                  <form>
-                     <input type='text' className='form-control' id='amount' onChange={(e) => { setAmount(e.target.value); }}></input>
-                     <button type="submit" className='btn btn-primary' onClick={handleIncreaseMembership}>Promijeni</button>
-                  </form>
-               </div>
-            </div>
-         )}
+                  {/* TODO - dodati funkcionalnost buttona! */}
+                  <div className="edit-content">
+                     <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
+                     <button className="btn btn-primary" id="edit-buttons" onClick={() => {
+                        handleAllUsers(0);
+                     }}>Pogledaj sve korisnike</button>
+                     <button className="btn btn-primary" id='edit-buttons' onClick={() => {
+                        openModalIncreaseMembership();
+                     }}>Promijeni cijenu članarinu</button>
+                  </div>
 
-         {/* Modal */}
-         {showModalMessage && (
-            <div className="background">
-               <div className="window">
-                  <span className='exit' onClick={closeModalMessage}>&times;</span>
-                  <div>{message}</div>
-                  <button className='btn btn-primary' onClick={closeModalMessage}>Zatvori</button>
-               </div>
-            </div>
-         )}
+                  {/* Modal */}
+                  {showModalValidation && (
+                     <div className="background">
+                        <div className="window">
+                           <div>Unesi lozinku</div>
+                           <label htmlFor='password'>Lozinka:</label>
+                           <input type='password' className='form-control' id='password' onChange={(e) => { setPassword(e.target.value); }}></input>
+                           <button type="submit" className='btn btn-primary' onClick={handleEdit}>Provjeri</button>
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalShowAll && (
+                     <div className="background">
+                        <div className="window-show-all">
+                           <span className='exit' onClick={closeModalShowAll}>&times;</span>
+                           <div>Prikaži sve</div>
+                           <div>
+                              <button className='btn btn-primary' onClick={() => {
+                                 handleAllUsers(0);
+                              }}>Svi</button>
+                              <button className='btn btn-primary' onClick={() => {
+                                 handleAllUsers(1);
+                              }}>Posjetitelji</button>
+                              <button className='btn btn-primary' onClick={() => {
+                                 handleAllUsers(2);
+                              }}>Organizatori</button>
+                           </div>
+                           <div className='allUsers'></div>
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalIncreaseMembership && (
+                     <div className="background">
+                        <div className="window">
+                           <span className='exit' onClick={closeModalIncreaseMembership}>&times;</span>
+                           <div>Unesi iznos:</div>
+                           <form>
+                              <input type='text' className='form-control' id='amount' onChange={(e) => { setAmount(e.target.value); }}></input>
+                              <button type="submit" className='btn btn-primary' onClick={handleIncreaseMembership}>Promijeni</button>
+                           </form>
+                        </div>
+                     </div>
+                  )}
+
+                  {/* Modal */}
+                  {showModalMessage && (
+                     <div className="background">
+                        <div className="window">
+                           <div>{message.content}</div>
+                           <button className='btn btn-primary' onClick={() => {
+                              closeModalMessage();
+
+                              if (message.type === "delete") {
+                                 sessionStorage.removeItem("accessToken");
+                                 navigate('/home');
+                              }
+                              window.location.reload();
+                           }}>Zatvori</button>
+                        </div>
+                     </div>
+                  )}
+
+               </div> : ""
+         }
       </>
    );
 }
