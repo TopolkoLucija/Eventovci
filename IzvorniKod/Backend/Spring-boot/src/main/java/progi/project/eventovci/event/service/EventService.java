@@ -184,4 +184,40 @@ public class EventService {
         User user = userRepository.findUserById(event.getEventCoordinatorid());
         return new EventInfoDTO(event.getEventName(), event.getTypeOfEvent(), event.getLocation(), event.getTimeOfTheEvent(), event.getDuration(), event.getTicketPrice(), event.getEventCoordinatorid(), user.getUsername());
     }
+
+    public List<EventPrintDTO> getMyEvents(Long userId) {
+        List<EventPrintDTO> eventsdto = new ArrayList<>();
+        List<Event> events = eventRepository.findAllByTimeOfTheEventAfterAndEventCoordinatorid(LocalDateTime.now(), userId);
+
+        for (Event e : events) {
+            String media = null;
+            String type = null;
+            MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
+            if (mc!=null) {
+                media = mc.getContent();
+                type = mc.getType();
+            }
+            eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
+        }
+
+        return eventsdto;
+    }
+
+    public List<EventPrintDTO> getMyOldEvents(Long userId) {
+        List<EventPrintDTO> eventsdto = new ArrayList<>();
+        List<Event> events = eventRepository.findAllByTimeOfTheEventBeforeAndEventCoordinatorid(LocalDateTime.now(), userId);
+
+        for (Event e : events) {
+            String media = null;
+            String type = null;
+            MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
+            if (mc!=null) {
+                media = mc.getContent();
+                type = mc.getType();
+            }
+            eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
+        }
+
+        return eventsdto;
+    }
 }

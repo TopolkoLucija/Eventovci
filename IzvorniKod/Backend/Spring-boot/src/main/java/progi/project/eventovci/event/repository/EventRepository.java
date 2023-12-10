@@ -28,4 +28,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findAllByTimeOfTheEventAfter(LocalDateTime time);
 
+    List<Event> findAllByTimeOfTheEventAfterAndEventCoordinatorid(LocalDateTime time, Long userId);
+
+    List<Event> findAllByTimeOfTheEventBeforeAndEventCoordinatorid(LocalDateTime time, Long userId);
+
 }

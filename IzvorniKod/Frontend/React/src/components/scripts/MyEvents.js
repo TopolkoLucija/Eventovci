@@ -32,7 +32,6 @@ const MyEvents = () => {
         })
         .then((data) => {
           //setUserData(data);
-          console.log("Hello");
           console.log(data);
         })
         .catch((error) => {
@@ -128,7 +127,7 @@ const MyEvents = () => {
             onMouseEnter={() => setActiveLink(null)}
             */
           >
-            Budući događaji
+            Buduća događanja
           </a>
           <a
             onClick={() => mojiPrethodniDogadaji()}
@@ -138,7 +137,7 @@ const MyEvents = () => {
             onMouseEnter={() => setActiveLink(null)}
             */
           >
-            Prethodni Događaji
+            Prethodna događanja
           </a>
           <div className="animation start-home"></div>
         </nav>
@@ -160,7 +159,6 @@ const MyEvents = () => {
           </div>
         ) : (
           <div className="empty">
-            <h2>No movies found</h2>
           </div>
         )}
       </div>

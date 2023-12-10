@@ -61,6 +61,18 @@ public class EventController {
         return ResponseEntity.ok(eventinfo);
     }
 
+    @GetMapping("/myEvents")
+    public ResponseEntity<List<EventPrintDTO>> myEvents(@RequestHeader("Authorization") String token) {
+        List<EventPrintDTO> events = eventService.getMyEvents(convert.convertToId(token));
+        return ResponseEntity.ok(events);
+    }
+
+    @GetMapping("/myOldEvents")
+    public ResponseEntity<List<EventPrintDTO>> myOldEvents(@RequestHeader("Authorization") String token) {
+        List<EventPrintDTO> events = eventService.getMyOldEvents(convert.convertToId(token));
+        return ResponseEntity.ok(events);
+    }
+
     @ExceptionHandler()
     public ResponseEntity<String> handleException(RuntimeException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error occurred: " + ex.getMessage());
