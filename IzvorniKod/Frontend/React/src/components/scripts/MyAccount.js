@@ -211,7 +211,6 @@ const MyAccount = () => {
             {showModalValidation && (
               <div className="background">
                 <div className="window">
-                  <span onClick={closeModalValidation}>&times;</span>
                   <div>Unesi lozinku</div>
                   <label htmlFor='password'>Lozinka:</label>
                   <input type='password' className='form-control' id='password' onChange={(e) => { setPassword(e.target.value); }}></input>
