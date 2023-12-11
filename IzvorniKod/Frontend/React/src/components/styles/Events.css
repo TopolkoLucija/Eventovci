@@ -15,7 +15,7 @@
   }
  .glavniKontejner{
   display: grid;
-  width: 77vw;
+  width: 80vw;
  }
  .kontejnerZaNavbar{
   height: 5vh;
@@ -75,38 +75,32 @@ nav .animation{
 }
 nav a:nth-child(1){
     width: 100px;
+    
 }
 nav .start-home, a:nth-child(1):hover~.animation{
     width: 100px;
     left: 0;
 }
 nav a:nth-child(2){
-    width: 110px;
+    width: 10vw;
 }
 nav a:nth-child(2):hover~.animation{
-    width: 110px;
-    left: 100px;
+    width: 10vw;
+    left: 10vw;
 }
 nav a:nth-child(3){
-    width: 100px;
+    width: 17vw;
 }
 nav a:nth-child(3):hover~.animation{
-    width: 100px;
-    left: 210px;
+    width: 17vw;
+    left: 40vw;
 }
 nav a:nth-child(4){
-    width: 160px;
+    width: 17vw;
 }
 nav a:nth-child(4):hover~.animation{
-    width: 160px;
-    left: 310px;
-}
-nav a:nth-child(5){
-    width: 120px;
-}
-nav a:nth-child(5):hover~.animation{
-    width: 120px;
-    left: 470px;
+    width: 17vw;
+    left: 57vw;
 }
 @media (max-width: 768px) {
     .glavniKontejner{
@@ -157,6 +151,7 @@ nav a:nth-child(5):hover~.animation{
         left: 60vw;
     }
   }
+  
   @media (max-width: 768px) {
     nav a{
         font-size: 8px;
