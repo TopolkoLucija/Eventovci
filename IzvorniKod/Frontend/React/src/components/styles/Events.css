@@ -102,6 +102,9 @@ body {
     width: 15vw;
     left: 45vw;
 }
+.sveCss{
+    width: 15vw;
+}
 @media (max-width: 768px) {
     .glavniKontejner{
         width: 100vw;
@@ -114,47 +117,51 @@ body {
     .kontejnerZaNavbar{
         width: 100vw;
     }
-    .navigacijaEvents{
-        width: 80vw;
-    }
     .navigacijaEvents a{
         font-size: 10px;
-        width: 20vw;
+        width: 16vw;
     }
     .dvadesetCetriSataCss{
-        width: 20vw;
+        width: 16vw;
     }
     .sedanDanaCss{
-        width: 20vw;
+        width: 16vw;
     }
     .tridesetDanaCss{
-        width: 20vw;
+        width: 16vw;
     }
     .cetrdesetOsamSatiCss{
-        width: 20vw;
+        width: 16vw;
     }
     .navigacijaEvents{
         width: 80vw !important
     }
     .navigacijaEvents .animation {
-        width: 20vw; /* Match the width of the animation to nav a elements */
+        width: 16vw; /* Match the width of the animation to nav a elements */
         transition: all .5s ease 0s;
     }
     .navigacijaEvents .start-home, .dvadesetCetriSataCss:hover~.animation{
-        width: 20vw;
+        width: 16vw;
         left: 0;
     }
     .sedanDanaCss:hover~.animation{
-        width: 20vw;
-        left: 20vw;
+        width: 16vw;
+        left: 16vw;
     }
     .tridesetDanaCss:hover~.animation{
-        width: 20vw;
-        left: 40vw;
+        width: 16vw;
+        left: 32vw;
     }
     .cetrdesetOsamSatiCss:hover~.animation{
-        width: 20vw;
-        left: 60vw;
+        width: 16vw;
+        left: 48vw;
+    }
+    .sveCss{
+        width: 16vw !important;
+    }
+    .sveCss:hover~.animation{
+            width: 16vw;
+            left: 64vw;
     }
   }
   

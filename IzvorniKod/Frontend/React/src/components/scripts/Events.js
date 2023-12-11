@@ -16,9 +16,8 @@ function Events() {
 
   const handleLinkClick = (filterValue, index) => {
     setClickedLink(index);
-      setInitialLoad(false);
-      dvadesetCetriSata(filterValue);
-
+    setInitialLoad(false);
+    dvadesetCetriSata(filterValue);
   };
 
   useEffect(() => {
@@ -38,8 +37,7 @@ function Events() {
           }
           return response.json();
         })
-        .then((data) => {
-        })
+        .then((data) => {})
         .catch((error) => {
           console.error("Error: " + error);
         });
@@ -74,8 +72,7 @@ function Events() {
   };
 
   // Call the function
-  useEffect(() => {
-  }, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
+  useEffect(() => {}, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
 
   useEffect(() => {
     if (initialLoad) {
@@ -89,42 +86,62 @@ function Events() {
       <div className="kontejnerZaNavbar">
         <nav className="navigacijaEvents">
           <a
-              className={(selectedLink === 0 || (selectedLink === null && clickedLink === 0)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
-              onClick={() => handleLinkClick(0, 0)}
-              onMouseEnter={() => setSelectedLink(0)}
-              onMouseLeave={() => setSelectedLink(null)}
+            className={
+              selectedLink === 0 || (selectedLink === null && clickedLink === 0)
+                ? "active sveCss"
+                : "sveCss"
+            }
+            onClick={() => handleLinkClick(0, 0)}
+            onMouseEnter={() => setSelectedLink(0)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             Sve
           </a>
           <a
-              className={(selectedLink === 1 || (selectedLink === null && clickedLink === 1)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
-              onClick={() => handleLinkClick(24, 1)}
-              onMouseEnter={() => setSelectedLink(1)}
-              onMouseLeave={() => setSelectedLink(null)}
+            className={
+              selectedLink === 1 || (selectedLink === null && clickedLink === 1)
+                ? "active dvadesetCetriSataCss"
+                : "dvadesetCetriSataCss"
+            }
+            onClick={() => handleLinkClick(24, 1)}
+            onMouseEnter={() => setSelectedLink(1)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             24h
           </a>
           <a
-              className={(selectedLink === 2 || (selectedLink === null && clickedLink === 2)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
-              onClick={() => handleLinkClick(7, 2)}
-              onMouseEnter={() => setSelectedLink(2)}
-              onMouseLeave={() => setSelectedLink(null)}
+            className={
+              selectedLink === 2 || (selectedLink === null && clickedLink === 2)
+                ? "active dvadesetCetriSataCss"
+                : "dvadesetCetriSataCss"
+            }
+            onClick={() => handleLinkClick(7, 2)}
+            onMouseEnter={() => setSelectedLink(2)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             7 dana
           </a>
           <a
-              className={(selectedLink === 3 || (selectedLink === null && clickedLink === 3)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
-              onClick={() => handleLinkClick(30, 3)}
-              onMouseEnter={() => setSelectedLink(3)}
-              onMouseLeave={() => setSelectedLink(null)}
+            className={
+              selectedLink === 3 || (selectedLink === null && clickedLink === 3)
+                ? "active dvadesetCetriSataCss"
+                : "dvadesetCetriSataCss"
+            }
+            onClick={() => handleLinkClick(30, 3)}
+            onMouseEnter={() => setSelectedLink(3)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             30 dana
           </a>
           <a
-              className={(selectedLink === 4 || (selectedLink === null && clickedLink === 4)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
-              onClick={() => handleLinkClick(48, 4)}
-              onMouseEnter={() => setSelectedLink(4)}
-              onMouseLeave={() => setSelectedLink(null)}
+            className={
+              selectedLink === 4 || (selectedLink === null && clickedLink === 4)
+                ? "active dvadesetCetriSataCss"
+                : "dvadesetCetriSataCss"
+            }
+            onClick={() => handleLinkClick(48, 4)}
+            onMouseEnter={() => setSelectedLink(4)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             Prije 48h
           </a>
