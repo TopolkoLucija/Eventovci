@@ -3,40 +3,22 @@ import { useNavigate } from "react-router-dom";
 import Dogadaj from "./Dogadaj";
 import "../styles/Events.css";
 
-const dogadaj = {
-  Naslov: "Shrek",
-  Datum: "05.01.2024",
-  Mjesto: "Dolac",
-  Poster:
-    "https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-};
-/*      {dogadaj ? (
-        <div className="container">
-          <Dogadaj dogadaj={dogadaj}></Dogadaj>
-        </div>
-      ) : (
-        <div className="empty">
-          <h2>No movies found</h2>
-        </div>
-      )}
-*/
 function Events() {
   const accessToken = sessionStorage.getItem("accessToken");
   const [dogadajcic, setdogadajcic] = useState([]);
   const [initialLoad, setInitialLoad] = useState(true);
 
-  const [activeLink, setActiveLink] = useState(null);
-  // console.log(accessToken);
+  const [clickedLink, setClickedLink] = useState(null);
+  const [selectedLink, setSelectedLink] = useState(null);
 
   const setUserData = useState("");
   const navigate = useNavigate();
 
   const handleLinkClick = (filterValue, index) => {
-    setActiveLink(index);
-    if (filterValue !== 0) {
+    setClickedLink(index);
       setInitialLoad(false);
       dvadesetCetriSata(filterValue);
-    }
+
   };
 
   useEffect(() => {
@@ -54,13 +36,9 @@ function Events() {
             navigate("/login");
             return;
           }
-          // console.log(response.json());
           return response.json();
         })
         .then((data) => {
-          //setUserData(data);
-          console.log("Hello");
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error: " + error);
@@ -87,16 +65,9 @@ function Events() {
         return;
       }
 
-      const data = await response.json(); /*.then((dataJeSon) => {
-        setdogadajcic(dataJeSon);
-        console.log("unutar awaita: " + dataJeSon);
-      }); */
-
-      console.log("Data nakon " + x + " : " + data);
+      const data = await response.json();
 
       setdogadajcic(data);
-      // console.log("ovo je dogadajcic nakon 24h: " + dogadajcic);
-      // Perform actions with the data here
     } catch (error) {
       console.error("Error:", error);
     }
@@ -104,7 +75,6 @@ function Events() {
 
   // Call the function
   useEffect(() => {
-    console.log("Updated dogadajcic:", dogadajcic);
   }, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
 
   useEffect(() => {
@@ -119,42 +89,42 @@ function Events() {
       <div className="kontejnerZaNavbar">
         <nav className="navigacijaEvents">
           <a
-            className={
-              activeLink === 1
-                ? "active dvadesetCetriSataCss"
-                : "dvadesetCetriSataCss"
-            }
-            onClick={() => handleLinkClick(24, 1)}
-            onMouseEnter={() => setActiveLink(null)}
+              className={(selectedLink === 0 || (selectedLink === null && clickedLink === 0)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
+              onClick={() => handleLinkClick(0, 0)}
+              onMouseEnter={() => setSelectedLink(0)}
+              onMouseLeave={() => setSelectedLink(null)}
+          >
+            Sve
+          </a>
+          <a
+              className={(selectedLink === 1 || (selectedLink === null && clickedLink === 1)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
+              onClick={() => handleLinkClick(24, 1)}
+              onMouseEnter={() => setSelectedLink(1)}
+              onMouseLeave={() => setSelectedLink(null)}
           >
             24h
           </a>
           <a
-            className={
-              activeLink === 2 ? "active sedanDanaCss" : "sedanDanaCss"
-            }
-            onClick={() => handleLinkClick(7, 2)}
-            onMouseEnter={() => setActiveLink(null)}
+              className={(selectedLink === 2 || (selectedLink === null && clickedLink === 2)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
+              onClick={() => handleLinkClick(7, 2)}
+              onMouseEnter={() => setSelectedLink(2)}
+              onMouseLeave={() => setSelectedLink(null)}
           >
             7 dana
           </a>
           <a
-            className={
-              activeLink === 3 ? "active tridesetDanaCss" : "tridesetDanaCss"
-            }
-            onClick={() => handleLinkClick(30, 3)}
-            onMouseEnter={() => setActiveLink(null)}
+              className={(selectedLink === 3 || (selectedLink === null && clickedLink === 3)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
+              onClick={() => handleLinkClick(30, 3)}
+              onMouseEnter={() => setSelectedLink(3)}
+              onMouseLeave={() => setSelectedLink(null)}
           >
             30 dana
           </a>
           <a
-            className={
-              activeLink === 4
-                ? "active cetrdesetOsamSatiCss"
-                : "cetrdesetOsamSatiCss"
-            }
-            onClick={() => handleLinkClick(48, 4)}
-            onMouseEnter={() => setActiveLink(null)}
+              className={(selectedLink === 4 || (selectedLink === null && clickedLink === 4)) ? "active dvadesetCetriSataCss" : "dvadesetCetriSataCss"}
+              onClick={() => handleLinkClick(48, 4)}
+              onMouseEnter={() => setSelectedLink(4)}
+              onMouseLeave={() => setSelectedLink(null)}
           >
             Prije 48h
           </a>

@@ -389,7 +389,6 @@ const AdminView = (props) => {
                                  sessionStorage.removeItem("accessToken");
                                  navigate('/home');
                               }
-                              window.location.reload();
                            }}>Zatvori</button>
                         </div>
                      </div>
