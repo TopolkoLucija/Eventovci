@@ -29,7 +29,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     background: #ffffff;
 }
-nav{
+.navigacijaEvents{
     position: relative;
     /*
     margin: 270px auto 0;
@@ -41,17 +41,17 @@ nav{
     font-size: 0;
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
 }
-nav a.active {
+.navigacijaEvents a.active {
     /* Your styles for the active link */
     background-color: #1abc9c; /* Change to your desired background color */
     color: rgb(0, 0, 0); /* Change to your desired text color */
     border-radius: 8px;
     height: 100%;
   }
-  nav a.active~.animation {
+  .navigacijaEvents a.active~.animation {
     display: none; /* Or any other styles you want to apply to remove the active effect */
   }
-nav a{
+.navigacijaEvents a{
     font-size: 15px;
     text-transform: uppercase;
     color: rgb(0, 0, 0);
@@ -62,7 +62,7 @@ nav a{
     display: inline-block;
     text-align: center;
 }
-nav .animation{
+.navigacijaEvents .animation{
     position: absolute;
     height: 100%;
     /* height: 5px; */
@@ -73,34 +73,34 @@ nav .animation{
     border-radius: 8px;
     transition: all .5s ease 0s;
 }
-nav a:nth-child(1){
-    width: 100px;
+.dvadesetCetriSataCss{
+    width: 15vw;
     
 }
-nav .start-home, a:nth-child(1):hover~.animation{
-    width: 100px;
+.navigacijaEvents .start-home, .dvadesetCetriSataCss:hover~.animation{
+    width: 15vw;
     left: 0;
 }
-nav a:nth-child(2){
-    width: 10vw;
+.sedanDanaCss{
+    width: 15vw;
 }
-nav a:nth-child(2):hover~.animation{
-    width: 10vw;
-    left: 10vw;
+.sedanDanaCss:hover~.animation{
+    width: 15vw;
+    left: 15vw;
 }
-nav a:nth-child(3){
-    width: 17vw;
+.tridesetDanaCss{
+    width: 15vw;
 }
-nav a:nth-child(3):hover~.animation{
-    width: 17vw;
-    left: 40vw;
+.tridesetDanaCss:hover~.animation{
+    width: 15vw;
+    left: 30vw;
 }
-nav a:nth-child(4){
-    width: 17vw;
+.cetrdesetOsamSatiCss{
+    width: 15vw;
 }
-nav a:nth-child(4):hover~.animation{
-    width: 17vw;
-    left: 57vw;
+.cetrdesetOsamSatiCss:hover~.animation{
+    width: 15vw;
+    left: 45vw;
 }
 @media (max-width: 768px) {
     .glavniKontejner{
@@ -111,42 +111,48 @@ nav a:nth-child(4):hover~.animation{
         height: 80vh;
         padding-top: 1rem;
     }
-    nav a{
+    .kontejnerZaNavbar{
+        width: 100vw;
+    }
+    .navigacijaEvents{
+        width: 80vw;
+    }
+    .navigacijaEvents a{
         font-size: 10px;
         width: 20vw;
     }
-    nav a:nth-child(1){
+    .dvadesetCetriSataCss{
         width: 20vw;
     }
-    nav a:nth-child(2){
+    .sedanDanaCss{
         width: 20vw;
     }
-    nav a:nth-child(3){
+    .tridesetDanaCss{
         width: 20vw;
     }
-    nav a:nth-child(4){
+    .cetrdesetOsamSatiCss{
         width: 20vw;
     }
-    nav{
-        width: 80vw;
+    .navigacijaEvents{
+        width: 80vw !important
     }
-    nav .animation {
+    .navigacijaEvents .animation {
         width: 20vw; /* Match the width of the animation to nav a elements */
         transition: all .5s ease 0s;
     }
-    nav .start-home, a:nth-child(1):hover~.animation{
+    .navigacijaEvents .start-home, .dvadesetCetriSataCss:hover~.animation{
         width: 20vw;
         left: 0;
     }
-    nav a:nth-child(2):hover~.animation{
+    .sedanDanaCss:hover~.animation{
         width: 20vw;
         left: 20vw;
     }
-    nav a:nth-child(3):hover~.animation{
+    .tridesetDanaCss:hover~.animation{
         width: 20vw;
         left: 40vw;
     }
-    nav a:nth-child(4):hover~.animation{
+    .cetrdesetOsamSatiCss:hover~.animation{
         width: 20vw;
         left: 60vw;
     }

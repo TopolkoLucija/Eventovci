@@ -122,6 +122,7 @@ const MyEvents = () => {
         <nav>
           <a
             onClick={() => mojiBuduciDogadaji()}
+            className="myeventsBucuciDogadaji"
             /* className={activeLink === 1 ? "active" : ""}
             onClick={() => handleLinkClick(24, 1)}
             onMouseEnter={() => setActiveLink(null)}
@@ -131,6 +132,7 @@ const MyEvents = () => {
           </a>
           <a
             onClick={() => mojiPrethodniDogadaji()}
+            className="myeventsPrethodniDogadaji"
             /*
             className={activeLink === 2 ? "active" : ""}
             onClick={() => handleLinkClick(7, 2)}
@@ -158,8 +160,7 @@ const MyEvents = () => {
             })}
           </div>
         ) : (
-          <div className="empty">
-          </div>
+          <div className="empty"></div>
         )}
       </div>
     </div>

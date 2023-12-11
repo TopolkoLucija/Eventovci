@@ -117,30 +117,42 @@ function Events() {
   return (
     <div className="glavniKontejner">
       <div className="kontejnerZaNavbar">
-        <nav>
+        <nav className="navigacijaEvents">
           <a
-            className={activeLink === 1 ? "active" : ""}
+            className={
+              activeLink === 1
+                ? "active dvadesetCetriSataCss"
+                : "dvadesetCetriSataCss"
+            }
             onClick={() => handleLinkClick(24, 1)}
             onMouseEnter={() => setActiveLink(null)}
           >
             24h
           </a>
           <a
-            className={activeLink === 2 ? "active" : ""}
+            className={
+              activeLink === 2 ? "active sedanDanaCss" : "sedanDanaCss"
+            }
             onClick={() => handleLinkClick(7, 2)}
             onMouseEnter={() => setActiveLink(null)}
           >
             7 dana
           </a>
           <a
-            className={activeLink === 3 ? "active" : ""}
+            className={
+              activeLink === 3 ? "active tridesetDanaCss" : "tridesetDanaCss"
+            }
             onClick={() => handleLinkClick(30, 3)}
             onMouseEnter={() => setActiveLink(null)}
           >
             30 dana
           </a>
           <a
-            className={activeLink === 4 ? "active" : ""}
+            className={
+              activeLink === 4
+                ? "active cetrdesetOsamSatiCss"
+                : "cetrdesetOsamSatiCss"
+            }
             onClick={() => handleLinkClick(48, 4)}
             onMouseEnter={() => setActiveLink(null)}
           >
@@ -165,8 +177,7 @@ function Events() {
             })}
           </div>
         ) : (
-          <div className="empty">
-          </div>
+          <div className="empty"></div>
         )}
       </div>
     </div>
