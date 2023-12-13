@@ -1,4 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { format } from "date-fns";
+import DatePicker from "react-datepicker";  // Dodajte ovaj import
 import { useEffect, useState } from 'react';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
@@ -9,6 +11,7 @@ const OrganizerView = (props) => {
    var userData = props.myProp;
 
    const navigate = useNavigate();
+
    const [email, setEmail] = useState("");
    const [username, setUserName] = useState("");
    const [password, setPassword] = useState("");
@@ -333,6 +336,70 @@ const OrganizerView = (props) => {
          })
    }
 
+   const [eventName, setEventName] = useState("");
+   const [eventType, setEventType] = useState("");
+   const [eventLocation, setEventLocation] = useState("");
+   const [eventTime, setEventTime] = useState(""); // Dodajte vremenski state
+   const [eventDuration, setEventDuration] = useState("");
+   const [eventPrice, setEventPrice] = useState("");
+   const [eventDescription, setEventDescription] = useState("");
+   const [eventImages, setEventImages] = useState([]);  // state za praćenje slika
+   const [eventVideos, setEventVideos] = useState([]);  // state za praćenje videozapisa
+
+
+
+   const handleEventNameChange = (e) => {
+      setEventName(e.target.value);
+   };
+
+   const handleEventTypeChange = (e) => {
+      setEventType(e.target.value);
+   };
+
+   const handleEventLocationChange = (e) => {
+      setEventLocation(e.target.value);
+   };
+
+   const handleEventTimeChange = (e) => {
+      setEventTime(e.target.value);
+   };
+
+   const handleEventDurationChange = (e) => {
+      setEventDuration(e.target.value);
+   };
+
+   const handleEventPriceChange = (e) => {
+      setEventPrice(e.target.value);
+   };
+
+   const handleEventDescriptionChange = (e) => {
+      setEventDescription(e.target.value);
+   };
+
+   const handleEventImagesChange = (e) => {
+      const files = e.target.files;
+      setEventImages((prevImages) => [...prevImages, ...files]);
+   };
+
+   const handleEventVideosChange = (e) => {
+      const files = e.target.files;
+      setEventVideos((prevVideos) => [...prevVideos, ...files]);
+   };
+
+
+   const handleEventSubmit = () => {
+      console.log("Naziv događanja:", eventName);
+      console.log("Vrsta događanja:", eventType);
+      console.log("Lokacija događanja:", eventLocation);
+      console.log("Vrijeme događanja:", eventTime);
+      console.log("Trajanje događanja:", eventDuration);
+      console.log("Cijena događanja:", eventPrice);
+      console.log("Opis događanja:", eventDescription);
+
+
+   };
+
+
    return (
       <>
          {
@@ -387,13 +454,106 @@ const OrganizerView = (props) => {
 
                   {/* Modal */}
                   {showModalAddEvent && (
-                     <div className="background">
-                        <div className="window">
-                           <span className='exit' onClick={closeModalAddEvent}>&times;</span>
-                           <div>Unesi podatke o dođagaju</div>
+                  <div className="background">
+                     <div className="window-event">
+                        <span className='exit' onClick={closeModalAddEvent}>&times;</span>
+                        <div>Upištite podatke o događanju koje želite dodati:</div>
+                        <div>Naziv:</div>
+                        <input
+                           type="text"
+                           className="form-control"
+                           value={eventName}
+                           onChange={handleEventNameChange}
+                        />
+                        <div>Tip:</div>
+                        <select
+                           className="form-control"
+                           value={eventType}
+                           onChange={handleEventTypeChange}
+                        >
+                           <option value="" disabled>Odaberite tip događanja</option>
+                           <option value="koncert">Koncert</option>
+                           <option value="predstava">Predstava</option>
+                           <option value="izložba">Izložba</option>
+                           <option value="sajam">Sajam</option>
+                           <option value="konferencija">Konferencija</option>
+                           <option value="skup">Skup</option>
+                           <option value="zabava">Zabava</option>
+                           <option value="seminar">Seminar</option>
+                           <option value="festival">Festival</option>
+                           <option value="priredba">Priredba</option>
+                           <option value="manifestacija">Manifestacija</option>
+                           <option value="ostalo">Ostalo</option>
+                        </select>
+                        <div>Lokacija:</div>
+                        <select
+                           className="form-control"
+                           value={eventLocation}
+                           onChange={handleEventLocationChange}
+                        >
+                           <option value="" disabled>Odaberite lokaciju događanja</option>
+                           <option value="gornji grad">Gornji grad</option>
+                           <option value="donji grad">Donji grad</option>
+                           <option value="trnje">Trnje</option>
+                           <option value="novi zagreb">Novi Zagreb</option>
+                           <option value="ostalo">Ostalo</option>
+                        </select>
+                        <div>Vrijeme:</div>
+                           <input
+                           type="text"
+                           className="form-control"
+                           value={eventTime}
+                           onChange={handleEventTimeChange}   
+                           /> 
+                           <small className="small-text">Unesite datum i vrijeme u formatu: dd. MM. yyyy HH:mm</small>
+                        <div>Trajanje:</div>
+                        <input
+                           type="text"
+                           className="form-control"
+                           value={eventDuration}
+                           onChange={handleEventDurationChange}                        
+                        />
+                        <div>Cijena:</div>
+                        <input
+                           type="text"
+                           className="form-control"
+                           value={eventPrice}
+                           onChange={handleEventPriceChange}                        
+                        />
+                        <div>Opis:</div>
+                        <input
+                           type="text"
+                           className="form-control"
+                           value={eventDescription}
+                           onChange={handleEventDescriptionChange}                        
+                        />
+                        <div>
+                        <div className="form-group">
+                           <label htmlFor="eventImages">Slike događaja:</label>
+                           <input
+                              type="file"
+                              className="form-control"
+                              id="eventImages"
+                              onChange={handleEventImagesChange}
+                              multiple
+                           />
+                        </div>
+                        <div className="form-group">
+                           <label htmlFor="eventVideos">Videozapisi događaja:</label>
+                           <input
+                              type="file"
+                              className="form-control"
+                              id="eventVideos"
+                              onChange={handleEventVideosChange}
+                              multiple
+                           />
+                        </div>
+                           <button type="submit" className='btn btn-primary' onClick={handleEventSubmit}>Dodaj</button>
                         </div>
                      </div>
-                  )}
+                  </div>
+               )}
+
 
                   {/* Modal */}
                   {showModalPayMembership && (
