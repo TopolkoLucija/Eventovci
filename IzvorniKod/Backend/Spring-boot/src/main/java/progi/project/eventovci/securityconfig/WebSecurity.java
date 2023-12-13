@@ -73,12 +73,13 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/data/deleteUser/{filter}")).hasAnyRole( "ADMINISTRATOR")
 
                 .requestMatchers(new AntPathRequestMatcher("/events/add")).hasRole("ORGANIZATOR")
-                .requestMatchers(new AntPathRequestMatcher("/events/all")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/all/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/myInterests/{option}")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/delete/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR")
                 .requestMatchers(new AntPathRequestMatcher("/events/inbox")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
                 .requestMatchers(new AntPathRequestMatcher("/events/getEvent/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/events/myEvents")).hasRole("ORGANIZATOR")
+                .requestMatchers(new AntPathRequestMatcher("/events/myOldEvents")).hasRole("ORGANIZATOR")
 
                 .requestMatchers(new AntPathRequestMatcher("/media/get/{filter}")).hasAnyRole("ORGANIZATOR", "ADMINISTRATOR", "POSJETITELJ")
 
