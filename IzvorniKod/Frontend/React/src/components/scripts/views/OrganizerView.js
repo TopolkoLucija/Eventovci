@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from 'react-router-dom';
-import { format } from "date-fns";
-import DatePicker from "react-datepicker";  // Dodajte ovaj import
+import { useNavigate } from 'react-router-dom';
+// import { format } from "date-fns";
+// import DatePicker from "react-datepicker";  // Dodajte ovaj import
 import { useEffect, useState } from 'react';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
@@ -21,11 +21,39 @@ const OrganizerView = (props) => {
       content: ""
    });
    const [membershipAmount, setMembershipAmount] = useState("");
+   const [errorInput, setErrorInput] = useState("");
 
    const [creditCardNumber, setCreditCardNumber] = useState("");
    const [creditCardName, setCreditCardName] = useState("");
    const [creditCardExpirationDate, setCreditCardExpirationDate] = useState('');
    const [creditCardCVC, setCreditCardCVC] = useState("");
+   const [PayPalEmail, setPayPalEmail] = useState("");
+   const [PayPalPassword, setPayPalPassword] = useState("");
+
+   const validatePassword = () => {
+      const inputPayPalPassword = document.getElementById('PayPalPassword');
+      
+      if (inputPayPalPassword.value === "") {
+         setErrorInput("Upišite sve podatke!");
+         return false;
+      }
+      else {
+         setErrorInput("");
+         return true;
+      }
+   }
+
+   const validatePayPalEmail = () => {
+      const inputPayPayEmail = document.getElementById('PayPalEmail');
+      if (!inputPayPayEmail.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+         inputPayPayEmail.style.borderColor = "red";
+         return false;
+      }
+      else {
+         inputPayPayEmail.style.borderColor = "green";
+         return true;
+      }
+   }
 
    const handleCardCVCInput = (event) => {
       let inputValue = event.target.value;
@@ -222,6 +250,9 @@ const OrganizerView = (props) => {
       setShowModalPayWithPayPal(false);
    }
    const openModalPayWithPayPal = () => {
+      setPayPalEmail("");
+      setPayPalPassword("");
+      setErrorInput("");
       setShowModalPayWithPayPal(true);
    }
 
@@ -229,6 +260,10 @@ const OrganizerView = (props) => {
       setShowModalPayWithCard(false);
    }
    const openModalPayWithCard = () => {
+      setCreditCardNumber("");
+      setCreditCardName("");
+      setCreditCardExpirationDate("");
+      setCreditCardCVC("");
       setShowModalPayWithCard(true);
    }
 
@@ -310,6 +345,17 @@ const OrganizerView = (props) => {
    }
 
    const handlePayMembership = () => {
+
+      // ako plaćam PayPalom onda se mora provjeriti Email i Password
+
+      if (!validatePayPalEmail()) {
+         setErrorInput("Unesite točan format email adrese!");
+         return;
+      }
+      if (!validatePassword()) {
+         return;
+      }
+
       fetch('/api/membership', {
          method: "POST",
          headers: {
@@ -333,6 +379,7 @@ const OrganizerView = (props) => {
             }
             openModalMembershipPayed();
             closeModalPayWithCard();
+            closeModalPayWithPayPal();
          })
    }
 
@@ -580,53 +627,53 @@ const OrganizerView = (props) => {
                            <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
                            <div>Iznos: {membershipAmount} €</div>
                            <div>Unesi podatke o kartici:</div>
-                              <div className='form-group'>
-                                 <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
-                                 <input
-                                    type='text'
-                                    className='form-control'
-                                    id='cardNumber'
-                                    value={creditCardNumber}
-                                    onChange={handleCardNumberInput}
-                                    placeholder='0000 0000 0000 0000'
-                                    maxLength={19}
-                                 />
-                              </div>
-                              <div className='form-group'>
-                                 <label htmlFor='cardName'>Ime nositelja kartice:</label>
-                                 <input type='text'
-                                    className='form-control'
-                                    id='cardName'
-                                    value={creditCardName}
-                                    placeholder='Pero Perić'
-                                    onChange={(e) => { setCreditCardName(e.target.value) }} />
-                              </div>
-                              <div className='form-group'>
-                                 <label htmlFor='cardExpirationDate'>Datum isteka:</label>
-                                 <input
-                                    type="text"
-                                    className='form-control'
-                                    id='cardExpirationDate'
-                                    value={creditCardExpirationDate}
-                                    onChange={handleExpirationDateInput}
-                                    placeholder="MM/YY"
-                                    maxLength={5}
-                                 />
-                              </div>
-                              <div className='form-group'>
-                                 <label htmlFor='cardCVC'>CVC:</label>
-                                 <input type='text'
-                                    className='form-control'
-                                    id='cardCVC'
-                                    value={creditCardCVC}
-                                    placeholder='000'
-                                    onChange={handleCardCVCInput}
-                                    maxLength={3}
-                                 />
-                              </div>
+                           <div className='form-group'>
+                              <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
+                              <input
+                                 type='text'
+                                 className='form-control'
+                                 id='cardNumber'
+                                 value={creditCardNumber}
+                                 onChange={handleCardNumberInput}
+                                 placeholder='0000 0000 0000 0000'
+                                 maxLength={19}
+                              />
+                           </div>
+                           <div className='form-group'>
+                              <label htmlFor='cardName'>Ime nositelja kartice:</label>
+                              <input type='text'
+                                 className='form-control'
+                                 id='cardName'
+                                 value={creditCardName}
+                                 placeholder='Pero Perić'
+                                 onChange={(e) => { setCreditCardName(e.target.value) }} />
+                           </div>
+                           <div className='form-group'>
+                              <label htmlFor='cardExpirationDate'>Datum isteka:</label>
+                              <input
+                                 type="text"
+                                 className='form-control'
+                                 id='cardExpirationDate'
+                                 value={creditCardExpirationDate}
+                                 onChange={handleExpirationDateInput}
+                                 placeholder="MM/YY"
+                                 maxLength={5}
+                              />
+                           </div>
+                           <div className='form-group'>
+                              <label htmlFor='cardCVC'>CVC:</label>
+                              <input type='text'
+                                 className='form-control'
+                                 id='cardCVC'
+                                 value={creditCardCVC}
+                                 placeholder='000'
+                                 onChange={handleCardCVCInput}
+                                 maxLength={3}
+                              />
+                           </div>
 
-                              <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
-                           
+                           <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
+
                         </div>
                      </div>
                   )}
@@ -637,6 +684,32 @@ const OrganizerView = (props) => {
                         <div className="window-payment">
                            <span className='exit' onClick={closeModalPayWithPayPal}>&times;</span>
                            <div>Unesi podatke o PayPalu:</div>
+                           <div className='error-input'>{ errorInput }</div>
+                           <div className='form-group'>
+                              <label htmlFor='PayPalEmail'>Email:</label>
+                              <input
+                                 type="email"
+                                 className="form-control"
+                                 id="PayPalEmail"
+                                 value={PayPalEmail}
+                                 onChange={(e) => {
+                                    setErrorInput("");
+                                    setPayPalEmail(e.target.value);
+                                    validatePayPalEmail();
+                                 }}
+                              />
+                              <label htmlFor='PayPalPassword'>Password:</label>
+                              <input
+                                 type='password'
+                                 className='form-control'
+                                 id='PayPalPassword'
+                                 value={PayPalPassword}
+                                 onChange={(e) => {
+                                    setErrorInput("");
+                                    setPayPalPassword(e.target.value);
+                                 }}></input>
+                           </div>
+                           <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
                         </div>
                      </div>
                   )}
@@ -646,7 +719,7 @@ const OrganizerView = (props) => {
                      <div className="background">
                         <div className="window-payment">
                            <div>{message.content}</div>
-                           {message.type !== "error" ? 
+                           {message.type !== "error" ?
                               <div>
                                  <button className='btn btn-primary' onClick={() => {
                                     closeModalMembershipPayed();

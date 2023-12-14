@@ -13,3 +13,9 @@
    justify-content: center;
    align-content: center;
 }
+
+.error-input{
+   margin: 10px;
+   padding: 10px;
+   color: red;
+}
