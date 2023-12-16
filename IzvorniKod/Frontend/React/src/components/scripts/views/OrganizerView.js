@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-// import { format } from "date-fns";
-// import DatePicker from "react-datepicker";  // Dodajte ovaj import
 import { useEffect, useState } from 'react';
+import '../../styles/App.css';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
 
@@ -235,6 +234,7 @@ const OrganizerView = (props) => {
    const closeModalDelete = () => {
       setShowModalDelete(false);
    }
+
    const openModalDelete = () => {
       setShowModalDelete(true);
    }
@@ -386,13 +386,12 @@ const OrganizerView = (props) => {
    const [eventName, setEventName] = useState("");
    const [eventType, setEventType] = useState("");
    const [eventLocation, setEventLocation] = useState("");
-   const [eventTime, setEventTime] = useState(""); // Dodajte vremenski state
+   const [eventTime, setEventTime] = useState(""); // dodajte vremenski state
    const [eventDuration, setEventDuration] = useState("");
    const [eventPrice, setEventPrice] = useState("");
    const [eventDescription, setEventDescription] = useState("");
    const [eventImages, setEventImages] = useState([]);  // state za praćenje slika
    const [eventVideos, setEventVideos] = useState([]);  // state za praćenje videozapisa
-
 
 
    const handleEventNameChange = (e) => {
@@ -433,17 +432,77 @@ const OrganizerView = (props) => {
       setEventVideos((prevVideos) => [...prevVideos, ...files]);
    };
 
+   const handleRemoveImage = (index) => {
+      const updatedImages = [...eventImages];
+      updatedImages.splice(index, 1);
+      setEventImages(updatedImages);
+    
+      // Osvježi input element
+      const inputElement = document.getElementById('eventImages');
+      if (inputElement) {
+        inputElement.value = '';
+      }
+    };
+    
+    const handleRemoveVideo = (index) => {
+      const updatedVideos = [...eventVideos];
+      updatedVideos.splice(index, 1);
+      setEventVideos(updatedVideos);
+    
+      // Osvježi input element
+      const inputElement = document.getElementById('eventVideos');
+      if (inputElement) {
+        inputElement.value = '';
+      }
+    };
 
-   const handleEventSubmit = () => {
-      console.log("Naziv događanja:", eventName);
-      console.log("Vrsta događanja:", eventType);
-      console.log("Lokacija događanja:", eventLocation);
-      console.log("Vrijeme događanja:", eventTime);
-      console.log("Trajanje događanja:", eventDuration);
-      console.log("Cijena događanja:", eventPrice);
-      console.log("Opis događanja:", eventDescription);
+   const handleEventSubmit = async () => {
+      accessToken = sessionStorage.getItem("accessToken");
 
+      const formData = new FormData();
+   
+      formData.append("eventName", eventName);
+      formData.append("eventType", eventType);
+      formData.append("eventLocation", eventLocation);
+      formData.append("eventTime", eventTime);
+      formData.append("eventDuration", eventDuration);
+      formData.append("eventPrice", eventPrice);
+      formData.append("eventDescription", eventDescription);
+   
+      for (let i = 0; i < eventImages.length; i++) {
+         formData.append("eventImages", eventImages[i]);
+      }
+   
+      for (let i = 0; i < eventVideos.length; i++) {
+         formData.append("eventVideos", eventVideos[i]);
+      }
 
+      formData.append("Authorization", accessToken);
+
+      fetch("/api/events/add", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken, // assuming it's a bearer token
+    },
+    body: JSON.stringify(formData), // pass the FormData object directly as the body
+      })
+         .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+               setMessage({
+                  type: "error",
+                  content: "Failed to add event"
+               })
+            }
+            else {
+               setMessage({
+                  type: "event-added",
+                  content: "Događanje dodano!"
+               })
+            }
+            closeModalAddEvent();
+         })
    };
 
 
@@ -499,12 +558,11 @@ const OrganizerView = (props) => {
                      </div>
                   )}
 
-                  {/* Modal */}
                   {showModalAddEvent && (
                   <div className="background">
                      <div className="window-event">
                         <span className='exit' onClick={closeModalAddEvent}>&times;</span>
-                        <div>Upištite podatke o događanju koje želite dodati:</div>
+                        <div className='option-title'>Unesite podatke o događanju koje želite dodati:</div>
                         <div>Naziv:</div>
                         <input
                            type="text"
@@ -547,12 +605,12 @@ const OrganizerView = (props) => {
                         </select>
                         <div>Vrijeme:</div>
                            <input
-                           type="text"
-                           className="form-control"
-                           value={eventTime}
-                           onChange={handleEventTimeChange}   
-                           /> 
-                           <small className="small-text">Unesite datum i vrijeme u formatu: dd. MM. yyyy HH:mm</small>
+                              type="text"
+                              className="form-control"
+                              value={eventTime}
+                              onChange={handleEventTimeChange}
+                              placeholder='dd. MM. yyyy HH:mm'
+                           />
                         <div>Trajanje:</div>
                         <input
                            type="text"
@@ -576,30 +634,65 @@ const OrganizerView = (props) => {
                         />
                         <div>
                         <div className="form-group">
-                           <label htmlFor="eventImages">Slike događaja:</label>
                            <input
-                              type="file"
-                              className="form-control"
-                              id="eventImages"
-                              onChange={handleEventImagesChange}
-                              multiple
-                           />
+                           type="file"
+                           className="form-control"
+                           id="eventImages"
+                           onChange={handleEventImagesChange}
+                           multiple
+                           accept="image/*"
+                           style={{ display: 'none' }} // Skrijte stvarni input
+                        />
+                        <button type="button" className="btn btn-primary" onClick={() => document.getElementById('eventImages').click()}>
+                           Dodajte slike
+                        </button>
+                        {eventImages.length > 0 && (
+                        <div>
+                           <p>Odabrane slike:</p>
+                           {eventImages.map((image, index) => (
+                              <div key={index} className="image-item">
+                              <img src={URL.createObjectURL(image)} alt={`Slika ${index}`} />
+                              <span className="remove-item" onClick={() => handleRemoveImage(index)}>&times;</span>
+                              </div>
+                           ))}
+                        </div>
+                        )}
+ 
                         </div>
                         <div className="form-group">
-                           <label htmlFor="eventVideos">Videozapisi događaja:</label>
-                           <input
-                              type="file"
-                              className="form-control"
-                              id="eventVideos"
-                              onChange={handleEventVideosChange}
-                              multiple
-                           />
+                        <input
+                           type="file"
+                           className="form-control"
+                           id="eventVideos"
+                           onChange={handleEventVideosChange}
+                           multiple
+                           accept="video/*"
+                           style={{ display: 'none' }} // skrijte stvarni input
+                        />
+                        <button type="button" className="btn-primary btn-increase-height" onClick={() => document.getElementById('eventVideos').click()}>
+                           Dodajte videozapise
+                        </button>
+                           {eventVideos.length > 0 && (
+                           <div>
+                              <p>Odabrani videozapisi:</p>
+                              {eventVideos.map((video, index) => (
+                                 <div key={index} className="video-item">
+                                 <video controls>
+                                    <source src={URL.createObjectURL(video)} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                 </video>
+                                 <span className="remove-item" onClick={() => handleRemoveVideo(index)}>&times;</span>
+                                 </div>
+                              ))}
+                           </div>
+                           )}
                         </div>
-                           <button type="submit" className='btn btn-primary' onClick={handleEventSubmit}>Dodaj</button>
+                           <button type="submit" className='btn-primary btn-increase-height' onClick={handleEventSubmit}>Dodaj događanje</button>
                         </div>
                      </div>
                   </div>
                )}
+
 
 
                   {/* Modal */}
