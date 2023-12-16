@@ -151,7 +151,7 @@ VALUES
 
 INSERT INTO pretplata (kategorija, lokacija, idkorisnik)
 VALUES
-    ('Concert', NULL, 1),
+    ('Type 1', NULL, 1),
     (NULL, 'Concert Hall', 2),
-    (NULL, 'Trešnjevka', 1),
+    (NULL, 'Location 1', 1),
     (NULL, 'Trešnjevka', 8);
