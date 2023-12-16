@@ -71,7 +71,12 @@ const Interested = () => {
     setInitialLoad(false);
     posaljiZahtjev(filter);
   };
-  const bezveznaFja = async (/* x */) => {};
+  useEffect(() => {
+    if (initialLoad) {
+      posaljiZahtjev(0);
+      setInitialLoad(false);
+    }
+  }, [initialLoad]);
   return (
     <div className="glavniKontejner">
       <div className="kontejnerZaNavbar">
