@@ -20,6 +20,28 @@
    color: red;
 }
 
+.exit{
+   position: fixed;
+}
+
+.window-event {
+   height: 95%;
+   width: 90%;
+   overflow-y: scroll;
+}
+
+.added-image{
+   width: 20vw;
+   height: 20vw;
+   object-fit: cover;
+}
+
+.added-video{
+   width: 20vw;
+   height: 20vw;
+   object-fit: scale-down;
+}
+
 .background {
    position: absolute;
 }

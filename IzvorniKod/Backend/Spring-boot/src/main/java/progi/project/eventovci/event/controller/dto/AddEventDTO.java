@@ -13,11 +13,8 @@ public class AddEventDTO {
     private Double duration;
     private Double ticketPrice;
     private String text;
-    private List<MultipartFile> files;
 
-    private List<String> type;
-
-    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Double ticketPrice, String text, List<MultipartFile> files, List<String> type) {
+    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -25,8 +22,6 @@ public class AddEventDTO {
         this.duration = duration;
         this.ticketPrice = ticketPrice;
         this.text = text;
-        this.files = files;
-        this.type = type;
     }
 
     public AddEventDTO(){}
@@ -87,19 +82,4 @@ public class AddEventDTO {
         this.text = text;
     }
 
-    public List<MultipartFile> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<MultipartFile> files) {
-        this.files = files;
-    }
-
-    public List<String> getType() {
-        return type;
-    }
-
-    public void setType(List<String> type) {
-        this.type = type;
-    }
 }

@@ -1,0 +1,48 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.dodavanje{
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.naslov-dodavanje {
+    padding: 1%;
+    text-align: center;
+    color: #333;
+}
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    padding: 2vw;
+}
+
+.dogadjanja-labele {
+    margin-top: 1%;
+    font-weight: bold;
+}
+
+.add, .dodaj-dogadjanje {
+    padding: 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.dodaj-dogadjanje {
+    background-color: #4c60af;
+    color: #fff;
+    cursor: pointer;
+}
+
+.dodaj-dogadjanje:hover {
+    background-color: #45a049;
+}
+
+input[type="file"] {
+
+}

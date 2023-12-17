@@ -50,6 +50,7 @@ function App() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/interested" element={<Interested />} />
             <Route path="/my-events" element={<MyEvents />} />
+            <Route path="/add-event" element={<AddEvent />} />
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}

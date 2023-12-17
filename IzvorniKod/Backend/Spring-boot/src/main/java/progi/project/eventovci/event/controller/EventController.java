@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import progi.project.eventovci.event.controller.dto.AddEventDTO;
 import progi.project.eventovci.event.controller.dto.EventInfoDTO;
 import progi.project.eventovci.event.controller.dto.EventPrintDTO;
+import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.event.service.EventService;
 import progi.project.eventovci.securityconfig.auth.Convert;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -24,9 +26,9 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping("/add")
-    public ResponseEntity<Void> add(@RequestHeader("Authorization") String token, @RequestBody AddEventDTO eventDTO) {
-        eventService.add(convert.convertToUser(token), eventDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Long> add(@RequestHeader("Authorization") String token, @RequestBody AddEventDTO eventDTO) {
+        Event event = eventService.add(convert.convertToUser(token), eventDTO);
+        return ResponseEntity.ok(event.getId());
     }
 
     @DeleteMapping("/delete/{filter}")

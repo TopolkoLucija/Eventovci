@@ -21,7 +21,6 @@ import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.membership.controller.dto.NoMembershipException;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -46,7 +45,7 @@ public class EventService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
 
-    public void add(User user, AddEventDTO eventDTO) {
+    public Event add(User user, AddEventDTO eventDTO) {
 
         if (!Objects.equals(user.getTypeOfUser(), "organizator")) {
             throw new UnAuthorizedException("Korisnik nije organizator!");
@@ -61,14 +60,7 @@ public class EventService {
 
         Event event = new Event(eventDTO.getEventName(), eventDTO.getTypeOfEvent(), eventDTO.getLocation(), eventDTO.getTimeOfTheEvent(), eventDTO.getDuration(), user.getId(), eventDTO.getTicketPrice(), eventDTO.getText());
         eventRepository.save(event);
-
-        for (int i = 0; i<eventDTO.getFiles().size(); i++) {
-            try {
-                mediaContentRepository.save(new MediaContent(Base64.getEncoder().encodeToString(eventDTO.getFiles().get(i).getBytes()), eventDTO.getType().get(i), event.getId()));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        return event;
     }
 
     @Transactional
