@@ -1,5 +1,6 @@
 package progi.project.eventovci.event.controller.dto;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 public class EventInfoDTO {
@@ -7,7 +8,7 @@ public class EventInfoDTO {
     private String typeOfEvent;
     private String location;
     private LocalDateTime timeOfTheEvent;
-    private Double duration;
+    private Time duration;
     private Double ticketPrice;
     private Long eventCoordinatorid;
     private String username;
@@ -33,7 +34,7 @@ public class EventInfoDTO {
         return timeOfTheEvent;
     }
 
-    public Double getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
@@ -48,7 +49,7 @@ public class EventInfoDTO {
     public EventInfoDTO(){
 
     }
-    public EventInfoDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Double ticketPrice, Long eventCoordinatorid, String username) {
+    public EventInfoDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Double ticketPrice, Long eventCoordinatorid, String username) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;

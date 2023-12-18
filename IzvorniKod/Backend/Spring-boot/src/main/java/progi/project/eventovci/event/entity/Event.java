@@ -2,6 +2,7 @@ package progi.project.eventovci.event.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,7 +33,7 @@ public class Event {
     private LocalDateTime timeOfTheEvent;
 
     @Column(name="trajanje")
-    private Double duration;
+    private Time duration;
 
     @Column(name="organizatorid")
     private Long eventCoordinatorid;
@@ -49,7 +50,7 @@ public class Event {
 
     }
 
-    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinatorid, Double ticketPrice, String text) {
+    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Long eventCoordinatorid, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -118,11 +119,11 @@ public class Event {
         this.timeOfTheEvent = timeOfTheEvent;
     }
 
-    public Double getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
 

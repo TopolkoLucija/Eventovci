@@ -2,6 +2,7 @@ package progi.project.eventovci.event.controller.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class AddEventDTO {
     private String typeOfEvent;
     private String location;
     private LocalDateTime timeOfTheEvent;
-    private Double duration;
+    private Time duration;
     private Double ticketPrice;
     private String text;
 
-    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Double ticketPrice, String text) {
+    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -58,11 +59,11 @@ public class AddEventDTO {
         this.timeOfTheEvent = timeOfTheEvent;
     }
 
-    public Double getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
 
