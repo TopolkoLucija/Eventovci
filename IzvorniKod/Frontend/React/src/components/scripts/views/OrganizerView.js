@@ -271,6 +271,7 @@ const OrganizerView = (props) => {
    const closeModalMembershipPayed = () => {
       setShowModalMembershipPayed(false);
    }
+
    const openModalMembershipPayed = () => {
       setShowModalMembershipPayed(true);
    }

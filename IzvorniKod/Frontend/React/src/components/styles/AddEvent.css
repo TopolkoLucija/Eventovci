@@ -4,13 +4,13 @@ body {
     padding: 0;
 }
 
-.dodavanje{
+.dodavanje {
     overflow-y: scroll;
     width: 100%;
 }
 
 .naslov-dodavanje {
-    padding: 1%;
+    margin-top: 3%;
     text-align: center;
     color: #333;
 }
@@ -34,6 +34,7 @@ body {
 }
 
 .dodaj-dogadjanje {
+    margin-top: 2%;
     background-color: #4c60af;
     color: #fff;
     cursor: pointer;
@@ -42,7 +43,12 @@ body {
 .dodaj-dogadjanje:hover {
     background-color: #45a049;
 }
-
+/*
 input[type="file"] {
 
+}*/
+
+.instructions {
+    color: red;
+    font-size: larger;
 }
