@@ -21,6 +21,7 @@ import progi.project.eventovci.user.entity.User;
 import progi.project.eventovci.user.repository.UserRepository;
 import progi.project.eventovci.membership.controller.dto.NoMembershipException;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -57,8 +58,9 @@ public class EventService {
                 throw new NoMembershipException("Korisnik nije platio članarinu!");
             }
         }
+        Time duration = Time.valueOf(eventDTO.getDuration() + ":00");
 
-        Event event = new Event(eventDTO.getEventName(), eventDTO.getTypeOfEvent(), eventDTO.getLocation(), eventDTO.getTimeOfTheEvent(), eventDTO.getDuration(), user.getId(), eventDTO.getTicketPrice(), eventDTO.getText());
+        Event event = new Event(eventDTO.getEventName(), eventDTO.getTypeOfEvent(), eventDTO.getLocation(), eventDTO.getTimeOfTheEvent(), duration, user.getId(), eventDTO.getTicketPrice(), eventDTO.getText());
         eventRepository.save(event);
         return event;
     }

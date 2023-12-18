@@ -11,11 +11,11 @@ public class AddEventDTO {
     private String typeOfEvent;
     private String location;
     private LocalDateTime timeOfTheEvent;
-    private Time duration;
+    private String duration;
     private Double ticketPrice;
     private String text;
 
-    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Double ticketPrice, String text) {
+    public AddEventDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, String duration, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -59,11 +59,11 @@ public class AddEventDTO {
         this.timeOfTheEvent = timeOfTheEvent;
     }
 
-    public Time getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
