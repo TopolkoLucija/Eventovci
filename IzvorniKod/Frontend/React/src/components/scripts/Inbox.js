@@ -69,7 +69,9 @@ const Inbox = () => {
   useEffect(() => {
     console.log(dogadajcic);
   }, [dogadajcic]);
-
+  const clickedOnEvent = (id) => {
+    console.log(id);
+  };
   return (
     <div className="inboxContainer">
       <h1 className="inBoxCenter">Inbox</h1>
@@ -78,13 +80,18 @@ const Inbox = () => {
           <div className="container">
             {dogadajcic.map((dogadaj) => {
               return (
-                <Dogadaj
+                <div
                   key={dogadaj.id}
-                  Mjesto={dogadaj.location}
-                  Datum={dogadaj.timeOfTheEvent}
-                  Naslov={dogadaj.eventName}
-                  Poster={dogadaj.media}
-                ></Dogadaj>
+                  onClick={() => clickedOnEvent(dogadaj.id)}
+                >
+                  <Dogadaj
+                    key={dogadaj.id}
+                    Mjesto={dogadaj.location}
+                    Datum={dogadaj.timeOfTheEvent}
+                    Naslov={dogadaj.eventName}
+                    Poster={dogadaj.media}
+                  ></Dogadaj>
+                </div>
               );
             })}
           </div>

@@ -116,6 +116,9 @@ const MyEvents = () => {
       setInitialLoad(false);
     }
   }, [initialLoad]);
+  const clickedOnEvent = (id) => {
+    console.log(id);
+  };
   return (
     <div className="glavniKontejner">
       <div className="kontejnerZaNavbar">
@@ -149,13 +152,18 @@ const MyEvents = () => {
           <div className="container">
             {dogadajcic.map((dogadaj) => {
               return (
-                <Dogadaj
+                <div
                   key={dogadaj.id}
-                  Mjesto={dogadaj.location}
-                  Datum={dogadaj.timeOfTheEvent}
-                  Naslov={dogadaj.eventName}
-                  Poster={dogadaj.media}
-                ></Dogadaj>
+                  onClick={() => clickedOnEvent(dogadaj.id)}
+                >
+                  <Dogadaj
+                    key={dogadaj.id}
+                    Mjesto={dogadaj.location}
+                    Datum={dogadaj.timeOfTheEvent}
+                    Naslov={dogadaj.eventName}
+                    Poster={dogadaj.media}
+                  ></Dogadaj>
+                </div>
               );
             })}
           </div>
