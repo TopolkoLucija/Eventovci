@@ -1,0 +1,21 @@
+.window {
+    height: 80%
+}
+
+.smaller-title {
+   font-size: 120%; 
+}
+
+.bigger-title {
+    font-size: 150%;
+    margin-bottom: 8%;
+}
+
+input[type="checkbox"] {
+    margin-left: 8px; 
+    margin-right: 2px; 
+}
+
+.btn-add {
+    margin-top: 6%;
+}

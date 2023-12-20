@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import '../../styles/App.css';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
+import '../../styles/views/UserView.css';
 import AddEvent from "../AddEvent";
 
 const OrganizerView = (props) => {
@@ -29,6 +30,94 @@ const OrganizerView = (props) => {
    const [creditCardCVC, setCreditCardCVC] = useState("");
    const [PayPalEmail, setPayPalEmail] = useState("");
    const [PayPalPassword, setPayPalPassword] = useState("");
+
+   const [showModalPreferences, setShowModalPreferences] = useState(false);
+   const [selectedLocations, setSelectedLocations] = useState([]);
+   const [selectedTypes, setSelectedTypes] = useState([]);
+
+   const closeModalPreferences = () => {
+      setShowModalPreferences(false);
+   }
+   const openModalPreferences = () => {
+      setShowModalPreferences(true);
+   }
+
+
+   const handleCheckboxChange = (e, selectedArray, setSelectedArray) => {
+      const value = e.target.value;
+      if (e.target.checked) {
+          setSelectedArray([...selectedArray, value]);
+      } else {
+          setSelectedArray(selectedArray.filter(item => item !== value));
+      }
+  };
+
+  useEffect(() => {
+   fetch('api/subscription', {
+     headers: {
+       Authorization: accessToken
+     }
+   })
+   .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();  // Pretvaranje odgovora u JSON format
+    })
+   .then(subscriptions => {
+      if (subscriptions && subscriptions.length > 0) {
+         const locations = subscriptions.map(sub => sub.locations).flat(); 
+         const types = subscriptions.map(sub => sub.types).flat(); 
+         setSelectedLocations(locations);
+         setSelectedTypes(types);
+         console.log("Locations:", locations);
+         console.log("Types:", types);
+     } else {
+         console.warn("No subscriptions received or subscriptions array is empty.");
+     }
+
+    })
+    .catch(error => {
+      console.error('Error fetching subscriptions:', error);
+    });
+  
+}, []);
+
+const handleDodajClick = async () => {
+   try {
+      const response = await fetch('/api/subscription', {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         },
+         body: JSON.stringify({
+            types: selectedTypes,  
+            locations: selectedLocations
+         })
+      });
+
+      if (!response.ok) {
+         setMessage({
+            type: "error",
+            content: "Preference nisu dodane!"
+         });
+      } else {
+         setMessage({
+            type: "preferences-added",
+            content: "Dodane preference!"
+         });
+         closeModalPreferences();
+      }
+   } catch (error) {
+      console.error('Error while adding preferences:', error);
+      setMessage({
+         type: "error",
+         content: "Dogodila se pogreška prilikom dodavanja preferencija!"
+      });
+   }
+};
+
 
    const validatePassword = () => {
       const inputPayPalPassword = document.getElementById('PayPalPassword');
@@ -424,8 +513,218 @@ const OrganizerView = (props) => {
                      <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalAddEvent}>Dodaj događanje</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalPayMembership}>Plati članarinu</button>
+                     <button className="btn btn-primary" id="edit-buttons" onClick={() => {openModalPreferences();}}>Uredi preference</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalDelete}>Obriši moj račun</button>
                   </div>
+
+                  {/* Modal */}
+                  {showModalPreferences && (
+                     <div className="background">
+                        <div className="window">
+                           <span className='exit' onClick={closeModalPreferences}>&times;</span>
+                           <h3 className="bigger-title">Dodaj preference</h3>
+                           <div className="preferences-section">
+                           <div className="column">
+                              <div className='smaller-title'>Lokacija</div>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="centar" 
+                                       checked={selectedLocations.includes("centar")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Centar
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="tresnjevka" 
+                                       checked={selectedLocations.includes("tresnjevka")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Trešnjevka
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="maksimir" 
+                                       checked={selectedLocations.includes("maksimir")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Maksimir
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="sesvete" 
+                                       checked={selectedLocations.includes("sesvete")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Sesvete
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="jarun" 
+                                       checked={selectedLocations.includes("jarun")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Jarun
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="dubrava" 
+                                       checked={selectedLocations.includes("dubrava")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Dubrava
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="trnje" 
+                                       checked={selectedLocations.includes("trnje")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Trnje
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="novi zagreb" 
+                                       checked={selectedLocations.includes("novi zagreb")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Novi Zagreb
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="ostalo" 
+                                       checked={selectedLocations.includes("ostalo")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    />
+                                    Ostalo
+                              </label>
+                           </div>
+
+                           <div className="column">
+                              <div className='smaller-title'>Tip</div>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="koncert" 
+                                       checked={selectedTypes.includes("koncert")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Koncert
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="predstava" 
+                                       checked={selectedTypes.includes("predstava")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Predstava
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="izložba" 
+                                       checked={selectedTypes.includes("izložba")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Izložba
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="sajam" 
+                                       checked={selectedTypes.includes("sajam")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Sajam
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="konferencija" 
+                                       checked={selectedTypes.includes("konferencija")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Konferencija
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="skup" 
+                                       checked={selectedTypes.includes("skup")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Skup
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="zabava" 
+                                       checked={selectedTypes.includes("zabava")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Zabava
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="seminar" 
+                                       checked={selectedTypes.includes("seminar")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Seminar
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="festival" 
+                                       checked={selectedTypes.includes("festival")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Festival
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="priredba" 
+                                       checked={selectedTypes.includes("priredba")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Priredba
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="manifestacija" 
+                                       checked={selectedTypes.includes("manifestacija")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Manifestacija
+                              </label>
+                              <label>
+                                    <input 
+                                       type="checkbox" 
+                                       value="ostalo" 
+                                       checked={selectedTypes.includes("ostalo")} 
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    />
+                                    Ostalo
+                              </label>
+                           </div>
+                           <button className="btn btn-primary btn-add" onClick={handleDodajClick}>Dodaj</button>
+                        </div>
+                        </div>
+                     </div>
+                  )}
 
                   {/* Modal */}
                   {showModalValidation && (

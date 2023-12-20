@@ -326,7 +326,7 @@ const AdminView = (props) => {
                      }}>Pogledaj sve korisnike</button>
                      <button className="btn btn-primary" id='edit-buttons' onClick={() => {
                         openModalIncreaseMembership();
-                     }}>Promijeni cijenu članarinu</button>
+                     }}>Promijeni cijenu članarine</button>
                   </div>
 
                   {/* Modal */}
