@@ -5,7 +5,7 @@ import '../styles/AddEvent.css';
 import '../styles/views/OrganizerView.css';
 import '../styles/MyAccount.css';
 
-const AddEvent = () => {
+const AddEvent = ({ getType }) => {
 
    var accessToken = sessionStorage.getItem("accessToken");
    const [eventName, setEventName] = useState("");
@@ -380,11 +380,14 @@ const AddEvent = () => {
                 console.log(await response2.text());
             }
             navigate('/my-account');
+            getType(true, "Događanje uspješno dodano!", "success");
 
         } catch (error) {
             console.error(error);
         }
     };
+
+    const [popup, setPopup] = useState(false)
 
     return(
         <div className="dodavanje">

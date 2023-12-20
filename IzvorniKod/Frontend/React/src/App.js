@@ -29,7 +29,7 @@ function App() {
     setToastType(type);
     setTimeout(() => {
       setShow(false);
-    }, 1000);
+    }, 3000);
   };
 
   return (
@@ -50,7 +50,7 @@ function App() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/interested" element={<Interested />} />
             <Route path="/my-events" element={<MyEvents />} />
-            <Route path="/add-event" element={<AddEvent />} />
+            <Route path="/add-event" element={<AddEvent getType={getType}/>} />
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}
