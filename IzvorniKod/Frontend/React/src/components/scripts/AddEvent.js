@@ -196,7 +196,7 @@ const AddEvent = ({ getType }) => {
   const validateType = () => {
     const nameErr = document.getElementById("type-error");
     const sifra = document.getElementById("typeField");
-    if (sifra.value === "") {
+    if (sifra.value === "default") {
       sifra.style.borderColor = "red";
       nameErr.innerText = "Unesite tip događanja";
       nameErr.style.color = "red";
@@ -210,7 +210,7 @@ const AddEvent = ({ getType }) => {
   const validateLocation = () => {
     const nameErr = document.getElementById("location-error");
     const sifra = document.getElementById("locationField");
-    if (sifra.value === "") {
+    if (sifra.value === "default") {
       sifra.style.borderColor = "red";
       nameErr.innerText = "Unesite lokaciju događanja";
       nameErr.style.color = "red";
@@ -221,19 +221,30 @@ const AddEvent = ({ getType }) => {
     }
   };
 
-  const validateTime = () => {
-    const nameErr = document.getElementById("time-error");
-    const sifra = document.getElementById("timeField");
-    if (sifra.value === null) {
-      sifra.style.borderColor = "red";
-      nameErr.innerText = "Unesite vrijeme događanja";
-      nameErr.style.color = "red";
-    } else {
-      sifra.style.borderColor = "green";
-      nameErr.innerText = "";
-      nameErr.style.color = "green";
-    }
-  };
+    const validateTime = () => {
+        const nameErr = document.getElementById("time-error");
+        const timeField = document.getElementById("timeField");
+
+        if (!timeField.value) {
+            timeField.style.borderColor = "red";
+            nameErr.innerText = "Unesite vrijeme događanja";
+            nameErr.style.color = "red";
+        } else {
+            const selectedTime = new Date(timeField.value);
+            const currentTime = new Date();
+
+            if (selectedTime <= currentTime) {
+                timeField.style.borderColor = "red";
+                nameErr.innerText = "Možete dodati samo događanje koje još nije počelo!";
+                nameErr.style.color = "red";
+            } else {
+                timeField.style.borderColor = "green";
+                nameErr.innerText = "";
+                nameErr.style.color = "green";
+            }
+        }
+    };
+
 
   const validateDuration = () => {
     const nameErr = document.getElementById("duration-error");
@@ -387,7 +398,6 @@ const AddEvent = ({ getType }) => {
         }
     };
 
-    const [popup, setPopup] = useState(false)
 
     return(
         <div className="dodavanje">
