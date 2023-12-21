@@ -513,7 +513,7 @@ const handleDodajClick = async () => {
                      <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalAddEvent}>Dodaj događanje</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalPayMembership}>Plati članarinu</button>
-                     <button className="btn btn-primary" id="edit-buttons" onClick={() => {openModalPreferences();}}>Uredi preference</button>
+                     <button className="btn btn-primary" id="edit-buttons" onClick={() => {openModalPreferences();}}>Uredi postavke obavijesti</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalDelete}>Obriši moj račun</button>
                   </div>
 
@@ -522,7 +522,7 @@ const handleDodajClick = async () => {
                      <div className="background">
                         <div className="window">
                            <span className='exit' onClick={closeModalPreferences}>&times;</span>
-                           <h3 className="bigger-title">Dodaj preference</h3>
+                           <h3 className="bigger-title">Uredi postavke obavijesti</h3>
                            <div className="preferences-section">
                            <div className="column">
                               <div className='smaller-title'>Lokacija</div>

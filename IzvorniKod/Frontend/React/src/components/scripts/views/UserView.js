@@ -26,7 +26,6 @@ const UserView = (props) => {
    }, [userData]);
 
    const [showModalValidation, setShowModalValidation] = useState(false);
-   const [showModalSettings, setShowModalSettings] = useState(false);
    const [showModalDelete, setShowModalDelete] = useState(false);
    const [showModalPreferences, setShowModalPreferences] = useState(false);
    const [showModalMessage, setShowModalMessage] = useState(false);
@@ -43,13 +42,6 @@ const UserView = (props) => {
    }
    const openModalMessage = () => {
       setShowModalMessage(true);
-   }
-
-   const closeModalSettings = () => {
-      setShowModalSettings(false);
-   };
-   const openModalSettings = () => {
-      setShowModalSettings(true);
    }
 
    const closeModalDelete = () => {
@@ -311,15 +303,11 @@ const UserView = (props) => {
                   {/* TODO - dodati funkcionalnost buttona! */}
                   <div className="edit-content">
                      <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
-                     <button className="btn btn-primary" id="edit-buttons" onClick={() => {
-                        openModalSettings();
-                     }
-                     }>Uredi postavke obavijesti</button>
 
                      <button className="btn btn-primary" id="edit-buttons" onClick={() => {
                         openModalPreferences();
                      }
-                     }>Uredi preference</button>
+                     }>Uredi postavke obavijesti</button>
 
                      <button className="btn btn-primary" id="edit-buttons" onClick={() => {
                         openModalDelete();
@@ -328,102 +316,92 @@ const UserView = (props) => {
 
 
                   {/* Modal */}
-                  {showModalSettings && (
-                     <div className="background">
-                        <div className="window">
-                           <span className='exit' onClick={closeModalSettings}>&times;</span>
-                           <div>Uređivanje postavke obavijesti</div>
-                        </div>
-                     </div>
-                  )}
-
-                  {/* Modal */}
                   {showModalPreferences && (
                      <div className="background">
                         <div className="window">
                            <span className='exit' onClick={closeModalPreferences}>&times;</span>
-                           <h3 className="bigger-title">Dodaj preference</h3>
+                           <h3 className="bigger-title">Uredi postavke obavijesti</h3>
                            <div className="preferences-section">
                            <div className="column">
                               <div className='smaller-title'>Lokacija</div>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="centar" 
-                                       checked={selectedLocations.includes("centar")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="centar"
+                                       checked={selectedLocations.includes("centar")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Centar
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="tresnjevka" 
-                                       checked={selectedLocations.includes("tresnjevka")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="tresnjevka"
+                                       checked={selectedLocations.includes("tresnjevka")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Trešnjevka
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="maksimir" 
-                                       checked={selectedLocations.includes("maksimir")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="maksimir"
+                                       checked={selectedLocations.includes("maksimir")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Maksimir
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="sesvete" 
-                                       checked={selectedLocations.includes("sesvete")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="sesvete"
+                                       checked={selectedLocations.includes("sesvete")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Sesvete
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="jarun" 
-                                       checked={selectedLocations.includes("jarun")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="jarun"
+                                       checked={selectedLocations.includes("jarun")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Jarun
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="dubrava" 
-                                       checked={selectedLocations.includes("dubrava")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="dubrava"
+                                       checked={selectedLocations.includes("dubrava")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Dubrava
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="trnje" 
-                                       checked={selectedLocations.includes("trnje")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="trnje"
+                                       checked={selectedLocations.includes("trnje")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Trnje
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="novi zagreb" 
-                                       checked={selectedLocations.includes("novi zagreb")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="novi zagreb"
+                                       checked={selectedLocations.includes("novi zagreb")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Novi Zagreb
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="ostalo" 
-                                       checked={selectedLocations.includes("ostalo")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
+                                    <input
+                                       type="checkbox"
+                                       value="ostalo"
+                                       checked={selectedLocations.includes("ostalo")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)}
                                     />
                                     Ostalo
                               </label>
@@ -432,110 +410,110 @@ const UserView = (props) => {
                            <div className="column">
                               <div className='smaller-title'>Tip</div>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="koncert" 
-                                       checked={selectedTypes.includes("koncert")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="koncert"
+                                       checked={selectedTypes.includes("koncert")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Koncert
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="predstava" 
-                                       checked={selectedTypes.includes("predstava")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="predstava"
+                                       checked={selectedTypes.includes("predstava")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Predstava
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="izložba" 
-                                       checked={selectedTypes.includes("izložba")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="izložba"
+                                       checked={selectedTypes.includes("izložba")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Izložba
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="sajam" 
-                                       checked={selectedTypes.includes("sajam")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="sajam"
+                                       checked={selectedTypes.includes("sajam")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Sajam
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="konferencija" 
-                                       checked={selectedTypes.includes("konferencija")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="konferencija"
+                                       checked={selectedTypes.includes("konferencija")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Konferencija
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="skup" 
-                                       checked={selectedTypes.includes("skup")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="skup"
+                                       checked={selectedTypes.includes("skup")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Skup
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="zabava" 
-                                       checked={selectedTypes.includes("zabava")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="zabava"
+                                       checked={selectedTypes.includes("zabava")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Zabava
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="seminar" 
-                                       checked={selectedTypes.includes("seminar")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="seminar"
+                                       checked={selectedTypes.includes("seminar")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Seminar
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="festival" 
-                                       checked={selectedTypes.includes("festival")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="festival"
+                                       checked={selectedTypes.includes("festival")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Festival
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="priredba" 
-                                       checked={selectedTypes.includes("priredba")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="priredba"
+                                       checked={selectedTypes.includes("priredba")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Priredba
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="manifestacija" 
-                                       checked={selectedTypes.includes("manifestacija")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="manifestacija"
+                                       checked={selectedTypes.includes("manifestacija")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Manifestacija
                               </label>
                               <label>
-                                    <input 
-                                       type="checkbox" 
-                                       value="ostalo" 
-                                       checked={selectedTypes.includes("ostalo")} 
-                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)} 
+                                    <input
+                                       type="checkbox"
+                                       value="ostalo"
+                                       checked={selectedTypes.includes("ostalo")}
+                                       onChange={(e) => handleCheckboxChange(e, selectedTypes, setSelectedTypes)}
                                     />
                                     Ostalo
                               </label>
