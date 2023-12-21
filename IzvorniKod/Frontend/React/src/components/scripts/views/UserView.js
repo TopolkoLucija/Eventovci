@@ -224,8 +224,8 @@ const UserView = (props) => {
             const types = subscriptions.map(sub => sub.types).flat(); 
             setSelectedLocations(locations);
             setSelectedTypes(types);
-            console.log("Locations:", locations);
-            console.log("Types:", types);
+            //console.log("Locations:", locations);
+            //console.log("Types:", types);
         } else {
             console.warn("No subscriptions received or subscriptions array is empty.");
         }
