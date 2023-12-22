@@ -87,3 +87,9 @@ input[type="checkbox"] {
         font-weight: bolder;
      }
 }
+
+@media (max-height: 700px) {
+    .window {
+        overflow-y: scroll;
+    }
+}
