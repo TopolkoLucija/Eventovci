@@ -1,6 +1,6 @@
-.main-contents {
-    width: 100vw;
-    display: grid;
+.dodavanje {
+    overflow-y: scroll;
+    width: 100%;
 }
 
 .organizer-data {
@@ -43,11 +43,6 @@ label {
     margin-top: 0%;
 }
 
-.KontejnerZaKarice {
-    overflow-y: scroll; /* Enable vertical scrolling */
-    /* Uklonite fiksnu visinu kako biste omogućili skrolanje */
-}
-
  .main-title {
     margin-top: 4%;
     text-align: center;
@@ -57,9 +52,6 @@ label {
 }
 
 @media (max-width: 768px) {
-    .main-content {
-        width: 100vw;
-    }
 
     .KontejnerZaKarice {
         /*overflow-y: scroll;*/

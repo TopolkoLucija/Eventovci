@@ -277,6 +277,7 @@ const UserView = (props) => {
       <>
          {
             (accessToken !== null) ? // ako je netko prijavljen onda vrati info o korisniku/organizatoru, inače ništa
+               <div className="content">
                <div className="my-account-content">
                   <div className='my-account-content-title-and-text'>
                      <div className='my-account-content-title'>
@@ -569,7 +570,7 @@ const UserView = (props) => {
                                     </div>
                                  </div>
                               )}
-
+               </div>
                </div> : ""
          }
       </>

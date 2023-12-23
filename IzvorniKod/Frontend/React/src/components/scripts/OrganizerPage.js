@@ -50,23 +50,24 @@ const OrganizerPage = () => {
   };
 
 return (
-    <div className="main-contents">
+    <div className="dodavanje">
+    <div className="main-content">
        {organizer ? (
         <div className='organizer-data'>
           <h1 className="main-title">{organizer.username}</h1>
           <div className="organizer-details">
           <div className="category-container">
-        <label className="category-email">E-mail organizatora:</label>
+        <label className="category-email category-org">E-mail organizatora:</label>
         <p>{organizer.email}</p>
     </div>
 
     <div className="category-container">
-        <label>Adresa organizatora:</label>
+        <label className="category-org">Adresa organizatora:</label>
         <p>{organizer.homeAdress}</p>
     </div>
 
     <div className="category-container">
-        <label>Poveznice na organizatorove Facebook/web stranice:</label>
+        <label className="category-org">Poveznice na organizatorove Facebook/web stranice:</label>
         <ul>
             {organizer.links && organizer.links.map((link, index) => (
                 <li key={index}>
@@ -76,8 +77,8 @@ return (
         </ul>
     </div>
           
-          <label>Sva organizatorova događanja:</label>
-          <div className="KontejnerZaKarice">
+          <label className="category-org">Sva organizatorova događanja:</label>
+          <div className="KontejnerZaKartice">
             {dogadajcic?.length > 0 ? (
             <div className="container">
                 {dogadajcic.map((dogadaj) => {
@@ -106,6 +107,7 @@ return (
        ) : (
         <div className="bigger-empty"></div>
        )}
+    </div>
     </div>
  );
 };

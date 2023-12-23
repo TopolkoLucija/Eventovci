@@ -192,7 +192,7 @@ const LoginM = ({ getType }) => {
   };
 
   return (
-    <div className="content" id="NaCentarDiva">
+    <div className="contents" id="NaCentarDiva">
       <div className="JosImasNemas">
         {!dodatnoZaRegistraciju ? (
           <>

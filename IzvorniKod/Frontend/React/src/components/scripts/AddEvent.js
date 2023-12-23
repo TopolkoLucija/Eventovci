@@ -336,7 +336,7 @@ const AddEvent = ({ getType }) => {
         validatePrice();
     
 
-        if (!eventName.trim() || !typeOfEvent || !location || !timeOfTheEvent || !duration || ticketPrice < 0|| !ticketPrice) {
+        if (!eventName.trim() || !typeOfEvent || !location || !timeOfTheEvent || !duration || ticketPrice < 0) {
             return;
         }
   
