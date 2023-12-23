@@ -50,7 +50,7 @@ const OrganizerPage = () => {
   };
 
 return (
-    <div className="main-content">
+    <div className="main-contents">
        {organizer ? (
         <div className='organizer-data'>
           <h1 className="main-title">{organizer.username}</h1>
