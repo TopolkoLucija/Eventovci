@@ -14,6 +14,7 @@ import { useState } from "react";
 import Inbox from "./components/scripts/Inbox";
 import Interested from "./components/scripts/Interested";
 import MyEvents from "./components/scripts/MyEvents";
+import OrganizerPage from "./components/scripts/OrganizerPage";
 
 function App() {
   const accessToken = sessionStorage.getItem('accessToken');
@@ -46,11 +47,12 @@ function App() {
             <Route path="/login" element={<LoginM getType={getType} />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/my-account/add-events" element={<AddEvent />} />
-            <Route path="/my-account/show-all" element={ <ShowAll/>} />
+            <Route path="/my-account/show-all" element={<ShowAll />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/interested" element={<Interested />} />
             <Route path="/my-events" element={<MyEvents />} />
             <Route path="/add-event" element={<AddEvent getType={getType}/>} />
+            <Route path={`/:id`} element={<OrganizerPage />}/>
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}

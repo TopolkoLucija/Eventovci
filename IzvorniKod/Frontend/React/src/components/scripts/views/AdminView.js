@@ -284,6 +284,13 @@ const AdminView = (props) => {
                   buttonDelete.classList = "delete-button";
                   buttonDelete.id = `${res.userId}`;
 
+                  // dodavanje event listenera za navigaciju na detalje organizatora
+                  spanUserName.addEventListener("click", () => {
+                     if(res.typeOfUser === "organizator") {
+                     navigate(`/${res.userId}`);
+                     }
+                  });
+
                   buttonDelete.addEventListener("click", handleDeleteUser);
 
                })
