@@ -110,7 +110,7 @@ public class UserService {
                 List<MediaContent> mc = mediaContentRepository.getAllByEventid(e.getId());
                 String media = null;
                 String type = null;
-                for (int i = mc.size()-1; i>0; i--) {
+                for (int i = mc.size()-1; i>=0; i--) {
                     if (Objects.equals(mc.get(i).getType(), "image")){
                         media = mc.get(i).getContent();
                         type = mc.get(i).getType();
