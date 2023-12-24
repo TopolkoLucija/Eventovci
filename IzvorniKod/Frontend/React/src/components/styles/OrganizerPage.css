@@ -10,10 +10,14 @@
 
 .organizer-details {
     padding: 5%;
+    display: flex;
+    flex-direction: column;
     /*overflow-y: scroll;*/
 }
 
 .category-container {
+    display: flex;
+    flex-direction: column;
     background-color: #f5f5f5; /* Siva pozadina */
     padding: 0.7rem;
     margin-bottom: 0.9rem;
@@ -53,8 +57,61 @@ label {
 
 @media (max-width: 768px) {
 
-    .KontejnerZaKarice {
+    .KontejnerZaKartice {
         /*overflow-y: scroll;*/
         padding-top: 1rem;
     }
   }
+
+@media (max-width: 280px) {
+
+    .category-container {
+        /*width: 100%;*/
+        margin-left: 16%;
+        margin-right: 3%;
+      }
+
+      .category-e {
+        /*width: 100%;*/
+        margin-left: 16%;
+        margin-right: 3%;
+      }
+  }
+
+  @media (max-width: 768px) {
+    .organizer-details {
+        padding: 3%;
+    }
+
+    .category-container {
+        padding: 0.5rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .main-title {
+        font-size: 2em;
+    }
+
+    .category-org {
+        font-size: 0.9em;
+    }
+
+    ul {
+        font-size: 0.9em;
+    }
+}
+
+/* Za ekrane širine 480px i manje */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8em;
+    }
+
+    .category-org {
+        font-size: 0.8em;
+    }
+
+    ul {
+        font-size: 0.8em;
+    }
+}

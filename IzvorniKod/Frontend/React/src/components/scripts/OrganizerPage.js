@@ -37,7 +37,6 @@ const OrganizerPage = () => {
        } else {
           setOrganizer(data);
           setdogadajcic(data.eventList);
-
        }
     })
     .catch(error => {
@@ -77,8 +76,8 @@ return (
         </ul>
     </div>
           
-          <label className="category-org">Sva organizatorova događanja:</label>
-          <div className="KontejnerZaKartice">
+          <label className="category-org category-e">Sva organizatorova događanja:</label>
+          <div>
             {dogadajcic?.length > 0 ? (
             <div className="container">
                 {dogadajcic.map((dogadaj) => {
