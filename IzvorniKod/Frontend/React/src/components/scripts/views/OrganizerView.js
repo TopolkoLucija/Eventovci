@@ -62,7 +62,7 @@ const OrganizerView = (props) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json();  // Pretvaranje odgovora u JSON format
+      return response.json(); 
     })
    .then(subscriptions => {
       if (subscriptions && subscriptions.length > 0) {
@@ -70,8 +70,6 @@ const OrganizerView = (props) => {
          const types = subscriptions.map(sub => sub.types).flat(); 
          setSelectedLocations(locations);
          setSelectedTypes(types);
-         //console.log("Locations:", locations);
-         //console.log("Types:", types);
      } else {
          console.warn("No subscriptions received or subscriptions array is empty.");
      }
@@ -438,14 +436,16 @@ const handleDodajClick = async () => {
    const handlePayMembership = () => {
 
       // ako plaćam PayPalom onda se mora provjeriti Email i Password
+      if (showModalPayWithPayPal) {
+         if (!validatePayPalEmail()) {
+            setErrorInput("Unesite točan format email adrese!");
+            return;
+         }
+         if (!validatePassword()) {
+            return;
+         }
+      }
 
-      if (!validatePayPalEmail()) {
-         setErrorInput("Unesite točan format email adrese!");
-         return;
-      }
-      if (!validatePassword()) {
-         return;
-      }
 
       fetch('/api/membership', {
          method: "POST",
@@ -509,7 +509,6 @@ const handleDodajClick = async () => {
                      </div>
                   </div>
 
-                  {/* TODO - dodati funkcionalnost buttona! */}
                   <div className="edit-content">
                      <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalAddEvent}>Dodaj događanje</button>
