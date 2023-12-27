@@ -37,10 +37,26 @@ const LoginM = ({ getType }) => {
       sifra.style.borderColor = "red";
       errSifra.innerText = "Upišite lozinku";
       errSifra.style.color = "red";
+      return false;
     } else {
-      sifra.style.borderColor = "green";
-      errSifra.innerText = "";
-      errSifra.style.color = "green";
+      if (sifra.value.length > 30) {
+        sifra.style.borderColor = "black";
+        errSifra.innerText = "Maksimalna duzina je 30 znakova";
+        errSifra.style.color = "black";
+        return false;
+      } else {
+        if (sifra.value.length < 6) {
+          sifra.style.borderColor = "red";
+          errSifra.innerText = "Minimalna duzina je 6 znakova";
+          errSifra.style.color = "red";
+          return false;
+        } else {
+          sifra.style.borderColor = "green";
+          errSifra.innerText = "";
+          errSifra.style.color = "green";
+          return true;
+        }
+      }
     }
   };
   const validateName = () => {
@@ -50,10 +66,26 @@ const LoginM = ({ getType }) => {
       sifra.style.borderColor = "red";
       nameErr.innerText = "Upišite korisničko ime";
       nameErr.style.color = "red";
+      return false;
     } else {
-      sifra.style.borderColor = "green";
-      nameErr.innerText = "";
-      nameErr.style.color = "green";
+      if (sifra.value.length > 30) {
+        sifra.style.borderColor = "black";
+        nameErr.innerText = "Maksimalna duzina je 30 znakova";
+        nameErr.style.color = "black";
+        return false;
+      } else {
+        if (sifra.value.length < 4) {
+          sifra.style.borderColor = "red";
+          nameErr.innerText = "Minimalna duzina je 4 znakova";
+          nameErr.style.color = "red";
+          return false;
+        } else {
+          sifra.style.borderColor = "green";
+          nameErr.innerText = "";
+          nameErr.style.color = "green";
+          return true;
+        }
+      }
     }
   };
   const validateAdress = () => {
@@ -127,7 +159,13 @@ const LoginM = ({ getType }) => {
     };
     const alrt = document.getElementById("gmb");
     alrt.style.visibility = "hidden";
-    if (username !== "" && password !== "" && validateEmail()) {
+    if (
+      username !== "" &&
+      password !== "" &&
+      validateEmail() &&
+      validatePassword() &&
+      validateName()
+    ) {
       if (PrijaviSeOrganizator) {
         if (homeAdress != "null" && homeAdress != "") {
           fetch("/api/register", {
@@ -244,8 +282,9 @@ const LoginM = ({ getType }) => {
               id="nameField"
               value={username}
               onChange={(e) => {
-                setUserName(e.target.value);
-                validateName();
+                const trimmedName = e.target.value.slice(0, 30);
+                setUserName(trimmedName);
+                if (dodatnoZaRegistraciju) validateName();
               }}
             />
             <div id="name-error" className="form-text"></div>
@@ -260,8 +299,11 @@ const LoginM = ({ getType }) => {
               id="sifrafild"
               value={password}
               onChange={(e) => {
-                setPassword(e.target.value);
-                validatePassword();
+                const trimmedPassword = e.target.value.slice(0, 30);
+                setPassword(trimmedPassword);
+                if (dodatnoZaRegistraciju) {
+                  validatePassword();
+                }
               }}
             />
             <div id="sifra-errors" className="form-text"></div>
