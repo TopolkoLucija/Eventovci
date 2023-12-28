@@ -80,6 +80,12 @@ public class DataController {
         return ResponseEntity.ok(user.getTypeOfUser());
     }
 
+    @GetMapping("/id")
+    public ResponseEntity<Long> getId(@RequestHeader("Authorization") String token){
+        User user = convert.convertToUser(token);
+        return ResponseEntity.ok(user.getId());
+    }
+
     @DeleteMapping("/deleteMyProfile")
     public ResponseEntity<Void> deleteMyProfile(@RequestHeader("Authorization") String token){
         userService.deleteMyProfile(convert.convertToId(token));
