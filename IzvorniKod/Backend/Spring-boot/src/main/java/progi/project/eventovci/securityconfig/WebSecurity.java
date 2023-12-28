@@ -92,7 +92,7 @@ public class WebSecurity  {
                 .requestMatchers(new AntPathRequestMatcher("/review/get/{filter}")).hasAnyRole("ADMINISTRATOR","ORGANIZATOR", "POSJETITELJ")
 
                 .requestMatchers(new AntPathRequestMatcher("/rsvp")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
-                .requestMatchers(new AntPathRequestMatcher("/rsvp/get/{filter}")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
+                .requestMatchers(new AntPathRequestMatcher("/rsvp/get/{filter}")).hasAnyRole("ADMINISTRATOR", "ORGANIZATOR", "POSJETITELJ")
 
                 .requestMatchers(new AntPathRequestMatcher("/subscription")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
 
