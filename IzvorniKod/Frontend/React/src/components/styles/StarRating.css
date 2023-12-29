@@ -1,0 +1,13 @@
+.star {
+   cursor: pointer;
+   font-size: 24px;
+   color: #ddd;
+}
+
+.star.filled {
+   color: #ffc107;
+}
+
+.star.hovered {
+   color: #f8d100;
+}

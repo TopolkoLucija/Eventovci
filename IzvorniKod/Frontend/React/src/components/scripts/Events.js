@@ -157,10 +157,11 @@ function Events() {
               return (
                 <div
                   key={dogadaj.id}
-                  onClick={() => clickedOnEvent(dogadaj.id)}
+                  // onClick={() => clickedOnEvent(dogadaj.id)}
                 >
                   <Dogadaj
                     key={dogadaj.id}
+                    Id={dogadaj.id}
                     Mjesto={dogadaj.location}
                     Datum={dogadaj.timeOfTheEvent}
                     Naslov={dogadaj.eventName}

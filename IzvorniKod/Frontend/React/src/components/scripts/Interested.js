@@ -134,6 +134,7 @@ const Interested = () => {
                 >
                   <Dogadaj
                     key={dogadaj.id}
+                    Id={dogadaj.id}
                     Mjesto={dogadaj.location}
                     Datum={dogadaj.timeOfTheEvent}
                     Naslov={dogadaj.eventName}
