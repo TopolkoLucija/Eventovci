@@ -122,7 +122,7 @@ const ShowEvent = () => {
                return await response.json();
             })
             .then((data) => {
-               // console.log(data);
+               console.log(data);
                setEventInfo(data);
                setEventTime(parseISO(data.timeOfTheEvent));
             })
@@ -344,6 +344,13 @@ const ShowEvent = () => {
    }
 
    const handleRate = () => {
+
+      if (userId === eventInfo.eventCoordinatorid) {
+         alert("Ne možeš stavljati recenziju na svoj događaj!");
+         closeModalRate();
+         return;
+      }
+
       const reviewText = userRatingText;
       const grade = userRatingGrade;
       const eventId = id;
@@ -435,17 +442,17 @@ const ShowEvent = () => {
                      <div className="event-content-info">
                         <p>Vrijeme: {format(eventTime, 'dd.MM.yyyy HH:mm')}</p>
                         <p>Mjesto: {eventInfo.location}</p>
-                        <p>Organizator: {eventInfo.username}</p>
+                        <p>Organizator: <a href={`/organizer/${eventInfo.eventCoordinatorid}`}>{eventInfo.username}</a></p>
                         <p>Opis: {eventInfo.typeOfEvent}</p>
                      </div>
                      <div className="event-content-choose">
-                        <button id="option-1" className="btn btn-primary" disabled={typeOfUser === "administrator"} value={1} onClick={(e) => {
+                        <button id="option-1" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={1} onClick={(e) => {
                            handleChoose(e);
                         }}>Sigurno dolazim {RSVP1}</button>
-                        <button id="option-2" className="btn btn-primary" disabled={typeOfUser === "administrator"} value={2} onClick={(e) => {
+                        <button id="option-2" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={2} onClick={(e) => {
                            handleChoose(e);
                         }}>Možda dolazim {RSVP2}</button>
-                        <button id="option-3" className="btn btn-primary" disabled={typeOfUser === "administrator"} value={3} onClick={(e) => {
+                        <button id="option-3" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={3} onClick={(e) => {
                            handleChoose(e);
                         }}>Ne dolazim {RSVP3}</button>
                      </div>

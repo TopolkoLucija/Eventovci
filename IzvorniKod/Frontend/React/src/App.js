@@ -53,7 +53,7 @@ function App() {
             <Route path="/interested" element={<Interested />} />
             <Route path="/my-events" element={<MyEvents />} />
             <Route path="/add-event" element={<AddEvent getType={getType}/>} />
-            <Route path={`/:id`} element={<OrganizerPage />} />
+            <Route path={`/organizer/:id`} element={<OrganizerPage />} />
             <Route path="/event/:id" element={<ShowEvent />} />
           </Routes>
         </div>
