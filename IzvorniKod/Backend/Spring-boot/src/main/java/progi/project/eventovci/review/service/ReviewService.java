@@ -89,7 +89,7 @@ public class ReviewService {
         for (EventReview er : allReviews) {
             if (Objects.equals(er.getEvent_id(), filter)) {
                 User user = userRepository.findUserById(er.getUser_id());
-                ReviewDataDTO data = new ReviewDataDTO(er.getReviewText(), er.getGrade(), user.getId(), user.getUsername());
+                ReviewDataDTO data = new ReviewDataDTO(er.getId(), er.getReviewText(), er.getGrade(), user.getId(), user.getUsername());
                 reviewDataDTOList.add(data);
             }
         }
