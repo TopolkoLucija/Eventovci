@@ -446,20 +446,20 @@ const ShowEvent = () => {
                         <p>Opis: {eventInfo.typeOfEvent}</p>
                      </div>
                      <div className="event-content-choose">
-                        <button id="option-1" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={1} onClick={(e) => {
+                        <button id="option-1" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={1} onClick={(e) => {
                            handleChoose(e);
                         }}>Sigurno dolazim {RSVP1}</button>
-                        <button id="option-2" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={2} onClick={(e) => {
+                        <button id="option-2" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={2} onClick={(e) => {
                            handleChoose(e);
                         }}>Možda dolazim {RSVP2}</button>
-                        <button id="option-3" className="btn btn-primary" disabled={typeOfUser === "administrator" || typeOfUser === "organizator"} value={3} onClick={(e) => {
+                        <button id="option-3" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={3} onClick={(e) => {
                            handleChoose(e);
                         }}>Ne dolazim {RSVP3}</button>
                      </div>
                   </div>
                </div>
 
-               {Math.abs((new Date() - eventTime) / 36e5) <= 48 ? (
+               {(((new Date() - eventTime) / 36e5) >= 0 && ((new Date() - eventTime) / 36e5) <= 48) ? (
                   <div className="reviews-content">
                      <div>
                         <h3 className="h3 text-center">Recenzije</h3>
