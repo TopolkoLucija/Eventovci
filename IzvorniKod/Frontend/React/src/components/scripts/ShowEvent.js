@@ -446,13 +446,13 @@ const ShowEvent = () => {
                         <p>Opis: {eventInfo.typeOfEvent}</p>
                      </div>
                      <div className="event-content-choose">
-                        <button id="option-1" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={1} onClick={(e) => {
+                        <button id="option-1" className="btn btn-primary" disabled={((new Date() - eventTime) / 36e5) >= 0 || typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={1} onClick={(e) => {
                            handleChoose(e);
                         }}>Sigurno dolazim {RSVP1}</button>
-                        <button id="option-2" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={2} onClick={(e) => {
+                        <button id="option-2" className="btn btn-primary" disabled={((new Date() - eventTime) / 36e5) >= 0 || typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={2} onClick={(e) => {
                            handleChoose(e);
                         }}>Možda dolazim {RSVP2}</button>
-                        <button id="option-3" className="btn btn-primary" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={3} onClick={(e) => {
+                        <button id="option-3" className="btn btn-primary" disabled={((new Date() - eventTime) / 36e5) >= 0 || typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={3} onClick={(e) => {
                            handleChoose(e);
                         }}>Ne dolazim {RSVP3}</button>
                      </div>
