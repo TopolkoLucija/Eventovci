@@ -291,13 +291,15 @@ const AddEvent = ({ getType }) => {
     const handlePayMembership = () => {
 
         // ako plaćam PayPalom onda se mora provjeriti Email i Password
-  
-        if (!validatePayPalEmail()) {
-           setErrorInput("Unesite točan format email adrese!");
-           return;
-        }
-        if (!validatePassword()) {
-           return;
+
+        if (showModalPayWithPayPal) {
+            if (!validatePayPalEmail()) {
+                setErrorInput("Unesite točan format email adrese!");
+                return;
+            }
+            if (!validatePassword()) {
+                return;
+            }
         }
   
         fetch('/api/membership', {
@@ -436,15 +438,15 @@ const AddEvent = ({ getType }) => {
                 <label className="dogadjanja-labele" htmlFor="locationField">Lokacija:</label>
                 <select id="locationField" className="add" defaultValue="default" onChange={(e) => {setLocation(e.target.value); validateLocation();}}>
                     <option value="default" disabled>Odaberite lokaciju događanja</option>
-                    <option value="centar">Centar</option>
-                    <option value="tresnjevka">Trešnjevka</option>
-                    <option value="maksimir">Maksimir</option>
-                    <option value="sesvete">Sesvete</option>
-                    <option value="jarun">Jarun</option>
-                    <option value="dubrava">Dubrava</option>
-                    <option value="trnje">Trnje</option>
-                    <option value="novi zagreb">Novi Zagreb</option>
-                    <option value="ostalo">Ostalo</option>
+                    <option value="Centar">Centar</option>
+                    <option value="Tresnjevka">Trešnjevka</option>
+                    <option value="Maksimir">Maksimir</option>
+                    <option value="Sesvete">Sesvete</option>
+                    <option value="Jarun">Jarun</option>
+                    <option value="Dubrava">Dubrava</option>
+                    <option value="Trnje">Trnje</option>
+                    <option value="Novi Zagreb">Novi Zagreb</option>
+                    <option value="Ostalo">Ostalo</option>
                 </select>
                 <div id="location-error" className="form-text"></div>
 
