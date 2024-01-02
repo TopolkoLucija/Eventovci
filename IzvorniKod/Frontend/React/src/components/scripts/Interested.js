@@ -125,7 +125,7 @@ const Interested = () => {
       </div>
       <div className="KontejnerZaKarice">
         {dogadajcic?.length > 0 ? (
-          <div className="container">
+          <div className="container1">
             {dogadajcic.map((dogadaj) => {
               return (
                 <div

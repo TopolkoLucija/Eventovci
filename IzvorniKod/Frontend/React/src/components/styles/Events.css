@@ -8,6 +8,15 @@
     align-items: center;
     flex-wrap: wrap;
   }
+  .container1 {
+    width: 100%;
+    margin-top: 3rem;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 .KontejnerZaKarice {
     overflow-y: scroll;
   }

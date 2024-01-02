@@ -61,7 +61,7 @@ function Events() {
       });
 
       if (!response.ok) {
-        alert("Greska");
+        console.log("Nije oke response, mozda nisi prijavljen");
         return;
       }
 
@@ -152,7 +152,7 @@ function Events() {
       </div>
       <div className="KontejnerZaKarice">
         {dogadajcic?.length > 0 ? (
-          <div className="container">
+          <div className="container1">
             {dogadajcic.map((dogadaj) => {
               return (
                 <div

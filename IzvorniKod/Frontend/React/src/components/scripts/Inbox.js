@@ -77,7 +77,7 @@ const Inbox = () => {
       <h1 className="inBoxCenter">Inbox</h1>
       <div className="KontejnerZaKarice">
         {dogadajcic?.length > 0 ? (
-          <div className="container">
+          <div className="container1">
             {dogadajcic.map((dogadaj) => {
               return (
                 <div
