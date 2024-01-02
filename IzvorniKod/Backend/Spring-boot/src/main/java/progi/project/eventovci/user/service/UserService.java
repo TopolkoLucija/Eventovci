@@ -56,7 +56,7 @@ public class UserService {
 
     }
 
-    public User register(String username, String email, String password, String typeOfUser, String homeAdress) {
+    public void register(String username, String email, String password, String typeOfUser, String homeAdress) {
         User user = userRepository.findUserByEmail(email);
         if(user != null && Objects.equals(user.getEmail(), email)){
             throw new UserAlreadyExistsException("Neispravan email!");
@@ -68,12 +68,10 @@ public class UserService {
         user = new User(username, email, passwordEncoder.encode(password), typeOfUser, homeAdress);
         userRepository.save(user);
         if (Objects.equals(typeOfUser, "organizator")) {
-            Long a = (long) 1.0;
-            Double price = membershipRepository.findByMembershipId(a).getPrice();
-            Membership membership = new Membership(user.getId(), price, LocalDateTime.MIN);
+            Double price = membershipRepository.findByMembershipId(1L).getPrice();
+            Membership membership = new Membership(user.getId(), price, LocalDateTime.of(1990,1,1,0,0));
             membershipRepository.save(membership);
         }
-        return user;
     }
 
     public ProfileForm data(String username){

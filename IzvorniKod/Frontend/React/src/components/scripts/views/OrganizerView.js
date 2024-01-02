@@ -4,7 +4,8 @@ import '../../styles/App.css';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
 import '../../styles/views/UserView.css';
-import AddEvent from "../AddEvent";
+import logo from '../../styles/logo.png';
+import chip from '../../styles/chip.png';
 
 const OrganizerView = (props) => {
 
@@ -781,6 +782,43 @@ const handleDodajClick = async () => {
                      <div className="background">
                         <div className="window-payment">
                            <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
+
+                           <div className="containerzakarticu">
+                              <div className="card front-face">
+                                 <header>
+                                    <span className="logo">
+                                      <img src={logo} alt="Logo" />
+                                      <h5>Master Card</h5>
+                                    </span>
+                                    <img src={chip} alt="" className="chip" />
+                                 </header>
+
+                                 <div className="card-details">
+                                    <div className="name-number">
+                                       <h6>Broj kartice</h6>
+                                       <h5 className="number">{creditCardNumber ? creditCardNumber : '0000 0000 0000 0000'}</h5>
+                                       <h5 className="name">{creditCardName ? creditCardName : 'Vlasnik kartice'}</h5>
+                                    </div>
+
+                                    <div className="valid-date">
+                                       <h6>Vrijedi do</h6>
+                                       <h5>{creditCardExpirationDate ? creditCardExpirationDate : '11/11'}</h5>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div className="card back-face">
+                                 <h6>
+                                    Ova kartica je samo primjer i ne mora izgledati kao Vaša fizička kreditna kartica!
+                                 </h6>
+                                 <span className="magnetic-strip"></span>
+                                 <div className="signature"><i>{creditCardCVC ? creditCardCVC : '000'}</i></div>
+                                 <h5>
+
+                                 </h5>
+                              </div>
+                           </div>
+
                            <div>Iznos: {membershipAmount} €</div>
                            <div>Unesi podatke o kartici:</div>
                            <div className='error-input'>{ errorInput }</div>

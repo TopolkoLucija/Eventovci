@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/AddEvent.css';
 import '../styles/views/OrganizerView.css';
 import '../styles/MyAccount.css';
+import logo from "../styles/logo.png";
+import chip from "../styles/chip.png";
 
 const AddEvent = ({ getType }) => {
 
@@ -57,6 +59,7 @@ const AddEvent = ({ getType }) => {
        return true;
     }
  }
+
 
  const handleCardCVCInput = (event) => {
     let inputValue = event.target.value;
@@ -401,6 +404,13 @@ const AddEvent = ({ getType }) => {
     };
 
 
+    const handleCardNameInput = (event) => {
+        let inputValue = event.target.value;
+        inputValue = inputValue.replace(/[^a-zA-Z]/g, '');
+
+        setCreditCardName(inputValue);
+    }
+
     return(
         <div className="dodavanje">
             <h1 className="naslov-dodavanje">Dodaj događanje</h1>
@@ -498,62 +508,100 @@ const AddEvent = ({ getType }) => {
                   )}
 
                   {/* Modal */}
-                  {showModalPayWithCard && (
-                     <div className="background">
+                {showModalPayWithCard && (
+                    <div className="background">
                         <div className="window-payment">
-                           <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
-                           <div>Iznos: {membershipAmount} €</div>
-                           <div>Unesi podatke o kartici:</div>
-                           <div className='form-group'>
-                              <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
-                              <input
-                                 type='text'
-                                 className='form-control'
-                                 id='cardNumber'
-                                 value={creditCardNumber}
-                                 onChange={handleCardNumberInput}
-                                 placeholder='0000 0000 0000 0000'
-                                 maxLength={19}
-                              />
-                           </div>
-                           <div className='form-group'>
-                              <label htmlFor='cardName'>Ime nositelja kartice:</label>
-                              <input type='text'
-                                 className='form-control'
-                                 id='cardName'
-                                 value={creditCardName}
-                                 placeholder='Pero Perić'
-                                 onChange={(e) => { setCreditCardName(e.target.value) }} />
-                           </div>
-                           <div className='form-group'>
-                              <label htmlFor='cardExpirationDate'>Datum isteka:</label>
-                              <input
-                                 type="text"
-                                 className='form-control'
-                                 id='cardExpirationDate'
-                                 value={creditCardExpirationDate}
-                                 onChange={handleExpirationDateInput}
-                                 placeholder="MM/YY"
-                                 maxLength={5}
-                              />
-                           </div>
-                           <div className='form-group'>
-                              <label htmlFor='cardCVC'>CVC:</label>
-                              <input type='text'
-                                 className='form-control'
-                                 id='cardCVC'
-                                 value={creditCardCVC}
-                                 placeholder='000'
-                                 onChange={handleCardCVCInput}
-                                 maxLength={3}
-                              />
-                           </div>
+                            <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
 
-                           <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
+                            <div className="containerzakarticu">
+                                <div className="card front-face">
+                                    <header>
+                                        <span className="logo">
+                                          <img src={logo} alt="Logo" />
+                                          <h5>Master Card</h5>
+                                        </span>
+                                        <img src={chip} alt="" className="chip" />
+                                    </header>
+
+                                    <div className="card-details">
+                                        <div className="name-number">
+                                            <h6>Broj kartice</h6>
+                                            <h5 className="number">{creditCardNumber ? creditCardNumber : '0000 0000 0000 0000'}</h5>
+                                            <h5 className="name">{creditCardName ? creditCardName : 'Vlasnik kartice'}</h5>
+                                        </div>
+
+                                        <div className="valid-date">
+                                            <h6>Vrijedi do</h6>
+                                            <h5>{creditCardExpirationDate ? creditCardExpirationDate : '11/11'}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="card back-face">
+                                    <h6>
+                                        Ova kartica je samo primjer i ne mora izgledati kao Vaša fizička kreditna kartica!
+                                    </h6>
+                                    <span className="magnetic-strip"></span>
+                                    <div className="signature"><i>{creditCardCVC ? creditCardCVC : '000'}</i></div>
+                                    <h5>
+
+                                    </h5>
+                                </div>
+                            </div>
+
+                            <div>Iznos: {membershipAmount} €</div>
+                            <div>Unesi podatke o kartici:</div>
+                            <div className='error-input'>{ errorInput }</div>
+                            <div className='form-group'>
+                                <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    id='cardNumber'
+                                    value={creditCardNumber}
+                                    onChange={handleCardNumberInput}
+                                    placeholder='0000 0000 0000 0000'
+                                    maxLength={19}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='cardName'>Ime nositelja kartice:</label>
+                                <input type='text'
+                                       className='form-control'
+                                       id='cardName'
+                                       value={creditCardName}
+                                       placeholder='Pero Perić'
+                                       onChange={handleCardNameInput} />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='cardExpirationDate'>Datum isteka:</label>
+                                <input
+                                    type="text"
+                                    className='form-control'
+                                    id='cardExpirationDate'
+                                    value={creditCardExpirationDate}
+                                    onChange={handleExpirationDateInput}
+                                    placeholder="MM/YY"
+                                    maxLength={5}
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='cardCVC'>CVC:</label>
+                                <input type='text'
+                                       className='form-control'
+                                       id='cardCVC'
+                                       value={creditCardCVC}
+                                       placeholder='000'
+                                       onChange={handleCardCVCInput}
+                                       maxLength={3}
+                                />
+                            </div>
+
+                            <button type='submit' className='btn btn-primary' onClick={handlePayMembership}>Plati</button>
 
                         </div>
-                     </div>
-                  )}
+                    </div>
+                )}
 
                   {/* Modal */}
                   {showModalPayWithPayPal && (

@@ -272,7 +272,6 @@ const AdminView = (props) => {
                   divUser.append(buttonDelete);
 
                   divAllUsers.append(divUser);
-                  divAllUsers.append(document.createElement('hr'));
 
                   spanUserName.innerText = res.username;
                   spanEmail.innerText = res.email;

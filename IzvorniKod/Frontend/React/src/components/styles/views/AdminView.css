@@ -22,7 +22,6 @@
 }
 
 .window-show-all div {
-   margin-bottom: 20px;
 }
 
 .user{
@@ -69,4 +68,52 @@
          "email typeOfUser";
       row-gap: 0;
    }
+}
+
+.allUsers {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.user {
+   border: 1px solid #ccc;
+   padding: 10px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+}
+
+.user:hover {
+   background-color: #f0f0f0;
+}
+
+.user span {
+   margin-right: 10px;
+}
+
+.btn.delete-button {
+   background-color: #dc3545;
+   color: #fff;
+   border: none;
+   padding: 5px 10px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.btn.delete-button:hover {
+   background-color: #bd2130;
+}
+
+hr {
+   border: 0;
+   height: 1px;
+   background-color: #ccc;
+   margin: 10px 0;
+}
+
+.btn.btn-primary {
+   margin-bottom: 5px;
 }

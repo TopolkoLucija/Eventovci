@@ -74,7 +74,6 @@ const Inbox = () => {
   };
   return (
     <div className="inboxContainer">
-      <h1 className="inBoxCenter">Inbox</h1>
       <div className="KontejnerZaKarice">
         {dogadajcic?.length > 0 ? (
           <div className="container1">
