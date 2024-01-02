@@ -111,7 +111,7 @@ html, body, #root {
   }
 
   .category img {
-    margin: 0; /* ukloni margin za slike unutar kategorija */
+    margin: 0; /* ukloni marginu za slike unutar kategorija */
   }
 
   .box {

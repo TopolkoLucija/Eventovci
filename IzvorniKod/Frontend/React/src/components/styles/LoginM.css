@@ -20,7 +20,7 @@ form {
 }
 
 .forma {
-    width: 25rem; /* Set your desired maximum width */
+    width: 25rem;
     padding: 40px;
     background: rgba(256, 256, 256, 0.60);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);

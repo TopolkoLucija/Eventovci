@@ -9,9 +9,7 @@
     flex-wrap: wrap;
   }
 .KontejnerZaKarice {
-     /* Set a maximum height */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    /* Other styles for your container */
+    overflow-y: scroll;
   }
  .glavniKontejner{
   display: grid;
@@ -22,7 +20,6 @@
   display: flex;
   justify-content: space-between;
   justify-content: center;
-  /* VJ IMA LIPSI NACIN */
   margin-top: 2rem;
  }
 body {
@@ -42,14 +39,13 @@ body {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
 }
 .navigacijaEvents a.active {
-    /* Your styles for the active link */
-    background-color: #1abc9c; /* Change to your desired background color */
-    color: rgb(0, 0, 0); /* Change to your desired text color */
+    background-color: #1abc9c;
+    color: rgb(0, 0, 0);
     border-radius: 8px;
     height: 100%;
   }
   .navigacijaEvents a.active~.animation {
-    display: none; /* Or any other styles you want to apply to remove the active effect */
+    display: none;
   }
 .navigacijaEvents a{
     font-size: 15px;
@@ -137,7 +133,7 @@ body {
         width: 80vw !important
     }
     .navigacijaEvents .animation {
-        width: 16vw; /* Match the width of the animation to nav a elements */
+        width: 16vw;
         transition: all .5s ease 0s;
     }
     .navigacijaEvents .start-home, .dvadesetCetriSataCss:hover~.animation{

@@ -9,9 +9,7 @@
     flex-wrap: wrap;
   }
 .KontejnerZaKarice {
-     /* Set a maximum height */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    /* Other styles for your container */
+    overflow-y: scroll;
   }
  .glavniKontejner{
   display: grid;
@@ -26,9 +24,8 @@ body {
     
 }
 .SmanjiNa60Posto a.active {
-    /* Your styles for the active link */
-    background-color: #1abc9c; /* Change to your desired background color */
-    color: rgb(0, 0, 0); /* Change to your desired text color */
+    background-color: #1abc9c;
+    color: rgb(0, 0, 0);
     border-radius: 8px;
     height: 100%;
   }
