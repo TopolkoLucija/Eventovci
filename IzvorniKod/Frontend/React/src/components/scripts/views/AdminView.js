@@ -287,7 +287,7 @@ const AdminView = (props) => {
                   // dodavanje event listenera za navigaciju na detalje organizatora
                   spanUserName.addEventListener("click", () => {
                      if(res.typeOfUser === "organizator") {
-                     navigate(`/${res.userId}`);
+                     navigate(`/organizer/${res.userId}`);
                      }
                   });
 
@@ -326,7 +326,6 @@ const AdminView = (props) => {
                      </div>
                   </div>
 
-                  {/* TODO - dodati funkcionalnost buttona! */}
                   <div className="edit-content">
                      <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={() => {
@@ -378,7 +377,13 @@ const AdminView = (props) => {
                            <span className='exit' onClick={closeModalIncreaseMembership}>&times;</span>
                            <div>Unesi iznos:</div>
                            <form>
-                              <input type='text' className='form-control' id='amount' onChange={(e) => { setAmount(e.target.value); }}></input>
+                              <input type='text' className='form-control' id='amount' onChange={(e) => {
+                                     const inputValue = e.target.value;
+                                     if (/^\d+$/.test(inputValue) || inputValue === '') {
+                                        setAmount(inputValue);
+                                     }
+                                  }}
+                              />
                               <button type="submit" className='btn btn-primary' onClick={handleIncreaseMembership}>Promijeni</button>
                            </form>
                         </div>
