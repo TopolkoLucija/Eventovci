@@ -281,7 +281,9 @@
 		\section{Dijagram razreda}
 		
 		Dijagrami razreda prikazuju razrede u objektno orijentiranom sustavu, njihove atribute i
-		metode te veze između razreda koji međusobno komuniciraju ili se nasljeđuju. Na slikama su prikazani razredi koji odgovaraju backend dijelu MVC arhitekture. Slika \ref{cd2} prikazuje sučelja koja pripadaju sloju Repository. Razredi prikazani na slici \ref{cd3} nasljeđuju Controller razred. Na slici \ref{cd5} prikazan je sloj Services, a na slici \ref{cd4} Data transfer objects. Razredi prikazani na \ref{cd1} predstavljaju entitete iz baze podataka. Članske varijable tih klase atributi su odgovarajućih entiteta baze podataka.
+		metode te veze između razreda koji međusobno komuniciraju ili se nasljeđuju. Na slikama su prikazani razredi koji odgovaraju backend dijelu MVC arhitekture. Slika \ref{cd2} prikazuje sučelja koja pripadaju sloju Repository. Razredi prikazani na slici \ref{cd3} nasljeđuju Controller razred. Na slici \ref{cd5} prikazan je sloj Services, a na slici \ref{cd4} Data transfer objects. Razredi prikazani na \ref{cd1} predstavljaju entitete iz baze podataka. Članske varijable tih klase atributi su odgovarajućih entiteta baze podataka. Na slikama \ref{cd6} i \ref{cd7} prikazane su vlastite iznimke i dio programskog rješenja vezan za sigurnost aplikacije.  
+		
+		\vspace{-0.4cm}
 
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{dijagrami/cd2.png} 
@@ -290,6 +292,8 @@
 				\caption{Dijagram razreda - Repository}
 				\label{cd2}
 			\end{figure}
+			
+			\vspace{-0.5cm}
 			
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{dijagrami/cd5.png} 
@@ -325,12 +329,29 @@
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{dijagrami/cd1.png} 
 				\centering
+				\vspace{-0.5cm}
 				\caption{Dijagram razreda - Models}
 				\label{cd1}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/cd6.png} 
+				\centering
+				\vspace{-0.5cm}
+				\caption{Dijagram razreda - Exceptions}
+				\label{cd6}
 			\end{figure}
 
 			\eject
 		
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/cd7.png} 
+				\centering
+				\caption{Dijagram razreda - Security}
+				\label{cd7}
+			\end{figure}
+			
+			\eject
 		\section{Dijagram stanja}
 			
 			 Na slici \ref{sd} prikazan je dijagram stanja sustava za Posjetitelja i Organizatora. Neposredno nakon prijave u sustav, korisniku se prikazuje početna stranica sa osnovnim informacijama o web-aplikaciji. Ako je korisnik Posjetitelj, dostupne su mu opcije \textit{Početna stranica}, \textit{Događanja}, \textit{Inbox}, \textit{Zanima me}, \textit{Moj račun}, \textit{O nama} i \textit{Odjava}. Ako je korisnik ima ovlasti Organizatora, dodatno mu je dostupna opcija \textit{Moja događanja}. Biranjem opcije \textit{Moj račun} prikazuju se korisnički podaci i nude se opcije uređivanja osobnih podataka (opcija \textit{Uredi profil}), brisanje korisničkog računa i uređivanje postavki obavještavanja o novim događanjima (ta nova događanja pojavit će se u sekciji \textit{Inbox}). Organizatori na ovom mjestu, uz navedeno, imaju dodatnu opciju dodavanja novog događanja. Aktualna događanja prikazuju se odabirom opcije \textit{Događanja}, a moguće ih je i filtrirati prema vremenskom razdoblju.  Kad je iz popisa svih događanja odbrano i otvoreno jedno događanje, moguće ga je recenzirati, iskazati interes te prikazati profil organizatora događanja. Odabirom opcije \textit{Zanima me} prikazuju se događanja za koja je korisnik iskazao interes, a odabirom \textit{Moja događanja} organizatoru se prikazuju sva vlastita događanja. Odabirom opcije \textit{O nama} prikazuju se informacije o web-aplikaciji, a odabirom opcije \textit{Odjava} korisnik se odjavljuje iz sustava. 
