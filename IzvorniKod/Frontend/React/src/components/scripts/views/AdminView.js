@@ -272,11 +272,16 @@ const AdminView = (props) => {
                   divUser.append(buttonDelete);
 
                   divAllUsers.append(divUser);
+                  divAllUsers.append(document.createElement('hr'));
 
                   spanUserName.innerText = res.username;
                   spanEmail.innerText = res.email;
-                  spanTypeOfUser.innerText = res.typeOfUser;
+                  spanTypeOfUser.innerText = `(${res.typeOfUser})`;
                   buttonDelete.innerHTML = "&times";
+
+                  spanUserName.id = "username-span";
+                  spanEmail.id = "email-span";
+                  spanTypeOfUser.id = "typeOfUser-span";
 
                   divUser.className = "user";
                   divUser.id = `${res.userId}`;
@@ -354,7 +359,7 @@ const AdminView = (props) => {
                         <div className="window-show-all">
                            <span className='exit' onClick={closeModalShowAll}>&times;</span>
                            <div>Prikaži sve</div>
-                           <div>
+                           <div className='option-buttons'>
                               <button className='btn btn-primary' onClick={() => {
                                  handleAllUsers(0);
                               }}>Svi</button>

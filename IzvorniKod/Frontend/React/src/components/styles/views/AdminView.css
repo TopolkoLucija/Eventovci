@@ -10,8 +10,6 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   /* justify-content: center; */
-   /* align-content: center; */
    overflow-y: scroll;
 }
 
@@ -24,7 +22,7 @@
 }
 
 .window-show-all div {
-   margin-bottom: 10px;
+   margin-bottom: 20px;
 }
 
 .user{
@@ -36,6 +34,18 @@
    width: 100%;
 }
 
+#username-span{
+   grid-area: username;
+}
+
+#email-span{
+   grid-area: email;
+}
+
+#typeOfUser-span{
+   grid-area: typeOfUser;
+}
+
 .delete-button{
    width: 30px;
    height: 30px;
@@ -44,4 +54,19 @@
    border: red;
    border-radius: 5px;
    color: white;
+   grid-area: delete;
+}
+
+@media (max-width: 768px){
+   .window-show-all{
+      width: fit-content;
+   }
+
+   .user{
+      display: grid;
+      grid-template-areas: 
+         "username delete"
+         "email typeOfUser";
+      row-gap: 0;
+   }
 }

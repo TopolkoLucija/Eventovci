@@ -391,6 +391,7 @@ const ShowEvent = () => {
       setUserRatingText("");
    }
    const closeModalRate = () => {
+      setReviewError(false);
       setShowModalRate(false);
    }
 
@@ -428,7 +429,7 @@ const ShowEvent = () => {
                         ) : (
                            <ReactPlayer
                               url={`data:video/mp4;base64,${slide.content}`}
-                              width="100%"
+                              width="90%"
                               height="100%"
                               controls
                               className="center"
@@ -489,12 +490,12 @@ const ShowEvent = () => {
 
                {showModalRate && (
                   <div className="background">
-                     <div className="window">
+                     <div className="window-rating">
                         <span className='exit' onClick={closeModalRate}>&times;</span>
                         <div>Napiši recenziju!</div>
                         {reviewError ?
                            <div>
-                              <p>Nedostaju podatci</p>
+                              <p className="error-text">Nedostaju podatci</p>
                            </div> : <></>
                         }
                         <div><StarRating rating={userRatingGrade} onRatingChange={(newRating) => setUserRatingGrade(newRating)} /></div>
@@ -519,6 +520,9 @@ const ShowEvent = () => {
                   <div className="background">
                      <div className="window">
                         <div>
+                           <p>Recenzija objavljena!</p>
+                        </div>
+                        <div>
                            <button className="btn btn-primary" onClick={closeSendReview} id="close">Zatvori</button>
                         </div>
                      </div>
@@ -529,7 +533,7 @@ const ShowEvent = () => {
                   <div className="background">
                      <div className="window">
                         <div>Želite li izbrisati recenziju?</div>
-                        <div>
+                        <div className="option-buttons">
                            <button className="btn btn-primary" onClick={() => { handleDeleteReview(showModalDeleteReview.reviewId) }}>Izbriši</button>
                            <button className="btn btn-primary" onClick={closeDeleteReview}>Zatvori</button>
                         </div>

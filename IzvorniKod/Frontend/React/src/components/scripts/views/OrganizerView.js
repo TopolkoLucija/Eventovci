@@ -149,6 +149,13 @@ const handleDodajClick = async () => {
       setCreditCardCVC(inputValue);
    }
 
+   const handleCardNameInput = (event) => {
+      let inputValue = event.target.value;
+      inputValue = inputValue.replace(/[^a-zA-Z]/g, '');
+
+      setCreditCardName(inputValue);
+   }
+
    const handleExpirationDateInput = (event) => {
       let inputValue = event.target.value;
 
@@ -442,6 +449,15 @@ const handleDodajClick = async () => {
             return;
          }
          if (!validatePassword()) {
+            return;
+         }
+      }
+      else if (showModalPayWithCard) {
+         if (creditCardNumber === "" ||
+            creditCardName === "" ||
+            creditCardExpirationDate === "" ||
+            creditCardCVC === "") {
+            setErrorInput("Ispunite sva polja!");
             return;
          }
       }
@@ -751,7 +767,7 @@ const handleDodajClick = async () => {
                            {message.type !== "error" ?
                               <>
                                  <div>Odaberi način plaćanja:</div>
-                                 <div>
+                                 <div className='option-buttons'>
                                     <button className='btn btn-primary' onClick={openModalPayWithCard}>Karticom</button>
                                     <button className='btn btn-primary' onClick={openModalPayWithPayPal}>PayPalom</button>
                                  </div>
@@ -767,6 +783,7 @@ const handleDodajClick = async () => {
                            <span className='exit' onClick={closeModalPayWithCard}>&times;</span>
                            <div>Iznos: {membershipAmount} €</div>
                            <div>Unesi podatke o kartici:</div>
+                           <div className='error-input'>{ errorInput }</div>
                            <div className='form-group'>
                               <label htmlFor='cardNumber'>Broj kreditne kartice:</label>
                               <input
@@ -786,7 +803,7 @@ const handleDodajClick = async () => {
                                  id='cardName'
                                  value={creditCardName}
                                  placeholder='Pero Perić'
-                                 onChange={(e) => { setCreditCardName(e.target.value) }} />
+                                 onChange={handleCardNameInput} />
                            </div>
                            <div className='form-group'>
                               <label htmlFor='cardExpirationDate'>Datum isteka:</label>
@@ -897,7 +914,7 @@ const handleDodajClick = async () => {
                         <div className="window">
                            <span className='exit' onClick={closeModalDelete}>&times;</span>
                            <div>Jesi siguran da želiš obrisati račun?</div>
-                           <div>
+                           <div className='option-buttons'>
                               <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
                               <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
                            </div>

@@ -1,8 +1,17 @@
+.window{
+   height: fit-content;
+}
+
+.option-buttons{
+   display: flex;
+   gap: 20px;
+}
+
 .window-payment {
    background-color: white;
    padding: 20px;
    width: 60%;
-   height: 60%;
+   height: fit-content;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -25,7 +34,7 @@
 }
 
 .window-event {
-   height: 95%;
+   height: fit-content;
    width: 90%;
    overflow-y: scroll;
 }
@@ -50,7 +59,7 @@
    background-color: white;
    padding: 20px;
    width: 50%;
-   height: 100%; /* Prilagodite visinu prema potrebama */
+   height: fit-content; /* Prilagodite visinu prema potrebama */
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -122,4 +131,10 @@
 
  .btn-increase-height {
    height: fit-content;
+ }
+
+ @media (max-width: 768px) {
+   .option-buttons{
+      flex-direction: column;
+   }
  }

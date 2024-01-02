@@ -531,7 +531,7 @@ const UserView = (props) => {
                                     <div className="window">
                                        <span className='exit' onClick={closeModalDelete}>&times;</span>
                                        <div>Jesi siguran da želiš obrisati račun?</div>
-                                       <div>
+                                       <div className='option-buttons'>
                                           <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
                                           <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
                                        </div>
