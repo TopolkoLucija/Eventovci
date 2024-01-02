@@ -131,7 +131,7 @@ const ShowEvent = () => {
             });
 
 
-         // slike i videa
+         // slike i videi
          fetch(`/api/media/get/${id}`, {
             method: "GET",
             headers: {
@@ -464,7 +464,7 @@ const ShowEvent = () => {
                      <div>
                         <h3 className="h3 text-center">Recenzije</h3>
                         <div className="text-center">
-                           <button className="btn btn-primary" id="rate-btn" disabled={typeOfUser === "administrator"} onClick={openModalRate}>
+                           <button className="btn btn-primary" id="rate-btn" disabled={typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} onClick={openModalRate}>
                               Dodaj recenziju
                            </button>
                         </div>
