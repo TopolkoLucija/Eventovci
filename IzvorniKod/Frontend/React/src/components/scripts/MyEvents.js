@@ -163,6 +163,7 @@ const MyEvents = () => {
                     Datum={dogadaj.timeOfTheEvent}
                     Naslov={dogadaj.eventName}
                     Poster={dogadaj.media}
+                    display={true}
                   ></Dogadaj>
                 </div>
               );
