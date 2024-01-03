@@ -442,9 +442,11 @@ const ShowEvent = () => {
                   <div>
                      <div className="event-content-info">
                         <p>Vrijeme: {format(eventTime, 'dd.MM.yyyy HH:mm')}</p>
+                        <p>Trajanje: {eventInfo.duration}</p>
                         <p>Mjesto: {eventInfo.location}</p>
                         <p>Organizator: <a href={`/organizer/${eventInfo.eventCoordinatorid}`}>{eventInfo.username}</a></p>
                         <p>Opis: {eventInfo.typeOfEvent}</p>
+                        <p>Cijena: {eventInfo.ticketPrice}€</p>
                      </div>
                      <div className="event-content-choose">
                         <button id="option-1" className="btn btn-primary" disabled={((new Date() - eventTime) / 36e5) >= 0 || typeOfUser === "administrator" || userId === eventInfo.eventCoordinatorid} value={1} onClick={(e) => {
