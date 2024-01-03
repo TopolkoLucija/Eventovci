@@ -6,6 +6,7 @@ import '../../styles/views/OrganizerView.css';
 import '../../styles/views/UserView.css';
 import logo from '../../styles/logo.png';
 import chip from '../../styles/chip.png';
+import paypal from '../../styles/PayPal.png';
 
 const OrganizerView = (props) => {
 
@@ -153,7 +154,6 @@ const handleDodajClick = async () => {
    const handleCardNameInput = (event) => {
       let inputValue = event.target.value;
       inputValue = inputValue.replace(/[^a-zA-Z]/g, '');
-
       setCreditCardName(inputValue);
    }
 
@@ -344,16 +344,19 @@ const handleDodajClick = async () => {
 
    const closeModalPayWithPayPal = () => {
       setShowModalPayWithPayPal(false);
+      setShowModalPayMembership(true);
    }
    const openModalPayWithPayPal = () => {
       setPayPalEmail("");
       setPayPalPassword("");
       setErrorInput("");
       setShowModalPayWithPayPal(true);
+      setShowModalPayMembership(false);
    }
 
    const closeModalPayWithCard = () => {
       setShowModalPayWithCard(false);
+      setShowModalPayMembership(true);
    }
    const openModalPayWithCard = () => {
       setCreditCardNumber("");
@@ -361,6 +364,7 @@ const handleDodajClick = async () => {
       setCreditCardExpirationDate("");
       setCreditCardCVC("");
       setShowModalPayWithCard(true);
+      setShowModalPayMembership(false);
    }
 
    const closeModalMembershipPayed = () => {
@@ -546,8 +550,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="centar" 
-                                       checked={selectedLocations.includes("centar")} 
+                                       value="Centar"
+                                       checked={selectedLocations.includes("Centar")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Centar
@@ -555,8 +559,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="tresnjevka" 
-                                       checked={selectedLocations.includes("tresnjevka")} 
+                                       value="Tresnjevka"
+                                       checked={selectedLocations.includes("Tresnjevka")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Trešnjevka
@@ -564,8 +568,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="maksimir" 
-                                       checked={selectedLocations.includes("maksimir")} 
+                                       value="Maksimir"
+                                       checked={selectedLocations.includes("Maksimir")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Maksimir
@@ -573,8 +577,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="sesvete" 
-                                       checked={selectedLocations.includes("sesvete")} 
+                                       value="Sesvete"
+                                       checked={selectedLocations.includes("Sesvete")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Sesvete
@@ -582,8 +586,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="jarun" 
-                                       checked={selectedLocations.includes("jarun")} 
+                                       value="Jarun"
+                                       checked={selectedLocations.includes("Jarun")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Jarun
@@ -591,8 +595,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="dubrava" 
-                                       checked={selectedLocations.includes("dubrava")} 
+                                       value="Dubrava"
+                                       checked={selectedLocations.includes("Dubrava")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Dubrava
@@ -600,8 +604,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="trnje" 
-                                       checked={selectedLocations.includes("trnje")} 
+                                       value="Trnje"
+                                       checked={selectedLocations.includes("Trnje")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Trnje
@@ -609,8 +613,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="novi zagreb" 
-                                       checked={selectedLocations.includes("novi zagreb")} 
+                                       value="Novi Zagreb"
+                                       checked={selectedLocations.includes("Novi Zagreb")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Novi Zagreb
@@ -618,8 +622,8 @@ const handleDodajClick = async () => {
                               <label>
                                     <input 
                                        type="checkbox" 
-                                       value="ostalo" 
-                                       checked={selectedLocations.includes("ostalo")} 
+                                       value="Ostalo"
+                                       checked={selectedLocations.includes("Ostalo")}
                                        onChange={(e) => handleCheckboxChange(e, selectedLocations, setSelectedLocations)} 
                                     />
                                     Ostalo
@@ -878,6 +882,7 @@ const handleDodajClick = async () => {
                      <div className="background">
                         <div className="window-payment">
                            <span className='exit' onClick={closeModalPayWithPayPal}>&times;</span>
+                           <img className='paypal' src={paypal} alt = ""/>
                            <div>Unesi podatke o PayPalu:</div>
                            <div className='error-input'>{ errorInput }</div>
                            <div className='form-group'>

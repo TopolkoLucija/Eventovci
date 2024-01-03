@@ -6,6 +6,7 @@ import '../styles/views/OrganizerView.css';
 import '../styles/MyAccount.css';
 import logo from "../styles/logo.png";
 import chip from "../styles/chip.png";
+import paypal from "../styles/PayPal.png";
 
 const AddEvent = ({ getType }) => {
 
@@ -117,16 +118,19 @@ const AddEvent = ({ getType }) => {
 
  const closeModalPayWithPayPal = () => {
     setShowModalPayWithPayPal(false);
+     setShowModalPayMembership(true);
  }
  const openModalPayWithPayPal = () => {
     setPayPalEmail("");
     setPayPalPassword("");
     setErrorInput("");
     setShowModalPayWithPayPal(true);
+    setShowModalPayMembership(false);
  }
 
  const closeModalPayWithCard = () => {
     setShowModalPayWithCard(false);
+     setShowModalPayMembership(true);
  }
  const openModalPayWithCard = () => {
     setCreditCardNumber("");
@@ -134,6 +138,7 @@ const AddEvent = ({ getType }) => {
     setCreditCardExpirationDate("");
     setCreditCardCVC("");
     setShowModalPayWithCard(true);
+    setShowModalPayMembership(false);
  }
 
  const closeModalMembershipPayed = () => {
@@ -291,6 +296,14 @@ const AddEvent = ({ getType }) => {
         } 
     };
 
+    const handleDelete = (index) => {
+        const updatedFiles = [...file];
+        updatedFiles.splice(index, 1);
+        setFile(updatedFiles);
+    };
+
+
+
     const handlePayMembership = () => {
 
         // ako plaćam PayPalom onda se mora provjeriti Email i Password
@@ -406,8 +419,7 @@ const AddEvent = ({ getType }) => {
 
     const handleCardNameInput = (event) => {
         let inputValue = event.target.value;
-        inputValue = inputValue.replace(/[^a-zA-Z]/g, '');
-
+        inputValue = inputValue.replace(/^[a-zA-Z\s-]*$/g, '');
         setCreditCardName(inputValue);
     }
 
@@ -449,7 +461,7 @@ const AddEvent = ({ getType }) => {
                 <select id="locationField" className="add" defaultValue="default" onChange={(e) => {setLocation(e.target.value); validateLocation();}}>
                     <option value="default" disabled>Odaberite lokaciju događanja</option>
                     <option value="Centar">Centar</option>
-                    <option value="Tresnjevka">Trešnjevka</option>
+                    <option value="Trešnjevka">Trešnjevka</option>
                     <option value="Maksimir">Maksimir</option>
                     <option value="Sesvete">Sesvete</option>
                     <option value="Jarun">Jarun</option>
@@ -481,7 +493,22 @@ const AddEvent = ({ getType }) => {
 
                 <label className="dogadjanja-labele">Slike i videozapisi (opcionalno):</label>
                 <input type="file" multiple onChange={handleFileChange} accept="image/*,video/*"/>
-                {file.length > 0 && ( <div> Odabrane datoteke: <ul> {Array.from(file).map((file, index) => ( <li key={index}>{file.name}</li> ))} </ul> </div> )}
+
+                {
+                    file.length > 0 && (
+                        <div>
+                            <p>Odabrane datoteke:</p>
+                            <ul>
+                                {Array.from(file).map((file, index) => (
+                                    <li key={index}>
+                                        <button className="delete-button" onClick={(e) => { e.preventDefault(); handleDelete(index); }}>x</button> {file.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+
 
                 <button className="add dodaj-dogadjanje" type="button" onClick={handleAddEvent}>
                     Dodaj
@@ -608,6 +635,7 @@ const AddEvent = ({ getType }) => {
                      <div className="background">
                         <div className="window-payment">
                            <span className='exit' onClick={closeModalPayWithPayPal}>&times;</span>
+                            <img className='paypal' src={paypal} alt = ""/>
                            <div>Unesi podatke o PayPalu:</div>
                            <div className='error-input'>{ errorInput }</div>
                            <div className='form-group'>

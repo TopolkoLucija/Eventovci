@@ -151,3 +151,13 @@
       width: fit-content;
    }
 }
+
+.event-content-info a{
+   color: black;
+}
+
+.event-content-info a:hover{
+   color: #FF6B6B;
+   text-decoration: underline;
+   text-decoration-color: #FF6B6B;
+}

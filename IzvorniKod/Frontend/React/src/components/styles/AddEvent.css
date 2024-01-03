@@ -104,3 +104,18 @@ body {
  .add.error {
     border: 1px solid red;
 }
+
+.paypal {
+    width: 100px;
+}
+
+.delete-button {
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+li{
+    margin: 1%;
+    list-style: none;
+}
