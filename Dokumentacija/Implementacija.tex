@@ -60,12 +60,14 @@
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
 			
+			\textit{Za deploy aplikacije korištena je platforma Render. Putem njega omogućeno je da aplikacija bude javno dostupna. Pri implementaciji web usluge na render najprije je s njime potrebno povezati svoj GitHub repozitorij, pripremiti projekt za deploy te kreirati potrebne dijelove na Render-u.}
 			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
+			\subsection{Priprema projekta za deploy}
+			\textit{Priprema projekta za deploy na Render uključuje pripremu backenda i pripremu frontenda. Za pripremu backenda potrebno je dodati varijable okruženja, dodati DockerFile te postaviti /api kao prefiks svim zahtjevima na backend, dok je za pripremu frontenda potrebno dodati dependencye u package.json, dodati /src/setupProxy.js koji služi kao proxy server za lokalni development te dodati app.js u kojem se nalazi express server za posluživanje frontenda. Zatim je potrebno u Rander kontolnoj ploči kreirati bazu podataka, backend i fronted.}
+			
+			\subsection{Kreiranje potrebnih dijelova na Render-u}
+			\textit{Prvo kreiramo bazu podataka tako što odaberemo opciju Novo -> PostgreSQL u Renderovoj kontrolnoj ploči. Postavimo ime baze i korisničko ime te kliknemo Stvori Bazu podataka. Zatim kreiramo backend tako što odaberemo Novo -> Web Service. Ukoliko nismo povezali račun sada moramo kako bi mogli odabrati projekt kojeg želimo deployati. Nakon toga sve što je potrebno je postaviti ime za servis koje postaje dio web adrese, postavitit korijennski direktorij, dodati potrebne varijable okruženja (tj. kopirati njihove vrijednosti iz postavki baze podataka na Renderu), za environment odabrati Docker te postaviti putanju za Dockerfile. Tada odaberemo stvoriti Web uslugu. Posljednji korak je kreiranje frontenda pomoću odabira Novo -> Web Service. Zatim se odabire projekt, ime za servis, postavi korijenski direktorij, za environment odabire Node te za region Frankfurt, postavljamo komande upravljanja i dodamo potrebne varijable okruženja. Tada odaberemo stvoriti Web Service.
 			
 			
 			\eject 
