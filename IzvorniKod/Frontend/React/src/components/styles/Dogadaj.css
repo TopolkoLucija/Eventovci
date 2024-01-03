@@ -12,6 +12,11 @@
   box-shadow: 10px 13px 10px -7px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
+.dogadaj svg.bi-x {
+  cursor: pointer;
+  z-index: 3; /* Ensure it's above other content */
+
+}
 .staviFlexOdKraja{
   display: flex;
   justify-content: space-between;

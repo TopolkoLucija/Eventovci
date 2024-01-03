@@ -71,18 +71,18 @@ nav .animation{
     transition: all .5s ease 0s;
 }
 .myeventsBucuciDogadaji{
-    width: 20vw;
+    width: 25vw;
 }
 nav .start-home, .myeventsBucuciDogadaji:hover~.animation{
-    width: 20vw;
+    width: 25vw;
     left: 0;
 }
 .myeventsPrethodniDogadaji{
-    width: 20vw;
+    width: 25vw;
 }
 .myeventsPrethodniDogadaji:hover~.animation{
-    width: 20vw;
-    left: 20vw;
+    width: 25vw;
+    left: 25vw;
 }
 
 @media (max-width: 768px) {
@@ -96,28 +96,28 @@ nav .start-home, .myeventsBucuciDogadaji:hover~.animation{
     }
     nav a{
         font-size: 10px;
-        width: 20vw;
+        width: 25vw;
     }
     nav a:nth-child(1){
-        width: 20vw;
+        width: 25vw;
     }
     .myeventsPrethodniDogadaji{
-        width: 20vw;
+        width: 25vw;
     }
     nav{
-        width: 40vw;
+        width: 50vw;
     }
     nav .animation {
-        width: 20vw;
+        width: 25vw;
         transition: all .5s ease 0s;
     }
     nav .start-home, .myeventsBucuciDogadaji:hover~.animation{
-        width: 20vw;
+        width: 25vw;
         left: 0;
     }
     .myeventsPrethodniDogadaji:hover~.animation{
-        width: 20vw;
-        left: 20vw;
+        width: 25vw;
+        left: 25vw;
     }
   }
   @media (max-width: 768px) {
