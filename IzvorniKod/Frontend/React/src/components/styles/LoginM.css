@@ -13,7 +13,7 @@ form {
 }
 
 .contents {
-    width: 100%;
+    width: 76%;
     height: 100%;
     display: flex;
     flex-direction: column;
