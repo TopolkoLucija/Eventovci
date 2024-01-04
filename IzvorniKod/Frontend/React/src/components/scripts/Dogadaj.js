@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import "../styles/Dogadaj.css";
 
-const Dogadaj = ({ Id, Datum, Poster, Mjesto, Naslov, display }) => {
+const Dogadaj = ({
+  Id,
+  Datum,
+  Poster,
+  Mjesto,
+  Naslov,
+  display,
+  nemojPrikazatAdminu,
+}) => {
   const formattedDate = format(new Date(Datum), "dd. MM. yyyy  HH:mm");
   const accessToken = sessionStorage.getItem("accessToken");
   const [vrstaPosjetitelja, setVrstaPosjetitelja] = useState("");
@@ -79,7 +87,7 @@ const Dogadaj = ({ Id, Datum, Poster, Mjesto, Naslov, display }) => {
     <div className="dogadaj" onClick={handleClick}>
       <div className="staviFlexOdKraja">
         <p>{formattedDate}</p>
-        {(prikazi || display) && (
+        {(prikazi || display) && !nemojPrikazatAdminu && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

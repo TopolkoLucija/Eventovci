@@ -14,7 +14,7 @@
 }
 .dogadaj svg.bi-x {
   cursor: pointer;
-  z-index: 3; /* Ensure it's above other content */
+  z-index: 10; /* Ensure it's above other content */
 
 }
 .staviFlexOdKraja{
