@@ -165,12 +165,14 @@ const Sidebar = ({ className }) => {
   
         {isMenuOpen && (
           <div className="mobile-menu">
+            <div className="scroll-menu">
             <span className="close-icon" onClick={handleCloseMenu}>
               X
             </span>
             {categories.map((category, index) => (
               renderCategory(category, index)
             ))}
+            </div>
           </div>
         )}
       </div>

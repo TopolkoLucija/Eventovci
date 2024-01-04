@@ -22,7 +22,7 @@
   }
  .glavniKontejner{
   display: grid;
-  width: 80vw;
+  width: 76%;
  }
  .kontejnerZaNavbar{
   height: 5vh;

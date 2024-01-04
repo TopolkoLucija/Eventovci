@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AddEvent.css';
+import '../styles/App.css';
 import '../styles/views/OrganizerView.css';
 import '../styles/MyAccount.css';
 import logo from "../styles/logo.png";
@@ -424,9 +425,9 @@ const AddEvent = ({ getType }) => {
     }
 
     return(
-        <div className="dodavanje">
+        <div className="dodavanje1">
             <h1 className="naslov-dodavanje">Dodaj događanje</h1>
-
+            <div className="fields">
             <form className="add-form">
             <p className="instructions">Obavezno ispuniti sva polja, osim ako su označena kao opcionalna.</p>
                 <label htmlFor="nameField" className="dogadjanja-labele">Naziv događanja:</label>
@@ -703,10 +704,8 @@ const AddEvent = ({ getType }) => {
                         </div>
                      </div>
                   )}
-             
-
-                  
-        </div>
+            </div> 
+         </div>
     );
 };
 

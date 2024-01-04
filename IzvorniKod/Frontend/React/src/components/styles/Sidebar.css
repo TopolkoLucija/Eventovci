@@ -161,6 +161,11 @@ html, body, #root {
   z-index: 999; /* visok z-index da bude iznad ostalog sadržaja */
 }
 
+.scroll-menu {
+  margin-top: 5%;
+  overflow-y: scroll;
+}
+
 .close-icon {
   position: absolute;
   top: 10px;

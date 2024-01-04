@@ -11,11 +11,13 @@
 .KontejnerZaKarice {
     overflow-y: scroll;
   }
- .glavniKontejner{
+
+ .glavniKontejner {
   display: grid;
-  width: 77vw;
+  width: 76%;
  }
- .kontejnerZaNavbar{
+
+ .kontejnerZaNavbar {
   height: 5vh;
   display: flex;
   justify-content: space-between;

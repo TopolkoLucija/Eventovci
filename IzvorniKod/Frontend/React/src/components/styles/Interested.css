@@ -13,7 +13,7 @@
   }
  .glavniKontejner{
   display: grid;
-  width: 80vw;
+  width: 76%;
  }
 body {
     font-family: 'Open Sans', sans-serif;

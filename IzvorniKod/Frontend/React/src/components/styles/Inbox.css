@@ -5,7 +5,7 @@
     align-items: center;
 }
 .inboxContainer{
-    width: 80vw;
+    width: 76%;
 }
 @media (max-width: 768px) {
     .inboxContainer{
@@ -13,7 +13,7 @@
     }
     .KontejnerZaKarice{
         overflow-y: scroll;
-        height: 80vh;
+        height: 76%;
         padding-top: 1rem;
     }
   }

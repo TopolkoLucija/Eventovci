@@ -4,9 +4,13 @@ body {
     padding: 0;
 }
 
-.dodavanje {
+.dodavanje1 {
+    display: grid;
+    width: 76%;
+}
+
+.fields {
     overflow-y: scroll;
-    width: 100%;
 }
 
 .naslov-dodavanje {
