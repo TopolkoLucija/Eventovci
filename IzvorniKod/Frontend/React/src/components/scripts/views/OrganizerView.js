@@ -543,6 +543,7 @@ const handleDodajClick = async () => {
                      <div className="background">
                         <div className="window">
                            <span className='exit' onClick={closeModalPreferences}>&times;</span>
+                           <div className="bigger-div">
                            <h3 className="bigger-title">Uredi postavke obavijesti</h3>
                            <div className="preferences-section">
                            <div className="column">
@@ -742,6 +743,7 @@ const handleDodajClick = async () => {
                               </label>
                            </div>
                            <button className="btn btn-primary btn-add" onClick={handleDodajClick}>Dodaj</button>
+                        </div>
                         </div>
                         </div>
                      </div>

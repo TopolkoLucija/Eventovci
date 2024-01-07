@@ -93,3 +93,8 @@ input[type="checkbox"] {
         overflow-y: scroll;
     }
 }
+
+.bigger-div {
+    max-height: 400px;
+    overflow-y: scroll;
+}

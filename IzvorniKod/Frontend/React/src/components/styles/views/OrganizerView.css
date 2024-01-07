@@ -254,3 +254,8 @@ h5.name {
 .paypal {
     width: 100px;
 }
+
+.bigger-div {
+    max-height: 400px;
+    overflow-y: scroll;
+}
