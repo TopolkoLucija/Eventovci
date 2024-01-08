@@ -153,7 +153,7 @@ const handleDodajClick = async () => {
 
    const handleCardNameInput = (event) => {
       let inputValue = event.target.value;
-      inputValue = inputValue.replace(/[^a-zA-Z]/g, '');
+      inputValue = inputValue.replace(/[^a-zA-Z ]/g, '');
       setCreditCardName(inputValue);
    }
 
