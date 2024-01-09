@@ -1,7 +1,7 @@
-.window-show-all{
+.window-show-all {
    background-color: white;
    padding: 20px;
-   width: 60%;
+   width: 80%;
    height: 60%;
    border-radius: 10px;
    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -21,31 +21,17 @@
    cursor: pointer;
 }
 
-.window-show-all div {
+.window-show-all div {}
+
+.allUsers{
+   display: none;
 }
 
-.user{
-   display: flex;
-   gap: 30px;
-}
-
-.divAllUsers{
+.divAllUsers {
    width: 100%;
 }
 
-#username-span{
-   grid-area: username;
-}
-
-#email-span{
-   grid-area: email;
-}
-
-#typeOfUser-span{
-   grid-area: typeOfUser;
-}
-
-.delete-button{
+.delete-button {
    width: 30px;
    height: 30px;
    padding: 0;
@@ -56,56 +42,56 @@
    grid-area: delete;
 }
 
-@media (max-width: 768px){
-   .window-show-all{
-      width: fit-content;
+@media (max-width: 768px) {
+
+   .container.mt-5{
+      display: none;
+   }
+
+   .window-show-all {
+      width: 90%;
+   }
+
+   .allUsers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+   }
+
+   .div-userData{
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+   }
+
+   .div-buttonDelete{
+      display: flex;
+      justify-content: start;
    }
 
    .user{
-      display: grid;
-      grid-template-areas: 
-         "username delete"
-         "email typeOfUser";
-      row-gap: 0;
+      display: flex;
+      gap: 10px;
+      border: 0.5px solid;
+      padding: 10px;
+      width: 100%;
+   }
+
+   .btn.delete-button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+   }
+
+   .btn.delete-button:hover {
+      background-color: #bd2130;
    }
 }
 
-.allUsers {
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
-}
 
-.user {
-   border: 1px solid #ccc;
-   padding: 10px;
-   cursor: pointer;
-   transition: background-color 0.3s;
-   width: 100%;
-   justify-content: center;
-   align-items: center;
-}
-
-.user:hover {
-   background-color: #f0f0f0;
-}
-
-.user span {
-   margin-right: 10px;
-}
-
-.btn.delete-button {
-   background-color: #dc3545;
-   color: #fff;
-   border: none;
-   padding: 5px 10px;
-   cursor: pointer;
-   transition: background-color 0.3s;
-}
-
-.btn.delete-button:hover {
-   background-color: #bd2130;
-}
 
 hr {
    border: 0;
