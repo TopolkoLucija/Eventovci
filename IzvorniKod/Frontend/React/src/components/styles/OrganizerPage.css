@@ -3,6 +3,12 @@
     width: 76%;
 }
 
+@media (max-width: 768px) {
+    .dodavanje {
+        width: 100%;
+    }
+}
+
 .organizer-data {
     font-size: large;
     color: #333;
