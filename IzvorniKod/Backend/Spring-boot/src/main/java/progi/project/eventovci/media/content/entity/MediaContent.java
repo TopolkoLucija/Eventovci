@@ -2,6 +2,7 @@ package progi.project.eventovci.media.content.entity;
 
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.URL;
 import progi.project.eventovci.event.entity.Event;
 
 import java.lang.Long;
@@ -16,7 +17,7 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
-    @Lob
+    @URL
     @Column(name="medijskisadrzaj")
     private String content;
 
