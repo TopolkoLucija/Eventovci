@@ -27,12 +27,10 @@ const MyEvents = () => {
             navigate("/login");
             return;
           }
-          // console.log(response.json());
           return response.json();
         })
         .then((data) => {
           //setUserData(data);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error: " + error);
@@ -44,10 +42,8 @@ const MyEvents = () => {
   const mojiBuduciDogadaji = async (/* x */) => {
     try {
       const accessToken = sessionStorage.getItem("accessToken");
-      /* const filter = x;  */ // Replace with the actual filter value you want to use
 
       const response = await fetch(`/api/events/myEvents`, {
-        /* vj mogu normalne zagrade posto ne saljes filter */
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,16 +56,10 @@ const MyEvents = () => {
         return;
       }
 
-      const data = await response.json(); /*.then((dataJeSon) => {
-       setdogadajcic(dataJeSon);
-       console.log("unutar awaita: " + dataJeSon);
-     }); */
+      const data = await response.json();
 
-      /* console.log("Data nakon " + x + " : " + data); */
 
       setdogadajcic(data);
-      // console.log("ovo je dogadajcic nakon 24h: " + dogadajcic);
-      // Perform actions with the data here
     } catch (error) {
       console.error("Error:", error);
     }
@@ -77,10 +67,8 @@ const MyEvents = () => {
   const mojiPrethodniDogadaji = async (/* x */) => {
     try {
       const accessToken = sessionStorage.getItem("accessToken");
-      /* const filter = x;  */ // Replace with the actual filter value you want to use
 
       const response = await fetch(`/api/events/myOldEvents`, {
-        /* vj mogu normalne zagrade posto ne saljes filter */
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -93,23 +81,15 @@ const MyEvents = () => {
         return;
       }
 
-      const data = await response.json(); /*.then((dataJeSon) => {
-      setdogadajcic(dataJeSon);
-      console.log("unutar awaita: " + dataJeSon);
-    }); */
-
-      /* console.log("Data nakon " + x + " : " + data); */
+      const data = await response.json();
 
       setdogadajcic(data);
-      // console.log("ovo je dogadajcic nakon 24h: " + dogadajcic);
-      // Perform actions with the data here
     } catch (error) {
       console.error("Error:", error);
     }
   };
   useEffect(() => {
-    console.log("Updated dogadajcic:", dogadajcic);
-  }, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
+  }, [dogadajcic]);
   useEffect(() => {
     if (initialLoad) {
       mojiBuduciDogadaji();
@@ -117,7 +97,6 @@ const MyEvents = () => {
     }
   }, [initialLoad]);
   const clickedOnEvent = (id) => {
-    console.log(id);
   };
   return (
     <div className="glavniKontejner">
@@ -126,21 +105,12 @@ const MyEvents = () => {
           <a
             onClick={() => mojiBuduciDogadaji()}
             className="myeventsBucuciDogadaji"
-            /* className={activeLink === 1 ? "active" : ""}
-            onClick={() => handleLinkClick(24, 1)}
-            onMouseEnter={() => setActiveLink(null)}
-            */
           >
             Buduća događanja
           </a>
           <a
             onClick={() => mojiPrethodniDogadaji()}
             className="myeventsPrethodniDogadaji"
-            /*
-            className={activeLink === 2 ? "active" : ""}
-            onClick={() => handleLinkClick(7, 2)}
-            onMouseEnter={() => setActiveLink(null)}
-            */
           >
             Prethodna događanja
           </a>
@@ -154,7 +124,6 @@ const MyEvents = () => {
               return (
                 <div
                   key={dogadaj.id}
-                  // onClick={() => clickedOnEvent(dogadaj.id)}
                 >
                   <Dogadaj
                     key={dogadaj.id}

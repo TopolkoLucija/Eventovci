@@ -108,7 +108,6 @@ const LoginM = ({ getType }) => {
     const alrt = document.getElementById("gmb");
     alrt.style.visibility = "hidden";
     const podatci = { username, password };
-    //console.log(JSON.stringify(podatci));
     fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -180,7 +179,6 @@ const LoginM = ({ getType }) => {
               return response.text();
             })
             .then((response) => {
-              // console.log(response);
               sessionStorage.setItem("accessToken", response);
               navigate("/home");
               getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen
@@ -210,7 +208,6 @@ const LoginM = ({ getType }) => {
             return response.text();
           })
           .then((response) => {
-            // console.log(response);
             sessionStorage.setItem("accessToken", response);
             navigate("/home");
             getType(true, "Uspješna registracija", "success"); // uspjesna registracija stavi show na true i posalji poruku uspiješna prijava "success" znaci da okvir mora biti zelen

@@ -35,7 +35,6 @@ const Dogadaj = ({
         .then((data) => {
           console.log(data);
           setVrstaPosjetitelja(data);
-          //         console.log(vrstaPosjetitelja);
         })
         .catch((error) => {
           console.error("Error: " + error);
@@ -74,13 +73,10 @@ const Dogadaj = ({
     }
   };
   const handleClick = (event) => {
-    // Check if the click is on the SVG element
     if (event.target.tagName === "svg") {
-      // Call the delete function
       izbrisiDogadaj(event);
     } else {
-      // Redirect to another page or perform other actions
-      window.location.href = `/event/${Id}`; // Replace "/other-page" with your desired URL
+      window.location.href = `/event/${Id}`;
     }
   };
   return (

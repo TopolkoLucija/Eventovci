@@ -79,7 +79,6 @@ const ShowEvent = () => {
                return response.json();
             })
             .then((data) => {
-               // console.log(data);
                setTypeOfUser(data.typeOfUser);
             })
             .catch((error) => {
@@ -95,14 +94,12 @@ const ShowEvent = () => {
          })
             .then((response) => {
                if (!response.ok) {
-                  console.log("Request failed");
                   navigate('/login');
                   return;
                }
                return response.json();
             })
             .then((data) => {
-               console.log("userId: ", data);
                setUserId(data);
             })
 
@@ -122,7 +119,6 @@ const ShowEvent = () => {
                return await response.json();
             })
             .then((data) => {
-               console.log(data);
                setEventInfo(data);
                setEventTime(parseISO(data.timeOfTheEvent));
             })
@@ -147,7 +143,6 @@ const ShowEvent = () => {
                return await response.json();
             })
             .then((data) => {
-               console.log(data);
                setEventMedia(data);
             })
             .catch((error) => {
@@ -171,7 +166,6 @@ const ShowEvent = () => {
                return await response.json();
             })
             .then((data) => {
-               console.log(data);
                setReviews(data);
             })
             .catch((error) => {
@@ -321,8 +315,6 @@ const ShowEvent = () => {
    }
 
    const deleteReview = (reviewId) => {
-      console.log(reviewId);
-
       fetch(`/api/review/delete/${reviewId}`, {
          method: "DELETE",
          headers: {
@@ -355,9 +347,6 @@ const ShowEvent = () => {
       const grade = userRatingGrade;
       const eventId = id;
 
-      console.log(reviewText);
-      console.log(grade);
-      console.log(eventId);
 
       const data = {
          reviewText, grade, eventId
@@ -405,7 +394,6 @@ const ShowEvent = () => {
    }
 
    const openDeleteReview = (reviewId) => {
-      console.log(reviewId);
       setShowModalDeleteReview({ delete: true, reviewId: reviewId });
 
    }
