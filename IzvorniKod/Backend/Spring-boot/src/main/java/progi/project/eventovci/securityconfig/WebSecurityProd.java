@@ -26,8 +26,7 @@ import progi.project.eventovci.securityconfig.auth.AppConfig;
 
 
 @Profile({"prod"})
-@EnableMethodSecurity(securedEnabled = true, prePostEnabled = false)
-//this enables method-level security: use @Secured to secure individual methods
+@EnableMethodSecurity(prePostEnabled = true) //this enables method-level security: use @Secured to secure individual methods
 @Configuration
 @EnableWebSecurity
 public class WebSecurityProd  {
@@ -35,7 +34,6 @@ public class WebSecurityProd  {
     private JwtAuthEntryPoint authEntryPoint;
 
 
-    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private AppConfig appConfig; //appConfig.passwordEncoder()
@@ -46,11 +44,6 @@ public class WebSecurityProd  {
         return new CustomUserDetailsService();
     }
 
-    @Autowired
-    public WebSecurityProd(CustomUserDetailsService customUserDetailsService, JwtAuthEntryPoint authEntryPoint) {
-        this.customUserDetailsService = customUserDetailsService;
-        this.authEntryPoint = authEntryPoint;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -100,12 +93,29 @@ public class WebSecurityProd  {
         http.httpBasic(Customizer.withDefaults());
         return http.build();
 
-    }
+        /*
 
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling()
+                .authenticationEntryPoint(authEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/register")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/data")).permitAll()
+                .anyRequest().permitAll()
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter() ,UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(Customizer.withDefaults());
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
-        return authenticationConfiguration.getAuthenticationManager();
+        return http.build();
+
+        */
+
     }
 
     @Bean
@@ -114,6 +124,11 @@ public class WebSecurityProd  {
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(appConfig.passwordEncoder());
         return authenticationProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
