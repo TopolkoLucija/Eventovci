@@ -36,7 +36,7 @@ import progi.project.eventovci.securityconfig.auth.AppConfig;
 import java.io.IOException;
 
 
-@Profile({"test"})
+@Profile({"prod"})
 @EnableMethodSecurity(prePostEnabled = true) //this enables method-level security: use @Secured to secure individual methods
 @Configuration
 @EnableWebSecurity
