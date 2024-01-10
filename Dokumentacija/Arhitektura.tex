@@ -382,8 +382,17 @@
 			 \end{figure}
 			
 			\eject
+			
+			
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+			U dijagramu na slici \ref{comd} aplikaciju smo podijelili na tri glavne komponente: klijentska strana, sama aplikacija i baza podataka. React-view ključna je komponenta koja  komunicira s aplikacijom preko dostupnih sučelja i, ovisno o akcijama korisnika, osvježava prikaz i dohvaća nove podatke ili ažurira postojeće. Preko sučelja za dohvat HTML, CSS i .js datoteka pristupa se dijelu sustava zaduženom za klijentsku stranu. Glavni je dio u tom procesu datoteka App.js koja služi za usklađivanje rada ostalih komponenti i određivanje koji se podaci prosljeđuju za prikaz klijentu. Preko sučelja za dohvat JSON-a pristupa se Rest API-ju koji poslužuje podatke koji pripadaju poslužiteljskom dijelu aplikacije. Komunikacija preko Rest sučelja odvija se slanjem zahtjeva GET, PUT, POST i DELETE. Nakon primitka zahtjeva u kontrolerima, oni se prosljeđuju servisima ili komponentama repozitorija. Komponente Repositoryja koriste JPARepository sučelje za komunikaciju s bazom podataka i dohvaćanje potrebnih podataka. Sve JavaScript datoteke ovise o React biblioteci, a sve datoteke backend dijela ovise o biblioteci Spring.
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+		
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{dijagrami/comd.png} 
+				\centering
+				\caption{Dijagram komponenti}
+				\label{comd}
+			\end{figure}
+			
