@@ -1,6 +1,9 @@
 package progi.project.eventovci.rsvp.entity;
 
 import jakarta.persistence.*;
+import progi.project.eventovci.event.entity.Event;
+import progi.project.eventovci.user.entity.User;
+
 import java.lang.*;
 import java.util.Objects;
 
@@ -13,14 +16,24 @@ public class UserResponse {
     @Column(name="iddolaskakorisnika")
     private Long id;
 
-    @Column(name="statusdolaska")
+    @Column(name="statusdolaska", nullable = false, length = 255)
     private String status; // OPCIJE: "dolazim", "mozda", "ne dolazim"
 
-    @Column(name="iddogadjanja")
-    private Long event_id;
+    @Column(name="iddogadjanja", nullable = false)
+    private Long eventid;
 
-    @Column(name="idkorisnik")
-    private Long user_id;
+    @Column(name="idkorisnik", nullable = false)
+    private Long userid;
+
+
+     @ManyToOne
+     @JoinColumn(name = "iddogadjanja", insertable = false, updatable = false)
+     private Event event;
+
+     @ManyToOne
+     @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
+     private User user;
+
 
     //konstruktor
 
@@ -29,10 +42,10 @@ public class UserResponse {
     }
 
 
-    public UserResponse(String status, Long event_id, Long user_id) {
+    public UserResponse(String status, Long eventid, Long userid) {
         this.status = status;
-        this.event_id = event_id;
-        this.user_id = user_id;
+        this.eventid = eventid;
+        this.userid = userid;
     }
 
     //equals i hash za id
@@ -66,19 +79,19 @@ public class UserResponse {
         this.status = status;
     }
 
-    public Long getEvent_id() {
-        return event_id;
+    public Long getEventid() {
+        return eventid;
     }
 
-    public void setEvent_id(Long event_id) {
-        this.event_id = event_id;
+    public void setEventid(Long event_id) {
+        this.eventid = eventid;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserid(Long user_id) {
+        this.userid = user_id;
     }
 }

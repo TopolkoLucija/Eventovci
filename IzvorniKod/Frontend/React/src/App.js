@@ -6,12 +6,19 @@ import MyAccount from "./components/scripts/MyAccount";
 import LoginM from "./components/scripts/LoginM";
 import Events from "./components/scripts/Events";
 import Logout from "./components/scripts/Logout";
+import AddEvent from "./components/scripts/AddEvent";
+import ShowAll from "./components/scripts/ShowAll";
 import "./components/styles/App.css";
 import MyToast from "./components/scripts/MyToast";
 import { useState } from "react";
-import { useEffect } from "react";
+import Inbox from "./components/scripts/Inbox";
+import Interested from "./components/scripts/Interested";
+import MyEvents from "./components/scripts/MyEvents";
+import OrganizerPage from "./components/scripts/OrganizerPage";
+import ShowEvent from "./components/scripts/ShowEvent";
 
 function App() {
+  const accessToken = sessionStorage.getItem('accessToken');
   // podatci koji trebaju MyToast.js
   const [show, setShow] = useState(false); // zelis li da se pokaze zeleni prozor
   const [toastMessage, setToastMessage] = useState(""); // poruka koju zelis da se ispise
@@ -24,13 +31,13 @@ function App() {
     setToastType(type);
     setTimeout(() => {
       setShow(false);
-    }, 1000);
+    }, 3000);
   };
 
   return (
       <Router>
         <div className="app-container">
-          <Sidebar />
+        <Sidebar className={accessToken ? 'logged-in' : ''} />
 
           <Routes>
             <Route path="/home" element={<Home />} />
@@ -40,6 +47,14 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/login" element={<LoginM getType={getType} />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/my-account/add-events" element={<AddEvent />} />
+            <Route path="/my-account/show-all" element={<ShowAll />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/interested" element={<Interested />} />
+            <Route path="/my-events" element={<MyEvents />} />
+            <Route path="/add-event" element={<AddEvent getType={getType}/>} />
+            <Route path={`/organizer/:id`} element={<OrganizerPage />} />
+            <Route path="/event/:id" element={<ShowEvent />} />
           </Routes>
         </div>
         {show && <MyToast show={show} message={toastMessage} type={toastType} />}

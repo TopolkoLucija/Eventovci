@@ -1,6 +1,7 @@
 package progi.project.eventovci.membership.entity;
 
 import jakarta.persistence.*;
+import progi.project.eventovci.user.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,14 +15,20 @@ public class Membership {
     @Column(name="idclanarine")
     private Long membershipId;
 
-    @Column(name="idkorisnik")
+    @Column(name="idkorisnik", nullable = false)
     private Long userId;
 
-    @Column(name="cijenaclanarine")
+    @Column(name="cijenaclanarine", nullable = false)
     private Double price;
 
-    @Column(name="vrijedido")
+    @Column(name="vrijedido", nullable = false)
     private LocalDateTime validUntil;
+
+
+     @ManyToOne
+     @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
+     private User user;
+
 
     //konstruktori
     public Membership() {

@@ -2,6 +2,8 @@ package progi.project.eventovci.media.content.entity;
 
 
 import jakarta.persistence.*;
+import progi.project.eventovci.event.entity.Event;
+
 import java.lang.Long;
 import java.util.Objects;
 
@@ -14,19 +16,29 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
-    @Column(name="medijskisadrzaj")
-    private byte[] content;
+    @Lob
+    @Column(name="medijskisadrzaj", columnDefinition = "TEXT")
+    private String content;
 
+    @Column(name="vrsta", length = 10)
+    private String type;
     @Column(name="iddogadjanja")
     private Long eventid;
+
+
+     @ManyToOne
+     @JoinColumn(name = "iddogadjanja", insertable = false, updatable = false)
+     private Event event;
+
 
     //konstruktor
     public MediaContent() {
 
     }
 
-    public MediaContent(byte[] content, Long eventid) {
+    public MediaContent(String content, String type, Long eventid) {
         this.content = content;
+        this.type = type;
         this.eventid = eventid;
     }
 
@@ -55,19 +67,27 @@ public class MediaContent {
         this.id = id;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public Long getEvent_id() {
+    public Long getEventid() {
         return eventid;
     }
 
-    public void setEvent_id(Long eventid) {
+    public void setEventid(Long eventid) {
         this.eventid = eventid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

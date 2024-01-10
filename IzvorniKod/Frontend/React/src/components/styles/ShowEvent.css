@@ -1,0 +1,169 @@
+.window-rating {
+   background-color: white;
+   padding: 20px;
+   width: 40%;
+   height: fit-content;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 10px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+   position: relative;
+   text-align: center;
+   justify-content: center;
+   align-content: center;
+}
+
+.error-text {
+   color: red;
+}
+
+.event-content {
+   overflow-y: scroll;
+   width: 76%;
+}
+
+@media (max-width: 768px) {
+   .event-content {
+       width: 100%;
+   }
+}
+
+.event-content-title{
+   margin: 20px;
+}
+
+.media-slider {
+   width: 50%;
+   margin: 0 auto;
+}
+
+.media-item {
+   text-align: center;
+}
+
+.center {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.black-arrow {
+   color: black;
+}
+
+.event-content-info-and-choose {
+   display: grid;
+   place-items: center;
+   align-content: center;
+}
+
+.event-content-info-and-choose>div {
+   width: 60%;
+   display: flex;
+   gap: 30px;
+   justify-content: center;
+   align-items: center;
+   margin: 30px;
+   padding: 30px;
+   border-radius: 5px;
+   background-color: white;
+   box-shadow: 1px 1px 8px;
+}
+
+.event-content-info{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.event-content-info p{
+   margin: 0;
+}
+
+.event-content-choose{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 20%;
+   height: 30%;
+}
+
+#option-1, #option-2, #option-3{
+   height: 30%;
+   width: 100%;
+   font-size: 10pt;
+}
+
+.reviews-content{
+   display: grid;
+   place-items: center;
+   align-content: center;
+}
+
+.reviews-content>div{
+   width: 60%;
+   min-height: 50vh;
+}
+
+.review{
+   padding: 20px;
+}
+
+.review>p{
+   display: flex;
+   align-items: center;
+   gap: 20px;
+}
+
+#delete{
+   width: 20px;
+   height: 20px;
+   padding: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#rate-btn{
+   width: fit-content;
+}
+
+.textarea-review{
+   resize: none;
+}
+
+#post-review, #close{
+   width: fit-content;
+   height: fit-content;
+}
+
+@media (max-width: 768px) {
+   .media-slider{
+      width: 80%;
+   }
+
+   .event-content-info-and-choose>div{
+      flex-direction: column;
+      width: 90%;
+   }
+
+   .event-content-choose{
+      flex-direction: row;
+      width: 100%;
+   }
+
+   .window-rating{
+      width: fit-content;
+   }
+}
+
+.event-content-info a{
+   color: black;
+}
+
+.event-content-info a:hover{
+   color: #FF6B6B;
+   text-decoration: underline;
+   text-decoration-color: #FF6B6B;
+}

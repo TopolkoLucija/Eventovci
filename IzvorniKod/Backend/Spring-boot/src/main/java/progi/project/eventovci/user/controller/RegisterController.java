@@ -29,8 +29,8 @@ public class RegisterController {
 
     @PostMapping()
     public ResponseEntity<String> register(@RequestBody RegisterForm registerform) {
-        User user = userService.register(registerform.getUsername(), registerform.getEmail(), registerform.getPassword(),
-        registerform.getTypeOfUser(), registerform.getHomeAdress(), registerform.getShouldPayMembership() );
+        userService.register(registerform.getUsername(), registerform.getEmail(), registerform.getPassword(),
+        registerform.getTypeOfUser(), registerform.getHomeAdress());
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(registerform.getUsername(), registerform.getPassword()));

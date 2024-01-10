@@ -1,7 +1,9 @@
 package progi.project.eventovci.event.entity;
 
 import jakarta.persistence.*;
+import progi.project.eventovci.user.entity.User;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,30 +20,36 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nazivdogadjanja")
+    @Column(name="nazivdogadjanja", nullable = false, length = 255)
     private String eventName;
 
-    @Column(name="tipdogadjanja")
+    @Column(name="tipdogadjanja", nullable = false, length = 255)
     private String typeOfEvent;
 
-    @Column(name="lokacijadogadjanja")
+    @Column(name="lokacijadogadjanja", nullable = false, length = 255)
     private String location;
 
 
-    @Column(name="vrijemedogadjanja")
+    @Column(name="vrijemedogadjanja", nullable = false)
     private LocalDateTime timeOfTheEvent;
 
-    @Column(name="trajanje")
-    private Double duration;
+    @Column(name="trajanje", nullable = false)
+    private Time duration;
 
-    @Column(name="organizatorid")
+    @Column(name="organizatorid", nullable = false)
     private Long eventCoordinatorid;
 
-    @Column(name="cijenaulaznice")
-    private Double ticketPrice;// 0 - besplatan dogadjaj
+    @Column(name="cijenaulaznice", nullable = false)
+    private Double ticketPrice;
 
-    @Column(name = "opis")
+    @Column(name = "opis", length = 1500)
     private String text;
+
+
+     @ManyToOne
+     @JoinColumn(name = "organizatorid", insertable = false, updatable = false)
+     private User eventCoordinator;
+
 
 
     //konstruktor
@@ -49,7 +57,7 @@ public class Event {
 
     }
 
-    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Double duration, Long eventCoordinatorid, Double ticketPrice) {
+    public Event(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Long eventCoordinatorid, Double ticketPrice, String text) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
@@ -57,6 +65,7 @@ public class Event {
         this.duration = duration;
         this.eventCoordinatorid = eventCoordinatorid;
         this.ticketPrice = ticketPrice;
+        this.text = text;
     }
 
     //equals i hash za id
@@ -117,11 +126,11 @@ public class Event {
         this.timeOfTheEvent = timeOfTheEvent;
     }
 
-    public Double getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
 

@@ -23,7 +23,8 @@
    width: 100%;
    display: flex;
    justify-content: center; 
-   align-items: center; 
+   align-items: center;
+   margin-bottom: 10px;
 }
 
 .main-content-image img {
@@ -56,4 +57,11 @@
    color: #FF6B6B;
    text-decoration: underline;
    text-decoration-color: #FF6B6B;
+}
+
+@media only screen and (max-width: 768px) {
+   .main-content {
+       margin-left: 5px;
+       margin-right: 5px;
+   }
 }

@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+.dogadaj {
+  width: 310px;
+  height: 460px;
+  margin: 1.5rem;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+  box-shadow: 10px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+.dogadaj svg.bi-x {
+  cursor: pointer;
+  z-index: 10; /* Ensure it's above other content */
+
+}
+.staviFlexOdKraja{
+  display: flex;
+  justify-content: space-between;
+}
+
+  .dogadaj div:nth-of-type(1) {
+    position: absolute;
+    padding: 16px;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    color: #f9d3b4;
+  }
+  /* poveca se kad predes preko */
+.dogadaj:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+  /* Slika zauzima cijeli raspon diva, tj drugi element od vrha sta je div sa slikom */
+  .dogadaj div:nth-of-type(2) { 
+    width: 100%;
+    height: 100%;
+  }
+  .dogadaj div:nth-of-type(2) img {
+    height: 100%;
+    width: 100%;
+  }
+  /* treci element od vrha je preko ostalog tj Naslov i mjesto se pokazu */
+.dogadaj div:nth-of-type(3) {
+  z-index: 2;
+  background-color: #ffffff;
+  padding: 16px 24px 24px 24px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.dogadaj:hover div:nth-of-type(3) {
+  background-color: transparent;
+}
+
+  .dogadaj div:nth-of-type(3) span {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #131b74;
+  }
+  .dogadaj div:nth-of-type(3) h3 {
+    margin-top: 5px;
+    font-family: "Roboto Slab", serif;
+    color: #131b74;
+  }
+  /* kad predes da se pojavi preko cijele slike bijelo */
+  .dogadaj:hover div:nth-of-type(2) {
+    height: 100%;
+    opacity: 0.3;
+  }
+  /* trece po redu postane prozirno tj vidis cijelu sliku kada kliknes */
+  .dogadaj:hover div:nth-of-type(3) {
+    background-color: transparent;
+  }
+  /* kad hoveras prvi element dode na vrh tj vidis datum */
+  .dogadaj:hover div:nth-of-type(1) {
+    opacity: 1;
+    color: rgb(0, 0, 0);
+  }
+
+.dogadaj div:nth-of-type(3) {
+  z-index: 2;
+  background-color: #ffffff;
+  padding: 16px 24px 24px 24px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+img {
+  object-fit: contain;
+}
