@@ -19,9 +19,7 @@ function Events() {
     setInitialLoad(false);
     dvadesetCetriSata(filterValue);
   };
-  const clickedOnEvent = (id) => {
-    console.log(id);
-  };
+
   useEffect(() => {
     if (accessToken !== null) {
       fetch("/api/data", {
@@ -74,7 +72,7 @@ function Events() {
   };
 
   // Call the function
-  useEffect(() => {}, [dogadajcic]); // Will log the updated value of dogadajcic whenever it changes
+  useEffect(() => {}, [dogadajcic]);
 
   useEffect(() => {
     if (initialLoad) {

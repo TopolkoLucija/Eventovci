@@ -11,6 +11,9 @@ const MyEvents = () => {
   const setUserData = useState("");
   const navigate = useNavigate();
 
+  const [clickedLink, setClickedLink] = useState(null);
+  const [selectedLink, setSelectedLink] = useState(null);
+
   /* provjeri samo san koristija isto ko sta je Iva napisala u Events.js */
   useEffect(() => {
     if (accessToken !== null) {
@@ -42,6 +45,7 @@ const MyEvents = () => {
   const mojiBuduciDogadaji = async (/* x */) => {
     try {
       const accessToken = sessionStorage.getItem("accessToken");
+      setClickedLink(0)
 
       const response = await fetch(`/api/events/myEvents`, {
         method: "GET",
@@ -67,6 +71,7 @@ const MyEvents = () => {
   const mojiPrethodniDogadaji = async (/* x */) => {
     try {
       const accessToken = sessionStorage.getItem("accessToken");
+      setClickedLink(1)
 
       const response = await fetch(`/api/events/myOldEvents`, {
         method: "GET",
@@ -101,16 +106,28 @@ const MyEvents = () => {
   return (
     <div className="glavniKontejner">
       <div className="kontejnerZaNavbar">
-        <nav>
+        <nav className="navigacijaEvents1">
           <a
+            className={
+              selectedLink === 0 || (selectedLink === null && clickedLink === 0)
+                  ? "active myeventsBucuciDogadaji"
+                  : "myeventsBucuciDogadaji"
+            }
             onClick={() => mojiBuduciDogadaji()}
-            className="myeventsBucuciDogadaji"
+            onMouseEnter={() => setSelectedLink(0)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             Buduća događanja
           </a>
           <a
+            className={
+              selectedLink === 1 || (selectedLink === null && clickedLink === 1)
+                  ? "active myeventsBucuciDogadaji"
+                  : "myeventsBucuciDogadaji"
+            }
             onClick={() => mojiPrethodniDogadaji()}
-            className="myeventsPrethodniDogadaji"
+            onMouseEnter={() => setSelectedLink(1)}
+            onMouseLeave={() => setSelectedLink(null)}
           >
             Prethodna događanja
           </a>
