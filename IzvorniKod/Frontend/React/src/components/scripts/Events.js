@@ -23,7 +23,6 @@ function Events() {
   useEffect(() => {
     if (accessToken !== null) {
       fetch("/api/data", {
-        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: accessToken,
