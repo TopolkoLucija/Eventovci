@@ -17,7 +17,7 @@ public class MediaContent {
     private Long id;
 
     @Lob
-    @Column(name="medijskisadrzaj", columnDefinition = "LONGTEXT")
+    @Column(name="medijskisadrzaj")
     private String content;
 
     @Column(name="vrsta", length = 10)
