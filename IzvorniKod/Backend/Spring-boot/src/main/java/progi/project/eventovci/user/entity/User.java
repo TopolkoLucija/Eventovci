@@ -13,14 +13,14 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="korisnickoime")
+    @Column(name="korisnickoime", nullable = false, unique = true)
     private String username;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false, unique = true)
     private String email;
-    @Column(name="lozinka")
+    @Column(name="lozinka", nullable = false)
     private String password;
-    @Column(name="tipkorisnika")
+    @Column(name="tipkorisnika", nullable = false)
     private String typeOfUser; //posjetitelj, organizator, administrator
     @Column(name="adresa")
     private String homeAdress;

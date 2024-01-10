@@ -1,6 +1,7 @@
 package progi.project.eventovci.subscription.entity;
 
 import jakarta.persistence.*;
+import progi.project.eventovci.user.entity.User;
 
 import java.util.Objects;
 
@@ -13,14 +14,20 @@ public class Subscription {
     @Column(name="idpretplata")
     private Long subscriptionid;
 
-    @Column(name="kategorija")
+    @Column(name="kategorija", length = 255)
     private String category;
 
-    @Column(name="lokacija")
+    @Column(name="lokacija", length = 255)
     private String location;
 
-    @Column(name="idkorisnik")
+    @Column(name="idkorisnik", nullable = false)
     private Long userid;
+
+
+     @ManyToOne
+     @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
+     private User user;
+
 
     //konstruktori
     public Subscription() {

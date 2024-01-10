@@ -1,3 +1,4 @@
+/*
 -- Create the 'korisnik' table
 CREATE TABLE KORISNIK (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -32,7 +33,7 @@ CREATE TABLE POVEZNICA (
                            FOREIGN KEY (organizatorid) REFERENCES korisnik(id)
                                ON DELETE CASCADE
 );
-
+--Create the 'medijski sadrzaj' table
 CREATE TABLE MEDIJSKISADRZAJ (
                                  idmedijskogsadrzaja BIGINT AUTO_INCREMENT PRIMARY KEY,
                                  medijskisadrzaj TEXT,
@@ -88,6 +89,8 @@ CREATE TABLE PRETPLATA (
                                ON DELETE CASCADE
 );
 
+*/
+
 
 INSERT INTO korisnik (korisnickoime, email, lozinka, tipkorisnika, adresa)
 VALUES
@@ -98,8 +101,8 @@ VALUES
     ('user5', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa7'),
     ('user6', 'user6@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa8'),
     ('user7', 'user7@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'posjetitelj', 'Adresa9'),
-    ('org1', 'user4@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa4'),
-    ('org2', 'user5@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5'),
+    ('org1', 'user8@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa4'),
+    ('org2', 'user9@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'organizator', 'Adresa5'),
     ('admin', 'admin@example.com', '$2a$10$N0qnEFuZlTuUaJ82aCqC9u0gV/txgl7r4ntinYsOZIgaDIT3KwPLW', 'administrator', 'AdminAdresa');
 
 INSERT INTO dogadjanje (nazivdogadjanja, tipdogadjanja, lokacijadogadjanja, vrijemedogadjanja, trajanje, organizatorid, cijenaulaznice, opis)
