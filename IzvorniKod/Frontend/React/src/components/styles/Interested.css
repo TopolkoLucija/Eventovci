@@ -15,6 +15,13 @@
   display: grid;
   width: 76%;
  }
+
+ @media (max-width: 768px) {
+    .glavniKontejner {
+        width: 100%;
+    }
+ }
+ 
 body {
     font-family: 'Open Sans', sans-serif;
     background: #ffffff;

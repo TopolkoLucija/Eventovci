@@ -9,6 +9,12 @@ body {
     width: 76%;
 }
 
+@media (max-width: 768px) {
+    .dodavanje1 {
+        width: 100%;
+    }
+}
+
 .fields {
     overflow-y: scroll;
 }

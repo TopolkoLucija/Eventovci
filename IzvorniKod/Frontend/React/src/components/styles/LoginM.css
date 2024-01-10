@@ -19,6 +19,12 @@ form {
     flex-direction: column;
 }
 
+@media (max-width: 768px) {
+    .contents {
+        width: 100%;
+    }
+}
+
 .forma {
     width: 25rem;
     padding: 40px;
