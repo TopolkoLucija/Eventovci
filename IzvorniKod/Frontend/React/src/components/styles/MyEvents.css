@@ -17,6 +17,12 @@
   width: 76%;
  }
 
+ @media (max-width: 768px) {
+    .glavniKontejner {
+        width: 100%;
+    }
+ }
+
  .kontejnerZaNavbar {
   height: 5vh;
   display: flex;
@@ -100,7 +106,7 @@ nav .start-home, .myeventsBucuciDogadaji:hover~.animation{
         font-size: 10px;
         width: 25vw;
     }
-    nav a:nth-child(1){
+    .myeventsBucuciDogadaji{
         width: 25vw;
     }
     .myeventsPrethodniDogadaji{

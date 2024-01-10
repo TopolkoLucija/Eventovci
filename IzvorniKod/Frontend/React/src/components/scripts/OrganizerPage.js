@@ -44,7 +44,6 @@ const OrganizerPage = () => {
   }, [accessToken, id]);
 
   const clickedOnEvent = (id) => {
-    console.log(id);
   };
 
   return (

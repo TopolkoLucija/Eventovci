@@ -15,6 +15,13 @@
   display: grid;
   width: 76%;
  }
+
+ @media (max-width: 768px) {
+    .glavniKontejner {
+        width: 100%;
+    }
+ }
+ 
 body {
     font-family: 'Open Sans', sans-serif;
     background: #ffffff;
@@ -50,7 +57,10 @@ body {
         padding-top: 1rem;
     }
     .SmanjiNa60Posto{
-        width: 60vw;
+        width: 78vw;
+    }
+    .Sigurnodolazim{
+        width: 26vw;
     }
   }
   

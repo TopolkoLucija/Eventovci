@@ -29,13 +29,10 @@ const Dogadaj = ({
             console.error("Request failed");
             return;
           }
-          console.log(response);
           return response.text();
         })
         .then((data) => {
-          console.log(data);
           setVrstaPosjetitelja(data);
-          //         console.log(vrstaPosjetitelja);
         })
         .catch((error) => {
           console.error("Error: " + error);
@@ -54,7 +51,6 @@ const Dogadaj = ({
   }, [vrstaPosjetitelja]);
   const izbrisiDogadaj = async (event) => {
     event.preventDefault();
-    console.log("Stisnija si");
     try {
       const accessToken = sessionStorage.getItem("accessToken");
       const response = await fetch(`api/events/delete/${Id}`, {
@@ -65,7 +61,6 @@ const Dogadaj = ({
         },
       });
       if (!response.ok) {
-        console.log("Nije izbrisalo");
         return;
       }
       window.location.reload();
@@ -74,13 +69,10 @@ const Dogadaj = ({
     }
   };
   const handleClick = (event) => {
-    // Check if the click is on the SVG element
     if (event.target.tagName === "svg") {
-      // Call the delete function
       izbrisiDogadaj(event);
     } else {
-      // Redirect to another page or perform other actions
-      window.location.href = `/event/${Id}`; // Replace "/other-page" with your desired URL
+      window.location.href = `/event/${Id}`;
     }
   };
   return (

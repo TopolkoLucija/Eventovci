@@ -1,4 +1,4 @@
-.window-rating{
+.window-rating {
    background-color: white;
    padding: 20px;
    width: 40%;
@@ -14,13 +14,19 @@
    align-content: center;
 }
 
-.error-text{
+.error-text {
    color: red;
 }
 
-.event-content{
+.event-content {
    overflow-y: scroll;
    width: 76%;
+}
+
+@media (max-width: 768px) {
+   .event-content {
+       width: 100%;
+   }
 }
 
 .event-content-title{
@@ -46,13 +52,13 @@
    color: black;
 }
 
-.event-content-info-and-choose{
+.event-content-info-and-choose {
    display: grid;
    place-items: center;
    align-content: center;
 }
 
-.event-content-info-and-choose>div{
+.event-content-info-and-choose>div {
    width: 60%;
    display: flex;
    gap: 30px;

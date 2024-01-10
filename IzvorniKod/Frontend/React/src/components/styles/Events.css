@@ -24,6 +24,13 @@
   display: grid;
   width: 76%;
  }
+
+ @media (max-width: 768px) {
+    .glavniKontejner {
+        width: 100%;
+    }
+ }
+
  .kontejnerZaNavbar{
   height: 5vh;
   display: flex;
