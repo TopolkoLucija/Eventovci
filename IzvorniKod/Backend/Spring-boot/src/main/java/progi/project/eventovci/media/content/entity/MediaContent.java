@@ -17,7 +17,6 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
-    @Lob
     @Column(name="medijskisadrzaj")
     private byte[] content;
 
