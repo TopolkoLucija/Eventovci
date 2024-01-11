@@ -58,6 +58,9 @@ function Events() {
       });
 
       if (!response.ok) {
+        console.log(response.text());
+        console.log(response);
+        console.log(response.json());
         console.log("Nije oke response, mozda nisi prijavljen");
         return;
       }
