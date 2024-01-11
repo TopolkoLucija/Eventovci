@@ -143,6 +143,7 @@ const ShowEvent = () => {
                return await response.json();
             })
             .then((data) => {
+               console.log(data)
                setEventMedia(data);
             })
             .catch((error) => {
@@ -413,15 +414,16 @@ const ShowEvent = () => {
                   {eventMedia.map((slide, index) => (
                      <div key={index} className="media-item">
                         {slide.type === 'image' ? (
-                           <img src={`data:image/png;base64,${slide.content}`} alt={`Slide ${index + 1}`} width={300} height={416} className="center" />
+                            <img src={`data:image/png;base64,${atob(slide.content)}`} alt={`Slide ${index + 1}`} width={300} height={416} className="center" />
                         ) : (
-                           <ReactPlayer
-                              url={`data:video/mp4;base64,${slide.content}`}
-                              width="90%"
-                              height="100%"
-                              controls
-                              className="center"
-                           />
+                            <ReactPlayer
+                                url={`data:video/mp4;base64,${atob(slide.content)}`}
+                                width="90%"
+                                height="100%"
+                                controls
+                                className="center"
+                            />
+
                         )}
                      </div>
                   ))}
