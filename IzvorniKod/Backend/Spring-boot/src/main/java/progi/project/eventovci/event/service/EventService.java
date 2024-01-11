@@ -96,7 +96,7 @@ public class EventService {
                 String type = null;
                 MediaContent mc = mediaContentRepository.findFirstByEventidAndType(event.getId(), "image");
                 if (mc!=null) {
-                    media = mc.getContent();
+                    media = Base64.getEncoder().encodeToString(mc.getContent());
                     type = mc.getType();
                 }
                 eventsdto.add(new EventPrintDTO(event.getId(), media, type, event.getEventName(), event.getTimeOfTheEvent(), event.getLocation()));
@@ -131,7 +131,7 @@ public class EventService {
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = mc.getContent();
+                media = Base64.getEncoder().encodeToString(mc.getContent());
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
@@ -165,7 +165,7 @@ public class EventService {
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = mc.getContent();
+                media = Base64.getEncoder().encodeToString(mc.getContent());
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
@@ -188,7 +188,7 @@ public class EventService {
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = mc.getContent();
+                media = Base64.getEncoder().encodeToString(mc.getContent());
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
@@ -206,7 +206,7 @@ public class EventService {
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = mc.getContent();
+                media = Base64.getEncoder().encodeToString(mc.getContent());
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));

@@ -24,6 +24,7 @@ import progi.project.eventovci.event.repository.EventRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -110,7 +111,7 @@ public class UserService {
                 String type = null;
                 for (int i = mc.size()-1; i>=0; i--) {
                     if (Objects.equals(mc.get(i).getType(), "image")){
-                        media = mc.get(i).getContent();
+                        media = Base64.getEncoder().encodeToString(mc.get(i).getContent());
                         type = mc.get(i).getType();
                     }
                 }

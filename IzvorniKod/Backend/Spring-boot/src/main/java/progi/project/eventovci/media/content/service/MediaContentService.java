@@ -22,16 +22,14 @@ public class MediaContentService {
         List<MediaContent> media = mediaContentRepository.getAllByEventid(eventid);
         List<MediaDTO> mediaDTOS = new ArrayList<>();
         for (MediaContent mc : media) {
-            mediaDTOS.add(new MediaDTO(mc.getContent(), mc.getType()));
+            String s = Base64.getEncoder().encodeToString(mc.getContent());
+            mediaDTOS.add(new MediaDTO(s, mc.getType()));
         }
         return mediaDTOS;
     }
 
     public void add(MultipartFile file, String type, Long eventId) throws IOException {
-        String s = Base64.getEncoder().encodeToString(file.getBytes());
-        System.out.println(s);
-        MediaContent mediaContent = new MediaContent(s, type, eventId);
-        System.out.println(mediaContent.getContent());
+        MediaContent mediaContent = new MediaContent(file.getBytes(), type, eventId);
         mediaContentRepository.save(mediaContent);
     }
 }
