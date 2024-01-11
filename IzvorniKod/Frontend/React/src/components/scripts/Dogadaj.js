@@ -97,7 +97,7 @@ const Dogadaj = ({
         {Poster !== null && (
             <img
                 src={`data:image/png;base64,${btoa(String.fromCharCode.apply(null, new Uint8Array(Poster)))}`}
-                alt=${Naslov}
+                alt={Naslov}
             />
         )}
       </div>
