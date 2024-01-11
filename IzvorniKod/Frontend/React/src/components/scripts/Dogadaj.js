@@ -4,7 +4,9 @@ import "../styles/Dogadaj.css";
 
 function toString(array) {
   const blob = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
-  return URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
+  console.log(url);
+  return url;
 }
 
 const Dogadaj = ({

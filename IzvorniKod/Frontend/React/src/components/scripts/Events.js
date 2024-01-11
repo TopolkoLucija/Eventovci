@@ -66,6 +66,7 @@ function Events() {
             return response.json();
           })
           .then((data) => {
+            console.log(data)
             setdogadajcic(data);
           })
           .catch((error) => {
