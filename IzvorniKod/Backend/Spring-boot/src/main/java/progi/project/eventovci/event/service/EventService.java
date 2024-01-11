@@ -164,10 +164,13 @@ public class EventService {
             String media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
+
             if (mc!=null) {
+                System.out.println(Arrays.toString(mc.getContent()));
                 media = Base64.getEncoder().encodeToString(mc.getContent());
                 type = mc.getType();
             }
+            System.out.println(media);
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
         }
 
