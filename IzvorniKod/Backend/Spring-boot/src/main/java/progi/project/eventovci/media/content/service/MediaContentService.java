@@ -28,7 +28,9 @@ public class MediaContentService {
     }
 
     public void add(MultipartFile file, String type, Long eventId) throws IOException {
-        MediaContent mediaContent = new MediaContent(Base64.getEncoder().encodeToString(file.getBytes()), type, eventId);
+        String s = Base64.getEncoder().encodeToString(file.getBytes());
+        System.out.println(s);
+        MediaContent mediaContent = new MediaContent(s, type, eventId);
         mediaContentRepository.save(mediaContent);
     }
 }
