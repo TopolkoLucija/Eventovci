@@ -55,6 +55,7 @@ public class EventController {
     public ResponseEntity<List<EventPrintDTO>> allEvents(@RequestHeader("Authorization") String token, @PathVariable Integer filter ){
         List<EventPrintDTO> events = eventService.getEvents(filter);
         for (EventPrintDTO e : events) {
+            System.out.println("u controlleru");
             System.out.println(e.getMedia());
         }
         return ResponseEntity.ok(events);
