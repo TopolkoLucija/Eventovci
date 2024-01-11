@@ -31,6 +31,7 @@ public class MediaContentService {
         String s = Base64.getEncoder().encodeToString(file.getBytes());
         System.out.println(s);
         MediaContent mediaContent = new MediaContent(s, type, eventId);
+        System.out.println(mediaContent.getContent());
         mediaContentRepository.save(mediaContent);
     }
 }
