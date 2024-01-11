@@ -92,11 +92,11 @@ public class EventService {
         for (UserResponse u: responses) {
             if (Objects.equals(u.getStatus(), status)) {
                 Event event = eventRepository.findEventById(u.getEventid());
-                String media = null;
+                byte[] media = null;
                 String type = null;
                 MediaContent mc = mediaContentRepository.findFirstByEventidAndType(event.getId(), "image");
                 if (mc!=null) {
-                    media = Base64.getEncoder().encodeToString(mc.getContent());
+                    media = mc.getContent();
                     type = mc.getType();
                 }
                 eventsdto.add(new EventPrintDTO(event.getId(), media, type, event.getEventName(), event.getTimeOfTheEvent(), event.getLocation()));
@@ -127,11 +127,11 @@ public class EventService {
         }
 
         for (Event e : events) {
-            String media = null;
+            byte[] media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = Base64.getEncoder().encodeToString(mc.getContent());
+                media = mc.getContent();
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
@@ -161,18 +161,13 @@ public class EventService {
             events = eventRepository.findAllByTimeOfTheEventIsBetween(LocalDateTime.now(), until);
         }
         for (Event e : events) {
-            String media = null;
+            byte[] media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
-            System.out.println("Uspješno izašao iz repositorija");
             if (mc!=null) {
-                System.out.println("u ifu");
-                System.out.println(Arrays.toString(mc.getContent()));
-                media = Base64.getEncoder().encodeToString(mc.getContent());
+                media =mc.getContent();
                 type = mc.getType();
             }
-            System.out.println("izašao iz ifa");
-            System.out.println(media);
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
         }
 
@@ -189,11 +184,11 @@ public class EventService {
         List<Event> events = eventRepository.findAllByTimeOfTheEventAfterAndEventCoordinatorid(LocalDateTime.now(), userId);
 
         for (Event e : events) {
-            String media = null;
+            byte[] media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = Base64.getEncoder().encodeToString(mc.getContent());
+                media = mc.getContent();
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
@@ -207,11 +202,11 @@ public class EventService {
         List<Event> events = eventRepository.findAllByTimeOfTheEventBeforeAndEventCoordinatorid(LocalDateTime.now(), userId);
 
         for (Event e : events) {
-            String media = null;
+            byte[] media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
-                media = Base64.getEncoder().encodeToString(mc.getContent());
+                media = mc.getContent();
                 type = mc.getType();
             }
             eventsdto.add(new EventPrintDTO(e.getId(), media, type, e.getEventName(), e.getTimeOfTheEvent(), e.getLocation()));
