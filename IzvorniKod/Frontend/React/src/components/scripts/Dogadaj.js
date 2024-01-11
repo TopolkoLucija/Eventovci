@@ -105,7 +105,7 @@ const Dogadaj = ({
         )}
       </div>
       <div>
-        {Poster && <img src={imageUrl} alt={eventName} />}
+        {Poster && <img src={imageUrl} alt={Naslov} />}
       </div>
       <div>
         <span>{Mjesto}</span>
