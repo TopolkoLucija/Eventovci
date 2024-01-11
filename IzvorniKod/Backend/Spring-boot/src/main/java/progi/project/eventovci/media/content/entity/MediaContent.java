@@ -17,7 +17,7 @@ public class MediaContent {
     @Column(name="idmedijskogsadrzaja")
     private Long id;
 
-    @URL
+
     @Column(name="medijskisadrzaj")
     private String content;
 
