@@ -1,31 +1,31 @@
 package progi.project.eventovci.securityconfig;
 
+
+import com.cloudinary.Cloudinary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Map;
 
 @Service
 public class FileUploadService {
+
+    private final Cloudinary cloudinary;
+
+    // Constructor to inject Cloudinary bean
+    public FileUploadService(Cloudinary cloudinary) {
+        this.cloudinary = cloudinary;
+    }
+
     public String uploadanje(MultipartFile file, Long ID) throws IOException {
+        // Convert ID to String before passing it to Cloudinary
+        String publicId = String.valueOf(ID);
 
-        Path trenutniDirektorij = Paths.get(System.getProperty("user.dir"));
-        Path relativnaPutanja = trenutniDirektorij.resolve("IzvorniKod/Backend/Spring-boot/src/main/resources");
-
-
-        StringBuilder builder = new StringBuilder();
-        builder.append(ID + "_");
-        builder.append(file.getOriginalFilename());
-
-
-        Path uploadPath = Paths.get(relativnaPutanja.toString(), builder.toString());
-
-        Files.copy(file.getInputStream(), uploadPath);
-
-        return builder.toString();
+        return cloudinary.uploader()
+                .upload(file.getBytes(), Map.of("public_id", publicId))
+                .get("url")
+                .toString();
     }
 
 }
