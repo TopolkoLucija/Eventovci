@@ -107,7 +107,7 @@ public class UserService {
             List<EventPrintDTO> eventlist = new ArrayList<>();
             for (Event e : event) {
                 List<MediaContent> mc = mediaContentRepository.getAllByEventid(e.getId());
-                byte[] media = null;
+                String media = null;
                 String type = null;
                 for (int i = mc.size()-1; i>=0; i--) {
                     if (Objects.equals(mc.get(i).getType(), "image")){

@@ -92,7 +92,7 @@ public class EventService {
         for (UserResponse u: responses) {
             if (Objects.equals(u.getStatus(), status)) {
                 Event event = eventRepository.findEventById(u.getEventid());
-                byte[] media = null;
+                String media = null;
                 String type = null;
                 MediaContent mc = mediaContentRepository.findFirstByEventidAndType(event.getId(), "image");
                 if (mc!=null) {
@@ -127,7 +127,7 @@ public class EventService {
         }
 
         for (Event e : events) {
-            byte[] media = null;
+            String media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
@@ -161,7 +161,7 @@ public class EventService {
             events = eventRepository.findAllByTimeOfTheEventIsBetween(LocalDateTime.now(), until);
         }
         for (Event e : events) {
-            byte[] media = null;
+            String media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
@@ -184,7 +184,7 @@ public class EventService {
         List<Event> events = eventRepository.findAllByTimeOfTheEventAfterAndEventCoordinatorid(LocalDateTime.now(), userId);
 
         for (Event e : events) {
-            byte[] media = null;
+            String media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {
@@ -202,7 +202,7 @@ public class EventService {
         List<Event> events = eventRepository.findAllByTimeOfTheEventBeforeAndEventCoordinatorid(LocalDateTime.now(), userId);
 
         for (Event e : events) {
-            byte[] media = null;
+            String media = null;
             String type = null;
             MediaContent mc = mediaContentRepository.findFirstByEventidAndType(e.getId(), "image");
             if (mc!=null) {

@@ -23,8 +23,6 @@ const Dogadaj = ({
   const [vrstaPosjetitelja, setVrstaPosjetitelja] = useState("");
   const [prikazi, setPrikazi] = useState(false);
 
-  const decodedImage = Poster ? atob(Poster) : null;
-  const imageUrl = decodedImage ? `data:image/jpeg;base64,${decodedImage}` : "path/to/default/image.jpg";
 
   useEffect(() => {
     if (accessToken !== null) {
@@ -105,7 +103,7 @@ const Dogadaj = ({
         )}
       </div>
       <div>
-        {Poster && <img src={imageUrl} alt={Naslov} />}
+        {Poster && <img src={Poster} alt={Naslov} />}
       </div>
       <div>
         <span>{Mjesto}</span>

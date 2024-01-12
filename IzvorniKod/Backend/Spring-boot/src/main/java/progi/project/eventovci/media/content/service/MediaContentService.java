@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import progi.project.eventovci.media.content.controller.dto.MediaDTO;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.media.content.repository.MediaContentRepository;
+import progi.project.eventovci.securityconfig.FileUploadService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,18 +19,21 @@ public class MediaContentService {
     @Autowired
     private MediaContentRepository mediaContentRepository;
 
+    @Autowired
+    private FileUploadService fileUploadService;
+
     public List<MediaDTO> get(Long eventid) {
         List<MediaContent> media = mediaContentRepository.getAllByEventid(eventid);
         List<MediaDTO> mediaDTOS = new ArrayList<>();
         for (MediaContent mc : media) {
-            String s = Base64.getEncoder().encodeToString(mc.getContent());
-            mediaDTOS.add(new MediaDTO(s, mc.getType()));
+            mediaDTOS.add(new MediaDTO(mc.getContent(), mc.getType()));
         }
         return mediaDTOS;
     }
 
     public void add(MultipartFile file, String type, Long eventId) throws IOException {
-        MediaContent mediaContent = new MediaContent(file.getBytes(), type, eventId);
+        String path = fileUploadService.uploadanje(file, eventId);
+        MediaContent mediaContent = new MediaContent(path, type, eventId);
         mediaContentRepository.save(mediaContent);
     }
 }

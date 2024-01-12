@@ -18,7 +18,7 @@ public class MediaContent {
     private Long id;
 
     @Column(name="medijskisadrzaj")
-    private byte[] content;
+    private String content;
 
     @Column(name="vrsta", length = 10)
     private String type;
@@ -36,7 +36,7 @@ public class MediaContent {
 
     }
 
-    public MediaContent(byte[] content, String type, Long eventid) {
+    public MediaContent(String content, String type, Long eventid) {
         this.content = content;
         this.type = type;
         this.eventid = eventid;
@@ -67,11 +67,11 @@ public class MediaContent {
         this.id = id;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

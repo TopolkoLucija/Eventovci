@@ -9,6 +9,7 @@ import progi.project.eventovci.media.content.controller.dto.MediaDTO;
 import progi.project.eventovci.media.content.controller.dto.MediaRequest;
 import progi.project.eventovci.media.content.entity.MediaContent;
 import progi.project.eventovci.media.content.service.MediaContentService;
+import progi.project.eventovci.securityconfig.FileUploadService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +22,14 @@ public class MediaContentController {
 
     @Autowired
     private MediaContentService mediaContentService;
+
     @GetMapping("/get/{filter}")
     public ResponseEntity<List<MediaDTO>> getMedia(@RequestHeader("Authorization") String token, @PathVariable Long filter) {
         List<MediaDTO> media = mediaContentService.get(filter);
         return ResponseEntity.ok(media);
     }
 
-    @PostMapping("/{type}")
+    @PostMapping(value = "/{type}", consumes = { "multipart/form-data"})
     public ResponseEntity<Void> add(
             @RequestHeader("Authorization") String token,
             @PathVariable String type,

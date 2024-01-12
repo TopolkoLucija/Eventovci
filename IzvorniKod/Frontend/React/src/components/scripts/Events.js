@@ -58,9 +58,6 @@ function Events() {
       })
           .then((response) => {
             if (!response.ok) {
-              console.log(response.text());
-              console.log(response);
-              console.log(response.json());
               console.log("Error kod učitavanja slika");
             }
             return response.json();
@@ -73,25 +70,6 @@ function Events() {
             console.error('Error: ' + error);
           });
 
-     /* const response = await fetch(`/api/events/all/${filter}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: accessToken,
-        },
-      });
-
-      if (!response.ok) {
-        console.log(response.text());
-        console.log(response);
-        console.log(response.json());
-        console.log("Nije oke response, mozda nisi prijavljen");
-        return;
-      }
-
-      const data = await response.json();
-
-      setdogadajcic(data);*/
     } catch (error) {
       console.error("Error:", error);
     }

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class EventPrintDTO {
     private Long id;
-    private byte[] media;
+    private String media;
     private String type;
     private String eventName;
     private LocalDateTime timeOfTheEvent;
@@ -13,7 +13,7 @@ public class EventPrintDTO {
     public EventPrintDTO() {
     }
 
-    public EventPrintDTO(Long id, byte[] media, String type, String eventName, LocalDateTime timeOfTheEvent, String location) {
+    public EventPrintDTO(Long id, String media, String type, String eventName, LocalDateTime timeOfTheEvent, String location) {
         this.id = id;
         this.media = media;
         this.type = type;
@@ -26,7 +26,7 @@ public class EventPrintDTO {
         return id;
     }
 
-    public byte[] getMedia() {
+    public String getMedia() {
         return media;
     }
 
@@ -46,7 +46,7 @@ public class EventPrintDTO {
         this.id = id;
     }
 
-    public void setMedia(byte[] media) {
+    public void setMedia(String media) {
         this.media = media;
     }
 
