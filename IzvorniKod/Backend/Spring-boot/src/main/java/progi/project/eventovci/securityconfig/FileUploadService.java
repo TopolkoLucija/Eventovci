@@ -20,7 +20,11 @@ public class FileUploadService {
 
     public String uploadanje(MultipartFile file, Long ID) throws IOException {
         // Convert ID to String before passing it to Cloudinary
-        String publicId = String.valueOf(ID);
+        String publicId = file.getOriginalFilename();
+
+        if (publicId==null) {
+            publicId = String.valueOf(Math.random());
+        }
 
         return cloudinary.uploader()
                 .upload(file.getBytes(), Map.of("public_id", publicId))
