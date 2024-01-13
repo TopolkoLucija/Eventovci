@@ -32,7 +32,7 @@ public class MediaContentService {
     }
 
     public void add(MultipartFile file, String type, Long eventId) throws IOException {
-        String path = fileUploadService.uploadanje(file, eventId);
+        String path = fileUploadService.uploadanje(file, eventId, type);
         MediaContent mediaContent = new MediaContent(path, type, eventId);
         mediaContentRepository.save(mediaContent);
     }
