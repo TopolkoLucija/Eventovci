@@ -32,20 +32,331 @@
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			Programske komponente sastavljene su od nekoliko jedinica (najmanjih dijelova programa: razreda i pripadajućih metoda i atributa) s intenzivnom međusobnom interakcijom. Interakcija se ostvaruje putem proceduralnog sučelja gdje jedna komponenta enkapsulira skup funkcionalnosti koje mogu pozivati ostale komponente. Ispitivanje komponenti provedeno je  korištenjem Junit radnog okvira koji automatizira proces ispitivanja. Korištenjem dvije vrsta testova, normalnim načinom rada i unosom neispravnih i rubnih uvjeta, provjerava se očekivano ponašanje razreda i unaprijed definirani izlaz metode.
+			
+			Prilikom testiranja \texttt{UserService} metoda, korišteno je sučelje \texttt{UserRepository} uz klase \texttt{User} i \texttt{ProfileForm}. Najprije se testira funkcionalnost prijavljivanja u sustac. Prvi test provjerava uspješno prijavljivanje sa unaprijed zadanim korisničkim imenom. 
+			
+			
+\begin{lstlisting}[xleftmargin=0em]
+	@Test
+	public void loginValidTest() {
+		//Arrange
+		newUser = new User();
+		newUser.setUsername("Ivana");
+		newUser.setEmail("ivana@gmail.com");
+		newUser.setTypeOfUser("posjetitelj");
+		newUser.setHomeAdress("adress");
+		
+		//Define mock behavior
+		when(userRepository.findUserByUsername(
+		newUser.getUsername())).thenReturn(newUser);
+		
+		//Actual test on service
+		User savedUser = userService.login(newUser.getUsername());
+		
+		//Assertion
+		assertNotNull(savedUser);
+		assertEquals(newUser, savedUser);
+	}
+\end{lstlisting}			
+
+			Drugi test provjerava prijavu u sustav sa neispravnim korisničkim imenom nakon što je zadano očekivano korisničko ime. 
+
+\begin{lstlisting}[xleftmargin=0em]
+	@Test
+	public void loginInvalidTest() {
+		//Arrange
+		newUser = new User();
+		newUser.setUsername("Ivana");
+		
+		//Define mock behavior
+		lenient().when(userRepository.findUserByUsername(
+		newUser.getUsername())).thenReturn(newUser);
+		
+		//Actual test on service
+		User savedUser = userService.login("invalidUsername");
+		
+		//Assertion
+		assertNull(savedUser);
+		assertEquals(null,savedUser);
+	}
+	
+\end{lstlisting}			
+			
+			
+			Trećim testom provjeren je uspješan dohvat podataka o korisniku čiji su očekivani podatci unaprijed zadani. 
+			
+\begin{lstlisting}
+	@Test
+	public void retrieveUserDataTest() {
+		// Arrange
+		newUser = new User();
+		newUser.setUsername("Ivana");
+		newUser.setEmail("ivana@gmail.com");
+		newUser.setTypeOfUser("posjetitelj");
+		newUser.setHomeAdress("adress");
+		
+		// Define mock behavior
+		when(userRepository.findUserByUsername(
+		newUser.getUsername())).thenReturn(newUser);
+		
+		// Act
+		profileForm = userService.data(newUser.getUsername());
+		
+		// Assert
+		assertNotNull(profileForm);
+		assertEquals(newUser.getUsername(), profileForm.getUsername());
+		assertEquals("ivana@gmail.com", profileForm.getEmail());
+		assertEquals("posjetitelj", profileForm.getTypeOfUser());
+		assertEquals("adress", profileForm.getHomeAdress());
+	}
+\end{lstlisting}
+			
+			
+			Provjerena je i promjena korisničkih podataka koja u sebi sadrži i provjeru prijave sa novim korisničkim podatcima.
+			
+\begin{lstlisting}
+	@Test
+	public void changeDataTest() {
+		// Arrange
+		Long userId = 1L;
+		String newUsername = "newUsername";
+		String newEmail = "newEmail@example.com";
+		String newHomeAddress = "newAddress";
+		
+		User existingUser = new User();
+		existingUser.setId(userId);
+		existingUser.setUsername("oldUsername");
+		existingUser.setEmail("oldEmail@example.com");
+		existingUser.setHomeAdress("oldAddress");
+		
+		// Mock repository behavior
+		when(userRepository.findUserById(userId)).thenReturn(existingUser);
+		
+		// Mock repository behavior for data update
+		doAnswer(invocation -> {
+			Long idArg = invocation.getArgument(0);
+			String usernameArg = invocation.getArgument(1);
+			String emailArg = invocation.getArgument(2);
+			String homeAddressArg = invocation.getArgument(3);
+			
+			assertEquals(userId, idArg);
+			assertEquals(newUsername, usernameArg);
+			assertEquals(newEmail, emailArg);
+			assertEquals(newHomeAddress, homeAddressArg);
+			
+			existingUser.setUsername(newUsername);
+			existingUser.setEmail(newEmail);
+			existingUser.setHomeAdress(newHomeAddress);
+			
+			return null;
+		}).when(userRepository).updateUserById(anyLong(), anyString(), anyString(), anyString());
+		
+		
+		// Act
+		userService.changeData(userId, newUsername, newEmail, newHomeAddress);
+		when(userRepository.findUserByUsername(
+			existingUser.getUsername())).thenReturn(existingUser);
+		User changedUser = userService.login(existingUser.getUsername());
+		
+		// Assert
+		verify(userRepository, times(1)).updateUserById(userId, newUsername, newEmail, newHomeAddress);
+		assertNotNull(changedUser);
+	}
+	
+\end{lstlisting}
+
+			Na kraju, provjereno je brisanje korisničkog profila uz pokušaj prijave sa obrisanim korisničkim podatcima.
+			
+\begin{lstlisting}
+	@Test
+	public void deleteMyProfileTest() {
+		// Arrange
+		Long userId = 1L;
+		newUser = new User();
+		newUser.setUsername("Ivana");
+		newUser.setId(userId);
+		
+		// Mock repository behavior
+		when(userRepository.findUserById(userId)).thenReturn(newUser);
+		
+		// Act
+		userService.deleteMyProfile(userId);
+		User deletedUser = userService.login(newUser.getUsername());
+		
+		// Assert
+		verify(userRepository, times(1)).deleteUserById(userId);
+		assertNull(deletedUser);
+		assertEquals(null, deletedUser);
+		
+	}
+\end{lstlisting}
+
+			Na slici \ref{komp} prikazan je rezultat izvođenja navedenih testova. 
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/ispitivanje_komponenti.jpeg} 
+				\centering
+				\vspace{-0.2cm}
+				\caption{Svi su testovi ispravno izvedeni}
+				\label{komp}
+			\end{figure}
 			
 			
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+			 Ispitivanje cijelog sustava napravljeno je pomoću Selenium WebDrivera unutar Junit testova. U svakom od testova unaprijed definiramo postavke drivera uz zadavanje URL-a aplikacije. Driver zatim sam pronalazi unaprijed zadane elemente, a putem testa prosljeđuju mu se podatci. Najprije je testirano ispravno prijavljivanje u sustav unaprijed registriranog korisnika. Budući da su podatci ispravni, aplikacija preusmjerava korisnika na početnu stranicu.
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+\begin{lstlisting}
+	@Test
+	public void loginValidTest() throws InterruptedException {
+		
+		driver.get("https://eventovci.onrender.com/login");
+		
+		WebElement element = driver.findElement(By.id("nameField"));
+		element.sendKeys("registeredUserr");
+		element = driver.findElement(By.id("sifrafild"));
+		element.sendKeys("password");
+		
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(5000);
+		
+		String url = driver.getCurrentUrl();
+		driver.quit();
+		Assertions.assertEquals("https://eventovci.onrender.com/home", url);
+	}
+	
+\end{lstlisting}
+
+			Drugi test provjerava neispravnu prijavu (pogrešna lozinka) zbog čega driver na kraju testa ostaje na stranici za prijavu.
+			
+\begin{lstlisting}
+	@Test
+	public void loginInvalidTest() throws InterruptedException {
+		
+		driver.get("https://eventovci.onrender.com/login");
+		
+		WebElement element = driver.findElement(By.id("nameField"));
+		element.sendKeys("registeredUserr");
+		element = driver.findElement(By.id("sifrafild"));
+		element.sendKeys("wrongPassword");
+		
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(5000);
+		
+		String url = driver.getCurrentUrl();
+		driver.quit();
+		Assertions.assertEquals("https://eventovci.onrender.com/login", url);
+	}
+\end{lstlisting}
+
+			Trećim testom provjereno je uspješno registriranje korisnika kao posjetitelja. Nakon registracije, korisnika se preusmjerava na početnu stranicu.
+			
+\begin{lstlisting}
+	@Test
+	public void registerValidTest() throws InterruptedException {
+		
+		driver.get("https://eventovci.onrender.com/login");
+		
+		driver.findElement(By.cssSelector("button")).click();
+		Thread.sleep(5000);
+		
+		WebElement element = driver.findElement(By.id("nameField"));
+		element.sendKeys("NewUserRegisterrr");
+		element = driver.findElement(By.id("sifrafild"));
+		element.sendKeys("password");
+		element = driver.findElement(By.id("email-field"));
+		element.sendKeys("NewUserRegisterrr@gmail.com");
+		
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(5000);
+		
+		String url = driver.getCurrentUrl();
+		driver.quit();
+		Assertions.assertEquals("https://eventovci.onrender.com/home", url);
+	}
+\end{lstlisting}
+
+			Ukoliko korisnik ne unese pravilno podatke za registraciju, ostat će na stranici za prijavu uz ispis greške koju treba popraviti (korisničko ime već postoji, e-mail nije u pravilnom formatu...) što se ispituje četvrtim testom.
+			
+\begin{lstlisting}
+	@Test
+	public void registerInvalidTest() throws InterruptedException {
+		
+		driver.get("https://eventovci.onrender.com/login");
+		
+		driver.findElement(By.cssSelector("button")).click();
+		Thread.sleep(5000);
+		
+		WebElement element = driver.findElement(By.id("nameField"));
+		element.sendKeys("registerNewUserr");
+		element = driver.findElement(By.id("sifrafild"));
+		element.sendKeys("password");
+		element = driver.findElement(By.id("email-field"));
+		element.sendKeys("registerNewUser-wrongMail");
+		
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(5000);
+		
+		String url = driver.getCurrentUrl();
+		driver.quit();
+		Assertions.assertEquals("https://eventovci.onrender.com/login", url);
+	}
+\end{lstlisting}
+
+			Posljednji test sustava provjerava dodavanje novog događanja. Nakon što se unaprijed registriran korisnik prijavi sa svojim podatcima, pokušat će dodati novi događaj uz izostanak postavljanja cijene. Dodavanje se neće uspješno provesti te korisnik ostaje na stranici za dodavanje događaja uz ispis odgovarajuće poruke. 
+			
+\begin{lstlisting}
+	@Test
+	public void addNewEventInvalid() throws InterruptedException {
+		
+		driver.get("https://eventovci.onrender.com/login");
+		WebElement element = driver.findElement(By.id("nameField"));
+		element.sendKeys("eventCoordinator");
+		element = driver.findElement(By.id("sifrafild"));
+		element.sendKeys("password");
+		
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(5000);
+		
+		driver.findElement(By.cssSelector("div.category img[alt='img for MOJ RACUN']")).click();
+		
+		String url = driver.getCurrentUrl();
+		Assertions.assertEquals("https://eventovci.onrender.com/my-account", url);
+		
+		driver.findElement(By.xpath("//button[text()='Dodaj dogadanje']")).click();
+		
+		url = driver.getCurrentUrl();
+		Assertions.assertEquals("https://eventovci.onrender.com/add-event", url);
+		
+		driver.findElement(By.id("nameField")).sendKeys("Event Name");
+		driver.findElement(By.id("typeField")).sendKeys("Koncert");
+		driver.findElement(By.id("locationField")).sendKeys("Centar");
+		driver.findElement(By.id("timeField")).sendKeys("2024-01-15T12:00");
+		driver.findElement(By.id("durationField")).sendKeys("02:00");
+		//driver.findElement(By.id("priceField")).sendKeys("0");
+		driver.findElement(By.xpath("//textarea")).sendKeys("Event Description");
+				
+		driver.findElement(By.cssSelector("button.dodaj-dogadjanje")).click();
+		Thread.sleep(5000);
+		
+		url = driver.getCurrentUrl();
+		driver.quit();
+		Assertions.assertEquals("https://eventovci.onrender.com/add-event", url);
+	}
+\end{lstlisting}
+
+			Na slici \ref{sust} prikazan je rezultat izvođenja navedenih testova.
+
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/ispitivanje_sustava.jpeg} 
+				\centering
+				\vspace{-0.2cm}
+				\caption{Svi se testovi uspješno izvode}
+				\label{sust}
+			\end{figure}
+			
 			
 			\eject 
 		
