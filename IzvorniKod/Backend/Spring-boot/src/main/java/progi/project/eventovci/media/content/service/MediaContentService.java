@@ -10,7 +10,6 @@ import progi.project.eventovci.securityconfig.FileUploadService;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @Service

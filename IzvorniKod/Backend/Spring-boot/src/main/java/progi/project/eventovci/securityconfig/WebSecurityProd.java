@@ -96,6 +96,8 @@ public class WebSecurityProd  {
 
                 .requestMatchers(new AntPathRequestMatcher("/subscription")).hasAnyRole("ORGANIZATOR", "POSJETITELJ")
 
+                .requestMatchers(new AntPathRequestMatcher("/link")).hasRole("ORGANIZATOR")
+
 
                 .anyRequest().permitAll(); // Inace sve ostale su dostupne (to su samo login i register)
 
