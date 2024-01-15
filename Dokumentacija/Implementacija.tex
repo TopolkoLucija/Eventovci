@@ -380,18 +380,18 @@
 		\section{Upute za puštanje u pogon}
 		
 			
-			Za deploy aplikacije korištena je platforma Render. Putem njega omogućeno je da aplikacija bude javno dostupna. Pri implementaciji web usluge na render najprije je s njime potrebno povezati svoj GitHub repozitorij, pripremiti projekt za deploy te kreirati potrebne dijelove na Renderu.
+			Za deploy aplikacije korištena je platforma Render. Putem platforme omogućeno je da aplikacija bude javno dostupna. Pri implementaciji web usluge na Render najprije je s njime potrebno povezati svoj GitHub repozitorij, pripremiti projekt za deploy te kreirati potrebne servise i bazu podataka na Renderu.
 			
 			\subsection{Priprema projekta za deploy}
 			
-			Priprema projekta za deploy na Render uključuje pripremu backenda i pripremu frontenda. Za pripremu backenda potrebno je dodati varijable okruženja, dodati DockerFile te postaviti \texttt{/api} kao prefiks svim zahtjevima na backend, dok je za pripremu frontenda potrebno dodati dependencyje u \texttt{package.json}, dodati \texttt{/src/setupProxy.js} koji služi kao proxy server za lokalni development te dodati \texttt{app.js} u kojem se nalazi express server za posluživanje frontenda. Zatim je potrebno u Render kontolnoj ploči kreirati bazu podataka, backend i fronted.\\
+			Priprema projekta za deploy na Render uključuje pripremu backenda i pripremu frontenda. Za pripremu backenda potrebno je dodati varijable okruženja za bazu podataka te dodati DockerFile, dok je za pripremu frontenda potrebno prilagoditi datoteke \texttt{package.json},  \texttt{/src/setupProxy.js} koji služi kao proxy server za lokalni development te dodati \texttt{app.js} u kojem se nalazi express server za posluživanje frontenda. Zatim je potrebno u Render kontolnoj ploči kreirati bazu podataka, backend i frontend.\\
 			
 			\noindent \textbf{Uporaba dockerfile-a kod deploya web stranice}
 			
 			\vspace{0.2cm}
 			
 			
-			\noindent Dockerfile je tekstualna datoteka koja sadrži skup uputa i naredbi koje Docker interpretira kako bi izgradio Docker sliku. Docker je slika paket koji uključuje sve potrebne stvari za pokretanje aplikacije, uključujući kôd, okoline izvođenja, biblioteke, konfiguracijske datoteke i slično.
+			\noindent Dockerfile je tekstualna datoteka koja sadrži skup uputa i naredbi koje Docker interpretira kako bi izgradio Docker sliku. Docker je slika paket koji uključuje sve potrebno za pokretanje aplikacije, uključujući kôd, okoline izvođenja, biblioteke, konfiguracijske datoteke i slično.
 			
 			
 			\lstset{
@@ -416,14 +416,16 @@
 	# Container za izgradnju (build) aplikacije
 	FROM openjdk:17-alpine AS builder
 	
-	# Kopiranje izvornog koda u container
+	# Kopiranje izvornog koda u radni direktorij u Docker slici
 	COPY ../../.mvn .mvn
 	COPY ../../mvnw .
 	COPY ../../pom.xml .
 	COPY ../../src src
+	
+	#Postavljanje dozvole za izvrsavanje Maven Wrapper skripte
 	RUN chmod +x mvnw
 	
-	# Pokretanje builda
+	# Pokretanje izgradnje
 	RUN ./mvnw clean package
 	
 	# Stvaranje containera u kojem ce se vrtiti aplikacija
@@ -438,114 +440,14 @@
 	# Naredba kojom se pokrece aplikacija
 	ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
 \end{lstlisting}
-
-			\noindent Svaki redak Dockerfilea ima svoju specifičnu ulogu u procesu izrade Docker slike. Evo detaljnog objašnjenja svakog retka:
-			
-			\begin{packed_enum}
-				\item 
-\begin{lstlisting}
-	FROM openjdk:17-alpine AS builder
-\end{lstlisting}
-
-			Ova linija postavlja baznu sliku za prvi dio Dockerfilea. Koristi se Alpine Linux operativni sustav s OpenJDK verzijom 17. Također, koristi se AS builder kako bi se stvorila privremena faza s imenom "builder", koja će se koristiti za izgradnju aplikacije.
-			
-			\item 
-\begin{lstlisting}
-	COPY ../../.mvn .mvn
-\end{lstlisting}
-			
-			Kopira \texttt{.mvn} direktorij iz izvornog koda aplikacije u trenutni radni direktorij u Docker slici. Ovaj korak je koristan ako \texttt{.mvn} direktorij sadrži konfiguracije ili skripte potrebne za izgradnju projekta.
-			
-			\item 
-\begin{lstlisting}
-	COPY ../../mvnw .
-\end{lstlisting}
-
-			Kopira \texttt{mvnw} (Maven Wrapper skriptu) iz izvornog koda aplikacije u trenutni radni direktorij u Docker slici.
-			
-			\item
-
-\begin{lstlisting}
-	COPY ../../pom.xml .
-\end{lstlisting}
-
-			Kopira \texttt{pom.xml} (Maven konfiguracijsku datoteku) iz izvornog kôda aplikacije u trenutni radni direktorij u Docker slici.
-			
-			\item 
-
-\begin{lstlisting}
-	COPY ../../src src
-\end{lstlisting}
-
-			Kopira \texttt{src} direktorij (izvorni kôd aplikacije) iz izvornog koda aplikacije u trenutni radni direktorij u Docker slici.
-			
-			
-			\item 
-			
-\begin{lstlisting}
-	RUN chmod +x mvnw
-\end{lstlisting}
-			
-			Postavlja izvršne dozvole (\texttt{chmod +x}) za Maven Wrapper skriptu kako bi se mogla izvršavati u sljedećim koracima.
-			
-			
-			\item 
-			
-\begin{lstlisting}
-	RUN ./mvnw clean package
-\end{lstlisting}
-			
-			Izvršava Maven Wrapper skriptu kako bi se izvršila Maven clean package faza, što uključuje čišćenje projekta i pakiranje izgrađene aplikacije.
-			
-			\item 
-
-\begin{lstlisting}
-	FROM openjdk:17-alpine
-\end{lstlisting}
-
-			Postavlja drugu fazu Dockerfilea koristeći istu baznu sliku kao prva faza, ali bez AS buildera.
-			
-			\item 
-			
-\begin{lstlisting}
-	COPY --from=builder target/*.jar /app.jar
-\end{lstlisting}
-
-			Kopira izgrađenu JAR datoteku iz "builder" faze (prve faze) u trenutni radni direktorij u Docker slici. Ova se linija koristi za preslikavanje samo onoga što je potrebno iz privremene faze.
-			
-			\item 
-
-\begin{lstlisting}
-	EXPOSE 8080
-\end{lstlisting}
-
-			Označava da će aplikacija unutar kontejnera slušati na portu 8080.
-			
-			
-			\item 
-
-\begin{lstlisting}
-	ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
-\end{lstlisting}
-
-			Postavlja glavnu naredbu koja će se izvršiti kada se kontejner pokrene. U ovom slučaju, to je pokretanje Java aplikacije s JAR datotekom (\texttt{/app.jar}) i postavljanje Spring profila na \texttt{"prod"}. Ova naredba pokreće aplikaciju unutar kontejnera kada kontejner bude pokrenut.
-			
-			\end{packed_enum} 
 			
 			
 			
-			\subsection{Kreiranje potrebnih dijelova na Render-u}
+			\subsection{Kreiranje potrebnih servisa na Render-u}
 			
-			Prvo kreiramo bazu podataka tako što odaberemo opciju \textit{Novo} $\xrightarrow{}$ \textit{PostgreSQL} u Renderovoj kontrolnoj ploči. Postavimo ime baze i korisničko ime te odaberemo \textit{Stvori Bazu podataka}. Zatim kreiramo backend tako što odaberemo \textit{Novo} $\xrightarrow{}$ \textit{Web Service}. Ukoliko nismo povezali račun sada moramo to napraviti kako bi mogli odabrati projekt kojeg želimo deployati. Nakon toga potrebno je postaviti ime za servis koje postaje dio web adrese, postaviti korijenski direktorij, dodati potrebne varijable okruženja (tj. kopirati njihove vrijednosti iz postavki baze podataka na Renderu), za okruženje odabrati Docker te postaviti putanju za Dockerfilea. Tada odaberemo stvoriti Web uslugu. Posljednji korak je kreiranje frontenda pomoću odabira \textit{Novo} $\xrightarrow{}$ \textit{Web Service}. Zatim se odabire projekt, ime za servis, postavi korijenski direktorij, za environment odabire Node te za region Frankfurt, postavljamo komande upravljanja i dodamo potrebne varijable okruženja. Tada odaberemo \textit{Stvoriti Web Service}.
+			Prvo kreiramo bazu podataka tako što odaberemo opciju \textit{Novo} $\xrightarrow{}$ \textit{PostgreSQL} u Renderovoj kontrolnoj ploči. Postavimo ime baze i korisničko ime te odaberemo \textit{Stvori Bazu podataka}. \\
+			Zatim kreiramo backend tako što odaberemo \textit{Novo} $\xrightarrow{}$ \textit{Web Service}. Ukoliko nismo povezali račun, sada moramo to napraviti kako bi mogli odabrati projekt kojeg želimo deployati. Nakon toga potrebno je postaviti ime za servis koje postaje dio web adrese, postaviti korijenski direktorij, dodati potrebne varijable okruženja (tj. kopirati njihove vrijednosti iz postavki baze podataka na Renderu), za okruženje odabrati Docker te postaviti putanju za Dockerfilea. Tada odaberemo stvoriti Web uslugu. 
 			
-			
-			\begin{figure}[H]
-				\includegraphics[width=\textwidth]{slike/Priprema_frontenda.jpg} 
-				\centering
-				\vspace{-0.2cm}
-				\caption{Priprema frontenda za deploy}
-				\label{front}
-			\end{figure}
 			
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{slike/Priprema_backenda.jpg} 
@@ -570,6 +472,17 @@
 				\vspace{-0.2cm}
 				\caption{Priprema backenda za deploy (3)}
 				\label{back3}
+			\end{figure}
+			
+			Posljednji korak je kreiranje frontenda pomoću odabira \textit{Novo} $\xrightarrow{}$ \textit{Web Service}. Zatim se odabire projekt, ime za servis, postavi korijenski direktorij, za environment odabire Node te za region Frankfurt, postavljamo komande upravljanja i dodamo potrebne varijable okruženja. Tada odaberemo \textit{Stvoriti Web Service}.
+			
+			
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth]{slike/Priprema_frontenda.jpg} 
+				\centering
+				\vspace{-0.2cm}
+				\caption{Priprema frontenda za deploy}
+				\label{front}
 			\end{figure}
 			
 			

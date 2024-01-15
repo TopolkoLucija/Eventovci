@@ -49,7 +49,7 @@
 		
 		\section{Baza podataka}
 			
-		Sustav koristi H2 relacijsku bazu podataka za organizaciju i pohranu različitih podataka. Organizacija temeljena na relacijskom modelu omogućuje lakšu manipulaciju podacima, pruža sigurnost i kontrolu nad podacima te osigurava trajno spremanje podataka. U sustavu baza podataka igra ključnu ulogu u pohrani informacija o korisnicima, događanjima i dodatnim informacijama o događanjima. Baza podataka ima sljedeće entitete:
+		Sustav koristi PostgreSQL relacijsku bazu podataka za organizaciju i pohranu različitih podataka. Organizacija temeljena na relacijskom modelu omogućuje lakšu manipulaciju podacima, pruža sigurnost i kontrolu nad podacima te osigurava trajno spremanje podataka. U sustavu baza podataka igra ključnu ulogu u pohrani informacija o korisnicima, događanjima i dodatnim informacijama o događanjima. Baza podataka ima sljedeće entitete:
 		
 		\begin{packed_item}
 			\item Korisnik
@@ -90,8 +90,6 @@
 					\hline 
 					adresa & VARCHAR & adresa Organizatora\\ 
 					\hline 
-					placanjeclanarine & BOOLEAN	& plaća li Organizator članarinu\\ 
-					\hline
 				\end{longtblr}
 				
 				\noindent \textbf{Dogadjanje} Entitet omogućuje pohranu informacija o različitim događanjima koja se mogu organizirati. Atribut organizatorid strani je ključ koji se odnosi na korisnika koji je organizator događanja. Atribut cijenaulaznice sadrži informacije o cijeni ulaznica za događanje, a može biti i \textit{null} u slučaju da je događanje besplatno. 
@@ -116,11 +114,13 @@
 					\hline 
 					vrijemedogadjanja & TIMESTAMP & datum i vrijeme događanja\\ 
 					\hline 
-					trajanje & DOUBLE & vremensko trajanje događanja\\ 
+					trajanje & TIME & vremensko trajanje događanja\\ 
 					\hline 
 					\SetCell{LightBlue} organizatorid & BIGINT	& identifikator Organizatora \\ 
 					\hline
 					cijenaulaznice & DOUBLE	& cijena ulaznice događanja\\ 
+					\hline
+					opis & VARCHAR & opis događanja\\
 					\hline
 				\end{longtblr}
 				
@@ -160,7 +160,9 @@
 					\hline
 					\SetCell{LightBlue} iddogadjanja & BIGINT	& identifikator događanja \\ 
 					\hline
-					medijskisadrzaj & LONGLOB & medijski sadržaj\\ 
+					medijskisadrzaj & VARCHAR & poveznica na medijski sadržaj\\ 
+					\hline
+					vrsta & VARCHAR & vrsta medijskog sadržaja (image, video)\\
 					\hline
 				\end{longtblr}
 				
