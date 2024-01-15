@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 import '../../styles/App.css';
 import '../../styles/MyAccount.css';
 import '../../styles/views/OrganizerView.css';
@@ -320,7 +320,7 @@ const handleDodajClick = async () => {
 
    const openModalAddURL = () => {
       setOrganizerURL("");
-      showModalAddURL(true);
+      setShowModalAddURL(true);
    }
 
    const closeModalAddURL = () => {
@@ -508,13 +508,13 @@ const handleDodajClick = async () => {
 
 
    const handleAddURL = () => {
-      const link = organizerURL;
-      fetch(`/api/link/${link}`, {
+      fetch(`/api/link`, {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
             'Authorization': accessToken
-         }
+         },
+         body: JSON.stringify(organizerURL)
       })
          .then((response) => {
             if (!response.ok) {
@@ -528,6 +528,7 @@ const handleDodajClick = async () => {
                type: "add-url",
                content: "URL ubačen!"
             })
+               closeModalAddURL();
             }
       })
    }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.eventovci.link.controller.dto.LinkDTO;
 import progi.project.eventovci.link.service.SocialMediaService;
 import progi.project.eventovci.securityconfig.auth.Convert;
 
@@ -20,9 +21,9 @@ public class SocialMediaController {
     private Convert convert;
 
     @PostMapping()
-    public ResponseEntity<Void> add(@RequestHeader("Authorization") String token, @PathVariable String link) {
+    public ResponseEntity<Void> add(@RequestHeader("Authorization") String token, @RequestBody LinkDTO linkDTO) {
         Long userId = convert.convertToId(token);
-        socialMediaService.add(link, userId);
+        socialMediaService.add(linkDTO.getLink(), userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
