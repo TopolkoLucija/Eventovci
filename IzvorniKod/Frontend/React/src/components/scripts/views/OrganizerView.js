@@ -32,6 +32,7 @@ const OrganizerView = (props) => {
    const [creditCardCVC, setCreditCardCVC] = useState("");
    const [PayPalEmail, setPayPalEmail] = useState("");
    const [PayPalPassword, setPayPalPassword] = useState("");
+   const [organizerURL, setOrganizerURL] = useState("");
 
    const [showModalPreferences, setShowModalPreferences] = useState(false);
    const [selectedLocations, setSelectedLocations] = useState([]);
@@ -315,6 +316,16 @@ const handleDodajClick = async () => {
    const [showModalPayWithCard, setShowModalPayWithCard] = useState(false);
    const [showModalPayWithPayPal, setShowModalPayWithPayPal] = useState(false);
    const [showModalMembershipPayed, setShowModalMembershipPayed] = useState(false);
+   const [showModalAddURL, setShowModalAddURL] = useState(false);
+
+   const openModalAddURL = () => {
+      setOrganizerURL("");
+      showModalAddURL(true);
+   }
+
+   const closeModalAddURL = () => {
+      setShowModalAddURL(false);
+   }
 
    const validation = () => {
       setShowModalValidation(true);
@@ -496,6 +507,31 @@ const handleDodajClick = async () => {
    }
 
 
+   const handleAddURL = () => {
+      const link = organizerURL;
+      fetch(`/api/link/${link}`, {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            'Authorization': accessToken
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               setMessage({
+                  type: "error",
+                  content: "URL nije ubačen!"
+               })
+            }
+            else {
+            setMessage({
+               type: "add-url",
+               content: "URL ubačen!"
+            })
+            }
+      })
+   }
+
 
    return (
       <>
@@ -531,7 +567,8 @@ const handleDodajClick = async () => {
                   </div>
 
                   <div className="edit-content">
-                     <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
+                        <button className="btn btn-primary" id="edit-buttons" onClick={Edit}>Uredi profil</button>
+                        <button className='btn btn-primary' id="edit-buttons" onClick={openModalAddURL}>Dodaj poveznicu</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalAddEvent}>Dodaj događanje</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={openModalPayMembership}>Plati članarinu</button>
                      <button className="btn btn-primary" id="edit-buttons" onClick={() => {openModalPreferences();}}>Uredi postavke obavijesti</button>
@@ -963,6 +1000,28 @@ const handleDodajClick = async () => {
                               <button className="btn btn-primary" id="yes-button" onClick={deleteMyProfile}>Da</button>
                               <button className="btn btn-primary" id="no-button" onClick={closeModalDelete}>Ne</button>
                            </div>
+                        </div>
+                     </div>
+                  )}
+
+                     {/* Modal */}
+                  {showModalAddURL && (
+                     <div className="background">
+                        <div className="window">
+                           <span className='exit' onClick={closeModalAddURL}>&times;</span>
+                           <div>Dodaj poveznicu na svoju društvenu mrežu:</div>
+                              <div className='form-group'>
+                                 <input
+                                    type='text'
+                                    className='form-control'
+                                    id='url'
+                                    value={organizerURL}
+                                    onChange={(e) => {
+                                       setOrganizerURL(e.target.value);
+                                    }}
+                                 />
+                              </div>
+                              <button type='submit' className='btn btn-primary' onClick={handleAddURL}>Dodaj</button>
                         </div>
                      </div>
                   )}
