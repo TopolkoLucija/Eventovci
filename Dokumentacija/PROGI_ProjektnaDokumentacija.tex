@@ -39,22 +39,6 @@
 \definecolor{javakeyword}{rgb}{0.5,0,0.33}
 \definecolor{javabackground}{rgb}{0.95,0.95,0.95}
 
-%\lstset{
-%	language=Java,
-%	basicstyle=\ttfamily\small,
-%	showstringspaces=false,
-%	columns=flexible,
-%	commentstyle=\color{green},
-%	keywordstyle=\color{blue},
-%	stringstyle=\color{purple},
-%	breaklines=true,
-%	breakatwhitespace=true,
-%	tabsize=3,
-%	numbers=none,
-%	frame=none,
-%	backgroundcolor=\color{white},
-%}
-
 
 \lstset{
 	language=Java,
@@ -69,9 +53,9 @@
 	tabsize=3,
 	numbers=none,
 	frame=none,
-	backgroundcolor=\color{gray!10}, % Adjust the percentage for the desired gray shade
-	rulesepcolor=\color{white}, % To hide the outline
-	framexleftmargin=0em, % To eliminate the margin
+	backgroundcolor=\color{gray!10}, 
+	rulesepcolor=\color{white}, 
+	framexleftmargin=0em,
 }
 
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %redefiniranje stila stranice u paketu fancyhdr
