@@ -1,6 +1,12 @@
 package progi.project.eventovci.event.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import progi.project.eventovci.media.content.entity.MediaContent;
+import progi.project.eventovci.membership.entity.Membership;
+import progi.project.eventovci.review.entity.EventReview;
+import progi.project.eventovci.rsvp.entity.UserResponse;
 import progi.project.eventovci.user.entity.User;
 
 import java.sql.Time;
@@ -47,8 +53,18 @@ public class Event {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "organizatorid", insertable = false, updatable = false)
      private User eventCoordinator;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MediaContent> mediaContents;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventReview> eventReviews;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserResponse> userResponses;
 
 
 

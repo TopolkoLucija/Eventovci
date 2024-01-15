@@ -1,6 +1,8 @@
 package progi.project.eventovci.review.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import progi.project.eventovci.event.entity.Event;
 import progi.project.eventovci.user.entity.User;
 
@@ -30,10 +32,12 @@ public class EventReview {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "iddogadjanja", insertable = false, updatable = false)
      private Event event;
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
      private User user;
 

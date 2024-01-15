@@ -2,6 +2,8 @@ package progi.project.eventovci.media.content.entity;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.URL;
 import progi.project.eventovci.event.entity.Event;
 
@@ -27,6 +29,7 @@ public class MediaContent {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "iddogadjanja", insertable = false, updatable = false)
      private Event event;
 

@@ -1,6 +1,8 @@
 package progi.project.eventovci.link.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import progi.project.eventovci.user.entity.User;
 
 import java.lang.Long;
@@ -23,6 +25,7 @@ public class SocialMediaLink {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "organizatorid", insertable = false, updatable = false)
      private User eventCoordinator;
 

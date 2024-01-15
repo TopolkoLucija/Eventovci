@@ -1,6 +1,8 @@
 package progi.project.eventovci.subscription.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import progi.project.eventovci.user.entity.User;
 
 import java.util.Objects;
@@ -25,6 +27,7 @@ public class Subscription {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
      private User user;
 

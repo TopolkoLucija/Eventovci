@@ -1,7 +1,11 @@
 package progi.project.eventovci.user.entity;
 
 import jakarta.persistence.*;
+import progi.project.eventovci.link.entity.SocialMediaLink;
+import progi.project.eventovci.membership.entity.Membership;
+import progi.project.eventovci.subscription.entity.Subscription;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +28,15 @@ public class User{
     private String typeOfUser; //posjetitelj, organizator, administrator
     @Column(name="adresa")
     private String homeAdress;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Membership> memberships;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SocialMediaLink> socialMediaLinks;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subscription> subscriptions;
 
     //konstruktor
     public User(){

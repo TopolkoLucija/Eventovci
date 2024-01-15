@@ -1,6 +1,8 @@
 package progi.project.eventovci.membership.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import progi.project.eventovci.user.entity.User;
 
 import java.time.LocalDateTime;
@@ -26,6 +28,7 @@ public class Membership {
 
 
      @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "idkorisnik", insertable = false, updatable = false)
      private User user;
 
