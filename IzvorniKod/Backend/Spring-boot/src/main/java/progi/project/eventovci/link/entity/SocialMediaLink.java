@@ -27,7 +27,7 @@ public class SocialMediaLink {
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
      @JoinColumn(name = "organizatorid", insertable = false, updatable = false)
-     private User eventCoordinator;
+     private User user;
 
 
 
