@@ -176,7 +176,7 @@ public class EventService {
     public EventInfoDTO getInfo(Long id) {
         Event event = eventRepository.findEventById(id);
         User user = userRepository.findUserById(event.getEventCoordinatorid());
-        return new EventInfoDTO(event.getEventName(), event.getTypeOfEvent(), event.getLocation(), event.getTimeOfTheEvent(), event.getDuration(), event.getTicketPrice(), event.getEventCoordinatorid(), user.getUsername());
+        return new EventInfoDTO(event.getEventName(), event.getTypeOfEvent(), event.getLocation(), event.getTimeOfTheEvent(), event.getDuration(), event.getTicketPrice(), event.getText(), event.getEventCoordinatorid(), user.getUsername());
     }
 
     public List<EventPrintDTO> getMyEvents(Long userId) {

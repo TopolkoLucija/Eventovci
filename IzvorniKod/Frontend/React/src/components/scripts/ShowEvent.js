@@ -434,8 +434,9 @@ const ShowEvent = () => {
                         <p>Vrijeme: {format(eventTime, 'dd.MM.yyyy HH:mm')}</p>
                         <p>Trajanje: {eventInfo.duration}</p>
                         <p>Mjesto: {eventInfo.location}</p>
+                        <p>Tip događanja: {eventInfo.typeOfEvent}</p>
                         <p>Organizator: <a href={`/organizer/${eventInfo.eventCoordinatorid}`}>{eventInfo.username}</a></p>
-                        <p>Opis: {eventInfo.typeOfEvent}</p>
+                        <p>Opis: {eventInfo.text}</p>
                         <p>Cijena: {eventInfo.ticketPrice}€</p>
                      </div>
                      <div className="event-content-choose">

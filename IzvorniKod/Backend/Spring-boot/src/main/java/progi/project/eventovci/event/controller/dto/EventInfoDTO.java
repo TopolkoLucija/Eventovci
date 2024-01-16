@@ -10,6 +10,8 @@ public class EventInfoDTO {
     private LocalDateTime timeOfTheEvent;
     private Time duration;
     private Double ticketPrice;
+
+    private String text;
     private Long eventCoordinatorid;
     private String username;
 
@@ -42,6 +44,7 @@ public class EventInfoDTO {
         return ticketPrice;
     }
 
+    public String getText() { return text; }
     public Long getEventCoordinatorid() {
         return eventCoordinatorid;
     }
@@ -49,13 +52,14 @@ public class EventInfoDTO {
     public EventInfoDTO(){
 
     }
-    public EventInfoDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Double ticketPrice, Long eventCoordinatorid, String username) {
+    public EventInfoDTO(String eventName, String typeOfEvent, String location, LocalDateTime timeOfTheEvent, Time duration, Double ticketPrice, String text, Long eventCoordinatorid, String username) {
         this.eventName = eventName;
         this.typeOfEvent = typeOfEvent;
         this.location = location;
         this.timeOfTheEvent = timeOfTheEvent;
         this.duration = duration;
         this.ticketPrice = ticketPrice;
+        this.text=text;
         this.eventCoordinatorid = eventCoordinatorid;
         this.username = username;
     }
