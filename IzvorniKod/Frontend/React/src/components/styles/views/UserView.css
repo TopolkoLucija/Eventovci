@@ -1,0 +1,100 @@
+.window {
+    height: 79%;
+    width: 35%;
+}
+
+.column {
+    margin-left: 20%; 
+    margin-right: 20%; 
+}
+
+.smaller-title {
+   font-size: 120%; 
+   font-weight: bolder;
+}
+
+.bigger-title {
+    font-size: 150%;
+    margin-bottom: 8%;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    margin-left: 8px; 
+    margin-right: 2px; 
+    margin-bottom: 5px; 
+}
+
+.btn-add {
+    margin-top: 4%;
+}
+
+@media (max-width: 768px) {
+    .window {
+        height: 90%;
+        width: 65%;
+    }
+
+    .bigger-title {
+        margin-bottom: 10%;
+    }
+
+    input[type="checkbox"] {
+        margin-bottom: 1px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .window {
+        height: 80%;
+    }
+}
+
+@media (max-width: 414px) {
+    .window {
+        height: 85%;
+    }
+}
+
+@media (max-width: 390px) {
+    .window {
+        height: 90%;
+    }
+}
+
+@media (max-width: 375px) {
+    .window {
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    .bigger-title {
+        font-size: 120%;
+        margin-bottom: 0%;
+    }
+
+    input[type="checkbox"] {
+        margin-bottom: 0px; 
+    }
+
+    .btn-add {
+        margin-top: 0%;
+    }
+
+    .smaller-title {
+        font-size: 100%; 
+        font-weight: bolder;
+     }
+}
+
+@media (max-height: 700px) {
+    .window {
+        overflow-y: scroll;
+    }
+}
+
+.bigger-div {
+    max-height: 400px;
+    overflow-y: scroll;
+}

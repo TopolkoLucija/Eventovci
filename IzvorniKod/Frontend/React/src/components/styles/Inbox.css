@@ -1,0 +1,19 @@
+.inBoxCenter{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    align-items: center;
+}
+.inboxContainer{
+    width: 76%;
+}
+@media (max-width: 768px) {
+    .inboxContainer{
+        width: 100%;
+    }
+    .KontejnerZaKarice{
+        overflow-y: scroll;
+        height: 76%;
+        padding-top: 1rem;
+    }
+  }
