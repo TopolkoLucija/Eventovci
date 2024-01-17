@@ -44,7 +44,14 @@
 		
 7. sastanak
 	datum: 11. siječnja 2024.
-	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesic, Natali Lazarić, Filip Mišković, Bruno Marković
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
 	teme:
 		kontrolna točka prije konačne predaje projekta
 		uputa i dogovor o daljnjem radu do predaje
+
+8. sastanak
+	datum: 11. siječnja 2024.
+	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
+	teme:
+		podjela zadataka vezanih za prezentaciju projekta
+		prezentacija i objašnjavanje vlastitih zadataka pojedinog člana tima ostalim članovima
