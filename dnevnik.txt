@@ -50,7 +50,7 @@
 		uputa i dogovor o daljnjem radu do predaje
 
 8. sastanak
-	datum: 11. siječnja 2024.
+	datum: 16. siječnja 2024.
 	prisustvovali: Lucija Topolko, Julijana Kolarec, Iva Svalina, Iva Kvesić, Natali Lazarić, Filip Mišković, Bruno Marković
 	teme:
 		podjela zadataka vezanih za prezentaciju projekta
