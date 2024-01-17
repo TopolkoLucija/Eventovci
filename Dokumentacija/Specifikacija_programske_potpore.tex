@@ -229,7 +229,7 @@
 	\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
 	\item  \textbf{Cilj:} Izmijeniti osobne podatke 
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i otvoren mu je pregled osobnih podataka (\textbf{UC5})
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
@@ -275,7 +275,7 @@
 	\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
 	\item  \textbf{Cilj:} Podesiti postavke obavještavanja o najnovijim događanjima
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i ima ovlasti Posjetitelja
+	\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja i otvoren mu je pregled osobnih podataka (\textbf{UC5})
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
@@ -311,7 +311,7 @@
 		\item \textbf{Glavni sudionik:} Korisnik (Organizator, Posjetitelj)
 		\item  \textbf{Cilj:} Obrisati korisnički račun i sve osobne podatke
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i otvoren je pregled osobnih podataka
+		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav i otvoren je pregled osobnih podataka (\textbf{UC5})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -497,7 +497,7 @@
 		\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 		\item  \textbf{Cilj:} Pregled korisničkog računa organizatora
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i ima otvoren prikaz nekog događanja
+		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i ima otvoren prikaz nekog događanja (\textbf{UC14})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -537,7 +537,7 @@
 		\item \textbf{Glavni sudionik:} Organizator
 		\item  \textbf{Cilj:} Prikaz jednog od događanja koje je taj organizator objavio
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja
+		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja (\textbf{UC16})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -557,7 +557,7 @@
 		\item \textbf{Glavni sudionik:} Organizator
 		\item  \textbf{Cilj:} Trajno brisanje vlastitog događanja
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja
+		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Organizatora i prikazana su mu sva vlastita događanja (\textbf{UC16})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -599,7 +599,7 @@
 		\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Organizator, Posjetitelj)
 		\item  \textbf{Cilj:} Dodavanje recenzije događanja
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz događanja koje je završilo u posljednjih 48 sati
+		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz događanja koje je završilo u posljednjih 48 sati (\textbf{UC14})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -637,7 +637,7 @@
 		\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 		\item  \textbf{Cilj:} Trajno brisanje vlastite recenzije događanja
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz jednog događanja
+		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Posjetitelja ili Organizatora i otvoren je prikaz jednog događanja (\textbf{UC14})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -659,7 +659,7 @@
 		\item \textbf{Glavni sudionik:} Administrator
 		\item  \textbf{Cilj:} Trajno brisanje recenzije događanja
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Administratora i otvoren je prikaz jednog događanja
+		\item  \textbf{Preduvjet:} Korisnik je prijavljen, ima ovlasti Administratora i otvoren je prikaz jednog događanja (\textbf{UC14})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
@@ -682,7 +682,7 @@
 		\item \textbf{Glavni sudionik:} Prijavljeni korisnik (Posjetitelj, Organizator)
 		\item  \textbf{Cilj:} Izraziti i/ili promijeniti interes za događanje
 		\item  \textbf{Sudionici:} Baza podataka
-		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i otvoren je  prikaz nekog događanja 
+		\item  \textbf{Preduvjet:} Korisnik je trenutno prijavljen u sustav, ima ovlasti Posjetitelja ili Organizatora i otvoren je  prikaz nekog događanja (\textbf{UC14})
 		\item  \textbf{Opis osnovnog tijeka:}
 		
 		\item[] \begin{packed_enum}
