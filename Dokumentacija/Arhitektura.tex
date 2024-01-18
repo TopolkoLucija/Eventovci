@@ -10,15 +10,14 @@
 %		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
 %	\end{itemize}
 
-		\noindent Arhitektura sustava sastoji se od tri glavna dijela: 
+		\noindent Arhitektura sustava sastoji se od četiri glavna dijela: 
 		
 		\begin{packed_item}
-			\item Web preglednik 
 			\item Web poslužitelj
 			\item Baza podataka
+			\item Frontend
+			\item Backend
 		\end{packed_item}
-		
-		\textbf{Web preglednik} računalni je program koji korisnicima omogućuje  pristup internetu i pregled web stranica te interakciju s raznim online sadržajem. Korisnici koriste web preglednik za slanje zahtjeva web poslužitelju putem HTTP (eng. \textit{Hyper Text Transfer Protocol}) protokola i primanje odgovora u obliku HTML dokumenata koji se zatim interpretiraju i prikazuju. Osim pregledavanja web stranica, web preglednici omogućuju i izvođenje različitih aktivnosti kao što su ispunjavanje web obrazaca i prikaz slika i videozapisa.
 		
 		\textbf{Web poslužitelj} ključan je dio web aplikacija i internetskih servisa. Njegova je glavna uloga primanje, obrada i posredovanje zahtjeva koji dolaze od web preglednika korisnika. Web poslužitelj uspostavlja komunikaciju između klijenta (korisnika) i web aplikacije te osigurava ispravan protok informacija.
 		
@@ -28,7 +27,7 @@
 		Aplikacija je izgrađena korištenjem objektno orijentirane paradigme. Za poslužiteljski dio (\textit{backend}) korišten je radni okvir Java Spring Boot. Za izradu korisničkog sučelja (\textit{frontend}) koristi se open-source JavaScript biblioteka React. Odabrana su razvojna okruženja Visual Studio Code i IntelliJ IDEA.\\
 		 
 		 
-		\noindent Korišteni Spring razvojni okvir koristi se MVC arhitekturom (eng. \textit{Model-View-Controller}). MVC arhitekturni obrazac razdvaja prezentaciju podataka, dohvat i manipulaciju podataka. MVC obuhvaća sljedeću podjelu uloga prikazanu i na slici \ref{arh}:
+		\noindent Korišteni Spring razvojni okvir koristi se MVC arhitekturom (eng. \textit{Model-View-Controller}). MVC arhitekturni obrazac razdvaja prezentaciju podataka, dohvat i rukovanje podacima. MVC obuhvaća sljedeću podjelu uloga prikazanu i na slici \ref{arh}:
 		
 		\begin{packed_item}
 			\item \textbf{Model} - sadrži razrede čiji objekti se obrađuju; služi za dohvat i manipulaciju podacima
